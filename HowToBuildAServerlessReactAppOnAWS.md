@@ -36,6 +36,56 @@ For a more precise list of tools that we will be implementing throughout the dev
 
 One of the more difficult activities I faced as a junior developer a very long, long, time ago was understanding that the type of project that I would be working on, very much dictated how I would eventually have to configure my machine *locally*, to be ready to develop *ground breaking and world changing software*. Anytime you read a mention to *world changing software* from here on out, please refer back to episodes of **HBO's Silicon Valley** to understand the *thick sarcasm* sprinkled throughout this article. My point is that I have always felt that most tutorials seem to skim over the idea of setting up your *local development environment*, as if it were a given that developers were born with the inherent understanding of the differences between `npm`, `yarn`, `bower`, and the never ending list of package managers and slick tools available to 'help' you succeed at this life in `SoftwareDevelopment`... For a historical perspective with a wholistic take on this matter please brush up on your knowledge of a topic some people refer to as [RPM Hell](http://wiki.c2.com/?RpmHell).
 
+To avoid [Dependency Hell](http://wiki.c2.com/?DependencyHell), we have decided to codify and create a series of *Best Practices* you can take with you for the development of the application in this tutorial and any other projects you work on in the future. For the goals of completing the application in this tutorial please make sure to configure all `local` development machines using the tools, dependencies, and configuration parameters described in this article. This list is not definitive and is only meant as a baseline from which to begin the development of your applications as quickly and as easily as possible.
+
+#### JavaScript Toolkit
+
+- [ ] Node Version Manager
+- [ ] Editor
+	* SublimeText3
+		a. PackageControl
+		b. Babel
+		c. ESLint
+		d. JSFMT
+		e. SublimeLinter
+		f. SublimeLinter-eslint (Connector)
+		g. SublimeLinter-annotations
+		h. Oceanic Next Color Scheme
+		j. Fix Mac Path (Only If using MacOS)
+- [ ] AWS CLI
+- [ ] Serverless Compute
+	* AWS Lambda
+- [ ] Infrastructure As Code
+	* [ServerlessFramework](https://serverless.com)
+- [ ] Package Manager
+	* `npm`
+- [ ] Automation Approach
+	* [npmScripts](https://docs.npmjs.com/misc/scripts)
+- [ ] Transpiling
+	* Babel ([Included in ServerlessFramework!](https://babeljs.io))
+- [ ] Module Format
+	* ES6Modules (CommonJS)
+- [ ] Bundling
+	* WebPack4 (Included in ServerlessFramework![serverless-webpack]](https://github.com/serverless-heaven/serverless-webpack))
+- [ ] Linting
+	* ESLint
+	* eslint-plugin-react
+	* babel-eslint
+	* esformatter
+	* esformatter-jsx
+- [ ] Testing
+	* [Jest](https://jest.io)
+- [ ] Continuous Integration Server
+	* AWS CodeDeploy & CodePipeline
+- [ ] HTTP Mock Framework
+	* [Included in ServerlessFramework!](https://serverless.com)
+- [ ] Sourcemaps
+	* [Babel: SourceMap Support NPM Plugin](https://www.npmjs.com/package/babel-plugin-source-map-support)
+
+#### Install Node.js with NVM (Node Version Manager)
+
+
+
 
 
 
