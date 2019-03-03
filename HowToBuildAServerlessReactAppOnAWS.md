@@ -43,15 +43,15 @@ To avoid [Dependency Hell](http://wiki.c2.com/?DependencyHell), we have decided 
 - [ ] Node Version Manager
 - [ ] Editor
 	* SublimeText3
-		a. PackageControl
-		b. Babel
-		c. ESLint
-		d. JSFMT
-		e. SublimeLinter
-		f. SublimeLinter-eslint (Connector)
-		g. SublimeLinter-annotations
-		h. Oceanic Next Color Scheme
-		j. Fix Mac Path (Only If using MacOS)
+		1. PackageControl
+		2. Babel
+		3. ESLint
+		4. JSFMT
+		5. SublimeLinter
+		6. SublimeLinter-eslint (Connector)
+		7. SublimeLinter-annotations
+		8. Oceanic Next Color Scheme
+		9. Fix Mac Path (Only If using MacOS)
 - [ ] AWS CLI
 - [ ] Serverless Compute
 	* AWS Lambda
