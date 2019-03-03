@@ -51,3 +51,40 @@ Margin differences on `Register` form on a mobile device (iOS):
 
 Correct `margin` inconsitencies and select a consistent margin setting for each UX element displayed to the device.
 
+## ERROR: Booking Failure
+
+1. When booking an appointment at: `Shareable link www.asapbookings.com/business/lopezdp` I created a booking event for the test profile and the test service and the application returned an **ERROR: Booking Failure** message.
+
+### Observation 1
+
+When a user tries to book an appointment from the `Shareable Link` interface on the web, the user gets a booking error as shown:
+
+**Image 5**
+
+Error message response:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/05.PNG "Image 5")
+
+### Steps to Reproduce
+
+**Image 6**
+
+User enters name:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/06.PNG "Image 5")
+
+**Image 7**
+
+User enters valid phone:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/07.PNG "Image 5")
+
+User enters valid address:
+
+**Image 8**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/08.PNG "Image 5")
+
+
+
+
