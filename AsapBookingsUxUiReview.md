@@ -71,20 +71,59 @@ Error message response:
 
 User enters name:
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/06.PNG "Image 5")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/06.PNG "Image 6")
 
 **Image 7**
 
 User enters valid phone:
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/07.PNG "Image 5")
-
-User enters valid address:
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/07.PNG "Image 7")
 
 **Image 8**
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/08.PNG "Image 5")
+User enters valid address:
 
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/08.PNG "Image 8")
+
+### Reviewer Suggestion
+
+Check `backend` logic and debug issue.
+
+## Mobile Responsiveness
+
+1. When the page is viewed on mobile devices iOS, or iPad, the html elements do not properly display the implemented features and elements.
+
+### Observations
+
+**Image 9**
+
+Content is not centered on mobile devices as show:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/09.PNG "Image 9")
+
+**Image 10**
+
+Content is not centered on mobile devices as show (Content as Scrolled down on page):
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/10.PNG "Image 10")
+
+**Image 11**
+
+In Landscape, header content and main display content does not share screen appropriately. In landscape design elements for header should change to a smaller height dimension to let main content display more efficiently.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/11.PNG "Image 11")
+
+**Image 12**
+
+On iPad devices in landscape, the design elements in the header do not respect each other and the bug reporting email is hidden from the user behind another element that is layered over the email address.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/12.PNG "Image 12")
+
+### Reviewer Suggestion
+
+For **Image 10** it may be best to separate out the screens to take up one page at a time instead of forcing the user to scroll when on mobile. Separate your booking logic into chunks so that only the pertinent information needed in each step is only shown on the screen without any scrolling. When the user completes the step shown to gather the required info, let the user confirm that they are ready for the information in the next screen, and let the app render a new screen that would avoid the user having to scroll through an infinite form that gives no feedback to the user in regards to their progress when filling out the form.
+
+I would add a progress bar if you change the interface as I have suggested so that the user knows how much is left in the workflow to complete when on mobile.
 
 
 
