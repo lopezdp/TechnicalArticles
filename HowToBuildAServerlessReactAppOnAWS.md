@@ -34,6 +34,7 @@ For a more precise list of tools that we will be implementing throughout the dev
 
 ### Local Development Environment Setup & Configuration
 
+One of the more difficult activities I faced as a junior developer a very long, long, time ago was understanding that the type of project that I would be working on, very much dictated how I would eventually have to configure my machine *locally*, to be ready to develop *ground breaking and world changing software*. Anytime you read a mention to *world changing software* from here on out, please refer back to episodes of **HBO's Silicon Valley** to understand the *thick sarcasm* sprinkled throughout this article. My point is that I have always felt that most tutorials seem to skim over the idea of setting up your *local development environment*, as if it were a given that developers were born with the inherent understanding of the differences between `npm`, `yarn`, `bower`, and the never ending list of package managers and slick tools available to 'help' you succeed at this life in `SoftwareDevelopment`... For a historical perspective with a wholistic take on this matter please brush up on your knowledge of a topic some people refer to as [RPM Hell](http://wiki.c2.com/?RpmHell).
 
 
 
