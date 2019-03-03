@@ -97,7 +97,7 @@ On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). 
 		[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 		```
 * Run the following command to verify the installation of `nvm`:
-	1. run from terminal: `$ command -v nvm`
+	1. run from Terminal: `$ command -v nvm`
 	2. Expected Output: `nvm`
 * On **macOS**, if you receive and error of `nvm: command not found`, then you need to add the following line to your `.bash_profile` located in your `home` directory as shown below:
 	1. `source ~/.bashrc`
@@ -107,6 +107,31 @@ On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). 
 		a. `$ nvm ls-remote`
 
 #### Setup Editor and Install Linting
+
+For JavaScript, React.js, and the build process that we are using in [SublimeText3]() we will proceed to configure linting, and formatting, while making use of OpenSource libraries and tools to help make this implementation of React.js more efficient. Please take the following steps to complete the installation of `ESLint`:
+
+* **Install ESLint:** Must install **BOTH** Globally & Locally
+	1. **Global Install:** `$ npm install -g eslint`
+	2. **Local Install:** (Must complete from the `root` of the project directory!!!)
+		* `$ npm install --save-dev eslint@latest`
+	3. **Local Install of the `babel-eslint` library also:** (Must complete from the `root` of the project directory!!!)
+		* `$ npm install --save-dev babel-eslint@latest`
+
+* Verify that you can run `eslint` from within the project directory:
+	1. run from Terminal: `$ ./node_modules/.bin/eslint -v`
+	2. Expected Output: `v5.8.0 (Or Latest)`
+	
+
+
+
+
+
+
+
+
+
+
+
 
 
 
