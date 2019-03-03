@@ -104,7 +104,7 @@ On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). 
 * To download, compile, and install a specific version of [Node.js](), then please run the following command to obtain [Node.js v8.10.0]() as needed to be able to work with [AWS Lambda]():
 	1. `$ nvm install 8.10.0`
 	2. You can list available versions to install using:
-		a. `$ nvm ls-remote`
+		* `$ nvm ls-remote`
 
 #### Setup Editor and Install Linting
 
