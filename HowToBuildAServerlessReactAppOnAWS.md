@@ -1,4 +1,4 @@
-# How To Build a Serverless React.js Application with AWS Lambda
+# How To Build a Serverless React.js Application with AWS Lambda, API Gateway, & DynamoDB
 
 *Author: [David P. Lopez](http://www.DavidPLopez.com)*
 
