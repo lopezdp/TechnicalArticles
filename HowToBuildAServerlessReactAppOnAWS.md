@@ -84,6 +84,12 @@ To avoid [Dependency Hell](http://wiki.c2.com/?DependencyHell), we have decided 
 
 #### Install Node.js with NVM (Node Version Manager)
 
+On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). This project will use [NVM (Node Version Manager)]() to work with different vesions of [Node.js]() between projects and to mitigate against any potential environment upgrades that may be implemented in the future by any 3rd party vendors. To ensure that we are working on the correct version of [Node.js]() for this project please install `nvm` and `node` as follows:
+
+* Refer to the [Node Version Manager Documentation]() if this information is out of date
+* **Installation** (Choose ONE based on your system OS):
+	1. cURL:
+	2. Wget:
 
 
 
