@@ -26,7 +26,7 @@ For a more precise list of tools that we will be using today, below I have liste
 * [CloudFront]() for serving our application to the world
 * [Route53]() for our domain registry
 * [Certificate Manager]() for our SSL/TLS certificates
-* [React.js] for our single page application
+* [React.js]() for our single page application
 * [React Router]() to develop our application routing functionality
 * [Bootstrap]() for the development of our UI components
 * [Stripe]() for processing credit card payments
