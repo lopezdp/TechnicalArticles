@@ -17,20 +17,20 @@ The objective of this tutorial is to deploy a simple application on [AWS]() to s
 
 ### Technology Stack
 
-For a more precise list of tools that we will be implementing throughout the development lifecycle of this multi-part series, below I have highlighted the technologies that we will be using to deploy our serverless application:
+For a more precise list of tools that we will be implementing throughout the development lifecycle of this multi-part series, below I have highlighted the technologies that we will be using to deploy our application on AWS using the [ServerlessFramework]():
 
-* [Lambda]() & [API Gateway]() for our serverless API
-* [DynamoDB]() for our NoSQL database
-* [Cognito]() for user authentication and securing our API's
-* [S3]() for hosting our application & file uploads
-* [CloudFront]() for serving our application to the world
-* [Route53]() for our domain registry
-* [Certificate Manager]() for our SSL/TLS certificates
-* [React.js]() for our single page application
+* [AWS Lambda]() & [API Gateway]() to expose the API endpoints
+* [DynamoDB]() is our NoSQL database
+* [Cognito]() provides user authentication and secures our API's
+* [S3]() will host our application & file uploads
+* [CloudFront]() will serve our application to the world
+* [Route53]() is our domain registry
+* [Certificate Manager]() provides us with SSL/TLS certificates
+* [React.js]() is our single page application
 * [React Router]() to develop our application routing functionality
 * [Bootstrap]() for the development of our UI components
-* [Stripe]() for processing credit card payments
-* [Github]() for hosting our project repositories
+* [Stripe]() will process our credit card payments
+* [Github]() will our project repositories
 
 ### Local Development Environment Setup & Configuration
 
@@ -120,7 +120,7 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 * Verify that you can run `eslint` from within the project directory:
 	1. run from Terminal: `$ ./node_modules/.bin/eslint -v`
 	2. Expected Output: `v5.8.0 (Or Latest)`
-	
+
 
 
 
