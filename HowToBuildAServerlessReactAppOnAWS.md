@@ -74,7 +74,7 @@ To avoid [Dependency Hell](http://wiki.c2.com/?DependencyHell), we have decided 
 	* esformatter
 	* esformatter-jsx
 - [ ] Testing
-	* [Jest](https://jest.io)
+	* [Jest](https://jestjs.io)
 - [ ] Continuous Integration Server
 	* AWS CodeDeploy & CodePipeline
 - [ ] HTTP Mock Framework
