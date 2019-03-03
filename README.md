@@ -8,4 +8,4 @@ This repository is dedicated to the articles I write for blogs and agencies who 
 
 ## Table Of Contents
 
-[An Introduction to Serverless Application Dpeloyment on AWS]() - *Not Published.*
+[An Introduction to Serverless Application Deployment on AWS]() - *Not Published.*
