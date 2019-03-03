@@ -35,15 +35,15 @@ Highlighted `Register` tab:
 
 ### Reviewer Suggestion
 
-Highlight the `Register` tab on the initial page load of the application also to maintain visual consistency of design elements.
+Highlight the `Register` tab on the initial page load of the application also to maintain the visual consistency of the different design elements.
 
 ### Observation 2
 
-When a the `Register` page is displayed on a mobile device, there is an obvious difference in the `margin` settings between the header image, the title/tagline text, and the `Register` form itself.
+When the `Register` page is displayed on a mobile device, there is an obvious difference in the `margin` settings between the header image, the title/tagline text, and the `Register` form itself.
 
 **Image 4**
 
-Margin differences on `Register` form on mobile device (iOS):
+Margin differences on `Register` form on a mobile device (iOS):
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AsapReviewImg/04.PNG "Image 4")
 
