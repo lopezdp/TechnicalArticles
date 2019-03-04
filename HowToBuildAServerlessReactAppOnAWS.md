@@ -120,13 +120,13 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 * **Install ESLint:** Must install **BOTH** Globally & Locally
 	1. **Global Install:** `$ npm install -g eslint`
 	2. **Local Install:** (Must complete from the `root` of the project directory!!!)
-		* `$ npm install --save-dev eslint@latest`
+		* `$ npm install --save-dev eslint`
 	3. **Local Install of the `babel-eslint` library also:** (Must complete from the `root` of the project directory!!!)
-		* `$ npm install --save-dev babel-eslint@latest`
+		* `$ npm install --save-dev babel-eslint`
 
 * Verify that you can run `eslint` from within the `local` project directory:
 	1. run from Terminal: `$ ./node_modules/.bin/eslint -v`
-	2. Expected Output: `v5.8.0 (Or Latest)`
+	2. Expected Output: `v5.15.0 (Or Latest)`
 
 * Initialize `ESLint` from the project's `root` directory with the following command from your terminal:
 	1. `$ eslint --init`
