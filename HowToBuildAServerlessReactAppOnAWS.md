@@ -133,7 +133,7 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 * Initialize `ESLint` from the project's `root` directory with the following command from your terminal:
 	1. `$ eslint --init`
 	2. Proceed through the following wizard on your terminal:
-		1. ```
+		```
 		MyDocs (master *) ServerlessStarterService
 		$ eslint --init
 		? How would you like to use ESLint? (Use arrow keys)
