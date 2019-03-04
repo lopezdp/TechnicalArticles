@@ -2,6 +2,10 @@
 
 *Author: [David P. Lopez](http://www.DavidPLopez.com)*
 
+You can clone a sample of the application we will be using in this tutorial here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git)
+
+Please refer back to this repo as you follow along with this tutorial.
+
 ### Introduction
 
 It is amazing how quickly the technology community iterates over new technology frameworks, and architectural paradigms to solve the never ending series of problems and *work-arounds* that a new tool, or *solution* inevitably brings to the table. Even more enjoyable to watch is the relentless chatter and online chat and commentary that spreads like wildfire all over the internet and the *Twittersphere*, that goes on discussing how to leverage the latest toolset and framework to build the next software that will **Change the World for the Better**. I must admit, although I sound cynical about the whole thing, I too am a part of the problem; I am an **AWS Serverless Fanboy**. 
@@ -117,11 +121,13 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 	3. **Local Install of the `babel-eslint` library also:** (Must complete from the `root` of the project directory!!!)
 		* `$ npm install --save-dev babel-eslint@latest`
 
-* Verify that you can run `eslint` from within the project directory:
+* Verify that you can run `eslint` from within the `local` project directory:
 	1. run from Terminal: `$ ./node_modules/.bin/eslint -v`
 	2. Expected Output: `v5.8.0 (Or Latest)`
 
-
+* Initialize `ESLint` from the project's `root` directory with the following command from your terminal:
+	1. `$ eslint --init`
+	2. Proceed through the following wizard on your terminal:
 
 
 
