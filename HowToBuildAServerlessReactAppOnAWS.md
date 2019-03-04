@@ -127,6 +127,8 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 * Verify that you can run `eslint` from within the `local` project directory:
 	1. run from Terminal: `$ ./node_modules/.bin/eslint -v`
 	2. Expected Output: `v5.15.0 (Or Latest)`
+	3. Here is what the output should look like right now:
+		* ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ESLintInstalled.png "Complete ESLint Install!")
 
 * Initialize `ESLint` from the project's `root` directory with the following command from your terminal:
 	1. `$ eslint --init`
