@@ -109,6 +109,8 @@ On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). 
 	1. `$ nvm install 8.10.0`
 	2. You can list available versions to install using:
 		* `$ nvm ls-remote`
+	3. The completed output should look like this, indicating you are ready to start building services in [AWS Lambda]()!
+		* ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NodeInstallComplete4Lambda.png "Complete Node Install with NVM!")
 
 #### Setup Editor and Install Linting
 
@@ -128,6 +130,7 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 * Initialize `ESLint` from the project's `root` directory with the following command from your terminal:
 	1. `$ eslint --init`
 	2. Proceed through the following wizard on your terminal:
+		* 
 
 
 
