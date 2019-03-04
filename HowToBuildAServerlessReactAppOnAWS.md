@@ -93,7 +93,7 @@ On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). 
 * Refer to the [Node Version Manager Documentation]() if this information is out of date
 * **Installation** (Choose ONE based on your system OS):
 	1. cURL: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
-	
+
 	2. Wget: `wget -q0- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
 
 	3. The installation will add the following to your `.bashrc` or `.bash_profile` in your `home` directory:
@@ -119,7 +119,7 @@ On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). 
 
 	3. The completed output should look like this, indicating that you are now ready to start building services in [AWS Lambda]()!
 
-		* ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NodeInstallComplete4Lambda.png "Complete Node Install with NVM!")
+		![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NodeInstallComplete4Lambda.png "Complete Node Install with NVM!")
 
 	4. Give yourself a tap on the back. Being able to hit the ground running as a new developer on a new team is a skill many employers would pay a few bucks extra to have more of on the team. Always refer to this page and tell your friends that this is where you can get the *low-down* on how to get it done without having to ask 10 questions on our favorite technology forums out in the ether.
 
@@ -139,7 +139,7 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 	2. Expected Output: `v5.15.0 (Or Latest)`
 	3. Here is what the output should look like right now:
 
-		* ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ESLintInstalled.png "Complete ESLint Install!")
+		![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ESLintInstalled.png "Complete ESLint Install!")
 
 * Initialize `ESLint` from the project's `root` directory with the following command from your terminal:
 	1. `$ eslint --init`
