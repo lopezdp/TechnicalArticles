@@ -109,8 +109,9 @@ On 7 November 2018, [AWS Lambda]() does officially support [Node.js v8.10.0](). 
 	1. `$ nvm install 8.10.0`
 	2. You can list available versions to install using:
 		* `$ nvm ls-remote`
-	3. The completed output should look like this, indicating you are ready to start building services in [AWS Lambda]()!
+	3. The completed output should look like this, indicating that you are now ready to start building services in [AWS Lambda]()!
 		* ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NodeInstallComplete4Lambda.png "Complete Node Install with NVM!")
+	4. Give yourself a tap on the back. Being able to hit the ground running as a new developer on a new team is a skill many employers would pay a few bucks extra to have more on the team. Always refer to this page and tell your friends that this is where you can get the *low-down* on how to get it done with out having to ask 10 questions on our favorite technology forums out in the ether.
 
 #### Setup Editor and Install Linting
 
