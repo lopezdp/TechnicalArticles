@@ -261,6 +261,65 @@ We think it's going to be best (and just easiest quite frankly), to just `alias`
 
 * **Run:** `$ npm run lint` to lint your project from the `terminal`.
 
+The linter will now provide feedback on syntax, bugs and problems, while enforcing code style, all from within the comfort of your `terminal`. Don't be fooled, this will work in `vim` also! For all of those `wq!` fans out there, all hope, is not lost... `#UseTheForce`.
+
+One more thing, from within the project root directory please make sure that you have a file called `.esformatter` in existence. You're going to need that `$ ls -a` command to find it. If it does not exist, go ahead and create it with a simple `$ touch .esformatter` and `wq!` the following bit of information into the file (if it already exists, just make sure this is in there!):
+
+```
+{
+  "preset": "default",
+
+  "plugins": [
+    "esformatter-quotes",
+    "esformatter-semicolons",
+    "esformatter-literal-notation",
+    "esformatter-parseint",
+    "esformatter-spaced-lined-comment",
+    "esformatter-var-each",
+    "esformatter-collapse-objects",
+    "esformatter-remove-trailing-commas",
+    "esformatter-quote-props"
+  ],
+
+  "quotes": {
+    "type": "double"
+  },
+
+  "collapseObjects": {
+    "ObjectExpression": {
+      "maxLineLength": 79,
+      "maxKeys": 1
+    }
+  },
+
+  "indent": {
+    "value": "  ",
+    "AlignComments": false
+  },
+
+  "whiteSpace": {
+    "before": {
+      "ObjectExpressionClosingBrace": 0,
+      "ModuleSpecifierClosingBrace": 0,
+      "PropertyName": 1
+    },
+    "after": {
+      "ObjectExpressionOpeningBrace": 0,
+      "ModuleSpecifierOpeningBrace": 0
+    }
+  }
+}
+```
+
+From here on out every time you save your `JavaScript` files all of the formatting will be handled for you accordingly. Sort of, we just have to configure all of this into our trusty [SublimeText3]() text editor now! 
+
+Before we get into it, yes, you can use `vim`. I promise you, you will find people who will die by `vim` throughout your career. My belief; keep it simple, buy the [SublimeText3]() license and just use that over every other IDE that will bombard your spam folder in your email. [SublimeText3]() provides the simplicity of `vim` without having to memorize the abstract commands like `wq!` that will inevitably leave you with a mess of `*.swp` files, because I guarantee that most of you will never clean them out and it becomes a hassle. Keep it simple, do not over complicate your life in an already all too complicated environment, and get the tool that is really cheap, easy on the eyes, and provides enough of the fancy functionality of a really expensive IDE and the simplicity of `vim` without having to memorize all of the abstract commands: `wq!`
+
+#### SublimeText3 Configuration
+
+To complete the configuration in [SublimeText3]() please install `PackageControl` and the following packages from within [SublimeText3]():
+
+
 
 
 
