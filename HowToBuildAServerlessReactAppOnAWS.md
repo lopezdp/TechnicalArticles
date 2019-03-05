@@ -265,6 +265,7 @@ The linter will now provide feedback on syntax, bugs and problems, while enforci
 
 A typical output running ESLint from the `terminal` as instructed would look something like this (depending on your project and the silly errors you make):
 
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/npmRunLint.png "$ npm run lint. An example!")
 
 
 One more thing, from within the project root directory please make sure that you have a file called `.esformatter` in existence. You're going to need that `$ ls -a` command to find it. If it does not exist, go ahead and create it with a simple `$ touch .esformatter` and `wq!` the following bit of information into the file (if it already exists, just make sure this is in there!):
