@@ -263,6 +263,10 @@ We think it's going to be best (and just easiest quite frankly), to just `alias`
 
 The linter will now provide feedback on syntax, bugs and problems, while enforcing code style, all from within the comfort of your `terminal`. Don't be fooled, this will work in `vim` also! For all of those `wq!` fans out there, all hope, is not lost... `#UseTheForce`.
 
+A typical output running ESLint from the `terminal` as instructed would look something like this (depending on your project and the silly errors you make):
+
+
+
 One more thing, from within the project root directory please make sure that you have a file called `.esformatter` in existence. You're going to need that `$ ls -a` command to find it. If it does not exist, go ahead and create it with a simple `$ touch .esformatter` and `wq!` the following bit of information into the file (if it already exists, just make sure this is in there!):
 
 ```
