@@ -139,13 +139,110 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 	2. Expected Output: `v5.15.0 (Or Latest)`
 	3. Here is what the output should look like right now:
 
-		![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ESLintInstalled.png "Complete ESLint Install!")
+	![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ESLintInstalled.png "Complete ESLint Install!")
 
 From this point forward, you can run: `$ eslint .` and the linter will help you and your development team check syntax, find problems, and enforce code style across your entire organization. In my case, that means just team `Wilson` and I hammering away at the keyboard debating the intricacies of JavaScript Memory Leaks and the best approach to string concatenation efficiency. I'm sure this is all very relateable. Here is what my code review process looks like when `Wilson` doesn't use the `eslint` settings I have specifically laid out for you today:
 
 **Wilson: The SCRUM Master**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/WilsonScrumMaster.png "Wilson: The SCRUM Master")
+
+#### Confirm ESLint Configuration Settings & Attributes
+
+From the project root directory run `$ ls -a`, and confirm that you can see the file called: `~/MyApp/Backend/services/ServerlesStarterService/.eslintrc.js` within the serverless project directory for the service you are implementing. Please take a look at the structure I have chosen to use as the `$PATH` for this example. Take this as a `hint` for now and we will go over this in detail a bit later. For now, simply open the file from within the `ServerlesStarterService` directory by running `$ subl .eslintrc.js` from your terminal to confirm that the following information is contained within the file:
+
+```
+module.exports = {
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "no-alert": 2,
+    "no-array-constructor": 2,
+    "no-caller": 2,
+    "no-catch-shadow": 2,
+    "no-labels": 2,
+    "no-eval": 2,
+    "no-extend-native": 2,
+    "no-extra-bind": 2,
+    "no-implied-eval": 2,
+    "no-iterator": 2,
+    "no-label-var": 2,
+    "no-labels": 2,
+    "no-lone-blocks": 2,
+    "no-loop-func": 2,
+    "no-multi-spaces": 2,
+    "no-multi-str": 2,
+    "no-native-reassign": 2,
+    "no-new": 2,
+    "no-new-func": 2,
+    "no-new-object": 2,
+    "no-new-wrappers": 2,
+    "no-octal-escape": 2,
+    "no-process-exit": 2,
+    "no-proto": 2,
+    "no-return-assign": 2,
+    "no-script-url": 2,
+    "no-sequences": 2,
+    "no-shadow": 2,
+    "no-shadow-restricted-names": 2,
+    "no-spaced-func": 2,
+    "no-trailing-spaces": 2,
+    "no-undef-init": 2,
+    "no-underscore-dangle": 2,
+    "no-unused-expressions": 2,
+    "no-use-before-define": 2,
+    "no-with": 2,
+    "camelcase": 2,
+    "comma-spacing": 2,
+    "consistent-return": 2,
+    "curly": [2, "all"],
+    "dot-notation": [2, {
+      "allowKeywords": true
+    }],
+    "eol-last": 2,
+    "no-extra-parens": [2, "functions"],
+    "eqeqeq": 2,
+    "key-spacing": [2, {
+      "beforeColon": false,
+      "afterColon": true
+    }],
+    "new-cap": 2,
+    "new-parens": 2,
+    "quotes": [2, "double"],
+    "semi": 2,
+    "semi-spacing": [2, {
+      "before": false,
+      "after": true
+    }],
+    "space-infix-ops": 2,
+    "keyword-spacing": 2,
+    "space-unary-ops": [2, {
+      "words": true,
+      "nonwords": false
+    }],
+    "strict": [2, "global"],
+    "yoda": [2, "never"]
+  }
+};
+```
+
+Please add the `eslintrc.js` file with the information above if you do not have it in your directory as shown. 
+
+
+
+
 
 
 
