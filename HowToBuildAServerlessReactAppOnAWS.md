@@ -238,7 +238,36 @@ module.exports = {
 };
 ```
 
-Please add the `eslintrc.js` file with the information above if you do not have it in your directory as shown. 
+Please add the `eslintrc.js` file with the information above if you do not have it in your directory as shown above.
+
+Moving forward, we can proceed to install the ESLint plugins that we will need to use for our React.js implementations also. In the root of the project directory, run the following two commands to install the React.js plugin for ESLint:
+
+* `$ npm install eslint-plugin-react --save-dev`
+
+* ` $ npm install -g eslint-plugin-react --save-dev` (Install globally also)
+
+Running `$ ./node_modules/.bin/eslint src` (with src being the path to your js files), will now parse your sources with **Babel** and will provide you with linting feedback to the command line.
+
+We think it's going to be best (and just easiest quite frankly), to just `alias` that last command with something like: `$ npm run lint` as part of your automation approach by adding the following `script` into the `package.json` file that you can find in the root directory of your application:
+
+```
+"scripts": {
+    "lint": "eslint .",
+    ...
+  },
+
+  ...
+```
+
+* **Run:** `$ npm run lint` to lint your project from the `terminal`.
+
+
+
+
+
+
+
+
 
 
 
