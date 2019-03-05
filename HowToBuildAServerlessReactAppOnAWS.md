@@ -141,7 +141,7 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 
 	![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ESLintInstalled.png "Complete ESLint Install!")
 
-From this point forward, you can run: `$ eslint .` and the linter will help you and your development team check syntax, find problems, and enforce code style across your entire organization. In my case, that means just team `Wilson` and I hammering away at the keyboard debating the intricacies of JavaScript Memory Leaks and the best approach to string concatenation efficiency. I'm sure this is all very relateable. Here is what my code review process looks like when `Wilson` doesn't use the `eslint` settings I have specifically laid out for you today:
+From this point forward, you can run: `$ eslint .` and the linter will help you and your development team check syntax, find problems, and enforce code style across your entire organization. In my case, that means just team `Wilson` and I hammering away at the keyboard debating the intricacies of JavaScript Memory Leaks and the best approach to achieve optimal string concatenation efficiency. I'm sure this is all very relateable. Here is what my code review process looks like when `Wilson` doesn't use the `eslint` settings I have specifically laid out for you today:
 
 **Wilson: The SCRUM Master**
 
@@ -322,13 +322,7 @@ Before we get into it, yes, you can use `vim`. I promise you, you will find peop
 
 #### SublimeText3 Configuration
 
-To complete the configuration in [SublimeText3]() please install `PackageControl` and the following packages from within [SublimeText3]():
-
-
-
-
-
-
+To complete the configuration in [SublimeText3]() please install `PackageControl` and the following packages from within [SublimeText3](): 
 
 
 
