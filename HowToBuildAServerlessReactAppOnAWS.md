@@ -342,7 +342,7 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
 
   The configuration parameters provided above, will generate an `Installed Packages` directory on your `local` machine (if needed). It will download the Package Control.sublime-package over HTTP instead of HTTPS because of known Python standard library constraints, and the file will be validated using SHA-256.
 
-  **WARNING:** Please do not copy or install tthis code via via this tutorial or the website. It will change with every release of [PackageControl](https://packagecontrol.io/installation). Please make sure to view the [PackageControl](https://packagecontrol.io/installation) release page and their developer documentation and installation instructions to get the most recent version of the code shared in this tutorial. You can obtain the most recent information needed directly from: [PackageControl](https://packagecontrol.io/installation).
+  **WARNING:** Please do not copy or install this code via this tutorial or our website. It will change with every release of [PackageControl](https://packagecontrol.io/installation). Please make sure to view the [Official PackageControl Release Documentation](https://packagecontrol.io/installation) page and installation instructions to get the most recent version of the code shared in this tutorial. You can obtain the most recent information needed directly from: [PackageControl](https://packagecontrol.io/installation).
 
 * Next, please proceed to navigate through to `SublimeText` --> `Preferences` --> `PackageControl` --> `InstallPackages` and install the following tools:
 
@@ -355,7 +355,56 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
   7. Oceanic Next Color Scheme
   8. Fix Mac Path (If using MacOS ONLY)
 
-  
+* Once you have completed the above, go ahead and navigate to: `View` --> `Syntax` --> `Open all with current extension as ...` --> `Babel` --> `JavaScript (Babel)` with any `file.js` open to configure the settings for the syntax is `JS` and `JSX`.
+
+* It is helpful to setup a `JSX` formatter for your text editor also. In our case we are using [esformatter-jsx](https://www.npmjs.com/package/esformatter-jsx). You will have to figure out where your `SublimeText3` `Packages` directory is located to complete your `jsfmt` configuration. Run the following commands to complete this step:
+
+  1. `$ cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/jsfmt`
+  2. `$ npm install jsfmt`
+    * Make an attempt to run: `$ npm ls esformatter` before proceeding to step #3
+    * If `esformatter` is already installed then skip step #3 and run:
+      1. `$ npm install esformatter-jsx`
+  3. `$ npm install esformatter esformatter-jsx` (**See notes above before proceeding with this step!!!**)
+  4. Test the installation of each package and run: `$ npm ls <package>` (See the expected output below)
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
