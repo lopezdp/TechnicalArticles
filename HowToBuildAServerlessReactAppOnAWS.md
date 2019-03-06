@@ -106,6 +106,7 @@ On 7 November 2018, [AWS]() announced to the world that [AWS Lambda](), will now
 
 * Run the following command to verify the installation of `nvm`:
   1. run from Terminal: `$ command -v nvm`
+
   2. Expected Output: `nvm`
 
 * On **macOS**, if you receive and error of `nvm: command not found`, then you need to add the following line to your `.bash_profile` found in your `home` directory as shown below:
@@ -129,14 +130,18 @@ For JavaScript, React.js, and the build process that we are using in [SublimeTex
 
 * **Install ESLint:** Must install **BOTH** Globally & Locally
   1. **Global Install:** `$ npm install -g eslint`
+
   2. **Local Install:** (Must complete from the `root` of the project directory!!!)
     * `$ npm install --save-dev eslint`
+
   3. **Local Install of the `babel-eslint` library also:** (Must complete from the `root` of the project directory!!!)
     * `$ npm install --save-dev babel-eslint`
 
 * Verify that you can run `eslint` from within the `local` project directory:
   1. run from Terminal: `$ ./node_modules/.bin/eslint -v`
+
   2. Expected Output: `v5.15.0 (Or Latest)`
+
   3. Here is what the output should look like right now:
 
   ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ESLintInstalled.png "Complete ESLint Install!")
@@ -360,14 +365,22 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
 * It is helpful to setup a `JSX` formatter for your text editor also. In our case we are using [esformatter-jsx](https://www.npmjs.com/package/esformatter-jsx). You will have to figure out where your `SublimeText3` `Packages` directory is located to complete your `jsfmt` configuration. Run the following commands to complete this step:
 
   1. `$ cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/jsfmt`
+
   2. `$ npm install jsfmt`
     * Make an attempt to run: `$ npm ls esformatter` before proceeding to step #3
+
     * If `esformatter` is already installed then skip step #3 and run:
       1. `$ npm install esformatter-jsx`
+
   3. `$ npm install esformatter esformatter-jsx` (**See notes above before proceeding with this step!!!**)
+
   4. Test the installation of each package and run: `$ npm ls <package>` (See the expected output below)
 
     ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/jsfmt-install.png "$ jsfmt installation complete!")
+
+* From the `jsfmt` package directory (See above if you don't remember! `hint: See Step #1 from above`) run: `$ ls -a` and open a file in `SublimeText3` called: `$ subl jsfmt.sublime-settings` and paste the following configuration settings:
+
+
 
 
     
