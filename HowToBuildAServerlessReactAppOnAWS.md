@@ -367,7 +367,12 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
   3. `$ npm install esformatter esformatter-jsx` (**See notes above before proceeding with this step!!!**)
   4. Test the installation of each package and run: `$ npm ls <package>` (See the expected output below)
 
+    ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/jsfmt-install.png "$ jsfmt installation complete!")
+
+
     
+
+
 
 
 
