@@ -344,6 +344,18 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
 
   **WARNING:** Please do not copy or install tthis code via via this tutorial or the website. It will change with every release of [PackageControl](https://packagecontrol.io/installation). Please make sure to view the [PackageControl](https://packagecontrol.io/installation) release page and their developer documentation and installation instructions to get the most recent version of the code shared in this tutorial. You can obtain the most recent information needed directly from: [PackageControl](https://packagecontrol.io/installation).
 
+* Next, please proceed to navigate through to `SublimeText` --> `Preferences` --> `PackageControl` --> `InstallPackages` and install the following tools:
+
+  1. Babel
+  2. ESLint
+  3. JSFMT
+  4. SublimeLinter
+  5. SublimeLinter-eslint (Connector)
+  6. SublimeLinter-annotations
+  7. Oceanic Next Color Scheme
+  8. Fix Mac Path (If using MacOS ONLY)
+
+  
 
 
 
