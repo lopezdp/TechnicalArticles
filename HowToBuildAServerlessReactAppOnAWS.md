@@ -179,7 +179,10 @@ module.exports = {
     }
   },
   "env": {
-    "node": true
+    "node": true,
+    "es6": true,
+    "es7": true,
+    "es8": true
   },
   "rules": {
     "react/jsx-uses-react": 2,
