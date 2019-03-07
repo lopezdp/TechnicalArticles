@@ -8,15 +8,15 @@ You can clone a sample of the application we will be using in this tutorial here
 
 Please refer to this repo as you follow along with this tutorial. 
 
-*No animals were hurt injured or maimed throughout the making of this tutorial. It was all done with CGI. We cannot be held liable for what you build after learning how to be a Ninja.*
+*No animals were hurt, injured, or maimed throughout the making of this tutorial. It was all done with CGI. Furthermore, we cannot be held liable for what you build after learning how to be a Ninja. Never go Full Ulbricht.*
 
 ### Introduction
 
-It is amazing how quickly the technology community iterates over innovative technology frameworks, and architectural paradigms to solve the never-ending series of problems and *work-arounds* that a new tool, or *solution* inevitably brings to the table. Even more enjoyable to watch is the relentless chatter and online chat and commentary that spreads like wildfire all over the internet and the *Twittersphere*, that goes on discussing how to use the latest toolset and framework to build the next software that will **Change the World for the Better**. I must admit, although I sound cynical about the whole thing, I too am a part of the problem; I am an **AWS Serverless Fanboy**.
+It is amazing how quickly the technology community iterates over innovative technology frameworks, and architectural paradigms to solve the never-ending series of problems and *work-arounds* that a new tool, or *solution* inevitably brings to the table. Even more enjoyable to watch is the relentless chatter, and online chat and commentary that spreads like wildfire all over the internet and the *Twittersphere*, that goes on discussing how to use the latest toolset and framework to build the next software that will **Change the World for the Better**. I must admit, although I sound cynical about the whole thing, I too am a part of the problem; I am an **AWS Serverless Fanboy**.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWSServerless.png "AWS Serverless Architecture")
 
-The aim of this tutorial is to deploy a simple application on [AWS]() to share with you, our favorite readers, the joys of developing applications on the [Serverless Framework]() with [AWS](). The application we will be walking you through today, includes a backend API service to handle basic **CRUD** operations built on something we like to call the **DARN Technology Stack**. Yes, we created a new acronym for your recruiter to get excited about. They will have no idea what you are talking about, but they will get you an interview if you tell them that you completed this tutorial to become a fully-fledged and certified *Application Developer on the DARN Cloud*. The **DARN Stack** includes the following tool set:
+The aim of this tutorial is to deploy a simple application on [AWS]() to share with you, our favorite readers, the joys of developing applications on the [Serverless Framework](ttps://serverless.com/framework/docs/) with [AWS](https://aws.amazon.com). The application we will be walking you through today, includes a backend API service to handle basic **CRUD** operations built on something we like to call the **DARN Technology Stack**. Yes, we created a new acronym for your recruiter to get excited about. They will have no idea what you are talking about, but they will get you an interview with **Facebook** if you tell them that you completed this tutorial to become a fully-fledged and certified *Application Developer on the DARN Cloud*. (That is an outright lie. Please do not believe any guarantees the maniac who wrote this article promises you.) The **DARN Stack** includes the following tool set:
 
 * **D**ynamoDB
 * **A**WS Serverless Lambda
@@ -40,13 +40,21 @@ For a more precise list of tools that we will be implementing throughout the dev
 * [Stripe](https://stripe.com) will process our credit card payments
 * [GitHub](https://github.com) will our project repositories
 
-### Local Development Environment Setup & Configuration
+### Local Development Environment Setup & Configuration: Part 1
 
 One of the more difficult activities I faced as a junior developer a very long, long, time ago was understanding that the type of project that I would be working on, very much dictated how I would eventually have to configure my machine *locally*, to be ready to develop *ground breaking and world changing software*. Anytime you read a mention to *world changing software* from here on out, please refer to episodes of **HBO's Silicon Valley** to understand the *thick sarcasm* sprinkled throughout this article. My point is that I have always felt that most tutorials seem to skim over the idea of setting up your *local development environment*, as if it were a given that developers were born with the inherent understanding of the differences between `npm`, `yarn`, `bower`, and the never ending list of package managers and slick tools available to 'help' you succeed at this life in `SoftwareDevelopment`... For a historical perspective with a wholistic take on this matter please brush up on your knowledge of a topic some people refer to as [RPM Hell](http://wiki.c2.com/?RpmHell).
 
 To avoid [Dependency Hell](http://wiki.c2.com/?DependencyHell), we have decided to codify and create a series of *Best Practices* you can take with you for the development of the application in this tutorial and any other projects you work on in the future. For the goals of completing the application in this tutorial please make sure to configure all `local` development machines using the tools, dependencies, and configuration parameters described in this article. This list is not definitive and is only meant as a baseline from which to begin the development of your applications as quickly and as easily as possible.
 
 #### JavaScript Toolkit
+
+The idea of a `JavaScript Toolkit` is to more easily onboard new engineers onto a *fast-moving* team of *Software Stallions*. I prefer to be called a *Ninja*, but that's not important right now. The important thing is to get the job and to act like you know what you're doing so that you can keep said job, no?
+
+Anyway; There is a file you will be making use of called the `package.json` file that will eventually make this process easy for you everytime you want to start a new project. What I mean is that once you understand the significance of all of the project `dependencies` declared in any rendom `package.json` file you find out there on the *Internets*, all you will really ever need to do is to **run:** `$ npm install` from the project directory of an application with a `package.json` file to install all of the dependencies declared. We are not going to do that in this *Part 1 Serverless + React.js Mini-Series* of a tutorial. Instead, I am going to hold your hand and walk you through each command, one, simple, step, at a time.
+
+*For those of you not interested in starting at the bottom because you are already Level-12 Ninja Assassins, then please... proceed to [Part Deuxxx of this tutorial]() - *Not yet Published!*. This section is for those who prefer to do things right.*
+
+Seriously though, this is what you will be working with throughout the course of this *multi-part tutorial*:
 
 - [ ] Node Version Manager
 - [ ] Editor
