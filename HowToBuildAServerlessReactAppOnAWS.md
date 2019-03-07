@@ -433,7 +433,24 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
 }
 ```
 
+#### Install and Activate Color Theme optimized for React.js
 
+`OceanicNext` is a color scheme and syntax highlighter on `SublimeText3` that is optimized for [babel-sublime](https://github.com/babel/babel-sublime) JavaScript and [React.js](). Please go ahead and review the [OceanicNext Documentation and Installation Instructions](https://github.com/voronianski/oceanic-next-theme). However, it would be great if you could complete the instructions below so we can get through the rest of this tutorial. We may actually start building something now that we have a legitimate `local` environment to work on.
+
+* Navigate to `SublimeText` --> `Preferences` --> `Settings` --> `User` menu and add the following configuration parameters:
+
+  ```
+  "color_scheme": "Package/Oceanic Next Color Scheme/Oceanic Next.tmTheme",
+  "theme": "Oceanic Next.sublime-theme",
+  ```
+
+* Navigate to `SublimeText` --> `Preferences` --> `PackageControl` --> `InstallPackages` and install the following:
+  
+  1. Oceanic Next Color Scheme
+
+* Select the correct theme from: `SublimeText` --> `Preferences` --> `ColorScheme` --> `Oceanic Next` 
+
+### You `local` environment is now configured for work... Good Luck! 
 
     
 
