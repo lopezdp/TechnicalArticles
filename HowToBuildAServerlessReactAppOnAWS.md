@@ -1,10 +1,13 @@
 # How To Build a Serverless React.js Application with AWS Lambda, API Gateway, & DynamoDB
 
 *Author: [David P. Lopez](http://www.DavidPLopez.com)*
+*Publisher: [UniqueSoftwareDevelopment](https://www.uniquesoftwaredev.com)*
 
 You can clone a sample of the application we will be using in this tutorial here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git)
 
-Please refer to this repo as you follow along with this tutorial.
+Please refer to this repo as you follow along with this tutorial. 
+
+*No animals were hurt injured or maimed throughout the making of this tutorial. It was all done with CGI. We cannot be held liable for what you build after learning how to be a Ninja.*
 
 ### Introduction
 
@@ -21,20 +24,20 @@ The aim of this tutorial is to deploy a simple application on [AWS]() to share w
 
 ### Technology Stack
 
-For a more precise list of tools that we will be implementing throughout the development lifecycle of this multi-part series, below I have highlighted the technologies that we will be using to deploy our application on AWS using the [ServerlessFramework]():
+For a more precise list of tools that we will be implementing throughout the development lifecycle of this multi-part series, below I have highlighted the technologies that we will be using to deploy our application on AWS using the [ServerlessFramework](https://serverless.com/framework/docs/):
 
-* [AWS Lambda]() & [API Gateway]() to expose the API endpoints
-* [DynamoDB]() is our NoSQL database
-* [Cognito]() supplies user authentication and secures our API's
-* [S3]() will host our application & file uploads
-* [CloudFront]() will serve our application to the world
-* [Route53]() is our domain registry
-* [Certificate Manager]() provides us with SSL/TLS certificates
-* [React.js]() is our single page application
-* [React Router]() to develop our application routing functionality
-* [Bootstrap]() for the development of our UI components
-* [Stripe]() will process our credit card payments
-* [GitHub]() will our project repositories
+* [AWS Lambda](https://aws.amazon.com/lambda) & [API Gateway](https://aws.amazon.com/api-gateway/) to expose the API endpoints
+* [DynamoDB](https://aws.amazon.com/dynamodb/) is our NoSQL database
+* [Cognito](https://aws.amazon.com/cognito) supplies user authentication and secures our API's
+* [S3](https://aws.amazon.com/s3/) will host our application & file uploads
+* [CloudFront](https://aws.amazon.com/cloudfront/) will serve our application to the world
+* [Route53](https://aws.amazon.com/route53/) is our domain registry
+* [Certificate Manager](https://aws.amazon.com/certificate-manager/) provides us with SSL/TLS certificates
+* [React.js](https://reactjs.org) is our single page application
+* [React Router](https://reacttraining.com/react-router/) to develop our application routing functionality
+* [Bootstrap](https://react-bootstrap.github.io) for the development of our React UI components in Bootstrap
+* [Stripe](https://stripe.com) will process our credit card payments
+* [GitHub](https://github.com) will our project repositories
 
 ### Local Development Environment Setup & Configuration
 
@@ -88,7 +91,7 @@ To avoid [Dependency Hell](http://wiki.c2.com/?DependencyHell), we have decided 
 
 #### Install Node.js with NVM (Node Version Manager)
 
-On 7 November 2018, [AWS]() announced to the world that [AWS Lambda](), will now officially support [Node.js v8.10.0](). This project will use [NVM (Node Version Manager)]() to work with different versions of [Node.js]() between projects and to mitigate against any potential environment upgrades implemented in the future by any 3rd party vendors. To ensure that we are working on the correct version of [Node.js]() for this project please install `nvm` and `node` as follows:
+On 7 November 2018, [AWS]() announced to the world that [AWS Lambda](https://aws.amazon.com/lambda), will now officially support [Node.js v8.10.0](). This project will use [NVM (Node Version Manager)]() to work with different versions of [Node.js]() between projects and to mitigate against any potential environment upgrades implemented in the future by any 3rd party vendors. To ensure that we are working on the correct version of [Node.js]() for this project please install `nvm` and `node` as follows:
 
 * Refer to the [Node Version Manager Documentation]() if this information is out of date
 * **Installation** (Choose ONE based on your system OS):
@@ -112,13 +115,13 @@ On 7 November 2018, [AWS]() announced to the world that [AWS Lambda](), will now
 * On **macOS**, if you receive and error of `nvm: command not found`, then you need to add the following line to your `.bash_profile` found in your `home` directory as shown below:
   1. `source ~/.bashrc`
 
-* To download, compile, and install a specific version of [Node.js](), then please run the following command to obtain [Node.js v8.10.0]() as needed to be able to work with [AWS Lambda]():
+* To download, compile, and install a specific version of [Node.js](https://nodejs.org/en/), then please run the following command to obtain [Node.js v8.10.0](https://nodejs.org/en/blog/release/v8.10.0/) as needed to be able to work with [AWS Lambda](https://aws.amazon.com/lambda):
   1. `$ nvm install 8.10.0`
 
   2. You can list available versions to install using:
     * `$ nvm ls-remote`
 
-  3. The completed output should look like this, showing that you are now ready to start building services in [AWS Lambda]()!
+  3. The completed output should look like this, showing that you are now ready to start building services in [AWS Lambda](https://aws.amazon.com/lambda)!
 
     ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NodeInstallComplete4Lambda.png "Complete Node Install with NVM!")
 
@@ -126,7 +129,7 @@ On 7 November 2018, [AWS]() announced to the world that [AWS Lambda](), will now
 
 #### Setup Editor and Install Linting
 
-For JavaScript, React.js, and the build process that we are using in [SublimeText3]() we will continue to configure linting, and formatting, while making use of OpenSource libraries and tools to help make this implementation of React.js more efficient. Please take the following steps to complete the installation of `ESLint`:
+For JavaScript, React.js, and the build process that we are using in [SublimeText3](https://www.sublimetext.com) we will continue to configure linting, and formatting, while making use of OpenSource libraries and tools to help make this implementation of React.js more efficient. Please take the following steps to complete the installation of `ESLint`:
 
 * **Install ESLint:** Must install **BOTH** Globally & Locally
   1. **Global Install:** `$ npm install -g eslint`
@@ -321,15 +324,15 @@ One more thing, from within the project root directory please make sure that you
 }
 ```
 
-From here on out every time you save your `JavaScript` files all the formatting completes automatically for you. Sort of, we just must configure all of this into our trusty [SublimeText3]() text editor now!
+From here on out every time you save your `JavaScript` files all the formatting completes automatically for you. Sort of, we just must configure all of this into our trusty [SublimeText3](https://www.sublimetext.com) text editor now!
 
-Before we get into it, yes, you can use `vim`. I promise you, you will find people who will die by `vim` throughout your career. My belief; keep it simple, buy the [SublimeText3]() license and just use that over every other IDE that will bombard your spam folder in your email. [SublimeText3]() provides the simplicity of `vim` without having to memorize the abstract commands like `wq!` that will inevitably leave you with a mess of `*.swp` files, because I guarantee that most of you will never clean them out and it becomes a hassle. Keep it simple, do not over complicate your life in an already all too complicated environment, and get the tool that is really cheap, easy on the eyes, and provides enough of the fancy functionality of a really expensive IDE and the simplicity of `vim` without having to memorize all of the abstract commands: `wq!`
+Before we get into it, yes, you can use `vim`. I promise you, you will find people who will die by `vim` throughout your career. My belief; keep it simple, buy the [SublimeText3](https://www.sublimetext.com) license and just use that over every other IDE that will bombard your spam folder in your email. [SublimeText3](https://www.sublimetext.com) provides the simplicity of `vim` without having to memorize the abstract commands like `wq!` that will inevitably leave you with a mess of `*.swp` files, because I guarantee that most of you will never clean them out and it becomes a hassle. Keep it simple, do not over complicate your life in an already all too complicated environment, and get the tool that is really cheap, easy on the eyes, and provides enough of the fancy functionality of a really expensive IDE and the simplicity of `vim` without having to memorize all of the abstract commands: `wq!`
 
 #### SublimeText3 Configuration
 
-To complete the configuration in [SublimeText3]() please install `PackageControl` and the following packages from within [SublimeText3]():
+To complete the configuration in [SublimeText3](https://www.sublimetext.com) please install `PackageControl` and the following packages from within [SublimeText3](https://www.sublimetext.com):
 
-* The easiest way to achieve this is to navigate to the [SublimeText3]() `View` --> `ShowConsole` menu, and proceed to paste the following code provided by [PackageControl](https://packagecontrol.io/installation):
+* The easiest way to achieve this is to navigate to the [SublimeText3](https://www.sublimetext.com) `View` --> `ShowConsole` menu, and proceed to paste the following code provided by [PackageControl](https://packagecontrol.io/installation):
 
   ```
   # For SublimeText3 ONLY!
@@ -450,7 +453,15 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
 
 * Select the correct theme from: `SublimeText` --> `Preferences` --> `ColorScheme` --> `Oceanic Next` 
 
+From this point forward your `local` development environment is ready to work with and will be able to provide you and your `Scrum Master`, *Wilson*, with the right kind of automated feedback you need to have as a professional *Jedi*, I mean... **Engineer**, so that you can debug and extend the most complex of *Mobile Applications on the DARN Cloud*... 
+
+If you can figure out a better way to make the technicalities of setting up *linting and formatting* on a Linux machine without ever having known the `terminal`, a tad bit more entertaining and easier to digest than this little tutorial we put you through today, then please enlighten my friends and I pretending to be the masters of the *Dark Side*. UNTIL THEN:
+
 ### You `local` environment is now configured for work... Good Luck! 
+
+## `localhost` Serverless + Microservice & The NEW Backend Paradigm
+
+* [Serverless + Microservice Implementation Instructions: Part Deuxxx]() - *Not Published.*
 
     
 
