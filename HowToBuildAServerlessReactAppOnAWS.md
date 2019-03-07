@@ -380,6 +380,58 @@ To complete the configuration in [SublimeText3]() please install `PackageControl
 
 * From the `jsfmt` package directory (See above if you don't remember! `hint: See Step #1 from above`) run: `$ ls -a` and open a file in `SublimeText3` called: `$ subl jsfmt.sublime-settings` and paste the following configuration settings:
 
+```
+{
+  // autoformat on file save events
+  "autoformat": false,
+
+  // This is and array of extensions for autoformatting
+  "extensions": ["js",
+    "jsx",
+    "sublime-settings"
+  ],
+
+  // options for jsfmt
+  "options": {
+    "preset": "jquery",
+    // plugins included
+    "plugins": [
+      "esformatter-jsx"
+    // "esformatter-quotes",
+    // "esformatter-semicolons",
+    // "esformatter-braces",
+    // "esformatter-dot-notation"
+    ],
+    "jsx": {
+      "formatJSX": true, // Default value
+      "attrsOnSameLineAsTag": false, // move each attribute to its own line
+      "maxAttrsOnTag": 3, // if lower or equal than 3 attributes, they will be kept on a single line
+      "firstAttributeOnSameLine": true, // keep the first attribute in the same line as the tag
+      "formatJSXExpressions": true, // default is true, if false, then jsxExpressions are not formatted recursively
+      "JSXExpressionsSingleLine": true, // default is true, if false the JSXExpressions may span several lines
+      "alignWithFirstAttribute": false, // do not align attributes with the first tag
+      "spaceInJSXExpressionContainers": " ", // default to one space. Make it empty if you don't like spaces between JSXExpressionContainers
+      "removeSpaceBeforeClosingJSX": false, // default false. if true <React.Component /> => <React.Component />
+      "closingTagOnNewLine": false, // default false. if true attributes on multiple lines will close the tag on a new line
+      "JSXAttributeQuotes": "", // possible values "single" or "double". Leave it as empty string if you don't want to modify the attributes' quotes
+      "htmlOptions": {
+        // put here the options for js-beautify.html
+      }
+    }
+  },
+  "options-JSON": {
+    "plugins": [
+      "esformatter-quotes"
+    ],
+    "quotes": {
+      "type": "double"
+    }
+  },
+  "node-path": "node",
+  "alert-errors": true,
+  "ignore-selection": false
+}
+```
 
 
 
