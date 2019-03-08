@@ -136,7 +136,7 @@ On 7 November 2018, [AWS](https://aws.amazon.com) announced to the world that [A
 
     ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NodeInstallComplete4Lambda.png "Complete Node Install with NVM!")
 
-  4. Give yourself a tap on the back. Being able to hit the ground running as a new developer on a new team is a skill many employers would pay a few bucks extra to have more of on the team. Always refer to this page and tell your friends that this is where you can get the *low-down* on how to get it done without having to ask 10 questions on our favorite technology forums out in the ether.
+  4. Give yourself a pat on the back! Being able to hit the ground running as a new developer on a new team, is a skill that many employers would pay a few bucks extra to have more of in their organizations. Always refer to this page and tell your friends that this is where you can get the *low-down* on how to get it done without having to ask 10 questions on our favorite technology forums out in the ether.
 
 #### Setup Editor and Install Linting
 
