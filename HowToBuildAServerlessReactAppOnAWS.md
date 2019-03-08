@@ -6,9 +6,9 @@
 
 You can clone a sample of the application we will be using in this tutorial here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git)
 
-Please refer to this repo as you follow along with this tutorial. 
+Please refer to this repo as you follow along with this tutorial.
 
-*No animals were hurt, injured, or maimed throughout the making of this tutorial. It was all done with CGI. Furthermore, we cannot be held liable for what you build after learning how to be a Ninja. Never go Full Ulbricht.*
+*We did not hurt, injur, or maim any animals or ponies throughout the making of this tutorial. We completed all our heroic action sequences in CGI. Furthermore, we are not liable for what you build after learning how to be a Ninja. Never go [Full Ulbricht](https://www.wired.com/2017/05/silk-road-creator-ross-ulbricht-loses-life-sentence-appeal/).*
 
 ### Introduction
 
@@ -16,7 +16,7 @@ It is amazing how quickly the technology community iterates over innovative tech
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWSServerless.png "AWS Serverless Architecture")
 
-The aim of this tutorial is to deploy a simple application on [AWS]() to share with you, our favorite readers, the joys of developing applications on the [Serverless Framework](ttps://serverless.com/framework/docs/) with [AWS](https://aws.amazon.com). The application we will be walking you through today, includes a backend API service to handle basic **CRUD** operations built on something we like to call the **DARN Technology Stack**. Yes, we created a new acronym for your recruiter to get excited about. They will have no idea what you are talking about, but they will get you an interview with **Facebook** if you tell them that you completed this tutorial to become a fully-fledged and certified *Application Developer on the DARN Cloud*. (That is an outright lie. Please do not believe any guarantees the maniac who wrote this article promises you.) The **DARN Stack** includes the following tool set:
+The aim of this tutorial is to deploy a simple application on [AWS](https://aws.amazon.com) to share with you, our favorite readers, the joys of developing applications on the [Serverless Framework](ttps://serverless.com/framework/docs/) with [AWS](https://aws.amazon.com). The application we will be walking you through today, includes a backend API service to handle basic **CRUD** operations built on something we like to call the **DARN Technology Stack**. Yes, we created a new acronym for your recruiter to get excited about. They will have no idea what you are talking about, but they will get you an interview with **Facebook** if you tell them that you completed this tutorial to become a fully-fledged and certified *Application Developer on the DARN Cloud*. (That is an outright lie. Please do not believe any guarantees the maniac who authored this article promises you.) The **DARN Stack** includes the following tool set:
 
 * **D**ynamoDB
 * **A**WS Serverless Lambda
@@ -48,11 +48,11 @@ To avoid [Dependency Hell](http://wiki.c2.com/?DependencyHell), we have decided 
 
 #### JavaScript Toolkit
 
-The idea of a `JavaScript Toolkit` is to more easily onboard new engineers onto a *fast-moving* team of *Software Stallions*. I prefer to be called a *Ninja*, but that's not important right now. The important thing is to get the job and to act like you know what you're doing so that you can keep said job, no?
+The idea of a `JavaScript Toolkit` is to more easily onboard new engineers onto a *fast-moving* team of *Software Stallions*. I prefer the title of *Ninja*, but that's not important right now. The important thing is to get the job and to act like you know what you are doing so that you can keep said job, no?
 
-Anyway; There is a file you will be making use of called the `package.json` file that will eventually make this process easy for you everytime you want to start a new project. What I mean is that once you understand the significance of all of the project `dependencies` declared in any rendom `package.json` file you find out there on the *Internets*, all you will really ever need to do is to **run:** `$ npm install` from the project directory of an application with a `package.json` file to install all of the dependencies declared. We are not going to do that in this *Part 1 Serverless + React.js Mini-Series* of a tutorial. Instead, I am going to hold your hand and walk you through each command, one, simple, step, at a time.
+Anyway; There is a file you will be making use of called the `package.json` file that will eventually make this process easy for you every time you want to start a new project. What I mean is that once you understand the significance of all of the project `dependencies` declared in any random `package.json` file you find out there on the *Internets*, all you will really ever need to do is to **run:** `$ npm install` from the project directory of an application with a `package.json` file to install all of the dependencies declared. We are not going to do that in this *Part 1 Serverless + React.js Mini-Series* of a tutorial. Instead, I am going to hold your hand and walk you through each command, one, simple, step, at a time.
 
-*For those of you not interested in starting at the bottom because you are already Level-12 Ninja Assassins, then please... proceed to [Part Deuxxx of this tutorial]() - *Not yet Published!*. This section is for those who prefer to do things right.*
+*For those of you not interested in starting at the bottom because you are already Level-12 Ninja Assassins, then please... continue to [Part Deuxxx of this tutorial]() - *Not yet Published!*. This section is for those who prefer to do things right.*
 
 Seriously though, this is what you will be working with throughout the course of this *multi-part tutorial*:
 
@@ -100,9 +100,9 @@ Seriously though, this is what you will be working with throughout the course of
 
 #### Install Node.js with NVM (Node Version Manager)
 
-On 7 November 2018, [AWS]() announced to the world that [AWS Lambda](https://aws.amazon.com/lambda), will now officially support [Node.js v8.10.0](). This project will use [NVM (Node Version Manager)]() to work with different versions of [Node.js]() between projects and to mitigate against any potential environment upgrades implemented in the future by any 3rd party vendors. To ensure that we are working on the correct version of [Node.js]() for this project please install `nvm` and `node` as follows:
+On 7 November 2018, [AWS](https://aws.amazon.com) announced to the world that [AWS Lambda](https://aws.amazon.com/lambda), will now officially support [Node.js v8.10.0](https://nodejs.org/en/blog/release/v8.10.0/). This project will use [NVM (Node Version Manager)](https://github.com/creationix/nvm) to work with different versions of [Node.js](https://nodejs.org/en/) between projects and to mitigate against any potential environment upgrades implemented in the future by any 3rd party vendors. To ensure that we are working on the correct version of [Node.js](https://nodejs.org/en/) for this project please install `nvm` and `node` as follows:
 
-* Refer to the [Node Version Manager Documentation]() if this information is out of date
+* Refer to the [Node Version Manager Documentation](https://github.com/creationix/nvm#installation-and-update) if this information is out of date
 * **Installation** (Choose ONE based on your system OS):
   1. cURL: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
 
@@ -282,7 +282,7 @@ We think it's going to be best (and just easiest quite frankly), to just `alias`
 
 * **Run:** `$ npm run lint` to lint your project from the `terminal`.
 
-The linter will now supply feedback on syntax, bugs, and problems, while enforcing code style, all from within the comfort of your `terminal`. Do not fool yourself, this will work in `vim` also! For all those `wq!` fans out there, all hope, is not lost... `#UseTheForce`.
+The linter will now supply feedback on syntax, bugs, and problems, while enforcing code style, all from within the comfort of your `terminal`. Do not fool yourself, this will work in `vim` also! For all those `wq!` fans out there, the hope, is on our side... `#UseTheForce`.
 
 A typical output running ESLint from the `terminal` as instructed would look something like this (depending on your project and the silly errors you make):
 
@@ -345,27 +345,27 @@ Before we get into it, yes, you can use `vim`. I promise you, you will find peop
 
 To complete the configuration in [SublimeText3](https://www.sublimetext.com) please install `PackageControl` and the following packages from within [SublimeText3](https://www.sublimetext.com):
 
-* The easiest way to achieve this is to navigate to the [SublimeText3](https://www.sublimetext.com) `View` --> `ShowConsole` menu, and proceed to paste the following code provided by [PackageControl](https://packagecontrol.io/installation):
+* The easiest way to achieve this is to navigate to the [SublimeText3](https://www.sublimetext.com) `View` --> `ShowConsole` menu, and continue to paste the following code provided by [PackageControl](https://packagecontrol.io/installation):
 
   ```
   # For SublimeText3 ONLY!
 
-  import urllib.request,os,hashlib; 
-  h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; 
-  pf = 'Package Control.sublime-package'; 
-  ipp = sublime.installed_packages_path(); 
-  urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); 
-  by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); 
-  dh = hashlib.sha256(by).hexdigest(); 
-  print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) 
+  import urllib.request,os,hashlib;
+  h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60';
+  pf = 'Package Control.sublime-package';
+  ipp = sublime.installed_packages_path();
+  urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) );
+  by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read();
+  dh = hashlib.sha256(by).hexdigest();
+  print('Error validating download (got %s instead of %s), please try manual install' % (dh, h))
   if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
   ```
 
-  The configuration parameters provided above, will generate an `Installed Packages` directory on your `local` machine (if needed). It will download the Package Control.sublime-package over HTTP instead of HTTPS because of known Python standard library constraints, and the file will be validated using SHA-256.
+  The configuration parameters supplied above, will generate an `Installed Packages` directory on your `local` machine (if needed). It will download the Package Control.sublime-package over HTTP instead of HTTPS because of known Python standard library constraints, and the file will apply SHA-256 to confirm that it is in fact a valid file.
 
-  **WARNING:** Please do not copy or install this code via this tutorial or our website. It will change with every release of [PackageControl](https://packagecontrol.io/installation). Please make sure to view the [Official PackageControl Release Documentation](https://packagecontrol.io/installation) page and installation instructions to get the most recent version of the code shared in this tutorial. You can obtain the most recent information needed directly from: [PackageControl](https://packagecontrol.io/installation).
+  **WARNING:** Please do not copy or install this code via this tutorial or our website. It will change with every release of [PackageControl](https://packagecontrol.io/installation). Please make sure to view the [Official PackageControl Release Documentation](https://packagecontrol.io/installation) page and installation instructions to get the most recent version of the code shared in this tutorial. You can obtain the most up-to-date information needed directly from: [PackageControl](https://packagecontrol.io/installation).
 
-* Next, please proceed to navigate through to `SublimeText` --> `Preferences` --> `PackageControl` --> `InstallPackages` and install the following tools:
+* Next, please continue to navigate through to `SublimeText` --> `Preferences` --> `PackageControl` --> `InstallPackages` and install the following tools:
 
   1. Babel
   2. ESLint
@@ -378,30 +378,30 @@ To complete the configuration in [SublimeText3](https://www.sublimetext.com) ple
 
 * Once you have completed the above, go ahead and navigate to: `View` --> `Syntax` --> `Open all with current extension as ...` --> `Babel` --> `JavaScript (Babel)` with any `file.js` open to configure the settings for the syntax is `JS` and `JSX`.
 
-* It is helpful to setup a `JSX` formatter for your text editor also. In our case we are using [esformatter-jsx](https://www.npmjs.com/package/esformatter-jsx). You will have to figure out where your `SublimeText3` `Packages` directory is located to complete your `jsfmt` configuration. Run the following commands to complete this step:
+* It is helpful to setup a `JSX` formatter for your text editor also. In our case we are using [esformatter-jsx](https://www.npmjs.com/package/esformatter-jsx). You will have to figure out where your `SublimeText3` `Packages` directory is, to complete your `jsfmt` configuration. Run the following commands to complete this step:
 
   1. `$ cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/jsfmt`
 
   2. `$ npm install jsfmt`
-    * Make an attempt to run: `$ npm ls esformatter` before proceeding to step #3
+    * Try to run: `$ npm ls esformatter` before continuing to step #3
 
-    * If `esformatter` is already installed then skip step #3 and run:
+    * If you have `esformatter` installed, then skip step #3 and run:
       1. `$ npm install esformatter-jsx`
 
-  3. `$ npm install esformatter esformatter-jsx` (**See notes above before proceeding with this step!!!**)
+  3. `$ npm install esformatter esformatter-jsx` (**See notes above before going ahead with this step!!!**)
 
   4. Test the installation of each package and run: `$ npm ls <package>` (See the expected output below)
 
     ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/jsfmt-install.png "$ jsfmt installation complete!")
 
-* From the `jsfmt` package directory (See above if you don't remember! `hint: See Step #1 from above`) run: `$ ls -a` and open a file in `SublimeText3` called: `$ subl jsfmt.sublime-settings` and paste the following configuration settings:
+* From the `jsfmt` package directory (See above if you do not remember! `hint: See Step #1 from above`) run: `$ ls -a` and open a file in `SublimeText3` called: `$ subl jsfmt.sublime-settings` and paste the following configuration settings:
 
 ```
 {
   // autoformat on file save events
   "autoformat": false,
 
-  // This is and array of extensions for autoformatting
+  // This is an array of extensions for autoformatting
   "extensions": ["js",
     "jsx",
     "sublime-settings"
@@ -421,15 +421,15 @@ To complete the configuration in [SublimeText3](https://www.sublimetext.com) ple
     "jsx": {
       "formatJSX": true, // Default value
       "attrsOnSameLineAsTag": false, // move each attribute to its own line
-      "maxAttrsOnTag": 3, // if lower or equal than 3 attributes, they will be kept on a single line
+      "maxAttrsOnTag": 3, // if lower or equal than 3 attributes, they will be on a single line
       "firstAttributeOnSameLine": true, // keep the first attribute in the same line as the tag
-      "formatJSXExpressions": true, // default is true, if false, then jsxExpressions are not formatted recursively
+      "formatJSXExpressions": true, // default is true, if false, then jsxExpressions does not apply formatting recursively
       "JSXExpressionsSingleLine": true, // default is true, if false the JSXExpressions may span several lines
       "alignWithFirstAttribute": false, // do not align attributes with the first tag
-      "spaceInJSXExpressionContainers": " ", // default to one space. Make it empty if you don't like spaces between JSXExpressionContainers
+      "spaceInJSXExpressionContainers": " ", // default to one space. Make it empty if you do not like spaces between JSXExpressionContainers
       "removeSpaceBeforeClosingJSX": false, // default false. if true <React.Component /> => <React.Component />
       "closingTagOnNewLine": false, // default false. if true attributes on multiple lines will close the tag on a new line
-      "JSXAttributeQuotes": "", // possible values "single" or "double". Leave it as empty string if you don't want to modify the attributes' quotes
+      "JSXAttributeQuotes": "", // values "single" or "double". Leave it as empty string if you do not want to change the attributes' quotes
       "htmlOptions": {
         // put here the options for js-beautify.html
       }
@@ -451,7 +451,7 @@ To complete the configuration in [SublimeText3](https://www.sublimetext.com) ple
 
 #### Install and Activate Color Theme optimized for React.js
 
-`OceanicNext` is a color scheme and syntax highlighter on `SublimeText3` that is optimized for [babel-sublime](https://github.com/babel/babel-sublime) JavaScript and [React.js](). Please go ahead and review the [OceanicNext Documentation and Installation Instructions](https://github.com/voronianski/oceanic-next-theme). However, it would be great if you could complete the instructions below so we can get through the rest of this tutorial. We may actually start building something now that we have a legitimate `local` environment to work on.
+`OceanicNext` is a color scheme and syntax highlighter on `SublimeText3` that is perfect for [babel-sublime](https://github.com/babel/babel-sublime) JavaScript and [React.js](https://reactjs.org/). Please go ahead and review the [Oceanic Next Documentation and Installation Instructions](https://github.com/voronianski/oceanic-next-theme). However, it would be great if you could complete the instructions below so we can get through the rest of this tutorial. We may start building something now that we have a legitimate `local` environment to work on.
 
 * Navigate to `SublimeText` --> `Preferences` --> `Settings` --> `User` menu and add the following configuration parameters:
 
@@ -461,23 +461,20 @@ To complete the configuration in [SublimeText3](https://www.sublimetext.com) ple
   ```
 
 * Navigate to `SublimeText` --> `Preferences` --> `PackageControl` --> `InstallPackages` and install the following:
-  
+
   1. Oceanic Next Color Scheme
 
-* Select the correct theme from: `SublimeText` --> `Preferences` --> `ColorScheme` --> `Oceanic Next` 
+* Select the correct theme from: `SublimeText` --> `Preferences` --> `ColorScheme` --> `Oceanic Next`
 
-From this point forward your `local` development environment is ready to work with and will be able to provide you and your `Scrum Master`, *Wilson*, with the right kind of automated feedback you need to have as a professional *Jedi*, I mean... **Engineer**, so that you can debug and extend the most complex of *Mobile Applications on the DARN Cloud*... 
+From this point forward your `local` development environment is ready to work with and will be able to provide you and your `Scrum Master`, *Wilson*, with the right kind of automated feedback you need to have as a professional *Jedi*, I mean... **Engineer**, so that you can debug and extend the most complex of *Mobile Applications on the DARN Cloud*...
 
 If you can figure out a better way to make the technicalities of setting up *linting and formatting* on a Linux machine without ever having known the `terminal`, a tad bit more entertaining and easier to digest than this little tutorial we put you through today, then please enlighten my friends and I pretending to be the masters of the *Dark Side*. UNTIL THEN:
 
-### You `local` environment is now configured for work... Good Luck! 
+### Your `local` environment ready for work and configured correctly... Good Luck!
 
 ## `localhost` Serverless + Microservice & The NEW Backend Paradigm
 
 * [Serverless + Microservice Implementation Instructions: Part Deuxxx]() - *Not Published.*
-
-    
-
 
 
 
