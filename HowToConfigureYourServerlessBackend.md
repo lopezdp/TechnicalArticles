@@ -22,6 +22,8 @@ When developing a *serverless* application, we need to make sure that the applic
 
 #### Stateless Functions
 
+When we deploy a **serverless + microservice** architecture, the functions that we declare as a part of our application API, are executed inside of stateless containers by the cloud service provider, or in our case [AWS](). The significance of this is that our code is not run as it typically would be on a *server* that executes long after the event has completed. There is no prior execution context to serve a request to the users of your application when running [AWS Lambda](). Throughout the development of your serverless applications you MUST assume that your function is invoked in its initial application state every time and with no contextual data to work with because your function will not be handling concurrent requests.
+
 #### Cold Starts
 
 
