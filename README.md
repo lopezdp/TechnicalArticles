@@ -14,3 +14,5 @@ This repository is dedicated to the articles I write for blogs and agencies who 
 ### How to build a Serverless React.js application on AWS
 
 **Chapter 1:** [Part 1: How To SetUp Your `local` Serverless Environment](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToSetUpYourLocalServerlessEnvironment.md) - *Not Published.*
+
+**Chapter 2:** [Part 2: How To Configure Your Serverless Backend API](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md)

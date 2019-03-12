@@ -54,7 +54,7 @@ The idea of a `JavaScript Toolkit` is to more easily onboard new engineers onto 
 
 Anyway; There is a file you will be making use of called the `package.json` file that will eventually make this process easy for you every time you want to start a new project. What I mean is that once you understand the significance of all of the project `dependencies` declared in any random `package.json` file you find out there on the *Internets*, all you will really ever need to do is to **run:** `$ npm install` from the project directory of an application with a `package.json` file to install all of the dependencies declared. We are not going to do that in this *Part 1 of our Serverless + React.js Mini-Series* of a tutorial. Instead, I am going to hold your hand and walk you through each command, one, simple, step, at a time.
 
-*For those of you not interested in starting at the bottom because you are already Level-12 Ninja Assassins, then please... continue to [Part Deuxxx of this tutorial]() - *Not yet Published!*. This section is for those who prefer to do things right.*
+*For those of you not interested in starting at the bottom because you are already Level-12 Ninja Assassins, then please... continue to [Part 2: How To Configure Your Serverless Backend API](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md) - *Not yet Published!*. This section is for those who prefer to do things right.*
 
 Seriously though, this is what you will be working with throughout the course of this *multi-part tutorial*:
 
@@ -476,7 +476,7 @@ If you can figure out a better way to make the technicalities of setting up *lin
 
 ## Part 2: `localhost` Serverless + Microservice & The NEW Backend Paradigm
 
-* [Serverless + Microservice Implementation Instructions: Part Deuxxx]() - *Not Published.*
+* [Part 2: How To Configure Your Serverless Backend API](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md) - *Not Published.*
 
 
 
