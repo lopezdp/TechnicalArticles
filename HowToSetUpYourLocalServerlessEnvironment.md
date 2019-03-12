@@ -472,7 +472,7 @@ From this point forward your `local` development environment is ready to work wi
 
 If you can figure out a better way to make the technicalities of setting up *linting and formatting* on a Linux machine without ever having known the `terminal`, a tad bit more entertaining and easier to digest than this little tutorial we put you through today, then please enlighten my friends and I pretending to be the masters of the *Dark Side*. UNTIL THEN:
 
-### Your `local` environment ready for work and configured correctly... Good Luck!
+### Your `local` environment is ready for work and is configured correctly... Good Luck!
 
 ## Part 2: `localhost` Serverless + Microservice & The NEW Backend Paradigm
 
