@@ -89,6 +89,12 @@ custom:
 
 If you are being perseptive right now, you will notice that this `serverless.yml` file is really letting us complete a lot of interesting tasks pretty quickly, and without having to think too much about the impact of the resources we are conjuring-up out of thin air. As you can see *Young Padawan*, we are slowly, but surely making our way through a concept known as **Infrastructure As Code**, and we are, albeit moderately for now, programatically allocating and *spinning-up* the cloud-based servers we need to keep our [Lambda's]() warm with this [serverless-warmup-plugin](https://github.com/FidelLimited/serverless-plugin-warmup).
 
+We will get back to **Infrastructure As Code** in a bit, but this idea of *serverless...servers*?? 
+
+**Irony in the Cloud**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/cloud-servers.png#center "Serverless Servers...")
+
 
 
 
