@@ -46,6 +46,16 @@ As discussed above, we will be keeping our [Lambda's]() warm during the hibernat
 
 * **Run:** `$ npm install --save-dev serverless-plugin-warmup`
 
+Add the following line to the `plugin` block in your `serverless.yml` file that is found in the root of your service's directory:
+
+```
+plugins:
+	- serverless-plugin-warmup
+```
+
+Take a look at what my file looks like if you need a reference point:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/serverless-warmup-blockYML.png#center "Serverless.yml Plugins!")
 
 
 
