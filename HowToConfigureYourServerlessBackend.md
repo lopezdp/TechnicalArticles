@@ -22,8 +22,39 @@ When developing a *serverless* application, we need to make sure that the applic
 
 #### Stateless Functions
 
-When we deploy a **serverless + microservice** architecture, the functions that we declare as a part of our application API, are executed inside of stateless containers by the cloud service provider, or in our case [AWS](). The significance of this is that our code is not run as it typically would be on a *server* that executes long after the event has completed. There is no prior execution context to serve a request to the users of your application when running [AWS Lambda](). Throughout the development of your serverless applications you MUST assume that your function is invoked in its initial application state every time and with no contextual data to work with because your function will not be handling concurrent requests.
+When we deploy a **serverless + microservice** architecture, the functions that we declare as a part of our application API, are executed inside of stateless containers for us by our cloud service provider, or in our case [AWS](). The significance of this is that our code is not run as it typically would be on a *server* that executes long after the event has completed. There is no prior execution context to serve a request to the users of your application when running [AWS Lambda](). Throughout the development of your serverless applications you MUST assume that your function is invoked in its initial application state every time, and with no contextual data to work with, because your function will not be handling concurrent requests. Your backend is stateless and each function should strive to return an *idempotent* response.
 
 #### Cold Starts
+
+Because our functions are executed inside of a stateless container that is managed by the cloud service provider, in our case [AWS](), there is a bit of latency associated with each http request to our serverless "backend". Our stateless infrastructure is dynamically allocated to respond to the events triggered by our application, and although the container is typically kept "alive" for a short period of time upon the completion of the [Lambda's]() functionality, the resources will be deallocated and will lead to latent responses for new requests. These are referred to as *Cold Starts*. 
+
+*Cold Start* durations typically last from a couple of hundred milliseconds to up to a few seconds. The size of the functions and the runtime language used can vary the *Cold Start* duration time in [AWS Lambda](). It is important to understand that our serverless containers *can* remain in an `Active` state in [AWS Lambda](), after the initial request to our serverless endpoint has completed its execution routine. If a subsequent request to our [Lambda]() is triggered by our application immediately after the completed execution of a previous request, the serverless lambda that defines our endpoint in the cloud on our stateless containers on [AWS](), will respond to this next request almost immediately and with little to no latency; this is called a *Warm Start*, and this is what we want to maintain to keep our application running optimally.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
