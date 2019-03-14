@@ -40,7 +40,7 @@ The great thing about working with the [ServerlessFramework]() library is the ro
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/warmStartCamaro.jpg#center "I still want my $2!!!")
 
-#### Optimize for Warm Starts
+#### Configure AWS Lambda & Optimize for Warm Starts
 
 As discussed above, we will be keeping our [Lambda's]() warm during the hibernation season with [serverless-plugin-warmup](https://github.com/FidelLimited/serverless-plugin-warmup).  In this next section, we will walk you through each step of the installation of this plugin. Remember, you can also refer to the sample of the application we will be using in this tutorial to follow along, here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git). 
 
@@ -61,8 +61,33 @@ Take a look at what my file looks like if you need a reference point:
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/serverless-warmup-blockYML.png#center "Serverless.yml Plugins!")
 
+Moving along now, you will want to configure the `serverless-warmup-plugin` in the `custom:` block of your service's `serverless.yml` file. Remember, each service will always have its own `serverless.yml` file that will define the [AWS Lambda]() endpoints for each **serverless + microservice** implemented for each path defined in the `functions:` block of the file. There are a number of configuration settings you can read more about at the `serverless-warmup` [Documentation repository](https://github.com/FidelLimited/serverless-plugin-warmup). Here ww will go over what we think are the most important settings you should at least be familiar with for now. Your `custom:` block in your `serverless.yml` file should look something like this:
 
+```
+custom:
+  # Stages are based on what is passed into the CLI when running
+  # serverless commands. Or fallback to settings in provider section.
+  stage: ${opt:stage, self:provider.stage}
+  
+  # Load webpack config
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
 
+  # ServerlessWarmup Configuration
+  # See configuration Options at:
+  # https://github.com/FidelLimited/serverless-plugin-warmup
+  warmup:
+    enabled: true # defaults to false
+    folderName: '_warmup' # Name of folder generated for warmup
+    memorySize: 256
+    events:
+      # Run WarmUp every 60 minutes Mon-Fri between 8:00am and 5:55pm (UTC)
+      - schedule: rate(60 minutes) 
+    timeout: 20
+```
+
+If you are being perseptive right now, you will notice that this `serverless.yml` file is really letting us complete a lot of interesting tasks pretty quickly, and without having to think too much about the impact of the resources we are conjuring-up out of thin air. As you can see *Young Padawan*, we are slowly, but surely making our way through a concept known as **Infrastructure As Code**, and we are, albeit moderately for now, programatically allocating and *spinning-up* the cloud-based servers we need to keep our [Lambda's]() warm with this [serverless-warmup-plugin](https://github.com/FidelLimited/serverless-plugin-warmup).
 
 
 
