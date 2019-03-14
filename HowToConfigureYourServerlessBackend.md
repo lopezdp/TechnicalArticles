@@ -95,6 +95,28 @@ We will get back to **Infrastructure As Code** in a bit, but this idea of *serve
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/cloud-servers.png#center "Serverless Servers...")
 
+### Understanding [AWS Lambda]()
+
+We really have to have a discussion about how [AWS Lambda]() will execute the logic within our functions to better understand, and to have a general idea about a few of the important properties that make up our [AWS FaaS]() paradigm. Below are a few details you should know about how [Lambda]() works with you:
+
+**[AWS Lambda]() Specs**
+Lambda will support the runtime environments listed below:
+* **Node.js:** v8.10 & v6.10
+* **Java 8**
+* **Python v3.6 & v2.7**
+* **.NET Core: v1.0.1 & v2.0**
+* **Go v1.x**
+* **Ruby v2.5**
+* **Rust**
+
+Each [Lambda]() will execute and compute inside of a container with a 64-bit AWS Linux AMI. The computation environment is allocated to each user according to the following system requirements:
+* **Memory:** 128MB - 3008MB (Allocated in 64MB increments)
+* **Ephemeral Disk Space:** 512 MB
+* **Max execution time:** 900 seconds
+* **Uncompressed Package Size:** 250 MB
+* **Compressed Package Size:** 50MB
+
+The `serverless` design paradigm is a language agnostic approach that is meant to give engineers the ability to leverage [AWS]() resources and infrastructure to better scale their products, i.e. your products, to a global market place and to more quickly put your innovation into the hands of the users that need it the most.
 
 
 
