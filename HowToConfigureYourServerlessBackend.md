@@ -36,6 +36,8 @@ Because our functions are executed inside of a stateless container that is manag
 
 The great thing about working with the [ServerlessFramework]() library is the robust community that contributes to its development and evolution as `Serverless` becomes more of a thing. Dynamically allocating resources programatically to deploy applications to the cloud just feels more practical from where I am sitting as an `engineer` *working quietly on the cyber front*. Take a second to bookmark this [List of plugins developed by the community for the ServerlessFramework](https://github.com/Jimdo/plugins-serverless). We are going to use the [serverless-plugin-warmup](https://github.com/FidelLimited/serverless-plugin-warmup) package on *NPM*, to make sure that our functions keep warm and purring like my dad's old 1967 Camaro. I personally had a thing for *Lane Meyer's* (John Cusak) '67 Camaro in the 1980's *Cult Classic* *Better Off Dead*.
 
+**I want my $2!**
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/warmStartCamaro.jpg#center "I still want my $2!!!")
 
 #### Optimize for Warm Starts
@@ -54,6 +56,8 @@ plugins:
 ```
 
 Take a look at what my file looks like if you need a reference point:
+
+**serverless.yml `plugin` block**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/serverless-warmup-blockYML.png#center "Serverless.yml Plugins!")
 
