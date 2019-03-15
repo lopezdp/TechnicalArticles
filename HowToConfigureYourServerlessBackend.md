@@ -86,6 +86,7 @@ custom:
       - schedule: rate(60 minutes)
     timeout: 20
 ```
+
 Inside of our `custom:` block you need to declare a `warmup:` resource that will be used to create a new [Lambda]() function *On your Behalf* on [AWS]() by the [ServerlessFramework](). Again, this [Lambda]() is going to be used by the `serverless-warmup-plugin` to keep your **Serverless + Microservices** *warm*, and *latency-free*. The primary setting we need to configure is `enabled: true`. By default this `attribute` is set to `false` because this does have an impact on your *serverless + server* costs on [AWS](). Warming up your [Lambda's]() means that they are computing for a longer time, and costing you more money. We will publish another article in the future that will show you how to determine these costs for you and your business. For now please take a look at this [calculator](https://servers.lol) to help you estimate your monthly compute OPEX costs. We do like this calculator at [Servers.LOL](https://servers.lol) because it gives you a tool that will let you compare your current [EC2]() costs against your proposed [AWS Lambda]() Serverless costs.
 
 The next `property` we think you need to be made aware about is the `- schedule: rate(60 minutes)` attribute in the `events:` block. By default the `rate` is set to 5-minutes. We think for the purpose of this demo application that we can leave it to once an hour to minimize our [AWS]() costs. You can also customize this setting on a more granular level to set it for certain times within certain days of the weeks to make sure your users can expect lower levels of latency at peak hours. For example, you can set your [Lamda]() to Run WarmUp every 5 minutes on Monday to Friday between 8:00 am and 5:55 pm (UTC) with this setting: `- schedule: 'cron(0/5 8-17 ? * MON-FRI *)'`
@@ -102,8 +103,10 @@ We will get back to **Infrastructure As Code** in a bit, but this idea of *serve
 
 We really must discuss how [AWS Lambda]() will execute the logic within our functions to better understand, and to have a general idea about a few of the important properties that make up our [AWS FaaS]() paradigm. Below are a few details you should know about how [Lambda]() works with you:
 
-**[AWS Lambda]() Specs**
+#### [AWS Lambda]() Specs
+
 Lambda will support the runtime environments listed below:
+
 * **Node.js:** v8.10 & v6.10
 * **Java 8**
 * **Python v3.6 & v2.7**
@@ -113,6 +116,7 @@ Lambda will support the runtime environments listed below:
 * **Rust**
 
 Each [Lambda]() will execute and compute inside of a container with a 64-bit AWS Linux AMI. [AWS]() will distribute our [Lambda’s]() computational needs to each user according to the following system requirements:
+
 * **Memory:** 128MB - 3008MB (Allocated in 64MB increments)
 * **Ephemeral Disk Space:** 512 MB
 * **Max execution time:** 900 seconds
@@ -124,6 +128,19 @@ The `serverless` design paradigm is a language agnostic approach that is meant t
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWSLambdaFunction.png#center "This is an AWS Lambda Function!!!")
 
 In the image, `myLambda` is the name of the [Lambda]() function written for the `Node.js` runtime environment shown above. The `event` object has all the information about the event that triggered this [Lambda]() for an `async` response, and in the case of an `http-request`, it will be the information you need about the specific request made to your application, and its *serverless-backend*. The `context` object will contain information about the runtime environment that will execute our [Lambda]() on [AWS](). When [AWS]() completes the execution of the logic within our [Lambda]() function, the `callback` function will execute and provide you with the corresponding `result` or `error` needed to respond to the `http-request`.
+
+<----- MAYBE STATELESS EXAMPLE????? ----->
+
+### Create AWS Developer Keys
+
+### Install the AWS Command Line Interface (CLI)
+
+### Add your Accedd Key to your AWS CLI
+
+### SetUp Serverless Framework locally
+
+
+
 
 
 
