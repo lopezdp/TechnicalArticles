@@ -26,11 +26,11 @@ When we deploy a **serverless + microservice** architecture, the functions that 
 
 #### Serverless + Microservices
 
-When developing a *serverless* application, we need to make sure that the application is structured in a way in which the functions we declare as part of the backend logic, are defined in the form of individual services that mimic a *microservice* based architecture so that we may better be able to reduce the size of our functions. The goal is to *loosely couple* the functionality between the services deployed as a part of the serverless backend, so that each function is responsible for an independent piece of functionality that will provide a user with a response that does not rely on any other service. 
+When developing a *serverless* application, we need to make sure that the application is structured in a way in which the functions we declare as part of the backend logic, are defined in the form of individual services that mimic a *microservice* based architecture so that we may better be able to reduce the size of our functions. The goal is to *loosely couple* the functionality between the services deployed as a part of the serverless backend, so that each function is responsible for an independent piece of functionality that will provide a user with a response that does not rely on any other service.
 
 #### Cold Starts
 
-Because our functions are executed inside of a stateless container that is managed by the cloud service provider, in our case [AWS](), there is a bit of latency associated with each `http request` to our serverless "backend". Our stateless infrastructure is dynamically allocated to respond to the events triggered by our application, and although the container is typically kept "alive" for a short time after completion of the [Lambda's]() functionality, the resources will be deallocated and will lead to slower than expected/desired responses for new requests. These are referred to as *Cold Starts*. 
+Because our functions are executed inside of a stateless container that is managed by the cloud service provider, in our case [AWS](), there is a bit of latency associated with each `http request` to our serverless "backend". Our stateless infrastructure is dynamically allocated to respond to the events triggered by our application, and although the container is typically kept "alive" for a short time after completion of the [Lambda's]() functionality, the resources will be deallocated and will lead to slower than expected/desired responses for new requests. These are referred to as *Cold Starts*.
 
 *Cold Start* durations will typically last from a couple of hundred milliseconds to up to a few seconds. The size of the functions and the runtime language used can vary the *Cold Start* duration time in [AWS Lambda](). It is important to understand that our serverless containers *can* remain in an `Active` state in [AWS Lambda](), after the initial request to our serverless endpoint has completed its execution routine. If a subsequent request to our [Lambda]() is triggered by our application immediately after the completed execution of a previous request, the serverless lambda that defines our endpoint in the cloud in our stateless containers on [AWS](), will respond to this next request almost immediately and with little to no latency; this is called a *Warm Start*, and this is what we want to maintain to keep our application running optimally.
 
@@ -42,7 +42,7 @@ The great thing about working with the [ServerlessFramework]() library is the ro
 
 #### Configure AWS Lambda & Optimize for Warm Starts
 
-As discussed above, we will be keeping our [Lambda's]() warm during the hibernation season with [serverless-plugin-warmup](https://github.com/FidelLimited/serverless-plugin-warmup).  In this next section, we will walk you through each step of the installation of this plugin. Remember, you can also refer to the sample of the application we will be using in this tutorial to follow along, here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git). 
+As discussed above, we will be keeping our [Lambda's]() warm during the hibernation season with [serverless-plugin-warmup](https://github.com/FidelLimited/serverless-plugin-warmup).  In this next section, we will walk you through each step of the installation of this plugin. Remember, you can also refer to the sample of the application we will be using in this tutorial to follow along, here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git).
 
 [ServerlessWarmup](https://github.com/FidelLimited/serverless-plugin-warmup) eliminates *Cold Start* latency by creating a [Lambda]() that is scheduled to invoke all of the services you select from your API, at a `time interval` of your choice, the default is set at 5-minutes. Thereby forcing your [Lambda's]() to stay warm. From within the root of you serverless project directory, continue to install [ServerlessWarmup](https://github.com/FidelLimited/serverless-plugin-warmup) as follows:
 
@@ -68,7 +68,7 @@ custom:
   # Stages are based on what is passed into the CLI when running
   # serverless commands. Or fallback to settings in provider section.
   stage: ${opt:stage, self:provider.stage}
-  
+
   # Load webpack config
   webpack:
     webpackConfig: ./webpack.config.js
@@ -83,13 +83,13 @@ custom:
     memorySize: 256
     events:
       # Run WarmUp every 60 minutes Mon-Fri between 8:00am and 5:55pm (UTC)
-      - schedule: rate(60 minutes) 
+      - schedule: rate(60 minutes)
     timeout: 20
 ```
 
 If you are being perseptive right now, you will notice that this `serverless.yml` file is really letting us complete a lot of interesting tasks pretty quickly, and without having to think too much about the impact of the resources we are conjuring-up out of thin air. As you can see *Young Padawan*, we are slowly, but surely making our way through a concept known as **Infrastructure As Code**, and we are, albeit moderately for now, programatically allocating and *spinning-up* the cloud-based servers we need to keep our [Lambda's]() warm with this [serverless-warmup-plugin](https://github.com/FidelLimited/serverless-plugin-warmup).
 
-We will get back to **Infrastructure As Code** in a bit, but this idea of *serverless...servers*?? 
+We will get back to **Infrastructure As Code** in a bit, but this idea of *serverless...servers*??
 
 **Irony in the Cloud**
 
@@ -118,6 +118,7 @@ Each [Lambda]() will execute and compute inside of a container with a 64-bit AWS
 
 The `serverless` design paradigm is a language agnostic approach that is meant to give engineers the ability to leverage [AWS]() resources and infrastructure to better scale their products, i.e. your products, to a global market place and to more quickly put your innovation into the hands of the users that need it the most.
 
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWSLambdaFunction.png#center "This is an AWS Lambda Function!!!")
 
 
 
