@@ -82,10 +82,13 @@ custom:
     folderName: '_warmup' # Name of folder generated for warmup
     memorySize: 256
     events:
-      # Run WarmUp every 60 minutes Mon-Fri between 8:00am and 5:55pm (UTC)
+      # Run WarmUp every 60 minutes
       - schedule: rate(60 minutes)
     timeout: 20
 ```
+Inside of our `custom:` block you need to declare a `warmup:` resource that will be used to create a new [Lambda]() function *On your Behalf* on [AWS]() by the [ServerlessFramework](). Again, this [Lambda]() is going to be used by the `serverless-warmup-plugin` to keep your **Serverless + Microservices** *warm*, and *latency-free*. The primary setting we need to configure is `enabled: true`. By default this `attribute` is set to `false` because this does have an impact on your *serverless + server* costs on [AWS](). Warming up your [Lambda's]() means that they are computing for a longer time, and costing you more money. We will publish another article in the future that will show you how to determine these costs for you and your business. For now please take a look at this [calculator](https://servers.lol) to help you estimate your monthly compute OPEX costs. We do like this calculator at [Servers.LOL](https://servers.lol) because it gives you a tool that will let you compare your current [EC2]() costs against your proposed [AWS Lambda]() Serverless costs.
+
+The next `property` we think you need to be made aware about is the `- schedule: rate(60 minutes)` attribute in the `events:` block. By default the `rate` is set to 5-minutes. We think for the purpose of this demo application that we can leave it to once an hour to minimize our [AWS]() costs. You can also customize this setting on a more granular level to set it for certain times within certain days of the weeks to make sure your users can expect lower levels of latency at peak hours. For example, you can set your [Lamda]() to Run WarmUp every 5 minutes on Monday to Friday between 8:00 am and 5:55 pm (UTC) with this setting: `- schedule: 'cron(0/5 8-17 ? * MON-FRI *)'`
 
 If you are being perceptive right now, you will notice that this `serverless.yml` file is really letting us complete a lot of interesting tasks quickly, and without having to think too much about the impact of the resources we are conjuring-up out of thin air. As you can see *Young Padawan*, we are slowly, but surely making our way through a concept known as **Infrastructure As Code**, and we are, albeit moderately for now, programmatically allocating and *spinning-up* the cloud-based servers we need to keep our [Lambda's]() warm with this [serverless-warmup-plugin](https://github.com/FidelLimited/serverless-plugin-warmup).
 
