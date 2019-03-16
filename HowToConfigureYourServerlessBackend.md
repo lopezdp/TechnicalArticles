@@ -129,7 +129,9 @@ The `serverless` design paradigm is a language agnostic approach that is meant t
 
 In the image, `myLambda` is the name of the [Lambda]() function written for the `Node.js` runtime environment shown above. The `event` object has all the information about the event that triggered this [Lambda]() for an `async` response, and in the case of an `http-request`, it will be the information you need about the specific request made to your application, and its *serverless-backend*. The `context` object will contain information about the runtime environment that will execute our [Lambda]() on [AWS](). When [AWS]() completes the execution of the logic within our [Lambda]() function, the `callback` function will execute and provide you with the corresponding `result` or `error` needed to respond to the `http-request`.
 
-Because our [Lambda]() functions are stateless events that execute inside of containers on the cloud, the code that is run inside of the program's file in the container is executed and cached, while warm, and only the code in the [Lambda]() function `handler` is run on subsequent attempts. In the example below, the `let sns = new aws.SNS();` method shown is only called the first time your container is instantiated on the cloud. The `new aws.SNS();` method and the code above it is *not run every time your Lambda is invoked*. On the other hand, the `myLambdaTopic` handler function shown as a `module export` in the example is called every time the [Lambda]() is invocated.
+#### The Stateless nature of [AWS Lambda]()
+
+Because our [Lambda]() functions are stateless events that execute inside of containers on the cloud, all of the code that is run inside of the program's file in the container is executed and cached, while warm, and only the code in the [Lambda]() function `handler` is run on subsequent attempts. In the example below, the `let sns = new aws.SNS();` method shown is only called the first time your container is instantiated on the cloud. The `new aws.SNS();` method and the code above it is *not run every time your Lambda is invoked*. On the other hand, the `myLambdaTopic` handler function shown as a `module export` in the example is called every time the [Lambda]() is invoked.
 
 ```
 let aws = require('aws-sdk');
@@ -153,11 +155,15 @@ exports.myLambdaTopic = function(event, context, callback) {
 ```
 There is a `/tmp` directory inside of the 512MB of **Ephemeral Disk Space** that your **64-bit Amazon Linux AMI** gives to your [Lambda]() where your containers are effectively cached when it is executed from the [AMS Lambda]() event that is triggered by your application. Using this directory is not a recommended approach to achieving `stateful` [Lambda]() functions. There is no way to govern what happens to the memory allocated for this directory because it is taken care of by your cloud provider. When your containers go *Cold* and are no longer **Cached** you will lose every thing in the `/tmp` directory.
 
-### Create AWS Developer Keys
+### Choose AWS as your Cloud Provider & Register
 
-### Install the AWS Command Line Interface (CLI)
+I am going to have to assume that you have an [AWS Account]() and are a registered user with [AWS]() for the sake of getting through this article in a reasonable amount of time. I hope that your curiosity has driven you to the wonders of the [AWS Console]() to leave you in a state of despair, let alone paralysis. Do not be ashamed; I really believe that I am not the only person on this planet that was left shocked by the amount of services on the [AWS Console]() when I first started out too. The first thing that ran through my head was, "with what time am I going to figure all of this out now that I have learned how to master the art of the *reversed Linked-List interview question*". I was terrified to say the least. Don't you worry though young *Silicon Valley Stallions*, we will be here to walk you through every step of each of those services. One day, we'll even show you how to launch a *Machine Learning* application on your very own *Serverless* backend! Im just not going to show you how to register with [AWS](). 
 
-### Add your Accedd Key to your AWS CLI
+#### Create AWS Developer Keys
+
+#### Install the AWS Command Line Interface (CLI)
+
+#### Add your Access Key to your AWS CLI
 
 ### SetUp Serverless Framework locally
 
