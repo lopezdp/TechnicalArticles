@@ -161,7 +161,9 @@ I am going to have to assume that you have an [AWS Account]() and are a register
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/aws.Services.jpg#center "The AWS Console is Insane...")
 
-#### Create AWS Developer Keys
+#### Create AWS Developer Access Keys
+
+To deploy your application's resources from the **Infrastructure As Code** paradigm, you need to connect your development environment to AWS by authenticating your `local` machine with your **AWS Access Keys** that you can find within the `IAM Service` from your `AWS Console`.
 
 #### Install the AWS Command Line Interface (CLI)
 
