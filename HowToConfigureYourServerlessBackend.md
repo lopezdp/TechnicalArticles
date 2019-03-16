@@ -129,7 +129,29 @@ The `serverless` design paradigm is a language agnostic approach that is meant t
 
 In the image, `myLambda` is the name of the [Lambda]() function written for the `Node.js` runtime environment shown above. The `event` object has all the information about the event that triggered this [Lambda]() for an `async` response, and in the case of an `http-request`, it will be the information you need about the specific request made to your application, and its *serverless-backend*. The `context` object will contain information about the runtime environment that will execute our [Lambda]() on [AWS](). When [AWS]() completes the execution of the logic within our [Lambda]() function, the `callback` function will execute and provide you with the corresponding `result` or `error` needed to respond to the `http-request`.
 
-<----- MAYBE STATELESS EXAMPLE????? ----->
+Because our [Lambda]() functions are stateless events that execute inside of containers on the cloud, the code that is run inside of the program's file in the container is executed and cached, while warm, and only the code in the [Lambda]() function `handler` is run on subsequent attempts. In the example below, the `let sns = new aws.SNS();` method shown is only called the first time your container is instantiated on the cloud. The `new aws.SNS();` method and the code above it is *not run every time your Lambda is invoked*. On the other hand, the `myLambdaTopic` handler function shown as a `module export` in the example is called every time the [Lambda]() is invocated.
+
+```
+let aws = require('aws-sdk');
+aws.config.update({region: 'us-east-1'});
+
+let sns = new aws.SNS();
+
+exports.myLambdaTopic = function(event, context, callback) {
+
+	const params = {
+		Message: `Message Posted to Topic.`,
+		TopicArn: process.env.SNSTopicARN
+	}
+
+	let result = sns.publish(params, (err,data) => {
+			callback(null, '');
+		});
+	
+	return result;
+};
+```
+There is a `/tmp` directory inside of the 512MB of **Ephemeral Disk Space** that your **64-bit Amazon Linux AMI** gives to your [Lambda]() where your containers are effectively cached when it is executed from the [AMS Lambda]() event that is triggered by your application. Using this directory is not a recommended approach to achieving `stateful` [Lambda]() functions. There is no way to govern what happens to the memory allocated for this directory because it is taken care of by your cloud provider. When your containers go *Cold* and are no longer **Cached** you will lose every thing in the `/tmp` directory.
 
 ### Create AWS Developer Keys
 
