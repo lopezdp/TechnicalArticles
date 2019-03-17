@@ -213,7 +213,24 @@ To deploy our demo application with a serverless backend to handle our business 
 
 	1. `$ install serverless -g`
 
-* Create a project structure that considers the **Serverless + MicroService** approach.
+* Create a project structure that considers the **Serverless + MicroService** approach and clone the `ServerlessStarterService` demo application as follows:
+
+	1. `$ mkdir PayMyInvoice`
+	2. `$ cd PayMyInvoice`
+	3. `$ mkdir services`
+	4. `$ cd services`
+	5. `$ git clone https://github.com/lopezdp/ServerlessStarterService.git`
+
+* Your project structure should now look like this:
+
+```
+    PayMyInvoice
+    |__services
+       |__ServerlessStarterService
+       |__FutureServerlessMicroService
+```
+
+
 
 
 
