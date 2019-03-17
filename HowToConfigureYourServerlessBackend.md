@@ -207,7 +207,13 @@ Default output format [json]: json
 
 ### SetUp Serverless Framework locally
 
+To deploy our demo application with a serverless backend to handle our business logic with independent functions deployed to [AWS Lambda](), we will need to configure [Lambda]() and [APIGateway]() to use the [ServerlessFramework](). The [ServerlessFramework]() is responsible for the configuration of our [Lambda]() functions to use our code to respond to `http requests` triggered by [APIGateway](). The [ServerlessFramework]() lets us use easy template files to programatically describe the resources and infrastructure that we need [AWS]() to provision for us, and on deployment, [AWS CloudFormation]() does the job of instantiating the cloud based infrastructure that we call the *serverless architecture* on [AWS](). The `serverless.yml` file is the file that executes the explicit resources that we declare from within the [ServerlessFramework](), to tell [AWS CloudFormation]() what we need from [AWS]() to run our application. Please make sure to install [NPM Package Manager]() to complete this installation:
 
+* Install the [ServerlessFramework]() globally and **run**:
+
+	1. `$ install serverless -g`
+
+* Create a project structure that considers the **Serverless + MicroService** approach.
 
 
 
