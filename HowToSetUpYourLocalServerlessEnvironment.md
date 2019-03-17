@@ -284,14 +284,14 @@ We think it's going to be best (and just easiest quite frankly), to just `alias`
 
 * **Run:** `$ npm run lint` to lint your project from the `terminal`.
 
-The linter will now supply feedback on syntax, bugs, and problems, while enforcing code style, all from within the comfort of your `terminal`. Do not fool yourself, this will work in `vim` also! For all those `wq!` fans out there, the hope, is on our side... `#UseTheForce`.
+The linter will now supply feedback on syntax, bugs, and problems, while enforcing code style, all from within the comfort of your `terminal`. Do not fool yourself, this will work in `vim` also! For all those `:wq!` fans out there, the hope, is on our side... `#UseTheForce`.
 
 A typical output running ESLint from the `terminal` as instructed would look something like this (depending on your project and the silly errors you make):
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/npmRunLint.png "$ npm run lint. An example!")
 
 
-One more thing, from within the project root directory please make sure that you have a file called `.esformatter` in existence. You are going to need that `$ ls -a` command to find it. If it does not exist, go ahead, and create it with a simple `$ touch .esformatter` and `wq!` the following bit of information into the file (if it already exists, just make sure this is in there!):
+One more thing, from within the project root directory please make sure that you have a file called `.esformatter` in existence. You are going to need that `$ ls -a` command to find it. If it does not exist, go ahead, and create it with a simple `$ touch .esformatter` and `:wq!` the following bit of information into the file (if it already exists, just make sure this is in there!):
 
 ```
 {
@@ -341,7 +341,7 @@ One more thing, from within the project root directory please make sure that you
 
 From here on out every time you save your `JavaScript` files all the formatting completes automatically for you. Sort of, we just must configure all of this into our trusty [SublimeText3](https://www.sublimetext.com) text editor now!
 
-Before we get into it, yes, you can use `vim`. I promise you, you will find people who will die by `vim` throughout your career. My belief; keep it simple, buy the [SublimeText3](https://www.sublimetext.com) license and just use that over every other IDE that will bombard your spam folder in your email. [SublimeText3](https://www.sublimetext.com) provides the simplicity of `vim` without having to memorize the abstract commands like `wq!` that will inevitably leave you with a mess of `*.swp` files, because I guarantee that most of you will never clean them out and it becomes a hassle. Keep it simple, do not over complicate your life in an already all too complicated environment, and get the tool that is really cheap, easy on the eyes, and provides enough of the fancy functionality of a really expensive IDE and the simplicity of `vim` without having to memorize all of the abstract commands: `wq!`
+Before we get into it, yes, you can use `vim`. I promise you, you will find people who will die by `vim` throughout your career. My belief; keep it simple, buy the [SublimeText3](https://www.sublimetext.com) license and just use that over every other IDE that will bombard your spam folder in your email. [SublimeText3](https://www.sublimetext.com) provides the simplicity of `vim` without having to memorize the abstract commands like `:wq!` that will inevitably leave you with a mess of `*.swp` files, because I guarantee that most of you will never clean them out and it becomes a hassle. Keep it simple, do not over complicate your life in an already all too complicated environment, and get the tool that is really cheap, easy on the eyes, and provides enough of the fancy functionality of a really expensive IDE and the simplicity of `vim` without having to turn your anonymous functions into `ES6` syntax with an esoteric *regex-replace* like this `$ :%s/function \?(\(.*\)) {/(\1) => {/`.
 
 #### SublimeText3 Configuration
 
