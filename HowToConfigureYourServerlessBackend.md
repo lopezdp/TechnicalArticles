@@ -230,6 +230,29 @@ To deploy our demo application with a serverless backend to handle our business 
        |__FutureServerlessMicroService
 ```
 
+* From here navigate to your `ServerlessStarterService` project and take a look at the following files which we will now review as a part of what you need to have to completed in your `local` environment to deploy this demo application:
+
+	1. **billing.js**: This is our serverless [Lambda]() function that will deploy our *Stripe* billing functionality to allow users to accept payment for the Invoiced that they create in the application.
+	2. **createInvoice.js**: This serverless function will deploy the [Lambda]() needed to let users of the `PayMyInvoice` application *create new invoices* in the application.
+	3. **getInvoice.js**: This serverless function will deploy the [Lambda]() needed to let users of the `PayMyInvoice` application *obtain a specific invoice* stored in the application.
+	4. **listInvoices.js**: This serverless function will deploy the [Lambda]() needed to let users of the `PayMyInvoice` application *obtain a list* of invoices stored in the application.
+	5. **updateInvoice.js**: This serverless function will deploy the [Lambda]() needed to let users of the `PayMyInvoice` application *update* a specific invoice stored in the application.
+	6. **deleteInvoice.js**: This serverless function will deploy the [Lambda]() needed to let users of the `PayMyInvoice` application *delete* a specific invoice stored in the application.
+	7. **serverless.yml**: This is the configuration template used by the [ServerlessFramework]() to tell [AWS CloudFormation]() which resources we needs provisioned for our application and how to configure them on [AWS]().
+	8. `/mocks`: This is where the `json` files that we use in development, to mock `http-request events` to our serverless backend `locally` are stored.
+	9. `/resources`: This is the directory that we use to organize our programatic resources and files.
+	10. `/tests`: This is the directory where our `Unit Tests` are stored. Typically we will want to try to achieve at least 80% (or better) `Unit Testing` [coverage]().
+
+* This service relies on the dependencies that are listed in the `package.json` file found in the `root` of the serverless project directory.
+
+	1. **Navigate to `root` project directory**: `$ cd ~/PATH/PayMyInvoice/service/ServerlessStarterService`
+	2. **Run**: `$ npm install`
+
+### Your `localhost` serverless backend is now configured for work .. Good Luck!
+
+## Part 3: Configuring Infrastructure As Code
+
+* [Part 3: How To Configure Your Infrastructure As Code]() - *Not Published.*
 
 
 
