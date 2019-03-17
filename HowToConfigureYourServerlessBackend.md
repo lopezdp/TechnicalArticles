@@ -173,7 +173,9 @@ From your [IAM]() Dashboard continue to click on the `Users` button from the nav
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AccessKey.CreateNew.png#center "Create New Access Key...")
 
-Show Secret ID: https://github.com/lopezdp/TechnicalArticles/blob/master/img/NewAccessKeyID.png
+Once you create a new `Access Key`, both record your `Secret Access Key` along with your `Acess Key ID` to configure your [AWS-CLI]() locally from your `terminal`.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NewAccessKeyID.png#center "Secret Access Key...")
 
 #### Install the AWS Command Line Interface (CLI)
 
