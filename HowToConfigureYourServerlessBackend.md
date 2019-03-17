@@ -177,7 +177,18 @@ Once you create a new `Access Key`, both record your `Secret Access Key` along w
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/NewAccessKeyID.png#center "Secret Access Key...")
 
+[AWS]() will only let you create two `Access Keys` per user. It is a *best practice* to change these keys frequently and to store them securely. [AWS]() will not allow you to view your `Secret Access Key` after you initially create it, you must be sure to record it in a safe place, as soon as you see the screen above.
+
 #### Install the AWS Command Line Interface (CLI)
+
+The demo application we are using today to discuss and teach you these skills are built on the [Serverless Framwork]() technology stack. The `awscli` needs *Python v2.7* or *Python v3.4+* and *PiP* to support our application environment. Below are links to the `Python` documentation repository, to help you familiarize yourself with these installations:
+
+* [Installing Python]()
+* [Instlling Pip]()
+
+With `Python` installed, and using `Pip`, install the `awscli` on (Linux, MacOS, or Unix) and run:
+
+* `$ sudo pip install awscli`
 
 #### Add your Access Key to your AWS CLI
 
