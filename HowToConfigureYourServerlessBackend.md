@@ -169,9 +169,9 @@ To deploy your application's resources using an **Infrastructure As Code** parad
 
 When you get into your [AWS Console](), you need to click on the `Services` link on the top left side of the [AWS]() navigation bar in your browser. Your `AWS Console` will proceed to bombard you with everything it has. Take a deep breathe, and look for the **Security, Identity, & Compliance** section inside of the `Services` menu. The first service in that section is the [AWS IAM]() service, or short for *Identity & Access Management*. 
 
-From your [IAM]() Dashboard continue to click on `Users` from the navigation frame on the left side of your browser
+From your [IAM]() Dashboard continue to click on the `Users` button from the navigation frame on the left side of your browser, and then click on the `user` that you will use to create a new `Access Key`. When the `user`'s information is displayed to you, click on the tab called `Security credentials` and create a new `Access Key` as shown below.
 
-Create Access Key: https://github.com/lopezdp/TechnicalArticles/blob/master/img/AccessKey.CreateNew.png
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AccessKey.CreateNew.png#center "Create New Access Key...")
 
 Show Secret ID: https://github.com/lopezdp/TechnicalArticles/blob/master/img/NewAccessKeyID.png
 
