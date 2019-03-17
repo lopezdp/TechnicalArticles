@@ -192,6 +192,19 @@ With `Python` installed, and using `Pip`, install the `awscli` on (Linux, MacOS,
 
 #### Add your Access Key to your AWS CLI
 
+Obtain your `Access Key ID` and your `Secret Access Key` from your `AWS Console` via the `AWS IAM` services console and run:
+
+* `$ aws configure`
+
+With the credentials obtained from your IAM userID, enter the following information into the `terminal` prompts:
+
+```
+AWS Access Key ID [****************91RX]: <paste your data here>
+AWS Secret Access Key [****************ADsM]: <paste your data here>
+Default region name [us-east-1]: us-east-1
+Default output format [json]: json
+```
+
 ### SetUp Serverless Framework locally
 
 
