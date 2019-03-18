@@ -120,9 +120,16 @@ Each [Lambda]() will execute and compute inside of a container with a 64-bit AWS
 * **Memory Allocation:** 128MB - 3008MB (Allocated in 64MB increments)
 * **Ephemeral Disk Space:** 512 MB
 * **Max execution time (timeout):** 15 minutes (900s)
+* **Function Evnironment Variables:** 4 KB
+* **Function [Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)** 5 layers
 * **Deployment Package Size (unzipped):** 250 MB
 * **Deployment Package Size (zipped):** 50MB
 * **Execution Threads (Processes):** 1024
+
+[Lambda]() puts the breaks on the amount of resources that you can use for compute and storage to run and store your functions on the [AWS]() cloud. The following default limits are set per-region by [AWS]() and can be increased by special request only:
+
+* **Concurrent Executions:** 1000
+* **Function & Layer Storage:** 75 MB
 
 The `serverless` design paradigm is a language agnostic approach that is meant to give engineers the ability to leverage [AWS]() resources and infrastructure to better scale their products, i.e. your products, to a global market place and to more quickly put your innovation into the hands of the users that need it the most.
 
