@@ -117,11 +117,12 @@ Lambda will support the runtime environments listed below:
 
 Each [Lambda]() will execute and compute inside of a container with a 64-bit AWS Linux AMI. [AWS]() will distribute our [Lambda’s]() computational needs to each user according to the following system requirements:
 
-* **Memory:** 128MB - 3008MB (Allocated in 64MB increments)
+* **Memory Allocation:** 128MB - 3008MB (Allocated in 64MB increments)
 * **Ephemeral Disk Space:** 512 MB
-* **Max execution time:** 900 seconds
-* **Uncompressed Package Size:** 250 MB
-* **Compressed Package Size:** 50MB
+* **Max execution time (timeout):** 15 minutes (900s)
+* **Deployment Package Size (unzipped):** 250 MB
+* **Deployment Package Size (zipped):** 50MB
+* **Execution Threads (Processes):** 1024
 
 The `serverless` design paradigm is a language agnostic approach that is meant to give engineers the ability to leverage [AWS]() resources and infrastructure to better scale their products, i.e. your products, to a global market place and to more quickly put your innovation into the hands of the users that need it the most.
 
