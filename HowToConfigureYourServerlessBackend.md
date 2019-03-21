@@ -258,9 +258,9 @@ To deploy our demo application with a serverless backend to handle our business 
 
 ### Your `localhost` serverless backend will now work and you can extend it for any feature you need to implement in the future. Good Luck!
 
-## Part 3: Configuring Infrastructure As Code
+## Part 3: Configuring Infrastructure As Code, Mock Services, & Unit Testing
 
-* [Part 3: How To Configure Your Infrastructure As Code](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigure.IAC.Mocks.UnitTests.md) - *Not Published.*
+* [Part 3: How To Configure Your Infrastructure As Code, Mock Services, & Unit Testing](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigure.IAC.Mocks.UnitTests.md) - *Not Published.*
 
 
 
