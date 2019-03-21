@@ -16,3 +16,5 @@ This repository is dedicated to the articles I write for blogs and agencies who 
 **Chapter 1:** [Part 1: How To SetUp Your `local` Serverless Environment](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToSetUpYourLocalServerlessEnvironment.md) - *Not Published.*
 
 **Chapter 2:** [Part 2: How To Configure Your Serverless Backend API](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md) - *Not Published.*
+
+**Chapter 3:** [Part 3: How To Configure Your Infrastructure As Code](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigure.IAC.Mocks.UnitTests.md) - *Not Published.*

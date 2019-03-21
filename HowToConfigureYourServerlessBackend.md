@@ -260,7 +260,7 @@ To deploy our demo application with a serverless backend to handle our business 
 
 ## Part 3: Configuring Infrastructure As Code
 
-* [Part 3: How To Configure Your Infrastructure As Code]() - *Not Published.*
+* [Part 3: How To Configure Your Infrastructure As Code](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigure.IAC.Mocks.UnitTests.md) - *Not Published.*
 
 
 
