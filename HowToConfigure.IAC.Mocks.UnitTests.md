@@ -178,6 +178,12 @@ Any custom variable that we declare in the manner shown above is made available 
 
 ### Configure An API Endpoint
 
+In the [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) `serverless.yml` [AWS CloudFormation]() template that describes our infrastructure, we define the functions that we have implemented as [Lambdas]() that we want exposed on [AWS](). You must remember that each *serverless + microservice* will have its own `serverless.yml` template in the project's `root` directory that will define the *endpoints* associated with each **serverless + microservice**. Below is an example of a [Lambda]() function defined in our [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) [CloudFormation]() template:
+
+```
+functions:
+```
+
 
 
 ## Mocking Serverless + MicroServices before Deploying to AWS
