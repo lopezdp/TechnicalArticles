@@ -164,7 +164,7 @@ provider:
     # stripePrivateKey: ${self:custom.environment.stripePrivatekey}
 ```
 
-Taking a closer look at the `YAML`-formatted template above, the `service` block is where you will need to declare the name of your *serverless + microservice* with [CloudFormation](). The [ServerlessFramework]() will use this as the name of the stack to create on [AWS](). If you change this name and redeploy it to [AWS](), then [CloudFormation]() will simply create a new project in your [AWS]() account for you.
+Taking a closer look at the `YAML`-formatted template above, the `service` block is where you will need to declare the name of your *serverless + microservice* with [CloudFormation](). The [ServerlessFramework]() will use this as the name of the stack to create on [AWS](). If you change this name and redeploy it to [AWS](), then [CloudFormation]() will simply create a new project for you in your [AWS]() account.
 
 
 
