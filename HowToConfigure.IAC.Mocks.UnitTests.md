@@ -166,6 +166,18 @@ provider:
 
 Taking a closer look at the `YAML`-formatted template above, the `service` block is where you will need to declare the name of your *serverless + microservice* with [CloudFormation](). The [ServerlessFramework]() will use this as the name of the stack to create on [AWS](). If you change this name and redeploy it to [AWS](), then [CloudFormation]() will simply create a new project for you in your [AWS]() account.
 
+The `environment` block is where we load secrets saved in our `env.yml` file. You have to remember that [AWS Lambda]() only gives you *4KB* of space for this file which should be more than enough for our needs. The important this to remember is to keep your logic modular and do not put all of you application secrets in one file. Use and `env.yml` file for each *serverless + microservice* that you implement. The secrets and custom variables that we load from our `env.yml` file are based on the stage that we are deploying to at any given point in the development lifecycle using `file(env.yml):${self:custom.stage}`. If your stage is not defined, then our application will fallback to load everything under the `default:` block with `file(env.yml):default`. The [ServerlessFramework]() will check if `custom.stage` is available before falling back to `default`.
+
+As shown in the example, we can also use this mechanism to add other custom variables that we may need loaded at any given time. Any environment variables can be added to the `environment` block using something like: 
+
+`${self:custom.environment.DECLARE_YOUR_VARIABLE}`
+
+Any custom variable that we declare in the manner shown above is made available to our [Lambda]() function with something like this: 
+
+`process.env.DECLARE_YOUR_VARIABLE`
+
+### Configure An API Endpoint
+
 
 
 ## Mocking Serverless + MicroServices before Deploying to AWS
