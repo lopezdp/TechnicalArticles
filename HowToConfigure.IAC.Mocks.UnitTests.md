@@ -93,6 +93,81 @@ In our [CloudFormation Template]() called `serverless.yml` found in each our ser
 
 Transpiling and converting [**ES Code**]() to [Node v8.10]() is taken care of by the [serverless-webpack]() plugin that is included with the [ServerlessFramework]().
 
+### AWS Resources & Property Types Reference
+
+This is the [AWS Resource & Property Types Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) information for the resources and properties that [AWS CloudFormation]() supports as *Infrastructure As Code*. Resource type identifiers **SHALL** always look like this:
+
+`service-provider::service-name::data-type-name`
+
+We will use a few of the services that you can find at the [AWS Resource & Property Types Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html). Below you will find a list of the resources in our demo application that we have implemented for this tutorial:
+
+* **[API Gateway]()**
+* **[CloudFormation]()**
+* **[DynamoDB]()**
+* **[Lambda]()**
+* **[S3]()**
+
+For now, please open the `serverless.yml` file located at the [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) repository. Please take a look at the sections below for an explaination of each declaration in our [ServerlessFramework]() [CloudFormation]() template:
+
+```
+# TODO: https://serverless.com/framework/docs/providers/aws/guide/intro/
+
+# New service names create new projects in aws once deployed
+service: serverless-starter-service(node.js)
+
+# Use the serverless-webpack plugin to transpile ES6
+# Using offline to mock & test locally
+# Use warmup to prevent Cold Starts
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-plugin-warmup
+
+# configure plugins declared above
+custom:
+  # Stages are based on what is passed into the CLI when running
+  # serverless commands. Or fallback to settings in provider section.
+  stage: ${opt:stage, self:provider.stage}
+
+  # Load webpack config
+  # Enable auto-packing of external modules
+  webpack: 
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+  # ServerlessWarmup Configuration
+  # See configuration Options at:
+  # https://github.com/FidelLimited/serverless-plugin-warmup
+  warmup:
+    enabled: true # defaults to false
+    forlderName: '_warmup' # Name of folder generated for warmup
+    memorySize: 256
+    events:
+      # Run WarmUp every 720 minutes
+      - schedule: rate(720 minutes)
+    timeout: 20
+
+  # Load secret environment variables based on the current stage
+  # Fallback to default if it is not in PROD
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+
+  # Environment variables made available through process.env
+  environment:
+    #### EXAMPLES
+    # tableName: ${self:custom.tableName}
+    # stripePrivateKey: ${self:custom.environment.stripePrivatekey}
+```
+
+Taking a closer look at the `YAML`-formatted template above, the `service` block is where you will need to declare the name of your *serverless + microservice* with [CloudFormation](). The [ServerlessFramework]() will use this as the name of the stack to create on [AWS](). If you change this name and redeploy it to [AWS](), then [CloudFormation]() will simply create a new project in your [AWS]() account for you.
+
+
+
 ## Mocking Serverless + MicroServices before Deploying to AWS
 
 ## Serverless Unit Testing & Code Coverage
