@@ -223,7 +223,9 @@ When saving a `*.json`-formatted event in a `/<microservice-project-directory>/m
 ### `invoke` Options on `local`
 
 * `--function` or `-f`: The name of the function in your microservice that you want to invoke locally. **Required**.
-* 
+* `--path` or `-p`: The path to a `json` file storing the input data that needs to be passed to the invoked [Lambda]() as the envent in the queue. This path is relative to the `root` directory of the microservice.
+* `--data` or `-d`: This is the `String` data you need to pass as an `event` to your [Lambda]() function. Be aware that if you pass both `--path` and `--data`, the information included in the `--path` file will overwrite the data that you passed with the `--data` flag.
+
 
 
 
