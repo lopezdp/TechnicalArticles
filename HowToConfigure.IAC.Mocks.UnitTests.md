@@ -208,6 +208,23 @@ Do not think this information has to be memorized. *Use the Force* and read the 
 
 ## Mocking Serverless + MicroServices before Deploying to AWS
 
+We have to **mock**, or *fake* the input paramaters for a specific event needed by our [Lambda's]() with a `*.json` file to be stored in a directory within the *serverless + microservice* project that we will use by executing the [ServerlessFramework]()'s `invoke` command. The `invoke` [command will run your serverless + microservice code locally by emulating the AWS Lambda environment](). As the old saying goes however:
+
+> "If everything was candy and nuts, everyday would be Christmas..." - unknown
+
+You just have to remember that this is not a 100% perfect emulation of the [AWS Lambda]() environment. There will be some differences between your cloud environment and your `local` machine, but this will do for the vast majority of use-cases. There are a lot of discussions online, and tools available that promote different approaches that you can take to optimize your `local` environment and your machine for `local` development outside of the *Cloud*. We will be mocking the `context` of our *serverless + microservices* within this tutorial with simple mock data only. The study of these tools will be left for a futurute tutorial. We do however find resources like [LocalStack](https://github.com/localstack/localstack), which is a tool that provides an easy testing and mocking framework for developing Cloud applications on the [AWS Cloud](), very interesting, to say the least. Please feel free to experiment with [LocalStack](https://github.com/localstack/localstack) and let us know how it works, in the future we will extend this tutorial to include a guid on its implementation also.
+
+When saving a `*.json`-formatted event in a `/<microservice-project-directory>/mocks` directory that we will use with the [ServerlessFramework]() `invoke` command we would invoke the local serverless `event` as shown below:
+
+**Example Usage of `invoke`**
+
+`$ serverless invoke local --function functionName --path mocks/testFile.json`
+
+### `invoke` Options on `local`
+
+* `--function` or `-f`: The name of the function in your microservice that you want to invoke locally. **Required**.
+* 
+
 
 
 ## Serverless Unit Testing & Code Coverage
