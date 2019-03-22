@@ -204,7 +204,7 @@ functions:
 
 Do not think this information has to be memorized. *Use the Force* and read the *documentation* and as questions on [StackOverFlow]() to discuss with the larger community of *Jedi*. As needed don't forget to refer to the [AWS Resource & Property Types Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) information for the resources and properties that [AWS CloudFormation]() supports as *Infrastructure As Code*.
 
-#### Your new serverless + microservice is not configured using the Infrastructure As Code architecture.
+#### Your new serverless + microservice is now configured using the Infrastructure As Code architecture.
 
 ## Mocking Serverless + MicroServices before Deploying to AWS
 
