@@ -182,11 +182,33 @@ In the [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStart
 
 ```
 functions:
+  # Defines an HTTP API endpoint that calls the microServerless function in handler.js
+  # - path: url path is /microServerless
+  # - method: GET request
+  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
+  #     domain api call
+  # - authorizer: authenticate using an AWS IAM Role
+  displayService:
+    handler: handler.starterService
+    events:
+      - http:
+          path: starterService
+          method: get
+          cors: true
+          authorizer: aws_iam
+    # Warmup can be applied to each lambda to override 
+    # settings in custom.warmup block globally.
+    warmup:
+      enabled: true
 ```
 
+Do not think this information has to be memorized. *Use the Force* and read the *documentation* and as questions on [StackOverFlow]() to discuss with the larger community of *Jedi*. As needed don't forget to refer to the [AWS Resource & Property Types Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) information for the resources and properties that [AWS CloudFormation]() supports as *Infrastructure As Code*.
 
+#### Your new serverless + microservice is not configured using the Infrastructure As Code architecture.
 
 ## Mocking Serverless + MicroServices before Deploying to AWS
+
+
 
 ## Serverless Unit Testing & Code Coverage
 
