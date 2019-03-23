@@ -265,7 +265,7 @@ We have tried to condense the most important topics and fundamentals that you ne
 
 ### Resources and IAM Permissions
 
-When an event defined by your application triggers a [Lambda]() function on the [AWS Cloud](), the [ServerlessFramework]() creates an [IAM]() role during the execution of the logic on your *serverless + microservice*. This will set all of the permissions to the settings that you provided during the implementation of your infrastructure that you see in the `iamRoleStatements` block, that is in your `serverless.yml` file for the *serverless + microservice* in question. Every call your application makes to the `aws-sdk` implemented in this [Lambda]() function is made with the [IAM]() role the [ServerlessFramework]() created for us. To perform this task key pair and secret is created and declared by [AWS]() as an environment variable like:
+When an event defined by your application triggers a [Lambda]() function on the [AWS Cloud](), the [ServerlessFramework]() creates an [IAM]() role during the execution of the logic on your *serverless + microservice*. This will set all of the permissions to the settings that you provided during the implementation of your infrastructure that you see in the `iamRoleStatements` block, that is in your `serverless.yml` file for the *serverless + microservice* in question. Every call your application makes to the `aws-sdk` implemented in this [Lambda]() function is made with the [IAM]() role the [ServerlessFramework]() created for us. If you do not explicitly declare this role, then [AWS]() will perform this task by creating a key pair and secret as an environment variable like:
 
 * `AWS_ACCESS_KEY_ID`
 
@@ -280,12 +280,17 @@ The problem with mocking your services on your `local` machine with `invoke loca
 
 Now you know why I am an [AWS]() #fanboy but I still have to explain what is wrong with this picture...
 
+It is different when you use the [ServerlessFramework]() and its `invoke local` function because the role just is not available to your `local` machine and the `aws-sdk` is just going to default to using your `default` profile that you specified inside of your [AWS credential configuration file](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). You can control how this default is used or not by hard coding another user directly in your code (not ideal) or with a key pair of environment variables.
 
+Please take some time to review the official [AWS]() documentation to better understand what you need to achieve in a secure manner. In this tutorial the *JavaScript SDK* is our primary concern, but it should be similar for all *SDK's*:
 
+* [loading-node-credentials-shared](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html)
 
+* [loading-node-credentials-lambda](https://docs.aws.amazon.com/sdk-for-javascript/vs/developer-guide/loading-node-credentials-lambda.html)
 
+The point of all of this is really just to make you aware that the set of permissions used will probably be different regardless of the approach you decide to implement. You will have to play around with different tools because you will not be able to precisely emulate the actual [IAM Policy]() in place. Not to sound repetitive but this is why we recommend resources like [LocalStack](https://github.com/localstack/localstack), which is a tool that provides an easy testing and mocking framework for developing Cloud applications on the [AWS Cloud](). Future tutorial in the making... (Not anytime soon though! --> Unless you send Bitcoin!)
 
-
+#### Your can now Mock and FAKE all of your Serverless + MicroServices locally before Deploying to AWS.
 
 ## Serverless Unit Testing & Code Coverage
 
