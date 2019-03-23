@@ -238,6 +238,12 @@ When saving a `*.json`-formatted event in a `/<microservice-project-directory>/m
 
 The `invoke local` command gives us the ability to *fake it until we make it* while implementing the serverless architecture for our applications. The functionality provided by the [ServerlessFramework]() will set reasonable environment configuration parameters for us that will allow us to successfuly test the functions that we trigger with `invoke local`.  The [ServerlessFramework]() configures all of the `local` [AWS]() specific values that are similar to those we find in the actual [AWS Cloud]() where our [Lambda]() functions will execute when we deploy our application. It is also important to remember that the `IS_LOCAL` variable is defined when using `invoke local`. This is important because it will prevent you from executing a request to services in *production* accidentally to help you safeguard your application while developing and extending new features. Basically, the [ServerlessFramework]() will do its best to help you and I from reliving any *Dilbert* cartoons.
 
+### `invoke local` serverless function example with `--data`
+
+`$ serverless invoke local --function functionName --path mocks/data.json`
+
+In the example you can see that we are using the `--function` option as described, to tell `invoke local` which [Lambda]() we want to mock on our `local` machine. When using the `-f` flag we also have to provide the name of the [Lambda function]() that we want to trigger with `invoke local` on our development machine. We are using *functionName* as a place holder for the name of the [Lambda function]() that we want to `invoke`.
+
 
 
 
