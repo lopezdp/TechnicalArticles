@@ -236,6 +236,8 @@ When saving a `*.json`-formatted event in a `/<microservice-project-directory>/m
 
 * `--env` or `--e`: This is a `string` that will represent an environment variable that you want to declare when you `invoke` your function locally. The format of the environment variable **SHALL** be defined with the following syntax: `<name> = <value>`. This can be reused for more that one environment variable that you may need declared in your application.
 
+The `invoke local` command gives us the ability to *fake it until we make it* while implementing the serverless architecture for our applications. The functionality provided by the [ServerlessFramework]() will set reasonable environment configuration parameters for us that will allow us to successfuly test the functions that we trigger with `invoke local`.  The [ServerlessFramework]() configures all of the `local` [AWS]() specific values that are similar to those we find in the actual [AWS Cloud]() where our [Lambda]() functions will execute when we deploy our application. It is also important to remember that the `IS_LOCAL` variable is defined when using `invoke local`. This is important because it will prevent you from executing a request to services in *production* accidentally to help you safeguard your application while developing and extending new features. Basically, the [ServerlessFramework]() will do its best to help you and I from reliving any *Dilbert* cartoons.
+
 
 
 
