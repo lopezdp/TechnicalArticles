@@ -332,6 +332,14 @@ You're not done yet; you also add a line of `.json` to update the `scripts` bloc
 
 With the above configuration complete, you will be able to use the `$ npm test` command to run your *unit testing* with the [Jest.js](https://jestjs.io) framework from your `terminal`.
 
+### Add Unit Tests
+
+Ideally you will want to make an attempt at keep[ing your project files somewhat organized, you know, unlike the way you keep your bedroom. Show this to you mother, go ahead, let her know you're out here getting an education and not wasting away watching *porn*. The *internet* is not all *trolls* and the *DarkWeb*, you can find a good example or two out here in this digital desert *wasteland* my friends. Either way, keep yourself organized!!! Anytime you add or implement and new *unit test* for each *serverless + microservice* endpoint you define in each of your [Lambda]() functions, make sure to create a new file for the endpoint that you are implementing. Proceed as such:
+
+`$ touch ~/<ApplicationProjectName>/service/<serverless-microservice-project>/tests/<serverless-endpoint>.test.js`
+
+Pay attention to the *relative* structure of the path that I have chosen to use in the example above as it will make more sense once we start digging into the implementation details of our demo application in this tutorial series. The important point to remember is that `<test>.js` files will be saved in a `/tests` directory. Easy enough, no???
+
 
 
 
