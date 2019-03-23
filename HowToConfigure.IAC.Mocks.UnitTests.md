@@ -294,6 +294,44 @@ The point of all of this is really just to make you aware that the set of permis
 
 ## Serverless Unit Testing & Code Coverage
 
+We are taking an automated testing approach to achieving out ideal [Code Coverage](https://en.wikipedia.org/wiki/Code_coverage) objective. Automated tests **SHALL** execute whenever a new change to the source code is *merged* into the main development branch of the project repository. We think that using a tool like [GitHub](https://github.com) is really the best approach here in terms of your project *repositories*; just keep things simple and believe it or not you will change your life! 
+
+Automated testing is implemented with typical *unit tests* that will execute individual software modules or functions, in our case our *unit tests* will execute our [Lambda]() functions on the [AWS Cloud](). When implementing your tests, you really want to try to make them *useful* if not at least *relevant* to the objective of your application's business *logic*. You really want to take some time to think of any *edge cases* that your users may be inputing into your application to ensure that your application's *user experience* meets your user's needs and expectations. If you are working as part of a team you really should collaborate with the rest of your team on the different test cases that should be implemented to mitigate any potential errors that your users may be confronted with out in the *wild*...
+
+Examples of useful test cases should consider the following:
+
+* Tests which reproduce and bugs and their cause to verify that errors are resolved with the latest updates to the application.
+
+* Tests that return the details that validate the correct and precise implementation of the system requirements and specifications. Tests that return the appropriate `data types` as specified in the system's data dictionary would be an appropriate metric.
+
+* Tests that validate that your software is correctly handling expected or *unexpected* edge and corner cases are appropriate.
+
+* Tests that validate any expected state changes of interactions with loosly coupled modules and system components are expected also.
+
+Throughout our automated testing processing and workflow, code coverage KPI's and metrics should be recorded. It would be ideal to maintain [Linear Code Sequence Coverage]() above **80%**.
+
+### Jest.js Implementation and Configuration
+
+This tutorial and its author has decided to use [Jest.js](https://jestjs.io) for this *lecture*. We have decided to use this automated testing framework to test our codebase and the correctness of our logic and our application's functionality because [Jest.js](https://jestjs.io) is very simple, it works with the libraries and front end frameworks we will be implementing in future parts to this series, it takes minimal configuration, it is easy to determine the percentage of code coverage we have implemented and most importantly, [Jest.js is well documented](https://jestjs.io/docs/en/getting-started).
+
+For this tutorial and the demo application we will be walking through together shortly, you will notice a directory within each *serverless + microservice* labeled something like: 
+
+`/<serverless-microservice-project>/tests/<component>.test.js`
+
+[Jest.js](https://jestjs.io) is already installed as a dependency in your `package.json` file, which means that everytime you `npm install` a new *serverless + microservice* project with our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git) project, you will automatically have [Jest.js](https://jestjs.io) installed on your local environment for you. *Easy Peasy* my friend, work smart is the name of the game... For all of the rest of you out there who simply refuse to just follow along because you absolutely have to do everything from scratch yourself then go ahead and get it done with the following `cmd`:
+
+`$ npm install --save-dev jest`
+
+You're not done yet; you also add a line of `.json` to update the `scripts` block in your `package.json` file. You need to add the following:
+
+```
+"scripts": {
+	"test": ":jest"
+}
+```
+
+With the above configuration complete, you will be able to use the `$ npm test` command to run your *unit testing* with the [Jest.js](https://jestjs.io) framework from your `terminal`.
+
 
 
 
