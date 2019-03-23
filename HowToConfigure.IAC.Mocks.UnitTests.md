@@ -257,8 +257,13 @@ Moving on, you will notice that we have also used the `--path` option to pass th
 }
 ```
 
+### Limitations
 
+We have tried to condense the most important topics and fundamentals that you need to understand to correcly mock and implement your application as a *serverless + microservice*. Please [refer to the `invoke local` documentation](https://serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) to better understand how the [ServerlessFramework]() helps you emulate the [AWS Cloud]() on your `local` machine to help you expedite the development of your application that will help *make the world a better place*...
 
+`invoke local` is currently supported on the Node.js, Python, Java, and Ruby runtime environments only. To obtain the correct output when using the Java runtime locally, your `response` class will need to implement the `toString()` method.
+
+### Resources and IAM Permissions
 
 
 
