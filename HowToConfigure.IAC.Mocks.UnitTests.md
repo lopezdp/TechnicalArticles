@@ -223,8 +223,20 @@ When saving a `*.json`-formatted event in a `/<microservice-project-directory>/m
 ### `invoke` Options on `local`
 
 * `--function` or `-f`: The name of the function in your microservice that you want to invoke locally. **Required**.
+
 * `--path` or `-p`: The path to a `json` file storing the input data that needs to be passed to the invoked [Lambda]() as the envent in the queue. This path is relative to the `root` directory of the microservice.
+
 * `--data` or `-d`: This is the `String` data you need to pass as an `event` to your [Lambda]() function. Be aware that if you pass both `--path` and `--data`, the information included in the `--path` file will overwrite the data that you passed with the `--data` flag.
+
+* `--raw`: This flag will allow you to pass data as a *raw string*, even if the string you are working with is a `.json`-formatted string. If you do not set this flag, then any `.json`-formatted data that you pass into the CLI when you `invoke` on local will be parsed and passed to your function as an `object`.
+
+* `--contextPath` or `-x`: This is the path to the `.json`-formatted file that you have to store the input `context` that will be passed to the function that you decide to `invoke` locally. This path is relative to the `root` directory of your *serverless + microservice*.
+
+* `--context` or `-c`: This is `string` data that you want to pass as the `context` to the function that you want to `invoke` locally. The information included with the `--contextPath` flag will overwrite the data that you passed with the `--context` flag.
+
+* `--env` or `--e`: This is a `string` that will represent an environment variable that you want to declare when you `invoke` your function locally. The format of the environment variable **SHALL** be defined with the following syntax: `<name> = <value>`. This can be reused for more that one environment variable that you may need declared in your application.
+
+
 
 
 
