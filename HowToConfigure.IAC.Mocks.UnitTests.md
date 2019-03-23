@@ -244,6 +244,19 @@ The `invoke local` command gives us the ability to *fake it until we make it* wh
 
 In the example you can see that we are using the `--function` option as described, to tell `invoke local` which [Lambda]() we want to mock on our `local` machine. When using the `-f` flag we also have to provide the name of the [Lambda function]() that we want to trigger with `invoke local` on our development machine. We are using *functionName* as a place holder for the name of the [Lambda function]() that we want to `invoke`.
 
+Moving on, you will notice that we have also used the `--path` option to pass the `.json`-formatted data that we have saved in the `mocks/data.json` file that is relative to our project directory. We will use this information when we trigger the `invoke local` command for the *functionName* we have declared as our [Lambda]() in this example.
+
+**Example data.json File**
+
+```
+{
+	"resource": "/",
+	"path": "/",
+	"httpMethod": "GET",
+	// etc  //
+}
+```
+
 
 
 
