@@ -265,6 +265,18 @@ We have tried to condense the most important topics and fundamentals that you ne
 
 ### Resources and IAM Permissions
 
+When an event defined by your application triggers a [Lambda]() function on the [AWS Cloud](), the [ServerlessFramework]() creates an [IAM]() role during the execution of the logic on your *serverless + microservice*. This will set all of the permissions to the settings that you provided during the implementation of your infrastructure that you see in the `iamRoleStatements` block, that is in your `serverless.yml` file for the *serverless + microservice* in question. Every call your application makes to the `aws-sdk` implemented in this [Lambda]() function is made with the [IAM]() role the [ServerlessFramework]() created for us. To perform this task key pair and secret is created and declared by [AWS]() as an environment variable like:
+
+* `AWS_ACCESS_KEY_ID`
+
+* `AWS_SECRET_ACCESS_KEY` 
+
+The problem with mocking your services on your `local` machine with `invoke local` is that your machine doesnt have *Jeff Bezos'* magic money inside of it. The role needed to invoke these [Lambda]() functions arent available!!! You aren't [AWS]()! Trust me, I wish I was *Jeff Bezos* too (or at least his bank account). As a Cuban, I can wholeheartedly tell you that he is the hero of an Island of *Caribeños* who came to the *USA* in search of the ever so elusive *Sueño Americano* or what some call the *American Dream*. #Learn2Code.
+
+
+
+
+
 
 
 ## Serverless Unit Testing & Code Coverage
