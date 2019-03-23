@@ -273,9 +273,14 @@ When an event defined by your application triggers a [Lambda]() function on the 
 
 The problem with mocking your services on your `local` machine with `invoke local` is that your machine doesnt have *Jeff Bezos'* magic money inside of it. The role needed to invoke these [Lambda]() functions arent available!!! You aren't [AWS]()! Trust me, I wish I was *Jeff Bezos* too (or at least his bank account). As a Cuban, I can wholeheartedly tell you that he is the hero of an Island of *Caribeños* who came to the *USA* in search of the ever so elusive *Sueño Americano* or what some call the *American Dream*. #Learn2Code.
 
+#### е верь не бойся не проси
+**Russian Trained Programmers**
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/bezosFloats.png#center "Jeff Bezos is a Cuban hero. No Joke.")
 
-Now you know why I am an [AWS]() #fanboy but 
+Now you know why I am an [AWS]() #fanboy but I still have to explain what is wrong with this picture...
+
+
 
 
 
