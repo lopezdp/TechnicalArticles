@@ -340,9 +340,72 @@ Ideally you will want to make an attempt at keeping your project files somewhat 
 
 Pay attention to the *relative* structure of the path that I have chosen to use in the example above as it will make more sense once we start digging into the implementation details of our demo application in this tutorial series. The important point to remember is that `<test>.js` files will be saved in a `/tests` directory. Easy enough, no???
 
+We can use the example `starter.test.js` file that we have implemented in our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git) project to better understand how we will implementing our test cases with the [Jest.js](https://jestjs.io) framework:
+
+**Need to Debug Implementation (Not Ready for Publishing)!!!**
+
+```
+import { starterService } from "../handler.js";
+
+// FIXME: Correct eslint `no-undef` errors
+test("Initial Starter Service Unit Testing", () => {
+
+  let test = starterService();
+
+  // FIXME: Need to retrieve value from response object here
+  console.log("output: " + test);
+  // Check edge or corner case in String.
+  // Verify String value in lambda outputs in response...
+  expect(test).toMatch(/executed/);
+});
+```
+
+The implementation of our tests is straight forward and relatively easy, once your can understand how to `assert` values and data types as provided from our *serverless + microservice* responses. Here we are simply adding one test to `assert` that the response we are getting back from our service is a `string`. We accomplish this with the `.toMatch()` method in the last line of the test we have implemented here as an example. We will explain this further as we implement the functionality in our demo application. In the meantime, be sure to [read more about using Jest.js as a testing tool in their documentation](https://jestjs.io/docs/en/getting-started).
+
+### Run Tests
+
+Once you have your *unit tests* implemented, you can run those tests in your *command line interface* from the `root` of project using the following command:
+
+`$ npm test`
+
+The terminal will provide an out put for a successful result that will look like this:
+
+**NEED TO DEBUG & IMPLEMENT CORRECT TESTS**
+```
+> jest
+
+ FAIL  tests/starter.test.js
+  ● Console
+
+    console.log tests/starter.test.js:21
+      output: undefined
+
+  ● Initial Starter Service Unit Testing
+
+    expect(string)[.not].toMatch(expected)
+    
+    string value must be a string.
+    Received:
+      object: {}
+      
+      at Object.<anonymous> (tests/starter.test.js:24:16)
+          at new Promise (<anonymous>)
+          at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
 
 
+``` 
 
+And that is it. We have discussed the fundamentals of building out the backend logic of an application using the **serverless + microservice** architecture with [AWS Lambda](). You know what [Lambda]() functions are, how to configure and implement the logic you need in each [Lambda](), you know how to **Mock**, or *fake* your *serverless + microservices* on your `local` machine using the `invoke local` command provided to us by the [ServerlessFramework](), and you know how to implement the **Unit Tests** we will need to implement to create an *automated testing* pipeline we can use to eventually **Continuously Integrate & Continuously Deploy** our application to the different stages we define for our development and production environment slater on.
+
+All service shoulde be implemented, mocked, and tested before deploying any resources or infrastructure to the [AWS Cloud]() as a software development *Best Practice*.
+
+------CHANGE THIS AND UPDATE AS NEEDED!!!!!-------
+### Your serverless backend is now configured as IAC to Mock & execute automated Unit Tests. Good Luck!
+
+## Part 4: Configuring an effective Continuous Integration & Continuous Deployment Pipeline
+
+* [Part 4: How To Configure an effective CI/CD Pipeline on AWS]() - *Not Published.*
 
 
 
