@@ -400,7 +400,6 @@ And that is it. We have discussed the fundamentals of building out the backend l
 
 All service shoulde be implemented, mocked, and tested before deploying any resources or infrastructure to the [AWS Cloud]() as a software development *Best Practice*.
 
-------CHANGE THIS AND UPDATE AS NEEDED!!!!!-------
 ### Your serverless backend is now configured as IAC to Mock & execute automated Unit Tests. Good Luck!
 
 ## Part 4: Configuring an effective Continuous Integration & Continuous Deployment Pipeline
