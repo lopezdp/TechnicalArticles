@@ -371,31 +371,25 @@ Once you have your *unit tests* implemented, you can run those tests in your *co
 
 The terminal will supply an output for a successful result that will look like this:
 
-**NEED TO DEBUG & IMPLEMENT CORRECT TESTS**
+**Testing Output**
 ```
+$ npm test
+
+> serverless-starter-service(node.js)@1.1.16 test /Users/MyDocs/DevOps/ServerlessStarterService
 > jest
 
- FAIL  tests/starter.test.js
-  ● Console
+ PASS  tests/starter.test.js
+  ✓ starterService Execution (1007ms)
 
-    console.log tests/starter.test.js:21
-      output: undefined
-
-  ● Initial Starter Service Unit Testing
-
-    expect(string)[.not].toMatch(expected)
-
-    string value must be a string.
-    Received:
-      object: {}
-
-      at Object.<anonymous> (tests/starter.test.js:24:16)
-          at new Promise (<anonymous>)
-          at <anonymous>
-      at process._tickCallback (internal/process/next_tick.js:188:7)
-
-
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        2.044s
+Ran all test suites.
 ```
+
+**Unit Test Output**
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/UnitTestingImplemented.png#center "This is what the passed Unit Test will look like in your terminal.")
 
 And that is it. We have discussed the fundamentals of building out the backend logic of an application using the **serverless + microservice** architecture with [AWS Lambda](). You know what [Lambda]() functions are, how to configure and implement the logic you need in each [Lambda](), you know how to **Mock**, or *fake* your *serverless + microservices* on your `local` machine using the `invoke local` command provided to us by the [ServerlessFramework](), and you know how to implement the **Unit Tests** we will need to implement to create an *automated testing* pipeline we can use to eventually **Continuously Integrate & Continuously Deploy** our application to the different stages we define for our development and production environment slater on.
 
