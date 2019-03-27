@@ -4,7 +4,7 @@
 
 *Publisher: [UniqueSoftwareDevelopment](https://www.uniquesoftwaredev.com)*
 
-This is a continuation of our multi-part series on building a simple web application on [AWS]() using [AWS Lambda]() and the [ServerlessFramework](). You can review the first and second parts of this series starting with the setup of your `local` environment at:
+This is a continuation of our multi-part series on building a simple web application on [AWS](https://aws.amazon.com) using [AWS Lambda]() and the [ServerlessFramework](). You can review the first and second parts of this series starting with the setup of your `local` environment at:
 
 * [Part 1: How To SetUp Your `local` Serverless Environment](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToSetUpYourLocalServerlessEnvironment.md)
 
@@ -16,7 +16,7 @@ Please refer to this repo as you follow along with this tutorial.
 
 ## Configuring Infrastructure As Code
 
-The [ServerlessFramework]() lets you describe the infrastructure that you want configured for your serverless + microservice based application logic. You can use template files in `.yml` or `.json` format to tell [AWS CloudFormation]() what exact resources you need deployed on [AWS]() to correctly run your application. The `YAML` or `JSON`-formatted files are the blueprints you design and architect to build your services with [AWS]() resources. We can see that by using the [AWS Template Anatomy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html) to describe our infrastructure, that the templates on [AWS CloudFormation]() will include a few major sections described in the template fragments shown below:
+The [ServerlessFramework]() lets you describe the infrastructure that you want configured for your serverless + microservice based application logic. You can use template files in `.yml` or `.json` format to tell [AWS CloudFormation]() what exact resources you need deployed on [AWS](https://aws.amazon.com) to correctly run your application. The `YAML` or `JSON`-formatted files are the blueprints you design and architect to build your services with [AWS](https://aws.amazon.com) resources. We can see that by using the [AWS Template Anatomy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html) to describe our infrastructure, that the templates on [AWS CloudFormation]() will include a few major sections described in the template fragments shown below:
 
 **YAML-formatted**
 
@@ -51,11 +51,11 @@ Outputs:
   define your outputs
 ```
 
-The `Resources` section of the template is the only section that needs in your `YAML` or `JSON`-formatted template. When describing the services you need deployed to [AWS]() on your [CloudFormation]() templates it will be helpful to use the order I will be describing below because some sections may refer to values in a previous section, however, you can include these sections in your template in any order that you feel is appropriate.
+The `Resources` section of the template is the only section that needs in your `YAML` or `JSON`-formatted template. When describing the services you need deployed to [AWS](https://aws.amazon.com) on your [CloudFormation]() templates it will be helpful to use the order I will be describing below because some sections may refer to values in a previous section, however, you can include these sections in your template in any order that you feel is appropriate.
 
 1. **Format Version (optional)**
 
-  * This is the [AWS CloudFormation]() template version that the `YAML` or `JSON`-formatted file abides by. This is a versioning format internal to [AWS]() and can change independently of any API or WSDL versions published.
+  * This is the [AWS CloudFormation]() template version that the `YAML` or `JSON`-formatted file abides by. This is a versioning format internal to [AWS](https://aws.amazon.com) and can change independently of any API or WSDL versions published.
 
 2. **Description (optional)**
 
@@ -63,7 +63,7 @@ The `Resources` section of the template is the only section that needs in your `
 
 3. **Metadata (optional)**
 
-  * You can use this object to give [CloudFormation]() more information about the application and the template you are using to use [AWS]() infrastructure.
+  * You can use this object to give [CloudFormation]() more information about the application and the template you are using to use [AWS](https://aws.amazon.com) infrastructure.
 
 4. **Parameters (optional)**
 
@@ -75,7 +75,7 @@ The `Resources` section of the template is the only section that needs in your `
 
 6. **Conditions (optional)**
 
-  * You can also control the creation of a resource or whether resource properties have values assigned that you declare when you update or create a stack in [AWS](). Depending on whether a stack is for a development or production environment, you can for example, conditionally create a resource for each stage as needed by your application.
+  * You can also control the creation of a resource or whether resource properties have values assigned that you declare when you update or create a stack in [AWS](https://aws.amazon.com). Depending on whether a stack is for a development or production environment, you can for example, conditionally create a resource for each stage as needed by your application.
 
 7. **Transform (optional)**
 
@@ -83,13 +83,13 @@ The `Resources` section of the template is the only section that needs in your `
 
 8. **Resources (REQUIRED)**
 
-  * This is the only required *Template Section* that you **MUST** include in your `serverless.yml` file in your serverless backend. You **SHALL** use this section to specify the precise stack resources and their properties that you need [AWS CloudFormation]() to create for you on [AWS](). You can use [ServerlessFramework to define the infrastructure you need](https://serverless.com/framework/docs/providers/aws/guide/resources) to deploy with your `serverless.yml` file.
+  * This is the only required *Template Section* that you **MUST** include in your `serverless.yml` file in your serverless backend. You **SHALL** use this section to specify the precise stack resources and their properties that you need [AWS CloudFormation]() to create for you on [AWS](https://aws.amazon.com). You can use [ServerlessFramework to define the infrastructure you need](https://serverless.com/framework/docs/providers/aws/guide/resources) to deploy with your `serverless.yml` file.
 
 9. **Outputs (optional)**
 
   * This section will let you view your properties on the [CloudFormation]() stack and the values that it returns to you. You can easily use the [AWS CLI]() to use commands that will display the values returned by your stack for outputs that you declare in your `serverless.yml` file.
 
-In our [CloudFormation Template]() called `serverless.yml` found in each of our serverless + microservices that  we implement for our API, we describe the [AWS Lambda]() functions, [API Gateway]() endpoints to configure, [DynamoDB tables](), [Cognito]() User & Identity Pools, and [S3 Buckets]() that we need to deploy to our serverless + microservice properly. This reality is what we call **Infrastructure As Code**. The goal in using an **IAC Architecture** is to reduce or prevent errors by avoiding the [AWS Management Console](). When we describe our **Infrastructure As Code** we can quickly and easily create multiple environments with minimal development time and effort exerted.
+In our [CloudFormation Template]() called `serverless.yml` found in each of our serverless + microservices that  we implement for our API, we describe the [AWS Lambda](https://aws.amazon.com/lambda) functions, [API Gateway]() endpoints to configure, [DynamoDB tables](), [Cognito]() User & Identity Pools, and [S3 Buckets]() that we need to deploy to our serverless + microservice properly. This reality is what we call **Infrastructure As Code**. The goal in using an **IAC Architecture** is to reduce or prevent errors by avoiding the [AWS Management Console](). When we describe our **Infrastructure As Code** we can quickly and easily create multiple environments with minimal development time and effort exerted.
 
 Transpiling and converting [**ES Code**]() in [Node v8.10]() is the responsibility of the [serverless-webpack]() plugin that we include with the [ServerlessFramework]().
 
@@ -104,7 +104,7 @@ We will use a few of the services that you can find in the [AWS Resource & Prope
 * **[API Gateway]()**
 * **[CloudFormation]()**
 * **[DynamoDB]()**
-* **[Lambda]()**
+* **[Lambda](https://aws.amazon.com/lambda)**
 * **[S3]()**
 
 For now, please open the `serverless.yml` file found at the [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) repository. Please look at the sections below for an explanation of each declaration in our [ServerlessFramework]() [CloudFormation]() template:
@@ -164,21 +164,21 @@ provider:
     # stripePrivateKey: ${self:custom.environment.stripePrivatekey}
 ```
 
-Taking a closer look at the `YAML`-formatted template above, the `service` block is where you will need to declare the name of your *serverless + microservice* with [CloudFormation](). The [ServerlessFramework]() will use this as the name of the stack to create on [AWS](). If you change this name and redeploy it to [AWS](), then [CloudFormation]() will simply create a new project for you in your [AWS]() account.
+Taking a closer look at the `YAML`-formatted template above, the `service` block is where you will need to declare the name of your *serverless + microservice* with [CloudFormation](). The [ServerlessFramework]() will use this as the name of the stack to create on [AWS](https://aws.amazon.com). If you change this name and redeploy it to [AWS](https://aws.amazon.com), then [CloudFormation]() will simply create a new project for you in your [AWS](https://aws.amazon.com) account.
 
-The `environment` block is where we load secrets saved in our `env.yml` file. You must remember that [AWS Lambda]() only gives you *4KB* of space for this file which should be more than enough for our needs. The important thing to remember is to keep your logic modular and do not put all of you application secrets in one file. Use an `env.yml` file for each *serverless + microservice* that you implement. The secrets and custom variables that we load from our `env.yml` file are based on the stage that we are deploying to at any given point in the development lifecycle using `file(env.yml):${self:custom.stage}`. If you do not define your stage, then our application will fall back to load everything under the `default:` block with `file(env.yml):default`. The [ServerlessFramework]() will check if `custom.stage` is available before falling back to `default`.
+The `environment` block is where we load secrets saved in our `env.yml` file. You must remember that [AWS Lambda](https://aws.amazon.com/lambda) only gives you *4KB* of space for this file which should be more than enough for our needs. The important thing to remember is to keep your logic modular and do not put all of you application secrets in one file. Use an `env.yml` file for each *serverless + microservice* that you implement. The secrets and custom variables that we load from our `env.yml` file are based on the stage that we are deploying to at any given point in the development lifecycle using `file(env.yml):${self:custom.stage}`. If you do not define your stage, then our application will fall back to load everything under the `default:` block with `file(env.yml):default`. The [ServerlessFramework]() will check if `custom.stage` is available before falling back to `default`.
 
 As shown in the example, we can also use this mechanism to add other custom variables that we may need loaded at any given time. You may add any environment variable to the `environment` block using something like:
 
 `${self:custom.environment.DECLARE_YOUR_VARIABLE}`
 
-Any custom variable that we declare in the manner shown above is available to our [Lambda]() function with something like this:
+Any custom variable that we declare in the manner shown above is available to our [Lambda](https://aws.amazon.com/lambda) function with something like this:
 
 `process.env.DECLARE_YOUR_VARIABLE`
 
 ### Configure an API Endpoint
 
-In the [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) `serverless.yml` [AWS CloudFormation]() template that describes our infrastructure, we define the functions that we have implemented as [Lambdas]() that we want exposed on [AWS](). You must remember that each *serverless + microservice* will have its own `serverless.yml` template in the project's `root` directory that will define the *endpoints* associated with each **serverless + microservice**. Below is an example of a [Lambda]() function defined in our [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) [CloudFormation]() template:
+In the [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) `serverless.yml` [AWS CloudFormation]() template that describes our infrastructure, we define the functions that we have implemented as [Lambdas](https://aws.amazon.com/lambda) that we want exposed on [AWS](https://aws.amazon.com). You must remember that each *serverless + microservice* will have its own `serverless.yml` template in the project's `root` directory that will define the *endpoints* associated with each **serverless + microservice**. Below is an example of a [Lambda](https://aws.amazon.com/lambda) function defined in our [**ServerlessStarterService**](https://github.com/lopezdp/ServerlessStarterService) [CloudFormation]() template:
 
 ```
 functions:
@@ -208,11 +208,11 @@ Do not think that you must memorize this information. *Use the Force* and read t
 
 ## Mocking Serverless + MicroServices before Deploying to AWS
 
-We have to **mock**, or *fake* the input parameters for a specific event needed by our [Lambda's]() with a `*.json` file to be stored in a directory within the *serverless + microservice* project that we will use by executing the [ServerlessFramework]()'s `invoke` command. The `invoke` [command will run your serverless + microservice code locally by emulating the AWS Lambda environment](). As the old saying goes however:
+We have to **mock**, or *fake* the input parameters for a specific event needed by our [Lambda's](https://aws.amazon.com/lambda) with a `*.json` file to be stored in a directory within the *serverless + microservice* project that we will use by executing the [ServerlessFramework]()'s `invoke` command. The `invoke` [command will run your serverless + microservice code locally by emulating the AWS Lambda environment](https://aws.amazon.com/lambda). As the old saying goes however:
 
 > "If everything were candy and nuts, everyday would be Christmas..." - unknown
 
-You just must remember that this is not a 100% perfect emulation of the [AWS Lambda]() environment. There will be some differences between your cloud environment and your `local` machine, but this will do for most use-cases. There are a lot of discussions online, and tools available that promote different approaches that you can take to perfect your `local` environment and your machine for `local` development outside of the *Cloud*. We will be mocking the `context` of our *serverless + microservices* within this tutorial with simple mock data only. We will leave the study of these tools for a future tutorial. We do however find resources like [LocalStack](https://github.com/localstack/localstack), which is a tool that supplies an easy testing and mocking framework for developing Cloud applications on the [AWS Cloud](), remarkably interesting, to say the least. Please feel free to experiment with [LocalStack](https://github.com/localstack/localstack) and let us know how it works, in the future we will extend this tutorial to include a guide on its implementation also.
+You just must remember that this is not a 100% perfect emulation of the [AWS Lambda](https://aws.amazon.com/lambda) environment. There will be some differences between your cloud environment and your `local` machine, but this will do for most use-cases. There are a lot of discussions online, and tools available that promote different approaches that you can take to perfect your `local` environment and your machine for `local` development outside of the *Cloud*. We will be mocking the `context` of our *serverless + microservices* within this tutorial with simple mock data only. We will leave the study of these tools for a future tutorial. We do however find resources like [LocalStack](https://github.com/localstack/localstack), which is a tool that supplies an easy testing and mocking framework for developing Cloud applications on the [AWS Cloud](https://aws.amazon.com), remarkably interesting, to say the least. Please feel free to experiment with [LocalStack](https://github.com/localstack/localstack) and let us know how it works, in the future we will extend this tutorial to include a guide on its implementation also.
 
 When saving a `*.json`-formatted event in a `/<microservice-project-directory>/mocks` directory that we will use with the [ServerlessFramework]() `invoke` command, we will execute the local serverless `event` as shown below:
 
@@ -224,11 +224,11 @@ When saving a `*.json`-formatted event in a `/<microservice-project-directory>/m
 
 * `--function` or `-f`: The name of the function in your microservice that you want to invoke locally. **Required**.
 
-* `--path` or `-p`: The path to a `json` file storing the input data that you need to pass to the invoked [Lambda]() that an event in the queue will trigger at a specific state in the application. This path is relative to the `root` directory of the microservice.
+* `--path` or `-p`: The path to a `json` file storing the input data that you need to pass to the invoked [Lambda](https://aws.amazon.com/lambda) that an event in the queue will trigger at a specific state in the application. This path is relative to the `root` directory of the microservice.
 
 * `--data` or `-d`: This is the `String` data you need to pass as an `event` to your [Lambda]() function. Be aware that if you pass both `--path` and `--data`, the information included in the `--path` file will overwrite the data that you passed with the `--data` flag.
 
-* `--raw`: This flag will allow you to pass data as a *raw string*, even if the string you are working with is a `.json`-formatted string. If you do not set this flag, then any `.json`-formatted data that you pass into the CLI when you `invoke local`, will imply that the [AWS Cloud]() runtime will parse and pass this data to your function as an `object`.
+* `--raw`: This flag will allow you to pass data as a *raw string*, even if the string you are working with is a `.json`-formatted string. If you do not set this flag, then any `.json`-formatted data that you pass into the CLI when you `invoke local`, will imply that the [AWS Cloud](https://aws.amazon.com) runtime will parse and pass this data to your function as an `object`.
 
 * `--contextPath` or `-x`: This is the path to the `.json`-formatted file that you must store the input that you will pass in as a `context` parameter value to the function that you decide to `invoke` locally. This path is relative to the `root` directory of your *serverless + microservice*.
 
@@ -236,7 +236,7 @@ When saving a `*.json`-formatted event in a `/<microservice-project-directory>/m
 
 * `--env` or `--e`: This is a `string` that will represent an environment variable that you want to declare when you `invoke` your function locally. The format of the environment variable **SHALL** have a declaration with the following syntax: `<name> = <value>`. You can reuse this for more than one environment variable that you may need declared in your application.
 
-The `invoke local` command gives us the ability to *fake it until we make it* while implementing the serverless architecture for our applications. The functionality provided by the [ServerlessFramework]() will set reasonable environment configuration parameters for us that will allow us to successfully test the functions that we trigger with `invoke local`. The [ServerlessFramework]() configures all the `local` [AWS]() specific values that are like those that we find in the actual [AWS Cloud]() where our [Lambda]() functions will execute when we deploy our application. It is also important to remember that [ServerlessFramework]() will define the `IS_LOCAL` variable when using `invoke local`. This is important because it will prevent you from executing a request to services in *production* accidentally to help you safeguard your application while developing and extending new features. The [ServerlessFramework]() will do its best to help you and I from reliving any *Dilbert* cartoons.
+The `invoke local` command gives us the ability to *fake it until we make it* while implementing the serverless architecture for our applications. The functionality provided by the [ServerlessFramework]() will set reasonable environment configuration parameters for us that will allow us to successfully test the functions that we trigger with `invoke local`. The [ServerlessFramework]() configures all the `local` [AWS](https://aws.amazon.com) specific values that are like those that we find in the actual [AWS Cloud](https://aws.amazon.com) where our [Lambda]() functions will execute when we deploy our application. It is also important to remember that [ServerlessFramework]() will define the `IS_LOCAL` variable when using `invoke local`. This is important because it will prevent you from executing a request to services in *production* accidentally to help you safeguard your application while developing and extending new features. The [ServerlessFramework]() will do its best to help you and I from reliving any *Dilbert* cartoons.
 
 ### `invoke local` serverless function example with `--data`
 
@@ -259,36 +259,36 @@ Moving on, you will notice that we have also used the `--path` option to pass th
 
 ### Limitations
 
-We have tried to condense the most important topics and fundamentals that you need to understand to correctly mock and implement your application as a *serverless + microservice*. Please [refer to the `invoke local` documentation](https://serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) to better understand how the [ServerlessFramework]() helps you emulate the [AWS Cloud]() on your `local` machine to help you expedite the development of your application that will help *make the world a better place*...
+We have tried to condense the most important topics and fundamentals that you need to understand to correctly mock and implement your application as a *serverless + microservice*. Please [refer to the `invoke local` documentation](https://serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) to better understand how the [ServerlessFramework]() helps you emulate the [AWS Cloud](https://aws.amazon.com) on your `local` machine to help you expedite the development of your application that will help *make the world a better place*...
 
 Node.js, Python, Java, and Ruby are the only runtime environments that currently support the `invoke local` emulation environment. To obtain the correct output when using the Java runtime locally, your `response` class will need to implement the `toString()` method.
 
 ### Resources and IAM Permissions
 
-When an event defined by your application triggers a [Lambda]() function on the [AWS Cloud](), the [ServerlessFramework]() creates an [IAM]() role during the execution of the logic on your *serverless + microservice*. This will set all the permissions to the settings that we provided during the implementation of our infrastructure that you see in the `iamRoleStatements` block, that is in your `serverless.yml` file for the *serverless + microservice* in question. Every call your application makes to the `aws-sdk` implemented in this [Lambda]() function, will use the [IAM]() role that the [ServerlessFramework]() created for us. If you do not explicitly declare this role, then [AWS]() will perform this task by creating a key pair and secret as an environment variable like:
+When an event defined by your application triggers a [Lambda]() function on the [AWS Cloud](https://aws.amazon.com), the [ServerlessFramework]() creates an [IAM]() role during the execution of the logic on your *serverless + microservice*. This will set all the permissions to the settings that we provided during the implementation of our infrastructure that you see in the `iamRoleStatements` block, that is in your `serverless.yml` file for the *serverless + microservice* in question. Every call your application makes to the `aws-sdk` implemented in this [Lambda]() function, will use the [IAM]() role that the [ServerlessFramework]() created for us. If you do not explicitly declare this role, then [AWS](https://aws.amazon.com) will perform this task by creating a key pair and secret as an environment variable like:
 
 * `AWS_ACCESS_KEY_ID`
 
 * `AWS_SECRET_ACCESS_KEY`
 
-The problem with mocking your services on your `local` machine with `invoke local` is that your machine does not have *Jeff Bezos'* magic money inside of it. The role needed to invoke these [Lambda]() functions are not available!!! You are not [AWS]()! Trust me, I wish I was *Jeff Bezos* too (or at least his bank account). As a Cuban, I can wholeheartedly tell you that he is the hero of an Island of *Caribeños* who came to the *USA* in search of the ever so elusive *Sueño Americano* or what some call the *American Dream*. #Learn2Code.
+The problem with mocking your services on your `local` machine with `invoke local` is that your machine does not have *Jeff Bezos'* magic money inside of it. The role needed to invoke these [Lambda]() functions are not available!!! You are not [AWS](https://aws.amazon.com)! Trust me, I wish I was *Jeff Bezos* too (or at least his bank account). As a Cuban, I can wholeheartedly tell you that he is the hero of an Island of *Caribeños* who came to the *USA* in search of the ever so elusive *Sueño Americano* or what some call the *American Dream*. #Learn2Code.
 
 #### не верь не бойся не проси
 **Russian Trained Programmers**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/bezosFloats.png#center "Jeff Bezos is a Cuban hero. No Joke.")
 
-Now you know why I am an [AWS]() #fanboy but I still must explain what is wrong with this picture...
+Now you know why I am an [AWS](https://aws.amazon.com) #fanboy but I still must explain what is wrong with this picture...
 
 It is different when you use the [ServerlessFramework]() and its `invoke local` function because the role just is not available to your `local` machine and the `aws-sdk` is just going to default to using your `default` profile that you specified inside of your [AWS credential configuration file](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). You can control how we use the default choice, or not, by hard coding another user directly in your code (not ideal), or with a key pair of environment variables (preferred).
 
-Please take some time to review the official [AWS]() documentation to better understand what you need to achieve in a secure manner. In this tutorial, the *JavaScript SDK* is our primary concern, but this process should be similar for all *SDK's*:
+Please take some time to review the official [AWS](https://aws.amazon.com) documentation to better understand what you need to achieve in a secure manner. In this tutorial, the *JavaScript SDK* is our primary concern, but this process should be similar for all *SDK's*:
 
 * [loading-node-credentials-shared](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html)
 
 * [loading-node-credentials-lambda](https://docs.aws.amazon.com/sdk-for-javascript/vs/developer-guide/loading-node-credentials-lambda.html)
 
-The point of all of this is to make you aware that the set of permissions used will be different, regardless of the approach you decide to implement. You will have to play around with different tools because you will not be able to precisely emulate the actual [AWS IAM Policy]() in place. Not to sound repetitive, but therefore we recommend resources like [LocalStack](https://github.com/localstack/localstack), which is a tool that supplies an easy testing and mocking framework for developing cloud native applications on the [AWS Cloud](). Future tutorial in the making... (Not anytime soon though! --> Unless you send Bitcoin!)
+The point of all of this is to make you aware that the set of permissions used will be different, regardless of the approach you decide to implement. You will have to play around with different tools because you will not be able to precisely emulate the actual [AWS IAM Policy]() in place. Not to sound repetitive, but therefore we recommend resources like [LocalStack](https://github.com/localstack/localstack), which is a tool that supplies an easy testing and mocking framework for developing cloud native applications on the [AWS Cloud](https://aws.amazon.com). Future tutorial in the making... (Not anytime soon though! --> Unless you send Bitcoin!)
 
 #### You can now Mock and FAKE all your Serverless + MicroServices locally before Deploying to AWS.
 
@@ -296,7 +296,7 @@ The point of all of this is to make you aware that the set of permissions used w
 
 We are taking an automated testing approach to achieving our ideal [Code Coverage](https://en.wikipedia.org/wiki/Code_coverage) goals. Automated tests **SHALL** execute whenever a new change to the source code is *merged* into the main development branch of the project repository. We think that using a tool like [GitHub](https://github.com) is really the best approach here in terms of your project *repositories*; just keep things simple and unbelievably you will change your life!
 
-You can implement Automated Testing with typical *unit tests* that will execute individual software modules or functions, in our case our *unit tests* will execute our [Lambda]() functions on the [AWS Cloud](). When implementing your tests, you really want to try to make them *useful*, if not at least *relevant* to the goal of your application's business *logic*. You really want to take some time to think of any *edge cases* that your users may be inputting into your application to ensure that your application's *user experience* meets your user's needs and expectations. If you are working as part of a team, you really should collaborate with them on the different test cases that you should implement to mitigate any potential errors, that your users may confront out in the *wild*...
+You can implement Automated Testing with typical *unit tests* that will execute individual software modules or functions, in our case our *unit tests* will execute our [Lambda]() functions on the [AWS Cloud](https://aws.amazon.com). When implementing your tests, you really want to try to make them *useful*, if not at least *relevant* to the goal of your application's business *logic*. You really want to take some time to think of any *edge cases* that your users may be inputting into your application to ensure that your application's *user experience* meets your user's needs and expectations. If you are working as part of a team, you really should collaborate with them on the different test cases that you should implement to mitigate any potential errors, that your users may confront out in the *wild*...
 
 **Examples of useful test cases should consider the following**:
 
@@ -393,13 +393,13 @@ Ran all test suites.
 
 And that is it. We have discussed the fundamentals of building out the backend logic of an application using the **serverless + microservice** architecture with [AWS Lambda](). You know what [Lambda]() functions are, how to configure and implement the logic you need in each [Lambda](), you know how to **Mock**, or *fake* your *serverless + microservices* on your `local` machine using the `invoke local` command provided to us by the [ServerlessFramework](), and you know how to implement the **Unit Tests** we will need to implement to create an *automated testing* pipeline we can use to eventually **Continuously Integrate & Continuously Deploy** our application to the different stages we define for our development and production environment slater on.
 
-All services should implement the proper logic within the correct project structure as described. You will then mock and test each service before deploying any resources or infrastructure to the [AWS Cloud]() as a software development *Best Practice*.
+All services should implement the proper logic within the correct project structure as described. You will then mock and test each service before deploying any resources or infrastructure to the [AWS Cloud](https://aws.amazon.com) as a software development *Best Practice*.
 
 ### You configured your serverless backend as IAC to Mock & execute automated Unit Tests. Good Luck!
 
 ## Part 4: Configuring an effective Continuous Integration & Continuous Deployment Pipeline
 
-* [Part 4: How To Configure an effective CI/CD Pipeline on AWS]() - *Not Published.*
+* [Part 4: How To Configure an effective CI/CD Pipeline on AWS](https://aws.amazon.com) - *Not Published.*
 
 
 
