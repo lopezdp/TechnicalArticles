@@ -231,7 +231,7 @@ To deploy our demo application with a serverless backend to handle our business 
   **Critical Step: Install the repo and name it accordingly**
   5. `$ serverless install --url https://github.com/lopezdp/ServerlessStarterService --name my-project`
 
-  6. In the command above change the generic `my-project` name passed as an argument and call your *serverless + microservice* whatever you want. In our case we decided to call ours `invoice-log-api`. We will be creating invoices and displaying a log of the invoices that our users send to their customers for payment. Try to use a logical name to describe your service when coming up with your project's naming conventions. After using the `ServerlessStarterService` as a template and renaming it from your `terminal` your output should look something like this:
+  6. In the command above, change the generic `my-project` name passed as an argument and call your *serverless + microservice* whatever you want. In our case we decided to call ours `invoice-log-api`. We will be creating invoices and displaying a log of the invoices that our users send to their customers for payment. Try to use a logical name to describe your service when coming up with your project's naming conventions. After using the `ServerlessStarterService` as a template and renaming it from your `terminal`, your output should look something like this:
 
   ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/serverless.install.png#center "Successful installation of starter service!")
 
@@ -244,7 +244,7 @@ To deploy our demo application with a serverless backend to handle our business 
        |__ FutureServerlessMicroService (TBD)
 ```
 
-* From here navigate to your `invoice-log-api` project. Currently you have a directory each fro `mocks` and `tests`, a `serverless.yml` file and a `handler.js` file that was a part of the original template. We will be refactoring this directory with the following files which we will review later as a part of what you need to have to completed in your `local` environment to deploy this demo application. For now just take a look at what we are proposing and try to understand the logic behind each [Lambda](https://aws.amazon.com/lambda).
+* From here, navigate to your `invoice-log-api` project. Currently, you have a directory each for `mocks` and `tests`, a `serverless.yml` file and a `handler.js` file that was a part of the original template. We will be refactoring this directory with the files shown below, which we will review later as a part of what you need to have to complete in your `local` environment to deploy this demo application. For now, just take a look at what we are proposing and try to understand the logic behind each [Lambda](https://aws.amazon.com/lambda). We will implement these a bit later.
 
   1. **billing.js**: This is our serverless [Lambda](https://aws.amazon.com/lambda) function that will deploy our *Stripe* billing functionality to allow users to accept payment for the Invoiced that they create in the application.
   2. **createInvoice.js**: This serverless function will deploy the [Lambda](https://aws.amazon.com/lambda) needed to let users of the `PayMyInvoice` application *create new invoices* in the application.
@@ -262,7 +262,7 @@ To deploy our demo application with a serverless backend to handle our business 
   1. **Navigate to `root` project directory**: `$ cd ~/PATH/PayMyInvoice/service/invoice-log-api`
   2. **Run**: `$ npm install`
 
-We will continue the review of these resources and their deployment to [AWS](https://aws.amazon.com) next...
+We will continue the review of these resources and their deployment to [AWS](https://aws.amazon.com) in the chapters that follow. For now, we have to make sure you understand what is happening behing the scenes of this new **Serverless Paradigm**...
 
 ### Your `localhost` serverless backend will now work and you can extend it for any feature you need to implement in the future. Good Luck!
 
