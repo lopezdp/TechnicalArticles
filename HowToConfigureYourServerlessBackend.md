@@ -231,7 +231,9 @@ To deploy our demo application with a serverless backend to handle our business 
   **Critical Step: Install the repo and name it accordingly**
   5. `$ serverless install --url https://github.com/lopezdp/ServerlessStarterService --name my-project`
 
-  ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/cloud-servers.png#center "Successful installation of starter service!")
+  6. In the command above change the generic `my-project` name passed as an argument and call your *serverless + microservice* whatever you want. In our case we decided to call ours `invoice-log-api`. We will be creating invoices and displaying a log of the invoices that our users send to their customers for payment. Try to use a logical name to describe your service when coming up with your project's naming conventions.
+
+  ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/serverless.install.png#center "Successful installation of starter service!")
 
 * Your project structure should now look like this:
 
