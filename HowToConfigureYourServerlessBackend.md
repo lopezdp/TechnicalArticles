@@ -227,7 +227,11 @@ To deploy our demo application with a serverless backend to handle our business 
   2. `$ cd PayMyInvoice`
   3. `$ mkdir services`
   4. `$ cd services`
-  5. `$ git clone https://github.com/lopezdp/ServerlessStarterService.git`
+
+  **Critical Step: Install the repo and name it accordingly**
+  5. `$ serverless install --url https://github.com/lopezdp/ServerlessStarterService --name my-project`
+
+  ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/cloud-servers.png#center "Successful installation of starter service!")
 
 * Your project structure should now look like this:
 
