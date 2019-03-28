@@ -219,7 +219,7 @@ To deploy our demo application with a serverless backend to handle our business 
 
 * Install the [ServerlessFramework](https://serverless.com/framework/docs/) globally and **run**:
 
-  1. `$ install serverless -g`
+  1. `$ npm install serverless -g`
 
 * Create a project structure that considers the **Serverless + MicroService** approach and clone the `ServerlessStarterService` demo application as follows:
 
