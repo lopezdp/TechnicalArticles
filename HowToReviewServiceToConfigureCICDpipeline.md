@@ -76,7 +76,9 @@ If you have gotten this far I am impressed. You might still have a chance at com
 	* [Unit Testing & Code Coverage]()
 	* [Run Tests before Deployment]()
 
+## Deploy the `ServerlessStarterService` Template
 
+We have finally gotten to the coolest part of this tutorial. The buildup is enormous, I know. Do let your head explode on me yet, I `Promise` there is a point to all of this.
 
 
 
