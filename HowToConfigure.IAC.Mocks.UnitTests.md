@@ -263,6 +263,69 @@ We have tried to condense the most important topics and fundamentals that you ne
 
 Node.js, Python, Java, and Ruby are the only runtime environments that currently support the `invoke local` emulation environment. To obtain the correct output when using the Java runtime locally, your `response` class will need to implement the `toString()` method.
 
+#### `invoke local` Mock example with `ServerlessStarterService`
+
+Earlier, we asked you to create a **project structure** for the `PayMyInvoice` demo application that we will build once we complete the review of the *fundamentals of serverless application development*. If you recall, we asked you to complete a few steps to [Setup the Serverless Framework locally](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally). After installing and renaming the `ServerlessStarterService` as instructed, you should have ended up with a **project structure** for the `PayMyInvoice` application that looks a little something like this:
+
+```
+PayMyInvoice
+    |__ services
+       |__ invoice-log-api (renamed from template)
+       |__ FutureServerlessMicroService (TBD)
+```
+
+To show you how to *Mock* your services locally, we would like to step back from this example for a second to walk you through a specific example we have set up for you in the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) repository. 
+
+**Please keep both of this repositories close. We will be performing exercises in both to better relate the material in this tutorial to each other.**
+
+Navigate to your `home` directory from your `terminal` and clone the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) so that you can deploy it locally after we perform our `invoke local` testing and mocking.
+
+1. `$ git clone https://github.com/lopezdp/ServerlessStarterService.git`
+
+2. **Run**: `$ npm install`
+
+3. `$ serverless invoke local --function displayService`
+
+  * The `displayService` function is the name of the [lambda](https://aws.amazon.com/lambda) function that we have declared in the `serverless.yml` file. The [lambda](https://aws.amazon.com/lambda) functions in the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) template should look like this:
+
+  ```
+  functions:
+  # Defines an HTTP API endpoint that calls the microServerless function in handler.js
+  # - path: url path is /microServerless
+  # - method: GET request
+  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
+  #     domain api call
+  # - authorizer: authenticate using an AWS IAM Role
+  displayService: # THIS IS THE NAME OF THE LAMBDA TO USE WITH INVOKE LOCAL!!!
+    handler: handler.starterService
+    events:
+      - http:
+          path: starterService
+          method: get
+          cors: true
+    # Warmup can be applied to each lambda to override 
+    # settings in custom.warmup block globally.
+    warmup:
+      enabled: true
+  ```
+
+4. After executing `invoke local` your output should look something like this:
+
+**Invoke Local Output**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/invokelocal.output.png#center "Invoke Serverless Locally!!!! YaaaaaY!")
+
+More precisely your `terminal` will give you some `.json` output that will look like the following bit of text:
+
+```
+{
+    "statusCode": 200,
+    "body": "{\"message\":\"You are now Serverless on AWS! Your serverless lambda has executed as it should! (with a delay)\",\"input\":\"\"}"
+}
+```
+
+Dont worry, I will walk you through this some more in a future section of this tutorial while we build the demo application. Keep reading *young padawan*, and *may the force be with you*.
+
 ### Resources and IAM Permissions
 
 When an event defined by your application triggers a [Lambda](https://aws.amazon.com/lambda) function on the [AWS Cloud](https://aws.amazon.com), the [ServerlessFramework](https://serverless.com/framework/docs/) creates an [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) during the execution of the logic on your *serverless + microservice*. This will set all the permissions to the settings that we provided during the implementation of our infrastructure that you see in the `iamRoleStatements` block, that is in your `serverless.yml` file for the *serverless + microservice* in question. Every call your application makes to the `aws-sdk` implemented in this [Lambda](https://aws.amazon.com/lambda) function, will use the [IAM](https://aws.amazon.com/iam/) role that the [ServerlessFramework](https://serverless.com/framework/docs/) created for us. If you do not explicitly declare this role, then [AWS](https://aws.amazon.com) will perform this task by creating a key pair and secret as an environment variable like:
