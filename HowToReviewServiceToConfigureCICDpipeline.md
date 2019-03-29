@@ -80,7 +80,82 @@ If you have gotten this far I am impressed. You might still have a chance at com
 
 We have finally gotten to the coolest part of this tutorial. The buildup is enormous, I know. Do not let your head explode on me yet, I `Promise` there is a point to all of this. We have already run `npm` `install`, `run lint`, and `test` on our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) that we have cloned on our `local` machine; We also mocked the [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) locally with `sls local invoke` and our `local` environment responded with all of the appropriate `Response: 200 OK` [messages as expected](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigure.IAC.Mocks.UnitTests.md#invoke-local-mock-example-with-serverlessstarterservice). Now it is time to `deploy` our *serverless + microservice*  to see what we can do. **Are you ready?!?!**
 
+Navigate into the [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) project directory on your `local` machine and execute the following command in your `terminal`:
 
+* `$ serverless deploy`
+
+Here is the result of the deployment; the output also includes the *Service Information* you need to consume the resources from the `API` you have just implemented on [AWS]()! 
+
+### [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) Output
+
+```
+MyDocs (master) ServerlessStarterService
+$ serverless deploy
+Serverless: WarmUp: setting 1 lambdas to be warm
+Serverless: WarmUp: serverless-starter-service-node-dev-displayService
+Serverless: Bundling with Webpack...
+Time: 1008ms
+Built at: 2019-03-29 19:19:19
+               Asset      Size  Chunks             Chunk Names
+    _warmup/index.js  8.94 KiB       0  [emitted]  _warmup/index
+_warmup/index.js.map  7.42 KiB       0  [emitted]  _warmup/index
+          handler.js  6.84 KiB       1  [emitted]  handler
+      handler.js.map  5.82 KiB       1  [emitted]  handler
+Entrypoint handler = handler.js handler.js.map
+Entrypoint _warmup/index = _warmup/index.js _warmup/index.js.map
+[0] external "babel-runtime/regenerator" 42 bytes {0} {1} [built]
+[1] external "babel-runtime/helpers/asyncToGenerator" 42 bytes {0} {1} [built]
+[2] external "babel-runtime/core-js/promise" 42 bytes {0} {1} [built]
+[3] external "source-map-support/register" 42 bytes {0} {1} [built]
+[4] ./handler.js 2.58 KiB {1} [built]
+[5] external "babel-runtime/core-js/json/stringify" 42 bytes {1} [built]
+[6] external "babel-runtime/helpers/objectWithoutProperties" 42 bytes {1} [built]
+[7] ./_warmup/index.js 4.75 KiB {0} [built]
+[8] external "aws-sdk" 42 bytes {0} [built]
+Serverless: Package lock found - Using locked versions
+Serverless: Packing external modules: babel-runtime@^6.26.0, source-map-support@^0.4.18
+Serverless: Packaging service...
+Serverless: Creating Stack...
+Serverless: Checking Stack create progress...
+.....
+Serverless: Stack create finished...
+Serverless: Uploading CloudFormation file to S3...
+Serverless: Uploading artifacts...
+Serverless: Uploading service serverless-starter-service-node.zip file to S3 (1.4 MB)...
+Serverless: Validating template...
+Serverless: Updating Stack...
+Serverless: Checking Stack update progress...
+................................................
+Serverless: Stack update finished...
+Service Information
+service: serverless-starter-service-node
+stage: dev
+region: us-east-1
+stack: serverless-starter-service-node-dev
+resources: 16
+api keys:
+  None
+endpoints:
+  GET - https://g0xd40o7wd.execute-api.us-east-1.amazonaws.com/dev/starterService
+functions:
+  displayService: serverless-starter-service-node-dev-displayService
+  warmUpPlugin: serverless-starter-service-node-dev-warmUpPlugin
+layers:
+  None
+MyDocs (master) ServerlessStarterService
+$ 
+
+```
+
+#### Serverless Starter Service Template API Endpoint
+
+This is the endpoint to our [Lambda](). You should have something similar that will produce a similar result if you have followed along:
+
+* **[Template Endpoint](https://g0xd40o7wd.execute-api.us-east-1.amazonaws.com/dev/starterService):** `https://g0xd40o7wd.execute-api.us-east-1.amazonaws.com/dev/starterService`
+
+**Deployment Output to `terminal`**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/template-endpoint.png#center "Did I really do that???")
 
 
 
