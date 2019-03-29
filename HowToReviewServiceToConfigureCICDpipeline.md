@@ -52,6 +52,33 @@ Collaborating with your team throughout the *Code Review* process is the most im
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/code-review-workflow.png#center "Do you even CodeReview Bro?")
 
+#### What have you done!?!?
+
+If you have gotten this far I am impressed. You might still have a chance at completing your first production ready application soon enough. We still need to customize the logic in our starter template so that it matches the list of [Lambda]() functions that [I promised you earlier that we would eventually get around to implementing](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally). We are not there yet, but we are really close. Let's take a second to put it all down into a sort of `OnePager` that we can use to refer back to these commands throughout future projects.
+
+##### Serverless MicroService Implementation Best Practices
+
+1. [Setup `local` Serverless Environment]():
+	* [Instal `nvm` and Node.js v8.10.0]()
+	* [Setup Editor & Instal ESLint]()
+	* [Configure SublimeText3]()
+
+2. [Configure your Serverless Backend on AWS]():
+	* [Decrease Application Latency with Warm Starts]()
+	* [Understand the AWS Lambda Runtime Environment]()
+	* [Register with AWS and configure your AWS-CLI]()
+	* [Setup the ServerlessFramework for `local` development]()
+
+3. [Infrastructure As Code, Mock Services, & Unit Testing]():
+	* [Configuring your Infrastructure As Code]()
+	* [Configure an API Endpoint]()
+	* [Mocking Services before Deployment]()
+	* [Unit Testing & Code Coverage]()
+	* [Run Tests before Deployment]()
+
+
+
+
 
 
 
