@@ -8,7 +8,7 @@
 
 ## Part 1: How To SetUp Your `local` Serverless Environment
 
-You can clone a sample of the application we will be using in this tutorial here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git)
+You can clone a sample of the application we will be using in this tutorial here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService)
 
 Please refer to this repo as you follow along with this tutorial.
 
