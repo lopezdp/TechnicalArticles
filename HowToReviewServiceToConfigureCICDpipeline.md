@@ -265,6 +265,11 @@ Triggering the new resource we deployed on [API Gateway]() from the address bar 
 }
 ```
 
+With the completion of this review and with the deployment of our [ServerlessStarterTemplate](), we are ready to proceed with the configuration of a proper *Continuous Integration & Continuous Deployment* pipelline that will allow us to abstract the deployment of our services a bit so that we can focus on implementing new features instead of maintaining infrastructure.
+
+#### You have successfuly deployed your first serverless + microservice on AWS with the ServerlessFramework!
+
+## Continuous Integration & Continuous Deployment on AWS
 
 
 
