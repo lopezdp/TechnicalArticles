@@ -462,7 +462,7 @@ All services should implement the proper logic within the correct project struct
 
 ## Part 4: Configuring an effective Continuous Integration & Continuous Deployment Pipeline
 
-* [Part 4: How To Configure an effective CI/CD Pipeline on AWS](https://aws.amazon.com) - *Not Published.*
+* [Part 4: How To Configure an effective CI/CD Pipeline on AWS]() - *Not Published.*
 
 
 
