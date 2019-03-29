@@ -452,6 +452,7 @@ Ran all test suites.
 ```
 
 **Unit Test Output**
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/UnitTestingImplemented.png#center "This is what the passed Unit Test will look like in your terminal.")
 
 And that is it. We have discussed the fundamentals of building out the backend logic of an application using the **serverless + microservice** architecture with [AWS Lambda](https://aws.amazon.com/lambda). You know what [Lambda](https://aws.amazon.com/lambda) functions are, how to configure and implement the logic you need in each [Lambda](https://aws.amazon.com/lambda), you know how to **Mock**, or *fake* your *serverless + microservices* on your `local` machine using the `invoke local` command provided to us by the [ServerlessFramework](https://serverless.com/framework/docs/), and you know how to implement the **Unit Tests** we will need to implement to create an *automated testing* pipeline we can use to eventually **Continuously Integrate & Continuously Deploy** our application to the different stages we define for our development and production environment slater on.
