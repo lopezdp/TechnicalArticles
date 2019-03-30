@@ -271,6 +271,16 @@ With the completion of this review and with the deployment of our [ServerlessSta
 
 ## Continuous Integration & Continuous Deployment on AWS
 
+Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* philosophy. We will also study and review concepts in Continuous Integration and Continuous Delivery to really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeDeploy]() and [CodePipeline]().
+
+> "Opportunity is missed by most people because it is dressed in overalls and looks like work." - [Thomas A. Edison]()
+
+[DevOps]() definitely conjures up the feeling of mysticism and confusion amongst those who discuss it in the cryptographic and vitriolic corners of the *Dark Web* and *Tor Browser* drum circles. If there was anything that you can call [*The Force*](), it would definitely be [DevOps](). 
+
+[DevOps]() is really a *benevolent force* for cultural good that promotes collaborative working relationships between development teams and their operational counterparts to work together to deploy and deliver software and infrastructure at a pace that allows the business units to cash in on the monetization of new features.
+
+----> get into code build and pipeline for lambda etc.
+
 
 
 
