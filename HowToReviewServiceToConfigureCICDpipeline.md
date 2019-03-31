@@ -318,7 +318,7 @@ The goal here is the same as in development, to get feedback quickly; we want to
 *Continuous Delivery* simply builds on the concept and process of *Continuous Integration* and is intended to automate the entire release of the application all the way on through the *production* environment.
 
 
----> Need to draw CI diagram for dev and ops....! asap!
+---> Need to draw CD diagram for dev and ops....! asap!
 
 
 ----> get into code build and pipeline for lambda etc.
