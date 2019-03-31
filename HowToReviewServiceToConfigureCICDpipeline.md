@@ -283,10 +283,31 @@ Implementing a [DevOps]() mindset allows you to completely automate your deploym
 
 The idea is to apply software development practices like quality control, testing, and code reviews to infrastructure and feature deployment that can be rolled into *production* with little intervention and minimal risk. Transparency is prioritized so that every team member has a clear view at every stage of the development and deployment process from its implemetation by the dev team, all the way to the operations team that monitors and measures your application's resources and infrastructure deployed in *production*.
 
+### Understanding and Implementing CI/CD
 
+[Continuous Integration]() started with this evolution of collaborative ideas that we now call [DevOps](). Ine perfect world, you want you and your team of engineers implementing and *integrating* new features into your platform, *continuously*, i.e. **Continuous Integration**.
+
+As you *continuously integrate* new features into your platform that will [*make the world a better place*](https://vimeo.com/98720197); hopefully, you and your group of *code monkeys*, have defined some kind of `git commit style guide`into those needles [`ContributionGuidelines.md` that I told you about earlier](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToReviewServiceToConfigureCICDpipeline.md#code-review-agility). What you need to be doing is continuouslly using `$ git commit` to `$ git push origin new-feature-branch-1` new features that you implement into some god forsaken form of central version control repository that you and your team use to share and review code. 
+
+**Continuous Intgration (CI) Workflow**
 
 
 ----> get into code build and pipeline for lambda etc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
