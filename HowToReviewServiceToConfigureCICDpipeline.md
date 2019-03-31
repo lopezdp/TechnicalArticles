@@ -283,7 +283,7 @@ Implementing a [DevOps]() mindset allows you to completely automate your deploym
 
 The idea is to apply software development practices like quality control, testing, and code reviews to infrastructure and feature deployment that can be rolled into *production* with little intervention and minimal risk. Transparency is prioritized so that every team member has a clear view at every stage of the development and deployment process from its implemetation by the dev team, all the way to the operations team that monitors and measures your application's resources and infrastructure deployed in *production*.
 
-### Understanding and Continuous Integration (CI)
+### Understanding Continuous Integration (CI)
 
 [Continuous Integration]() started with this evolution of collaborative ideas that we now call [DevOps](). Ine perfect world, you want you and your team of engineers implementing and *integrating* new features into your platform, *continuously*, i.e. **Continuous Integration**.
 
@@ -313,7 +313,9 @@ Graphically, this means that you and your operations engineers can write all of 
 
 The goal here is the same as in development, to get feedback quickly; we want to get your infrastructure engineer immediate information pertaining to the status of the resources deployed. Your operations teams need to be able to anticipate any issues and respond to feedback immediately to correct any issues that may appear in *production*.
 
+### Understanding Continuous Delivery (CD)
 
+*Continuous Delivery* simply builds on the concept and process of *Continuous Integration* and is intended to automate the entire release of the application all the way on through the *production* environment.
 
 
 ---> Need to draw CI diagram for dev and ops....! asap!
