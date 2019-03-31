@@ -271,13 +271,18 @@ With the completion of this review and with the deployment of our [ServerlessSta
 
 ## Continuous Integration & Continuous Deployment on AWS
 
-Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* philosophy. We will also study and review concepts in Continuous Integration and Continuous Delivery to really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeDeploy]() and [CodePipeline]().
+Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* mentality. We will also study and review concepts in Continuous Integration and Continuous Delivery to really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeDeploy]() and [CodePipeline]().
 
 > "Opportunity is missed by most people because it is dressed in overalls and looks like work." - [Thomas A. Edison]()
 
 [DevOps]() definitely conjures up the feeling of mysticism and confusion amongst those who discuss it in the cryptographic and vitriolic corners of the *Dark Web* and *Tor Browser* drum circles. If there was anything that you can call [*The Force*](), it would definitely be [DevOps](). 
 
-[DevOps]() is really a *benevolent force* for cultural good that promotes collaborative working relationships between development teams and their operational counterparts to work together to deploy and deliver software and infrastructure at a pace that allows the business units to cash in on the monetization of new features.
+[DevOps]() is really a *benevolent force* for cultural good that promotes collaborative working relationships between development teams, and their operational counterparts to work together to deploy and deliver software and infrastructure at a pace that allows the business units to cash in on the monetization of new features. The biggest benefit to this philosophy, is that the business teams can be sure that their efforts enforce the reliability and stability of the production environment holistically, because all of the key stakeholders are involved in the success of the product. 
+
+Implementing a [DevOps]() mindset allows you to completely automate your deployment process, testing and validating every new feature that you implement in a consistent framework, starting with every developer on your team all the way until the feature finds itself in use by your users, in *production*. This process is designed to eliminate IT silos of information across distributed teams of developers and operations teams. The idea is to breakdown the barriers to accessing information transparently so you can deploy infrastructure programatically, using a standard resource template, to allow you to focus on developing new features and launching your product faster. The idea is to apply software development practices like testing, and code reviews to infrastructure and feature deployment that can be rolled into *production* with minimal risk.
+
+
+
 
 ----> get into code build and pipeline for lambda etc.
 
