@@ -297,7 +297,14 @@ Being able to obtain a response with instant feedback from the implementation pa
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/CI.Workflow.Dev.png#center "Continuously Integrating Dev Software My Friends!")
 
+Visually, on the development side of the team, this would look like the image above with a developer making a change to a business feature deployed into production. The developer would commit the new code changes to the project's [GitHub]() repository onto the `master` branch. The `master` branch is where all of the changes that the engineers on the team make to their topic branches flow into, once each `Pull Request` is reviewed and merged into *production*.
+
+The code changes that your engineers will `$ git merge` into *production* after the [Code Reviews]() are complete for each feature implementation, will automatically trigger a system [**Build**](). A system [**Build**]() that your *Continuous Integration* pipeline triggers automatically when your **CI Server** detects your newest changes, will verify that your code will compile and execute successfully at runtime. Our Unit Tests that we implement will execute at this time, and will run against the new code changes that our **CI Server** detects when merged onto the `master` branch by your team. The goal used as a *Best Practice* in these scenarious is to have our **CI Servers** complete the *Build and Test* process quickly so that you and your development team get the immediate feedback you need to quickly iterate your way to a solution. The name of the game is speed, and launch your product ASAP.
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/CI.Workflow.Ops.png#center "Continuously Integrating IT Ops Infrastructure My Friends!")
+
+
+
 
 ---> Need to draw CI diagram for dev and ops....! asap!
 
