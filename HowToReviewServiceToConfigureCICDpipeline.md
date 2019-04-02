@@ -327,10 +327,15 @@ We will need to follow a workflow similar to the pipeline described above, on bo
 
 The image does in fact simplify what we will be implementing over the course of this tutorial. We will also touch upon a few more complex examples throughout the rest of this tutorial. You can also customize your own CI/CD Pipeline to suit your own project's needs, to include as many stages as you may require to suitably deploy your application with minimal risk of failure.
 
+**Continuous Delivery**
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Stages.CD.Manual.png "Continuous Delivery of Software is a MANUAL PROCESS!")
 
+Looking at this implementation from the view of the Systems Architect, the above is what a type of CI/CD Pipeline looks like. As we have discussed, the first step in the process includes a `source` stage where you and your team will commit your changes to the `source` and any new feature implementations to your respositories on [GitHub](). 
 
----> Need to draw CD diagram for dev and ops....! asap!
+The next stage will run a `build` that will compile your source code and spin up any `AMI`'s, `Lambda`'s, or other infrastructure you have declared as code that your application needs to function at scale. This stage will also perform and run unit tests, and infrastructure template validations on the resources declared as code that you will deploy to [CloudFormation](), within this `build` step to mitigate any errors or bugs that are introduced by any changes to the `source` at this stage of the process. Your unit tests shall **MAY** trigger a deployment into the staging environment next instead of deploying automatically. When the *Final Release* of the application to *production* environment in **NOT** executed *automatically*, then this is know as **Continuous DELIVERY**.
+
+
 
 
 ----> get into code build and pipeline for lambda etc.
