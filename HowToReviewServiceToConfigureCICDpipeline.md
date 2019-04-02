@@ -319,8 +319,15 @@ The goal here is the same as in development, to get feedback quickly; we want to
 
 Development and operations teams *shall* implement the same model for versioning both application and infrastructure implemented as code to allow your *Continuous Integration (CI) Servers* to run automated *builds* and *tests*, that will trigger the deployment of new versions of our application to development branches before we decide to promote them into production ourselves. This brings up an important distinction in the different variations that we can choose to run our CI/CD pipelines which we will discuss shortly. For now please take a second to review a simple example of what a CI/CD Pipeline will look like:
 
+**This is a CI/CD Pipeline**
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ContinuousDelivery.CD.PNG#center "Continuously Delivering Software with Friends!")
 
+We will need to follow a workflow similar to the pipeline described above, on both the development and operations sides of our implementation teams. Both of our teams will have to have the discipline to follow a standard set of `ContributionGuidelines.md` as we have [discussed in previous parts in this series]() to holds team members accountable and committed to pushing all of their changes to our [GutHub repositories]() that we are using as our Version Control Framework. With you and the rest of the team committing changes to the repository that stores our project's source code, our *Continuous Integration (CI) Server* will initiate the *builds* and *tests* that will then trigger a deplpoyment to either a new or existing environment in *production*. This is our CI/CD Pipeline as shown in the image above.
+
+The image does in fact simplify what we will be implementing over the course of this tutorial. We will also touch upon a few more complex examples throughout the rest of this tutorial. You can also customize your own CI/CD Pipeline to suit your own project's needs, to include as many stages as you may require to suitably deploy your application with minimal risk of failure.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Stages.CD.Manual.png "Continuous Delivery of Software is a MANUAL PROCESS!")
 
 
 ---> Need to draw CD diagram for dev and ops....! asap!
