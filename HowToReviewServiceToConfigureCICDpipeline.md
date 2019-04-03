@@ -327,13 +327,23 @@ We will need to follow a workflow similar to the pipeline described above, on bo
 
 The image does in fact simplify what we will be implementing over the course of this tutorial. We will also touch upon a few more complex examples throughout the rest of this tutorial. You can also customize your own CI/CD Pipeline to suit your own project's needs, to include as many stages as you may require to suitably deploy your application with minimal risk of failure.
 
-**Continuous Delivery**
+**Continuous DELIVERY Stages**
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Stages.CD.Manual.png "Continuous Delivery of Software is a MANUAL PROCESS!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Stages.CD.Manual.png "Continuous DELIVERY of Software is a MANUAL PROCESS!")
 
-Looking at this implementation from the view of the Systems Architect, the above is what a type of CI/CD Pipeline looks like. As we have discussed, the first step in the process includes a `source` stage where you and your team will commit your changes to the `source` and any new feature implementations to your respositories on [GitHub](). 
+Looking at this implementation from the high level view of the Systems Architect, the above is what a CI/CD Pipeline variation looks like. As we have discussed, the first step in the process includes a `source` stage where you and your team will commit your changes to the `source` and any new feature implementations to your respositories on [GitHub](). 
 
-The next stage will run a `build` that will compile your source code and spin up any `AMI`'s, `Lambda`'s, or other infrastructure you have declared as code that your application needs to function at scale. This stage will also perform and run unit tests, and infrastructure template validations on the resources declared as code that you will deploy to [CloudFormation](), within this `build` step to mitigate any errors or bugs that are introduced by any changes to the `source` at this stage of the process. Your unit tests shall **MAY** trigger a deployment into the staging environment next instead of deploying automatically. When the *Final Release* of the application to *production* environment in **NOT** executed *automatically*, then this is know as **Continuous DELIVERY**.
+The next stage will run a `build` process that will compile your source code and spin up any `AMI`'s, `Lambda`'s, or other infrastructure that your Operations team has declared as code and which your application needs to function at scale. This stage will also perform and run unit tests, and infrastructure template validations on the resources declared as code that you will deploy with [CloudFormation](). Unit Tests are executed within this `build` step to mitigate against any errors or bugs that are introduced by any changes to the `source` at this stage of the process. Your Unit Tests **SHALL** trigger a deployment into the staging environment next instead of deploying into *production* automatically. When the *Final Release* of the application to *production* environment in **NOT** executed *automatically*, then this is known as **Continuous DELIVERY**. Typically the is a **Business Rule** or **Manual Activity** completed before the final decision is made to release and **promote** the new version into *production*.
+
+Furthermore, you can add a stage that is run after Unit Tests are completed on your application's `source` code files that *may* load test and execute them against your infrastructure to make sure that your application's performance is acceptable. The objective of all of this is to make sure that everything must be validated and shown to work as designed at each stage before it moves on to the next step of the process.
+
+**Continuous DEPLOYMENT Stages**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Stages.CD.Auto.png "Continuous DEPLOYMENT of Software is an AUTOMATED PROCESS!")
+
+Here is where things get tricky. Be careful, there are always decisions to make and this is one of those times when a decision has to be made. In having to choose a path, this is the exact point where the road begins to diverge for many [DevOps Team](). In a Continuous DEPLOYMENT [pipeline on AWS](), the last step of moving into *production* is **automatic**. As long as each stage of the [pipeline on AWS]() was successful, the code that you commit to [GitHub]() will **ALWAYS** go through the [pipeline]() and into *production* **AUTOMATICALLY**, assuming that all stages have completed and pased all testing successfuly.
+
+In summary, in a Continuous **DELIVERY** [pipeline on AWS](), the goal is to completely **automate** everything from *end-to-end*. The *commits* that we push to our [GitHub]() repositories wil *automatically* trigger a `build` phase and any appropriate *Unit Testing* on your appliction's `source` code and *infrastructure as code*. The workflow will culminate with the 
 
 
 
