@@ -343,7 +343,10 @@ Furthermore, you can add a stage that is run after Unit Tests are completed on y
 
 Here is where things get tricky. Be careful, there are always decisions to make and this is one of those times when a decision has to be made. In having to choose a path, this is the exact point where the road begins to diverge for many [DevOps Team](). In a Continuous DEPLOYMENT [pipeline on AWS](), the last step of moving into *production* is **automatic**. As long as each stage of the [pipeline on AWS]() was successful, the code that you commit to [GitHub]() will **ALWAYS** go through the [pipeline]() and into *production* **AUTOMATICALLY**, assuming that all stages have completed and pased all testing successfuly.
 
-In summary, in a Continuous **DELIVERY** [pipeline on AWS](), the goal is to completely **automate** everything from *end-to-end*. The *commits* that we push to our [GitHub]() repositories wil *automatically* trigger a `build` phase and any appropriate *Unit Testing* on your appliction's `source` code and *infrastructure as code*. The workflow will culminate with the 
+In summary, in a Continuous **DELIVERY** [pipeline on AWS](), the goal is to completely **automate** everything from *end-to-end*. The *commits* that we push to our [GitHub]() repositories wil *automatically* trigger a `build` phase and any appropriate *Unit Testing* on your appliction's `source` code and *infrastructure as code*. The workflow will culminate with the deployment of the application into either a *development*, or staging environment, and will eventually be pushing into *production* after having completed a MANUAL process or BUSINESS RULE validation.
+
+In our specific use case as we work through the implementation of the `PayMyInvoice` application throughout the rest of this tutorial, we will be eliminating the maual task that provisions  and configures our infrastructure, while making sure to define all of our application and infrastructure `source` code to optimize our workflow with an implementation of *Continuous Deployment*. 
+
 
 
 
