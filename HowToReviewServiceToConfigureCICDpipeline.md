@@ -355,9 +355,13 @@ The implied goal of all of the processes is to *unify the software delivery* pro
 
 ## Implementing Continuous Integration & Continuous Deployment on AWS
 
-Now that you understand the fundamentals of **CI/CD** and how to foster a collaborative *DevOps* culture that will help your team work in a more *Agile* fashion, let's move on and take a look at how to implement these practices using [AWS]() *DevOps* tools and services. 
+Now that you understand the fundamentals of **CI/CD** and how to foster a collaborative *DevOps* culture that will help your team work in a more *Agile* fashion, let's move on and take a look at how to implement these practices using [AWS]() *DevOps* tools and services. Lets take a second to quickly review the basic architecture of a serverless application running on the [AWS Lambda]() *Compute* service. Our *Continuous Deployment* pipeline that we will implement using [AWS CodePipeline]() will automate the deployment of resources and application logic across this stack.
+
+**Basic Serverless Architecture**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/aws-serverless-pipeline.png "Serverless Pipelines are simple!!")
+
+Moving from right to left and starting with the client our functions running on [Lambda]() will respond to the user's requests triggered by [API Gateway]().
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWS.Serverless.CICD.PNG "Serverless CICD on AWS.")
 
