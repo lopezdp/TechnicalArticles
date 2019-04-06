@@ -269,7 +269,7 @@ With the completion of this review and with the deployment of our [ServerlessSta
 
 #### You have successfuly deployed your first serverless + microservice on AWS with the ServerlessFramework!
 
-## Implementing Continuous Integration & Continuous Deployment on AWS
+## Continuous Integration & Continuous Deployment Fundamentals
 
 Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* mentality. We will also study and review concepts in Continuous Integration and Continuous Delivery to really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeDeploy]() and [CodePipeline]().
 
@@ -353,9 +353,13 @@ The implied goal of all of the processes is to *unify the software delivery* pro
 
 [AWS CodeBuild]() and [AWS Code Pipeline]() are a few tools we will be using to implment our *CI/CD* [pipeline](). [CodeBuild]() allows us to easily **AUTOMATE** our `build` and **DEPLOYMENT** to rapidly release new features and services. [CodePipeline]() is a Continuous Delivery service that lets us model and visualize our solftware releases.
 
+## Implementing Continuous Integration & Continuous Deployment on AWS
 
+Now that you understand the fundamentals of **CI/CD** and how to foster a collaborative *DevOps* culture that will help your team work in a more *Agile* fashion, let's move on and take a look at how to implement these practices using [AWS]() *DevOps* tools and services. 
 
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/aws-serverless-pipeline.png "Serverless Pipelines are simple!!")
 
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWS.Serverless.CICD.PNG "Serverless CICD on AWS")
 
 
 
