@@ -361,7 +361,17 @@ Now that you understand the fundamentals of **CI/CD** and how to foster a collab
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/aws-serverless-pipeline.png "Serverless Pipelines are simple!!")
 
-Moving from right to left and starting with the client our functions running on [Lambda]() will respond to the user's requests triggered by [API Gateway]().
+Moving from right to left, and starting with the client, our functions running on [Lambda]() will respond to the user's requests triggered by [API Gateway]() through the `http` methods configured for each resource. Our *Infrastructure As Code* template will trigger [CloudFormation]() to configure endpoints on [API Gateway]() that will appoint a specific backend [Lambda]() function to respond to requests made by the client. Moving along the pipeline we will implement, you will then configure [Lambda]() to work with specific system resources on [AWS]() like [DynamoDB](), [Cognito](), or your own *Custom Code* to be able to properly respond to the requests handled by [API Gateway](). The users of our application can access the [API Gateway]() endpoints that you provision using either a direct `URL` or through a domain name that your register and configure through [Route53]().
+
+Our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) mimics this workflow and we will make use of the endpoint created for us on [API Gateway]() when we deployed with the [ServerlessFramework's] `$ serverless deploy` command from our `terminal`.
+
+This is the endpoint to our [Lambda](). You should have something similar that will produce a similar result if you have followed along:
+
+* **[Template Endpoint](https://g0xd40o7wd.execute-api.us-east-1.amazonaws.com/dev/starterService):** `https://g0xd40o7wd.execute-api.us-east-1.amazonaws.com/dev/starterService`
+
+Next we will describe the exact implementation steps on AWS for our **CI/CD Pipeline**.
+
+**Continuous Deployment Workflow on AWS**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWS.Serverless.CICD.PNG "Serverless CICD on AWS.")
 
