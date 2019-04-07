@@ -397,9 +397,9 @@ As shown above, the first thing that we need to get done is to create an [IAM]()
 
 Next we will configure our *serverless + microservice*, its *application code* and *infrastructure as code* that we configure with our `serverless.yml` template that is used to launch and deploy our resources with [CloudFormation](). Included in this step is the implementation and configuration of our `buildspec.yml` which is our [AWS CodeBuild]() Specification file.
 
-The last step is to create our [AWS CodePipeline]() which we can define with as many stages as we need. In the example we are using a `Source`, `Build`, `Create ChangeSet`, `Approve ChangeSet`, and an `Execute ChangeSet` series of stages for our implementations of our *CI/CD* pipeline for our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService).345
+The last step is to create our [AWS CodePipeline]() which we can define with as many stages as we need. In the example we are using a `Source`, `Build`, `Create ChangeSet`, `Approve ChangeSet`, and an `Execute ChangeSet` series of stages for our implementations of our *CI/CD* pipeline for our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService).
 
-### Implementation of [CodeDeploy]() and [CodePipeline]()
+### Implementation of [CodeBuild]() and [CodePipeline]()
 
 1. **Create A Service Role**
 
@@ -582,7 +582,9 @@ Make sure you change the policy below to include your `AWS Account ID` and your 
 
 With this `Role` now configured please review the summary page to obtain the *ARN* and all pertinent information that we will use for the deployment of our [CloudFormation]() resources with [CodePipeline]().
 
+### Using [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) to Deploy our Pipeline
 
+We will go ahead and use the **Project Dirrectory** that we defined in [Part 2, Setting Up Serverless Locally](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally).
 
 
 
