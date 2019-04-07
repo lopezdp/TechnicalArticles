@@ -357,7 +357,7 @@ The implied goal of all of the processes is to *unify the software delivery* pro
 
 Now that you understand the fundamentals of **CI/CD** and how to foster a collaborative *DevOps* culture that will help your team work in a more *Agile* fashion, let's move on and take a look at how to implement these practices using [AWS]() *DevOps* tools and services. Lets take a second to quickly review the basic architecture of a serverless application running on the [AWS Lambda]() *Compute* service. Our *Continuous Deployment* pipeline that we will implement using [AWS CodePipeline]() will automate the deployment of resources and application logic across this stack.
 
-**Basic Serverless Architecture**
+### **Basic Serverless Architecture**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/aws-serverless-pipeline.png "Serverless Pipelines are simple!!")
 
@@ -371,7 +371,7 @@ This is the endpoint to our [Lambda](). You should have something similar that w
 
 Next we will describe the exact implementation steps on AWS for our **CI/CD Pipeline**.
 
-**Continuous Deployment Workflow on AWS**
+### **Continuous Deployment Workflow on AWS**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWS.Serverless.CICD.PNG "Serverless CICD on AWS.")
 
@@ -389,11 +389,15 @@ When your `buildspec.yml` and your `serverless.yml` files are configured properl
 
 As we `$ git push` new updates or features to our *serverless + microservice* application, our [Pipeline]() will respond to events in our [GitHub]() repo that correspond to changes in our *application* or *infrastructure as code*, and will automatically execute the new *build* and make the appropriate changes to our application immediately. Diving in a bit deeper, below are the steps we will need to accomplish to complete the configuration and setup of our [Pipeline]().
 
-**Serverless Application Continuous Deployment Configuration Steps on AWS**
+### **Serverless Application Continuous Deployment Configuration Steps on AWS**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/CD.Steps.png "Deployment Steps on AWS.")
 
+As shown above, the first thing that we need to get done is to create an [IAM]() `service-role` for [CloudFormation]() that **must** include permissions to [S3](), [CodePipeline](), [Lambda](), [API Gateway](), and [CloudFormation](). This `service-role` is needed because [CloudFormation]() needs our permission to create resources on our behalf. Without the protection of these `service-roles` your [AWS]() account will be hacked by *Russian Bots* and your account will consist of bots that will take over the world without your help. 
 
+Next we will configure our *serverless + microservice*, its *application code* and *infrastructure as code* that we configure with our `serverless.yml` template that is used to launch and deploy our resources with [CloudFormation](). Included in this step is the implementation and configuration of our `buildspec.yml` which is our [AWS CodeBuild]() Specification file.
+
+The last step is to create our [AWS CodePipeline]() which we can define with as many stages as we need. In the example we are using a `Source`, `Build`, `Create ChangeSet`, `Approve ChangeSet`, and an `Execute ChangeSet` series of stages for our implementations of our *CI/CD* pipeline for our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService).
 
 
 
