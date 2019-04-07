@@ -403,25 +403,35 @@ The last step is to create our [AWS CodePipeline]() which we can define with as 
 
 1. **Create A Service Role**
 
-* *Step 1*: Go to your [IAM Console]() and click on `Roles` in the lft navigation frame shown below: 
+* **Step 1**: Go to your [IAM Console]() and click on `Roles` in the lft navigation frame shown below: 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step1.ClickRoles.png "IAM Role Step 1.")
 
-* *Step 2*: Click on the `Create Role` button pointed out in the picture:
+* **Step 2**: Click on the `Create Role` button pointed out in the picture:
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step2.ClickCreateRoles.png "IAM Role Step 2.")
 
-* *Step 3*: Click on [CloudFormation]() as shown: 
+* **Step 3**: Click on [CloudFormation]() as shown: 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step3.ClickCoudForm.png "IAM Role Step 3.")
 
+* **Step 4**: Select the [CloudFormation]() Use Case and then click on `Next: Permissions` as shown:
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step4.ClickNext.Permissions.png "IAM Role Step 4.")
+
+* **Step 5**: Put your cursor in the input field to filter the policies and type: `awslambdaexecute`. Select the box for the `AWSLambdaExecute` policy that shows up and click `Next: Tags` on the bottom right of the browser. Continue clicking `Next` on the *Tags (Optional)* screen. We will not use tags at the moment. See below:
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step5.ClickNext.Tags.png "IAM Role Step 5.")
 
+* **Step 6**: Add a `Role Name` for this role that we are creating as shown and make sure to note it so that we can use it later in the tutorial. Click on the `Create Role` button as shown and proceed to the next step:
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step6.ClickCreateRole.png "IAM Role Step 6.")
 
+* **Step 7**: Your new `Role` is now `Active` and ready for use!
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step7.CloudFormRoleComplete.png "IAM Role Step 7.")
+
+* **Step 8**: Now that we have added the correct permissions for our [CodePipeline]() to access [CloudFormation]() 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step8.AddInlinePolicy.png "IAM Role Step 8.")
 
