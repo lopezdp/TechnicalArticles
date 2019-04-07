@@ -403,11 +403,15 @@ The last step is to create our [AWS CodePipeline]() which we can define with as 
 
 1. **Create A Service Role**
 
-* Go to your [IAM Console](): 
+* *Step 1*: Go to your [IAM Console]() and click on `Roles` in the lft navigation frame shown below: 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step1.ClickRoles.png "IAM Role Step 1.")
 
+* *Step 2*: Click on the `Create Role` button pointed out in the picture:
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step2.ClickCreateRoles.png "IAM Role Step 2.")
+
+* *Step 3*: Click on [CloudFormation]() as shown: 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step3.ClickCoudForm.png "IAM Role Step 3.")
 
