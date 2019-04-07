@@ -582,9 +582,15 @@ Make sure you change the policy below to include your `AWS Account ID` and your 
 
 With this `Role` now configured please review the summary page to obtain the *ARN* and all pertinent information that we will use for the deployment of our [CloudFormation]() resources with [CodePipeline]().
 
-### Using [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) to Deploy our Pipeline
+### Using the [PayMyInvoice](https://github.com/lopezdp/PayMyInvoice) App to Deploy our Pipeline
 
-We will go ahead and use the **Project Dirrectory** that we defined in [Part 2, Setting Up Serverless Locally](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally).
+We will go ahead and use the **Project Directory** that we defined in [Part 2, Setting Up Serverless Locally](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally) that we called `PayMyInvoice`, and we will start with the service we named `$ ~/PayMyInvoice/services/invoice-log-api`. The `serverless.yml` file located in the project is of the same structure as we have discussed to implemented our *Infrastructure As Code*. I will rely on the fact that you have been listening carefully throughout this entire tutorial and that I will not have to review the elements of this file which is used by [CloudFormation]() to deploy the [AWS Services]() you need to run you application at scale. I will move right along into what I would argue is the most important file we need to implement our *CI/CD* [Pipeline]() effectively, the `buildpec.yml`.
+
+#### Implement a `buildspec.yml` for [AWS CodeBuild]()
+
+Go ahead and run `$ touch buildspec.yml` in your terminal from the `~/PayMyInvoice/services/invoice-log-api` directory and add the following to the file:
+
+
 
 
 
