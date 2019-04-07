@@ -397,7 +397,150 @@ As shown above, the first thing that we need to get done is to create an [IAM]()
 
 Next we will configure our *serverless + microservice*, its *application code* and *infrastructure as code* that we configure with our `serverless.yml` template that is used to launch and deploy our resources with [CloudFormation](). Included in this step is the implementation and configuration of our `buildspec.yml` which is our [AWS CodeBuild]() Specification file.
 
-The last step is to create our [AWS CodePipeline]() which we can define with as many stages as we need. In the example we are using a `Source`, `Build`, `Create ChangeSet`, `Approve ChangeSet`, and an `Execute ChangeSet` series of stages for our implementations of our *CI/CD* pipeline for our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService).
+The last step is to create our [AWS CodePipeline]() which we can define with as many stages as we need. In the example we are using a `Source`, `Build`, `Create ChangeSet`, `Approve ChangeSet`, and an `Execute ChangeSet` series of stages for our implementations of our *CI/CD* pipeline for our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService).345
+
+### Implementation of [CodeDeploy]() and [CodePipeline]()
+
+1. **Create A Service Role**
+
+* Go to your [IAM Console](): 
+
+
+
+
+
+**Policy Statement**
+
+```
+{
+	"Statement": [
+	  {
+			"Action": [
+				"s3:GetObject",
+				"s3:GetObjectVersion",
+				"s3:GetBucketVersioning"
+			],
+			"Resource": "*",
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"s3:PutObject"
+			],
+			"Resource": [
+				"arn:aws:s3:::codepipeline*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+                "lambda:CreateFunction",
+                "lambda:GetFunctionConfiguration",
+                "lambda:ListVersionsByFunction",
+                "lambda:PublishVersion",
+                "lambda:UpdateFunctionCode",
+                "lambda:GetFunction",
+                "lambda:AddPermission",
+                "execute-api:Invoke"
+            ],
+            "Resource": "*",
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+                "dynamodb:CreateTable",
+                "dynamodb:DescribeTable"
+            ],
+            "Resource": "*",
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+                "logs:CreateLogGroup",
+                "logs:DescribeLogGroups",
+                "logs:DeleteLogGroup"
+            ],
+            "Resource": [ "*" ],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"apigateway:*"
+			],
+			"Resource": [
+				"arn:aws:apigateway:us-east-1::*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"iam:GetRole",
+				"iam:CreateRole",
+				"iam:DeleteRole",
+				"iam:PutRolePolicy",
+				"iam:AttachRolePolicy",
+				"iam:DeleteRolePolicy",
+				"iam:DetachRolePolicy",
+				"iam:PassRole"
+			],
+			"Resource": [
+				"arn:aws:iam::968256005255:role/*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"cloudformation:CreateStack",
+				"cloudformation:DescribeStacks",
+				"cloudformation:DescribeStackEvents",
+				"cloudformation:DescribeStackResource",
+				"cloudformation:DescribeStackResources",
+				"cloudformation:CreateUploadBucket",
+				"cloudformation:UpdateStack",
+				"cloudformation:ValidateTemplate"
+			],
+			"Resource": [
+				"*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"codedeploy:CreateApplication",
+				"codedeploy:DeleteApplication",
+				"codedeploy:RegisterApplicationRevision"
+			],
+			"Resource": [
+				"arn:aws:codedeploy:us-east-1:968256005255:application:*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"codedeploy:CreateDeploymentGroup",
+				"codedeploy:CreateDeployment",
+				"codedeploy:GetDeployment"
+			],
+			"Resource": [
+				"arn:aws:codedeploy:us-east-1:968256005255:deploymentgroup:*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"codedeploy:GetDeploymentConfig"
+			],
+			"Resource": [
+				"arn:aws:codedeploy:us-east-1:968256005255:deploymentconfig:*"
+			],
+			"Effect": "Allow"
+		}
+	],
+	"Version": "2012-10-17"
+}
+```
+
+
 
 
 
