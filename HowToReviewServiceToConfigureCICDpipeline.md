@@ -605,6 +605,39 @@ phases:
     - npm test
 ```
 
+#### Create a New [CodePipeline]()
+
+Here you will need to navigate to the [CodePipeline Console](), and procedd by clicking on the `Create Pipeline` button shown on the Dashboard.
+
+**Step 1**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step01.Pipeline.png "CodePipeline Step 1!")
+
+**Step 2**
+
+Give your new [CodePipeline]() a name to remember. In our use case we will name our [Pipeline]() after the app that we will deploy on *CI/CD*. We will name this [Pipeline](): `PayMyInvoice`.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step02.Pipeline.png "CodePipeline Step 2!")
+
+**Step 3**
+
+Here we need to define the `Source` repository where our application resides and where [CodePipeline]() will have to listen in on for changes by you and the rest of your development team. Choose [GitHub]() as your `SourceProvider` then continue on by clicking the `Connect to GitHub` button shown in the image below.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step03.Pipeline.png "CodePipeline Step 3!")
+
+When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo you want to connect: `PayMyInvoice`.
+
+**Step 4**
+
+test
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step04a.Pipeline.png "CodePipeline Step 4a!")
+
+test
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step04b.Pipeline.png "CodePipeline Step 4b!")
+
+test
 
 
 
