@@ -401,7 +401,11 @@ The last step is to create our [AWS CodePipeline]() which we can define with as 
 
 ### Implementation of [CodeBuild]() and [CodePipeline]()
 
-1. **Create A Service Role**
+We are going to deploy our application on [AWS]() because we like it. We love being *Locked-In* and we love paying *Bezos* his cut. This might be a long tutorial but its worth it when you realize how easy it is to use [SublimeText3]() with [AWS]() on a [Mac]() over [VisualStudio]() on your 10-poubd [PC].
+
+Do yourself a favor and follow along. This is your *lottery-ticket*!
+
+#### **Create A Service Role**
 
 * **Step 1**: Go to your [IAM Console]() and click on `Roles` in the lft navigation frame shown below: 
 
