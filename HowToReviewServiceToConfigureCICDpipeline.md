@@ -271,7 +271,7 @@ With the completion of this review and with the deployment of our [ServerlessSta
 
 ## Continuous Integration & Continuous Deployment Fundamentals
 
-Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* mentality. We will also study and review concepts in Continuous Integration and Continuous Delivery to really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeDeploy]() and [CodePipeline]().
+Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* mentality. We will also study and review concepts in Continuous Integration and Continuous Delivery to really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeBuild]() and [CodePipeline]().
 
 > "Opportunity is missed by most people because it is dressed in overalls and looks like work." - [Thomas A. Edison]()
 
@@ -351,7 +351,7 @@ By pushing all of our application and infrastructure `source` code to a reposito
 
 The implied goal of all of the processes is to *unify the software delivery* process so that our application and its infrastructure are treated as one object that we can run through our end-to-end automated testing `build` phase to validate all of our application, infrastructure, and configuration logic and provisioning is correct and to the project's requirements and specifications.
 
-[AWS CodeBuild]() and [AWS Code Pipeline]() are a few tools we will be using to implment our *CI/CD* [pipeline](). [CodeBuild]() allows us to easily **AUTOMATE** our `build` and **DEPLOYMENT** to rapidly release new features and services. [CodePipeline]() is a Continuous Delivery service that lets us model and visualize our solftware releases.
+[AWS CodeBuild]() and [AWS CodePipeline]() are a few tools we will be using to implment our *CI/CD* [pipeline](). [CodeBuild]() allows us to easily **AUTOMATE** our `build` and **DEPLOYMENT** to rapidly release new features and services. [CodePipeline]() is a Continuous Delivery service that lets us model and visualize our solftware releases.
 
 ## Implementing Continuous Integration & Continuous Deployment on AWS
 
@@ -374,6 +374,12 @@ Next we will describe the exact implementation steps on AWS for our **CI/CD Pipe
 **Continuous Deployment Workflow on AWS**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/AWS.Serverless.CICD.PNG "Serverless CICD on AWS.")
+
+Now that we have covered the fundamentals of *CI/CD*, the image above will help us understand the exact nature of the *CI/CD* workflow that we will implement on [AWS](). We will implement [CodeDeploy]() and [CodePipeline]() to complete our *Continuous Deplpyment* pipeline as shown above. Our *Pipeline* will start with a commit to our *Central Version Control* repository by you or anyone on your development team. Shown above, our *CI/CD* [Pipeline]() will start when you trigger an event started by a `$ git commit` of any new `source code` to our [GitHub]() repository with the **Lambda Code** you see in the image above.
+
+Aside from any new **Lambda Code**, or application code that we `commit` to our *central version control* repository (repo from now on), there are two additional files that we **shall** include for the setup of our [Pipeline](). You already know what our `serverless.yml` file does and how it works with [CloudFormation]() to deploy new [**Infrastructure As Code**](), and now we are includeing a second file that you must call the: `buildspec.yml`. Your new `buildspec.yml` file is the input and configuration instructions we need to send to [AWS]() to setup our [CodeBuild]() project.
+
+
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/CD.Steps.png "Deployment Steps on AWS.")
 
