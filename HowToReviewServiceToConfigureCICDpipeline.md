@@ -590,7 +590,20 @@ We will go ahead and use the **Project Directory** that we defined in [Part 2, S
 
 Go ahead and run `$ touch buildspec.yml` in your terminal from the `~/PayMyInvoice/services/invoice-log-api` directory and add the following to the file:
 
-
+```
+version:0.1
+phases:
+  install:
+   commands:
+    - npm install
+    - npm install -g serverless
+  build:
+   commands:
+    - serverles deploy --stage cicd | tee deploy.out
+  post_build:
+   commands:
+    - npm test
+```
 
 
 
