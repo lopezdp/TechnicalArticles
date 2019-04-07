@@ -427,6 +427,8 @@ The last step is to create our [AWS CodePipeline]() which we can define with as 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step6.ClickCreateRole.png "IAM Role Step 6.")
 
+For this tutorial we chose **CloudFormationServiceRole** as the `Role Name` that we will use later.
+
 * **Step 7**: Your new `Role` is now `Active` and ready for use!
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step7.CloudFormRoleComplete.png "IAM Role Step 7.")
@@ -605,9 +607,9 @@ phases:
     - npm test
 ```
 
-#### Create a New [CodePipeline]()
+#### Create a New [AWS CodePipeline]()
 
-Here you will need to navigate to the [CodePipeline Console](), and procedd by clicking on the `Create Pipeline` button shown on the Dashboard.
+Here you will need to navigate to the [CodePipeline Console](), and proceed by clicking on the `Create Pipeline` button shown on the Dashboard.
 
 **Step 1**
 
@@ -615,29 +617,39 @@ Here you will need to navigate to the [CodePipeline Console](), and procedd by c
 
 **Step 2**
 
-Give your new [CodePipeline]() a name to remember. In our use case we will name our [Pipeline]() after the app that we will deploy on *CI/CD*. We will name this [Pipeline](): `PayMyInvoice`.
+Give your new [CodePipeline]() a name to remember. In our use case we will name our [Pipeline]() after the service that we will deploy on *CI/CD*. We will name this [Pipeline](): `invoice-log`.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step02.Pipeline.png "CodePipeline Step 2!")
 
 **Step 3**
 
-Here we need to define the `Source` repository where our application resides and where [CodePipeline]() will have to listen in on for changes by you and the rest of your development team. Choose [GitHub]() as your `SourceProvider` then continue on by clicking the `Connect to GitHub` button shown in the image below.
+Here we need to define the `Source` repository where our application resides and where [CodePipeline]() will have to listen in on for changes made by you and the rest of your development team. Choose [GitHub]() as your `SourceProvider` then continue on by clicking the `Connect to GitHub` button shown in the image below.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step03.Pipeline.png "CodePipeline Step 3!")
 
-When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo you want to connect: `PayMyInvoice`.
+When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo you want to connect: `invoice-log-api`.
 
 **Step 4**
 
-test
+Now it is time to select the `Build Provider` we will use to `build` our `source` that [CodePipeline]() will use to `pull` from our [GitHub]() repo. We love the *mythical concept of AWS Lock-In*, and we have decided to use [AWS CodeBuild]() as our provider. Select [CodeBuild]() and *Configure your project* as a `Create new build project`. We are naming our `build` *MyInvoiceBuildOnCICD*.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step04a.Pipeline.png "CodePipeline Step 4a!")
 
-test
+We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that specifies you to **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS. Your **Runtime** environment must be specified as **Node.js**, and from there proceed to select the latest **Version** available for the runtime environment you selected.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step04b.Pipeline.png "CodePipeline Step 4b!")
 
-test
+Make sure you tell [Pipeline]() to **Use the `buildspec.yml` in the source code root directory** when describing the environment `build`, and select the option to **Choose an existing service role from your account** and select the role that we created previously called: `CloudFormationServiceRole`.
+
+Accept the remaining defaults, click on the `Save build project` element and continue on to the next step in the implementation process for this [Pipeline on AWS]().
+
+**Step 5**
+
+We can skip the **Deployment Provider** for now because we are not using [AWS CodeDeploy]() in this example.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step05.Pipeline.png "CodePipeline Step 5!")
+
+
 
 
 
