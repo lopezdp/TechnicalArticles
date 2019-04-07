@@ -431,11 +431,19 @@ The last step is to create our [AWS CodePipeline]() which we can define with as 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step7.CloudFormRoleComplete.png "IAM Role Step 7.")
 
-* **Step 8**: Now that we have added the correct permissions for our [CodePipeline]() to access [CloudFormation]() 
+* **Step 8**: Now that we have added the correct permissions for our [CodePipeline]() to access [CloudFormation](), we also need to add additional permissions for this role so that our [CodePipeline]() can access [Lambda](), [API Gateway](), and other [AWS Services]() that we will need deployed with our *Infrastructure As Code* that [Pipeline]() will `pull` from our `Source` code located on our *Version Control* repo. Move on and select the `role` that we just created in the previous step and click on the `Add inline policy` button shown: 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step8.AddInlinePolicy.png "IAM Role Step 8.")
 
+* **Step 9**: Click on the `.json` tab indicated by the arrow so that we can get to the correct field to enter the policy we will show you next:
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step9.ClickJSONTab.png "IAM Role Step 9.")
+
+Below is the *Policy Statement* that you need to enter into the screen shown in **Step 9** above. Copy and paste this into the browser as shown and click on the `Review Policy` button on the bottom right side of the browser.
+
+#### **A NOTE on your INLINE POLICY STATEMENT**
+
+Make sure you change the policy below to include your `AWS Account ID` and your `AWS Region` or this will not work for you!!!
 
 **Policy Statement**
 
@@ -567,6 +575,13 @@ The last step is to create our [AWS CodePipeline]() which we can define with as 
 	"Version": "2012-10-17"
 }
 ```
+
+* **Step 10**: Name your new Policy and click on the the `Create Policy` button after reviewing The `Access Levels` and `Resources` that you have configured for your [Pipeline]() as shown below:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step10.ClickCreatePolicy.png "IAM Role Step 10.")
+
+With this `Role` now configured please review the summary page to obtain the *ARN* and all pertinent information that we will use for the deployment of our [CloudFormation]() resources with [CodePipeline]().
+
 
 
 
