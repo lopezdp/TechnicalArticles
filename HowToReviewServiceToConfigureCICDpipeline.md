@@ -613,7 +613,7 @@ phases:
 
 #### Create a New [AWS CodePipeline]()
 
-Here you will need to navigate to the [CodePipeline Console](), and proceed by clicking on the `Create Pipeline` button shown on the Dashboard.
+Here you will need to navigate to the [CodePipeline Console](https://console.aws.amazon.com/codesuite/codepipeline/home), and proceed by clicking on the `Create Pipeline` button shown on the Dashboard.
 
 **Step 1**
 
@@ -621,7 +621,11 @@ Here you will need to navigate to the [CodePipeline Console](), and proceed by c
 
 **Step 2**
 
-Give your new [CodePipeline]() a name to remember. In our use case we will name our [Pipeline]() after the service that we will deploy on *CI/CD*. We will name this [Pipeline](): `invoice-log`.
+Give your new [CodePipeline]() a name to remember in the `Pipeline Name` field. In our use case we will name our [Pipeline]() after the service that we will deploy on *CI/CD*. We will name this [Pipeline](): `invoice-log`.
+
+Click on the **New Service Role** selection and just let [AWS Pipeline]() fill out the `Role Name` for you while letting it create the service role for you. [AWS]() has changed the interface and it is a bit buggy right now and it is not letting me select the role we created earlier. Maybe by the time you read this you will be able to just select an **Existing Service Role**. If so, then feel free to submit a `Pull Request` and update this tutorial for yourself and those who come after.
+
+Lastly, leave the default selection for the *Artifact Store* and let [Pipeline]() use any bucket it wnts to temporarily store your builds. Keep It Simple, Stupid. **Click Next**!
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step02.Pipeline.png "CodePipeline Step 2!")
 
@@ -631,7 +635,9 @@ Here we need to define the `Source` repository where our application resides and
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step03.Pipeline.png "CodePipeline Step 3!")
 
-When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo you want to connect: `invoice-log-api`.
+When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo that you want to connect: `invoice-log-api`. Next, select the branch that you want [Pipeline]() to listen to, in our case this will be the `master` branch.
+
+Use [GitHub Webhooks]() to start our [Pipeline]() and execute a `build` when changes occur. **Click Next** to complete this step.
 
 **Step 4**
 
