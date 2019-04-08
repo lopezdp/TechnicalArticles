@@ -679,6 +679,10 @@ You can now review all of the setting you have configured for your [CodePipeline
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
 
+Your [Build]() is now complete for the implementation of our **CI/CD** [Pipeline]() on [AWS]() with the [ServerlessFramework]().
+
+	#JediStatus
+
 All we are doing with [CodePipeline]() and [CodeBuild]() in this pyrrhic exercise to *Continuously Integrate and Deploy* our application is to `build` a container that contains our `Source` code that [CodePipeline]() will `pull` from out [GitHub]() repo to run the commands declared in the implementation of our `buildspec.yml`. The commands we need to execute to complete our `build` stage are as follows:
 
 ```
@@ -696,34 +700,6 @@ phases:
 ```
 
 The `buildspec.yml` will install the dependencies declared in our `package.json` file with the `$ npm install` command. During the `build` stage of our [Pipeline](), we will `$ serverless deploy` our [Lambda]() services using the `npm` packages in our local copy of the `node_modules` directory. We will execute our *Unit Tests* that we implemented with [Jestjs.io]() during the `post_build` stage using the same scripts that we have defined in our `package.json` file. In this case we will execute `$ npm test` before moving on to the next phase of our [Pipeline]().
-
-To allow [CodeBuild]() to execute all of the commands ands scripts we list above, we need to provide an [IAM Role]() for [CodeBuild]() with the appropriate permissions that it will need to use to `authenticate` itself across the [AWS Services]() that we are using.
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step07.Pipeline.png "CodePipeline Step 6!")
-
-Create the new role by clicking on the botton and hopefully it lets you select it without having to create a new one. NEED TO VERIFY AND COMPLETE IMPLEMENTATION>
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step08.Pipeline.png "CodePipeline Step 6!")
-
-test
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline Step 6!")
-
-test
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline Step 6!")
-
-test
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline Step 6!")
-
-test
-
-**Step 7**
-
-Click on `Create Pipeline` to complete the implementation of our **CI/CD** [Pipeline]() on [AWS]() with the [ServerlessFramework]().
-
-	#JediStatus
 
 ## CI/CD CodePipeline Validation and Execution
 
