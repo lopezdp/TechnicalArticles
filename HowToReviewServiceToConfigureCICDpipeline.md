@@ -675,6 +675,10 @@ We can skip the **Deployment Provider** for now because we are not using [AWS Co
 
 **Step 6**
 
+You can now review all of the setting you have configured for your [CodePipeline](). If everything looks *kosher*, go ahead and click on the **Create Pipeline** button as shown in the image below.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
+
 All we are doing with [CodePipeline]() and [CodeBuild]() in this pyrrhic exercise to *Continuously Integrate and Deploy* our application is to `build` a container that contains our `Source` code that [CodePipeline]() will `pull` from out [GitHub]() repo to run the commands declared in the implementation of our `buildspec.yml`. The commands we need to execute to complete our `build` stage are as follows:
 
 ```
@@ -695,23 +699,23 @@ The `buildspec.yml` will install the dependencies declared in our `package.json`
 
 To allow [CodeBuild]() to execute all of the commands ands scripts we list above, we need to provide an [IAM Role]() for [CodeBuild]() with the appropriate permissions that it will need to use to `authenticate` itself across the [AWS Services]() that we are using.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step07.Pipeline.png "CodePipeline Step 6!")
 
 Create the new role by clicking on the botton and hopefully it lets you select it without having to create a new one. NEED TO VERIFY AND COMPLETE IMPLEMENTATION>
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step08.Pipeline.png "CodePipeline Step 6!")
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline Step 6!")
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline Step 6!")
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline Step 6!")
 
 test
 
@@ -725,11 +729,11 @@ Click on `Create Pipeline` to complete the implementation of our **CI/CD** [Pipe
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Complete.Pipeline.png "CodePipeline Complete!!!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Complete09.Pipeline.png "CodePipeline Complete!!!")
 
 test success status!
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline SUCCESS!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline SUCCESS!")
 
 ## Troubleshooting
 
