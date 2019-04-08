@@ -617,7 +617,7 @@ Here you will need to navigate to the [CodePipeline Console](https://console.aws
 
 **Step 1**
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step01.Pipeline.png "CodePipeline Step 1!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step01.Pipeline.png "CodePipeline Step 1!")
 
 **Step 2**
 
@@ -627,13 +627,13 @@ Click on the **New Service Role** selection and just let [AWS Pipeline]() fill o
 
 Lastly, leave the default selection for the *Artifact Store* and let [Pipeline]() use any bucket it wnts to temporarily store your builds. Keep It Simple, Stupid. **Click Next**!
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step02.Pipeline.png "CodePipeline Step 2!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step02.Pipeline.png "CodePipeline Step 2!")
 
 **Step 3**
 
 Here we need to define the `Source` repository where our application resides and where [CodePipeline]() will have to listen in on for changes made by you and the rest of your development team. Choose [GitHub]() as your `SourceProvider` then continue on by clicking the `Connect to GitHub` button shown in the image below.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step03.Pipeline.png "CodePipeline Step 3!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step03.Pipeline.png "CodePipeline Step 3!")
 
 When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo that you want to connect: `invoice-log-api`. Next, select the branch that you want [Pipeline]() to listen to, in our case this will be the `master` branch.
 
@@ -643,11 +643,11 @@ Use [GitHub Webhooks]() to start our [Pipeline]() and execute a `build` when cha
 
 Now it is time to select the `Build Provider` we will use to `build` our `source` that [CodePipeline]() will use to `pull` from our [GitHub]() repo. We love the *mythical concept of AWS Lock-In*, and we have decided to use [AWS CodeBuild]() as our provider. Select [CodeBuild]() and *Configure your project* as a `Create new build project`. We are naming our `build` *MyInvoiceBuildOnCICD*.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step04a.Pipeline.png "CodePipeline Step 4a!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04a.Pipeline.png "CodePipeline Step 4a!")
 
 We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that specifies you to **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS. Your **Runtime** environment must be specified as **Node.js**, and from there proceed to select the latest **Version** available for the runtime environment you selected.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step04b.Pipeline.png "CodePipeline Step 4b!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04b.Pipeline.png "CodePipeline Step 4b!")
 
 Make sure you tell [Pipeline]() to **Use the `buildspec.yml` in the source code root directory** when describing the environment `build`, and select the option to **Choose an existing service role from your account** and select the role that we created previously called: `CloudFormationServiceRole`.
 
@@ -657,7 +657,7 @@ Accept the remaining defaults, click on the `Save build project` element and con
 
 We can skip the **Deployment Provider** for now because we are not using [AWS CodeDeploy]() in this example.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step05.Pipeline.png "CodePipeline Step 5!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step05.Pipeline.png "CodePipeline Step 5!")
 
 **Step 6**
 
@@ -681,23 +681,23 @@ The `buildspec.yml` will install the dependencies declared in our `package.json`
 
 To allow [CodeBuild]() to execute all of the commands ands scripts we list above, we need to provide an [IAM Role]() for [CodeBuild]() with the appropriate permissions that it will need to use to `authenticate` itself across the [AWS Services]() that we are using.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
 
 Create the new role by clicking on the botton and hopefully it lets you select it without having to create a new one. NEED TO VERIFY AND COMPLETE IMPLEMENTATION>
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step06.Pipeline.png "CodePipeline Step 6!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
 
 test
 
@@ -711,11 +711,11 @@ Click on `Create Pipeline` to complete the implementation of our **CI/CD** [Pipe
 
 test
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Complete.Pipeline.png "CodePipeline Complete!!!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Complete.Pipeline.png "CodePipeline Complete!!!")
 
 test success status!
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step06.Pipeline.png "CodePipeline SUCCESS!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline SUCCESS!")
 
 ## Troubleshooting
 
