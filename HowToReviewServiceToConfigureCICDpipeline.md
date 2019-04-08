@@ -657,15 +657,15 @@ Next proceed to create a **New Service Role** as shown in the image below and ch
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04d.Pipeline.png "CodePipeline Step 4d!")
 
+Make sure you tell [Pipeline]() to **Use the `buildspec.yml` in the source code root directory** when describing the environment `build`, and select the option to **Choose an existing service role from your account** and select the role that we created previously called: `CloudFormationServiceRole`.
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04f.Pipeline.png "CodePipeline Step 4f!")
+
+Accept the remaining defaults, click on the `Save build project` element and continue on to the next step in the implementation process for this [Pipeline on AWS]().
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04g.Pipeline.png "CodePipeline Step 4g!")
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04h.Pipeline.png "CodePipeline Step 4h!")
-
-Make sure you tell [Pipeline]() to **Use the `buildspec.yml` in the source code root directory** when describing the environment `build`, and select the option to **Choose an existing service role from your account** and select the role that we created previously called: `CloudFormationServiceRole`.
-
-Accept the remaining defaults, click on the `Save build project` element and continue on to the next step in the implementation process for this [Pipeline on AWS]().
 
 **Step 5**
 
