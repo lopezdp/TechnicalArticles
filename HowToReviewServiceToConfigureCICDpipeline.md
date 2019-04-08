@@ -653,9 +653,9 @@ We have to manage our environment and specify the `build` properties we need to 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04c.Pipeline.png "CodePipeline Step 4c!")
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04d.Pipeline.png "CodePipeline Step 4d!")
+Next proceed to create a **New Service Role** as shown in the image below and choose a unique name for this role that you can remember later and make secure changes to as needed.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04e.Pipeline.png "CodePipeline Step 4e!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04d.Pipeline.png "CodePipeline Step 4d!")
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04f.Pipeline.png "CodePipeline Step 4f!")
 
