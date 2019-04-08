@@ -711,9 +711,17 @@ test success status!
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline SUCCESS!")
 
-## Troubleshooting
+### Troubleshooting
 
 Murphy's LAW!!
+
+### You configured your serverless CICD on AWS CodePipeline. Good Luck!
+
+## Part 5: Build a PayPal clone. Make money off your friend with the PayMyInvoice App!
+
+* [Part 5: How To Implement and Deploy your own Serverless + MicroService to AWS](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToBuildAServerlessMicroService.md) - *Not Published.*
+
+
 
 
 

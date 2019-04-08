@@ -21,4 +21,4 @@ This repository is dedicated to the articles I write for blogs and agencies who 
 
 **Chapter 4:** [Part 4: How To Deploy and Configure an effective CI/CD Pipeline on AWS](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToReviewServiceToConfigureCICDpipeline.md#part-4--code-review-deploy--configure-an-effective-cicd-pipeline-on-aws) - *Not Published.*
 
-**Chapter 5:** [Part 5: How To Implement and Deploy your own Serverless + MicroService to AWS]() - *Not Published.*
+**Chapter 5:** [Part 5: How To Implement and Deploy your own Serverless + MicroService to AWS](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToBuildAServerlessMicroService.md) - *Not Published.*
