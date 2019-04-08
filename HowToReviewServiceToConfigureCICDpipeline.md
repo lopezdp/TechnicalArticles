@@ -653,6 +653,25 @@ We can skip the **Deployment Provider** for now because we are not using [AWS Co
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step05.Pipeline.png "CodePipeline Step 5!")
 
+**Step 6**
+
+All we are doing with [CodePipeline]() and [CodeBuild]() in this pyrrhic exercise to *Continuously Integrate and Deploy* our application is to `build` a container that contains our `Source` code that [CodePipeline]() will `pull` from out [GitHub]() repo to run the commands declared in the implementation of our `buildspec.yml`. The commands we need to execute to complete our `build` stage are as follows:
+
+```
+version:0.1
+phases:
+  install:
+   commands:
+    - npm install
+  build:
+   commands:
+    - ./node_modules/.bin/serverles deploy --stage cicd | tee deploy.out
+  post_build:
+   commands:
+    - npm test
+```
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step06.Pipeline.png "CodePipeline Step 5!")
 
 
 
