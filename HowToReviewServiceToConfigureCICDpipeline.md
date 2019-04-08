@@ -643,13 +643,13 @@ Use [GitHub Webhooks]() to start our [Pipeline]() and execute a `build` when cha
 
 Now it is time to select the `Build Provider` we will use to `build` our `source` that [CodePipeline]() will use to `pull` from our [GitHub]() repo. We love the *mythical concept of AWS Lock-In*, and we have decided to use [AWS CodeBuild]() as our provider. Select [CodeBuild]() as your *Build Provider*, and enter the *Region* that is best for your location and constraints. 
 
-Next, go ahead and enter  the *Project Name* that you have defined in [CodeBuild]() of click on **Create Project** as shown in the image. You will be taken to another window to complete the *Project* setup step. We are naming our `build` *invoive-log-api*.
-
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04a.Pipeline.png "CodePipeline Step 4a!")
 
-We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that specifies you to **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS. Your **Runtime** environment must be specified as **Node.js**, and from there proceed to select the latest **Version** available for the runtime environment you selected.
+Next, go ahead and enter  the *Project Name* that you have defined in [CodeBuild](), **or** click on **Create Project** as shown in the image. You will be taken to another window to complete the *Project* setup step. We are naming our `build` *invoice-log-api*.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04b.Pipeline.png "CodePipeline Step 4b!")
+
+We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that specifies you to **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS. Your **Runtime** environment must be specified as **Node.js**, and from there proceed to select the latest **Version** available for the runtime environment you selected.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04c.Pipeline.png "CodePipeline Step 4c!")
 
