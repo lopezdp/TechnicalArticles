@@ -594,7 +594,7 @@ We will go ahead and use the **Project Directory** that we defined in [Part 2, S
 
 #### Implement a `buildspec.yml` for [AWS CodeBuild]()
 
-Go ahead and run `$ touch buildspec.yml` in your terminal from the `~/PayMyInvoice/services/invoice-log-api` directory and add the following to the file:
+Go ahead and run `$ touch buildspec.yml` in your terminal from the `~/PayMyInvoice/services/invoice-log-api` directory and add the following to the file and save in the root directory of the service to deploy:
 
 ```
 version:0.1
@@ -602,10 +602,9 @@ phases:
   install:
    commands:
     - npm install
-    - npm install -g serverless
   build:
    commands:
-    - serverles deploy --stage cicd | tee deploy.out
+    - ./node_modules/.bin/serverles deploy --stage cicd | tee deploy.out
   post_build:
    commands:
     - npm test
