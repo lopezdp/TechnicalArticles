@@ -597,7 +597,7 @@ We will go ahead and use the **Project Directory** that we defined in [Part 2, S
 Go ahead and run `$ touch buildspec.yml` in your terminal from the `~/PayMyInvoice/services/invoice-log-api` directory and add the following to the file and save in the root directory of the service to deploy:
 
 ```
-version:0.1
+version: 0.1
 phases:
   install:
    commands:
@@ -685,7 +685,7 @@ Your [Build]() is now complete for the implementation of our **CI/CD** [Pipeline
 All we are doing with [CodePipeline]() and [CodeBuild]() in this pyrrhic exercise to *Continuously Integrate and Deploy* our application is to `build` a container that contains our `Source` code that [CodePipeline]() will `pull` from out [GitHub]() repo to run the commands declared in the implementation of our `buildspec.yml`. The commands we need to execute to complete our `build` stage are as follows:
 
 ```
-version:0.1
+version: 0.1
 phases:
   install:
    commands:
