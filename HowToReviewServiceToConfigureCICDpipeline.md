@@ -708,13 +708,17 @@ Below is what your [CodePipeline]() will look like once it is created. As you ca
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step07.Pipeline.png "CodePipeline Complete!!!")
 
-test success status!
+Once our [Pipeline]() pulls from `source`, it will proccess each of the `build` phases that we defined in our `buildspec.yml` file. During the `install` phase that we defined, [CodeBuild]() will run `$ npm install` on our `package.json` file and it will also run `$ npm install -g serverless` and prepare our application's environment very much the same way we completed that task four our `local` machines in [Part 1 of this series.](). In this case we don't have to include `ESLint` or `jsfmt` because the container running our [Lambda]() just doesn't care about the beauty of our code.
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step09.Pipeline.png "CodePipeline SUCCESS!")
+During the `build` phase [CodeBuild]() will literally `build` out our application using the [ServerlessFramework]() tools we had it install in the `install` phase and it sill deploy our [Lambda's]() and backend services the same exact way we did it on our `local` machines... just, `autonomously`. Fear the Ai my friend, fear, the Ai.
+
+In the `post_build` phase, well we simply decided to run our unit tests. This was just to show you a very simple example and to highlight how flexible these stages can be. You can define these stages and run unit testing at any point along the workflow to deploy your services only when your tests come back positively. Below is what your [Pipeline]() will look like once all tests prove successful and all of your automated constraints to deplpoy your services are met.
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step08.Pipeline.png "CodePipeline SUCCESS!")
 
 ### Troubleshooting
 
-Murphy's LAW!!
+None of this comes without its issues and perpetual errors of course. Click on the details above, whether your [Pipeline]() succeeded or failed, so that we can analyze a few common propblems that you may encounter out in the *wild*.
 
 ### You configured your serverless CICD on AWS CodePipeline. Good Luck!
 
