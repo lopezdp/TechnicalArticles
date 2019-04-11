@@ -601,10 +601,11 @@ version: 0.1
 phases:
   install:
    commands:
+    - npm install -g serverless
     - npm install
   build:
    commands:
-    - ./node_modules/.bin/serverles deploy --stage cicd | tee deploy.out
+    - ./node_modules/.bin/serverless deploy --stage cicd | tee deploy.out
   post_build:
    commands:
     - npm test
@@ -689,10 +690,11 @@ version: 0.1
 phases:
   install:
    commands:
+    - npm install -g serverless
     - npm install
   build:
    commands:
-    - ./node_modules/.bin/serverles deploy --stage cicd | tee deploy.out
+    - ./node_modules/.bin/serverless deploy --stage cicd | tee deploy.out
   post_build:
    commands:
     - npm test
