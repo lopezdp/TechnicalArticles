@@ -722,7 +722,7 @@ None of this comes without its issues and perpetual errors of course. Click on t
 
 ### You configured your serverless CICD on AWS CodePipeline. Good Luck!
 
-## Part 5: Build a PayPal clone. Make money off your friend with the PayMyInvoice App!
+## Part 5: Build a PayPal clone. Make money off your friends with the PayMyInvoice App!
 
 * [Part 5: How To Implement and Deploy your own Serverless + MicroService to AWS](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToBuildAServerlessMicroService.md) - *Not Published.*
 
