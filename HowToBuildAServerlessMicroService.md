@@ -77,6 +77,7 @@ export async function main(event, context) {
      *
      *    - 'invoiceID': a uuid that is unique to this record
      *    - 'createdAt': this is the current UNIX timestamp
+     *    - 'payerEmail': this is the email of the invoice Payer
      *    - 'description': this is the description of the
      *                     transaction as entered by the user
      *                     and parsed from the Request.body
@@ -120,7 +121,7 @@ export async function main(event, context) {
 
 ```
 
-Well break this first one down by steps just to be sure this is all clear to you; *Step1* is where we import the functionality needed to allow us to generate a new `uuid` for each invoice created.
+We'll break this first one down by steps just to be sure this is all clear to you; *Step1* is where we import the functionality needed to allow us to generate a new `uuid` for each invoice created.
 
 
 
