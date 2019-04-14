@@ -160,7 +160,49 @@ The idea behind a *microservice* based architecture, for those of you not alread
 
 We'll get to the implementation of our [DynamoDb]() tables soon enough [*Danial-san*](). You'll need to show me that you can still make them [#AlphaMoves]() though, so take it easy and let's just take this one step at a time. For now, you'll need to get back to [*Paint The Fence*]().
 
-We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* directory, procees to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() table that we are going to use for our new *B2B* [PayPal]() close, **PayMyInvoice**.
+We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* directory, proceed to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() tables that we are going to use for our new *B2B* [PayPal]() close, **PayMyInvoice**. Inside of your new `resources` directory that you have created for your *serverless + microservice*, I will need you to go ahead and create a new file called `dynamoTbl.yml`. Below is a `gist` of what you  will need to implement in this new file of yours [Bud]():
+
+**DynamoDB without a Server!!!**
+
+```
+# NOTE: DynamoDB Serverless Configuration
+
+Resources:
+  Invoices:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.tableName}
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: invoiceId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: invoiceId
+          KeyType: RANGE
+      # Set the capacity based on the stage
+      ProvisionedThroughput:
+        ReadCapacityUnits: ${self:custom.tableThroughput}
+        WriteCapacityUnits: ${self:custom.tableThroughput}
+```
+
+There are a few considerations you need to make while studying the implementation I have just graced you with. The first and most important thing I would ask you to seriously consider is to **STOP THINKING RELATIONALLY**! This is a [NoSQL]() data model and if you try to build a *Relational Database* out of it you're going to engineer yourself right on out of house and home. Consider it a [NoSQL Best Practice]() to just shove in as much of your data into one table as possible. Therefore, the only thing that you really have to declare and think about ahead of time is a couple of concepts you need to know surrounding [Composite Keys](); Namely, your *NoSQL* [Partition Key]() and [SortKey]().
+
+Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Voodoo Santeria Mysticism* that is the **M**assively **A**ggregated **D**ata models we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**.
+
+1. Partition Keys
+2. Sort Keys
+3. Local Secondary Indexes
+4. Global Secondary Indexes
+5. Provisioning Throughput (RCU vs WCU)
+
+
+
+
+
+
 
 
 
