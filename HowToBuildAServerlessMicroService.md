@@ -192,11 +192,16 @@ There are a few considerations you need to make while studying the implementatio
 
 Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Voodoo Santeria Mysticism* that is the **M**assively **A**ggregated **D**ata models we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**.
 
-1. Partition Keys
-2. Sort Keys
-3. Local Secondary Indexes
-4. Global Secondary Indexes
-5. Provisioning Throughput (RCU vs WCU)
+1. **Partition Keys**: These will uniquely identify the records that you will have stored in your *NoSQL* table. There are very few use cases that justify multiple tables. In this new reality you want to implement **ONLY ONE TABLE** that is going to be uniquely idetified with this key. Here are a few things to keep in mind.
+
+	* 
+	*
+	*
+
+2. **Sort Keys**:
+3. **Local Secondary Indexes**:
+4. **Global Secondary Indexes**:
+5. **Provisioning Throughput (RCU vs WCU)**:
 
 
 
