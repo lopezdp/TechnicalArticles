@@ -121,7 +121,15 @@ export async function main(event, context) {
 
 ```
 
-We'll break this first one down by steps just to be sure this is all clear to you; *Step1* is where we import the functionality needed to allow us to generate a new `uuid` for each invoice created.
+We'll break this first one down by steps just to be sure this is all clear to you; *Step1* is where we import the functionality needed to allow us to generate a new `uuid` for each invoice created. The `uuid` will provide us with the ability to support cross-platform, UUID versions 1,3,4, and 5 that use *cryptographically-strong* random numbers with *zero-dependencies*. `uuid` should be listed as a dependency in your `package.json` if you cloned the [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git). If you are implementing this from scratch then you will need to run: `$ npm install --save uuid`.
+
+In *Step2* we have made use of a library that we implemented and is located at: `./libs/responseLib`. Or, one level up in your project directory under your new `/libs` directory. We are implementing this to be able to send consistent responses back from our [dynamoDB]() resources as invoice objects making use of the appropriate `http` status codes. Each service will have to respond with the correct `statusCode` and response `headers` so that our resources can be shared accros our *serverless + miscroservices*. This is known as **CORS (Cross-Origin Resource Sharing)**. With our [dynamoDB]() implementation, we will have to respond with `statusCode: 200` if our `http` requests are successful. Otherwise, the response from our *serverless + microservice* will be a `statusCode: 500`. We are using the `./libs/responseLib` library to attempt to keep ourselves [**DRY**]()!
+
+
+
+
+
+
 
 
 
