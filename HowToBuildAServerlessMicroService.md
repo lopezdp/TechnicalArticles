@@ -123,13 +123,46 @@ export async function main(event, context) {
 
 We'll break this first one down by steps just to be sure this is all clear to you; *Step1* is where we import the functionality needed to allow us to generate a new `uuid` for each invoice created. The `uuid` will provide us with the ability to support cross-platform, UUID versions 1,3,4, and 5 that use *cryptographically-strong* random numbers with *zero-dependencies*. `uuid` should be listed as a dependency in your `package.json` if you cloned the [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git). If you are implementing this from scratch then you will need to run: `$ npm install --save uuid`. In this application we are using `uuid.v1()` as the *uniqueId* for each invoice the user creates.
 
+#### CORS (Cross-Origin Resource Sharing)
+
 In *Step2* we have made use of a library that we implemented and is located at: `./libs/responseLib`. Or, one level up in your project directory under your new `/libs` directory. We are implementing this to be able to send consistent responses back from our [dynamoDB]() resources as invoice objects making use of the appropriate `http` status codes. Each service will have to respond with the correct `statusCode` and response `headers` so that our resources can be shared accros our *serverless + miscroservices*. This is known as **CORS (Cross-Origin Resource Sharing)**. With our [dynamoDB]() implementation, we will have to respond with `statusCode: 200` if our `http` requests are successful. Otherwise, the response from our *serverless + microservice* will be a `statusCode: 500`. We are using the `./libs/responseLib` library to attempt to keep ourselves [**DRY**]()!
 
-In *Step3* we implement an `import` that uses a library that we call `./libs/dynamoLib`, in another attempt to [*save the world*]() by decoupling our code and making it more [*modular*]() and easy to read! Our goal here is to create a [JS Promise]() library that we can use to make our code really easy to read. We just want a way to replace the standard syntax for the JavaScript `callback` functionality. If you have a better way to manage `asynchronous` code then please *HMU*, otherwise, this tutorial is going to make do with JavaScript *Promises*. The beauty behind using these *Promises* with our `async/await` pattern that we show in the implementation above, is that we can just return our `response` as soon as our service completes the execution of its logic which allows us to avoid using the `callback`. If you've been using a `callback` since `2012`, and it's what you know, then you may disagree. We're just going to push ahead with all the cool stuff [**ES6 Syntax**]() keeps on giving us.
+#### JavaScript Promises to Love You
 
-Soon, we will also have to define our *NoSQL* tables that we will need to implement in [AWS DynamoDB]() within an isolated environment, so that we can be sure to develop the appropriate data model needed for this specific service. Furthermore, in a *microservice* environment, each *service* will implement its own *database*. The idea behind a *microservice* based architecture, for those of you not already in the know, is to be able to more easily maintain your code and extend an infinite amount of features that you believe will [*save the world*](), in a [*decoupled*]() environment. Simply put, we just want to write code and develop services that only deal with one specific thing or task. No two services should rely on data from each other or any other source, nor should they know anything about the other's `state`. In a *serverless + microservice* environment each *microservice* is going to have its own database, that will deal with the specific attributes that the service in question needs to provide the correct response to any given request, while using the data it persists to its own data store.
+In *Step3* we implement an `import` that uses a library that we call `./libs/dynamoLib`, in another attempt to [*save the world*]() by decoupling our code and making it more [*modular*]() and easy to read! Our goal here is to create a [JS Promise]() library that we can use to make our code super simple minded for *cavemen* like me. 
+
+We just want a way to replace the standard syntax for the JavaScript `callback` functionality. If you have a better way to manage `asynchronous` code then please *HMU*, otherwise, this tutorial is going to make do with JavaScript *Promises*. The beauty behind using these *Promises* with our `async/await` pattern that we show in the [Lambda]() implementation above, is that we can just return our `response` as soon as our service completes the execution of its logic, which allows us to avoid using the `callback`. If you've been using a `callback` since `2012`, and it's what you know, then you may disagree. Please, send me the blog post you write about it telling me how I am wrong, and make sure to scream at me on [Twitter](). We're just going to push ahead with all the cool stuff [**ES6 Syntax**]() keeps on giving us.
+
+**Another Promise from DynamoDb**
+
+```
+// Need to use and import the aws-sdk
+import AWS from "aws-sdk";
+
+AWS.config.update({
+  region: "us-east-1"
+});
+
+export function call(action, params) {
+  const dynamo = new AWS.DynamoDB.DocumentClient();
+
+  // return a promise with the results for
+  // the specified action and params
+  return dynamo[action](params).promise();
+}
+```
+
+#### Serverless + MicroService & the *DataStore*
+
+Soon, we will also have to define the *NoSQL* tables that we will need to implement in [AWS DynamoDB]() within an isolated environment, so that we can be sure to develop the appropriate data model needed for this specific *serverless + microservice*. Furthermore, in a *microservice* environment, each *service* will implement its own *database*. In the case of *NoSQL*, its own table (more on this to come). 
+
+The idea behind a *microservice* based architecture, for those of you not already in the know, is to be able to more easily maintain your code, and extend an infinite amount of features that you believe will [*save the world*](), in a [*decoupled*]() environment. Simply put, we just want to write code and develop services that only deal with one specific thing or task. No two services should rely on data from each other or any other source, nor should they know anything about the other's `state`. In a *serverless + microservice* environment each *microservice* is going to have its own database, that will deal with the specific attributes that the service in question needs to provide the correct response to any given request, while using the data it persists to its own data store.
 
 We'll get to the implementation of our [DynamoDb]() tables soon enough [*Danial-san*](). You'll need to show me that you can still make them [#AlphaMoves]() though, so take it easy and let's just take this one step at a time. For now, you'll need to get back to [*Paint The Fence*]().
+
+We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* directory, procees to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() table that we are going to use for our new *B2B* [PayPal]() close, **PayMyInvoice**.
+
+
 
 
 
