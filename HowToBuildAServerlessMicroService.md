@@ -156,7 +156,7 @@ export function call(action, params) {
 
 Soon, we will also have to define the *NoSQL* tables that we will need to implement in [AWS DynamoDB]() within an isolated environment, so that we can be sure to develop the appropriate data model needed for this specific *serverless + microservice*. Furthermore, in a *microservice* environment, each *service* will implement its own *database*. In the case of *NoSQL*, its own table (more on this to come). 
 
-The idea behind a *microservice* based architecture, for those of you not already in the know, is to be able to more easily maintain your code, and extend an infinite amount of features that you believe will [*save the world*](), in a [*decoupled*]() environment. Simply put, we just want to write code and develop services that only deal with one specific thing or task. No two services should rely on data from each other or any other source, nor should they know anything about the other's `state`. In a *serverless + microservice* environment each *microservice* is going to have its own database, that will deal with the specific attributes that the service in question needs to provide the correct response to any given request, while using the data it persists to its own data store.
+The idea behind a *microservice* based architecture, for those of you not already in the know, is to be able to more easily maintain your code, and extend an infinite amount of features that you believe will [*save the world*](), in a [*decoupled*]() environment. Simply put, we just want to write code and develop services that only deal with one specific thing or task. No two services should rely on data from each other or any other source, nor should they know anything about the other's `state`. In a *serverless + microservice* environment each *microservice* is going to have its own database, that will deal with the specific attributes that the service in question needs, to provide the correct response to any given request, while using the data it persists to its own data store.
 
 We'll get to the implementation of our [DynamoDb]() tables soon enough [*Danial-san*](). You'll need to show me that you can still make them [#AlphaMoves]() though, so take it easy and let's just take this one step at a time. For now, you'll need to get back to [*Paint The Fence*]().
 
@@ -190,15 +190,24 @@ Resources:
 
 There are a few considerations you need to make while studying the implementation I have just graced you with. The first and most important thing I would ask you to seriously consider is to **STOP THINKING RELATIONALLY**! This is a [NoSQL]() data model and if you try to build a *Relational Database* out of it you're going to engineer yourself right on out of house and home. Consider it a [NoSQL Best Practice]() to just shove in as much of your data into one table as possible. Therefore, the only thing that you really have to declare and think about ahead of time is a couple of concepts you need to know surrounding [Composite Keys](); Namely, your *NoSQL* [Partition Key]() and [SortKey]().
 
-Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Voodoo Santeria Mysticism* that is the **M**assively **A**ggregated **D**ata models we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**.
+Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Magic* that is the **M**assively **A**ggregated **D**ata models that we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**. 
 
-1. **Partition Keys**: These will uniquely identify the records that you will have stored in your *NoSQL* table. There are very few use cases that justify multiple tables. In this new reality you want to implement **ONLY ONE TABLE** that is going to be uniquely idetified with this key. Here are a few things to keep in mind.
+> The lesson to learn is that it does not matter how bad it gets, the only way to become a real *professional* is to realize that it is all a mess and that our job as *Software Engineers* is to figure out some way to help our organizations achieve their goals and objectives. That is all we get paid to do, is to implement the ideas of those who are in charge. If you ask me, this is where the opportunity lies.
 
-	* 
-	*
-	*
+Learn [DynamoDB]() and become and expert at its [Best Practices](), the quicker you can learn to adapt to changing market conditions, the better of engineer you will become for it.
 
-2. **Sort Keys**:
+##### Key Types
+
+`Key` Types determine how your application can access the `data` it collects later on. There are two `Key` types you can use to define for your table and Key Attributes **MUST** be decided upon in advance. We can use either `SimpleKey` or `CompositeKey` types. To take advantage of the [Distributed Hash Map Architecture]() that enables [DynamoDB]()'s high performance as a `Key:Value` *Document Storage* database, we use a `CompositeKey`.
+
+The simplicity that [DynamoDB]() provides you with is that it is *Schemaless* in that it does not require you to define every field you need for this service ahead of time. The only two fields we do need to declare now however are as follows:
+
+  1. **Partition Keys**: These will uniquely identify the records that you will have stored in your *NoSQL* table. In our case we have called our table `/resources/GeneralLedgerTable.yml`. There are very few use cases that justify multiple tables. In this new reality you want to implement **ONLY ONE TABLE** that is going to be uniquely identified with this key. 
+
+  2. **Sort Keys**: This *Key* will have a value that will differentiate different items within a *Partition*. This `Key` will be combioned with our **PartitionK Key** to let [DynamoDB]() use it and catalog it within its data store according to the relationship of the `item` and its `partition:sort` *composite key*. 
+
+The thing to remember about *Composite Keys* is that all items are stored together if they share a *Partition Key*. Each item is sorted within this *Partition*, and sorted within the [DynamoDB]() physical storage system by the value of its *Sort Key*.
+
 3. **Local Secondary Indexes**:
 4. **Global Secondary Indexes**:
 5. **Provisioning Throughput (RCU vs WCU)**:
