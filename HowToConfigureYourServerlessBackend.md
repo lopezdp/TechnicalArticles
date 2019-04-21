@@ -42,7 +42,7 @@ The wonderful thing about working with the [ServerlessFramework](https://serverl
 
 #### Configure AWS Lambda & Decrease your Application’s Latency with Warm Starts
 
-As discussed above, we will be keeping our [Lambda's](https://aws.amazon.com/lambda) warm during the hibernation season with [serverless-plugin-warmup](https://github.com/FidelLimited/serverless-plugin-warmup). In this next section, we will walk you through each step of the installation of this plugin. Remember, you can also refer to the sample of the application we will be using in this tutorial to follow along, here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git).
+As discussed above, we will be keeping our [Lambda's](https://aws.amazon.com/lambda) warm during the hibernation season with [serverless-plugin-warmup](https://github.com/FidelLimited/serverless-plugin-warmup). In this next section, we will walk you through each step of the installation of this plugin. Remember, you can also refer to the sample of the application we will be using in this tutorial to follow along, here: [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService).
 
 [ServerlessWarmup](https://github.com/FidelLimited/serverless-plugin-warmup) eliminates *Cold Start* latency by creating a [Lambda](https://aws.amazon.com/lambda) that will schedule and invoke all the services you select from your API, at a `time interval` of your choice, the default is set at 5-minutes. Thereby forcing your [Lambda's](https://aws.amazon.com/lambda) to stay warm. From within the root of you serverless project directory, continue to install [ServerlessWarmup](https://github.com/FidelLimited/serverless-plugin-warmup) as follows:
 

@@ -381,7 +381,7 @@ For this tutorial and the demo application that we will be walking through toget
 
 `/<serverless-microservice-project>/tests/<component>.test.js`
 
-[Jest.js](https://jestjs.io) is already installed as a dependency in your `package.json` file, which means that every time you `npm install` a new *serverless + microservice* project with our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git) project, you will automatically have [Jest.js](https://jestjs.io) installed on your local environment for you. *Easy Peasy* my friend, work smart is the name of the game... For all the rest of you out there who simply refuse to just follow along because you absolutely must do everything from scratch yourself, then go ahead and get it done with the following `cmd`:
+[Jest.js](https://jestjs.io) is already installed as a dependency in your `package.json` file, which means that every time you `npm install` a new *serverless + microservice* project with our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) project, you will automatically have [Jest.js](https://jestjs.io) installed on your local environment for you. *Easy Peasy* my friend, work smart is the name of the game... For all the rest of you out there who simply refuse to just follow along because you absolutely must do everything from scratch yourself, then go ahead and get it done with the following `cmd`:
 
 `$ npm install --save-dev jest`
 
@@ -403,7 +403,7 @@ Ideally you will want to try to keep your project files organized, you know, unl
 
 Pay attention to the *relative* structure of the path that I have chosen to use in the example above as it will make more sense once we start digging into the implementation details of our demo application in this tutorial series. The crucial point to remember is that `<test>.js` files will save in the `/tests` directory. Easy enough, no???
 
-We can use the example `starter.test.js` file that we have implemented in our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService.git) project to better understand how we will be implementing our test cases with the [Jest.js](https://jestjs.io) framework:
+We can use the example `starter.test.js` file that we have implemented in our [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) project to better understand how we will be implementing our test cases with the [Jest.js](https://jestjs.io) framework:
 
 **Need to Debug Implementation (Not Ready for Publishing)!!!**
 
