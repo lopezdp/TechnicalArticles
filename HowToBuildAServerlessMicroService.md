@@ -152,7 +152,7 @@ export function call(action, params) {
 }
 ```
 
-#### Serverless + MicroService & the *DataStore*
+#### Serverless + MicroService & the DynamoDB *DataStore*
 
 Soon, we will also have to define the *NoSQL* tables that we will need to implement in [AWS DynamoDB]() within an isolated environment, so that we can be sure to develop the appropriate data model needed for this specific *serverless + microservice*. Furthermore, in a *microservice* environment, each *service* will implement its own *database*. In the case of *NoSQL*, its own table (more on this to come). 
 
@@ -160,7 +160,7 @@ The idea behind a *microservice* based architecture, for those of you not alread
 
 We'll get to the implementation of our [DynamoDb]() tables soon enough [*Danial-san*](). You'll need to show me that you can still make them [#AlphaMoves]() though, so take it easy and let's just take this one step at a time. For now, you'll need to get back to [*Paint The Fence*]().
 
-We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* directory, proceed to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() tables that we are going to use for our new *B2B* [PayPal]() close, **PayMyInvoice**. Inside of your new `resources` directory that you have created for your *serverless + microservice*, I will need you to go ahead and create a new file called `dynamoTbl.yml`. Below is a `gist` of what you  will need to implement in this new file of yours [Bud]():
+We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* directory, proceed to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() tables that we are going to use for our new *B2B* [PayPal]() clone we call, **PayMyInvoice**. Inside of your new `resources` directory that you have created for your *serverless + microservice*, I will need you to go ahead and create a new file called `GeneralLedgerTable.yml`. Below is a `gist` of what you  will need to implement in this new file of yours [Bud]():
 
 **DynamoDB without a Server!!!**
 
@@ -168,7 +168,7 @@ We will need a new directory that we will call `resources`. In the root of your 
 # NOTE: DynamoDB Serverless Configuration
 
 Resources:
-  Invoices:
+  GeneralLedger:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.tableName}
@@ -192,25 +192,43 @@ There are a few considerations you need to make while studying the implementatio
 
 Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Magic* that is the **M**assively **A**ggregated **D**ata models that we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**. 
 
-> The lesson to learn is that it does not matter how bad it gets, the only way to become a real *professional* is to realize that it is all a mess and that our job as *Software Engineers* is to figure out some way to help our organizations achieve their goals and objectives. That is all we get paid to do, is to implement the ideas of those who are in charge. If you ask me, this is where the opportunity lies.
+> The lesson to learn is that it does not matter how bad it gets, the only way to become a real *professional* is to realize that it is all a mess and that our job as *Software Engineers* is to figure out some way to help our organizations achieve their goals and objectives. That is all we get paid to do; We get paid to implement the ideas of those who are in charge. If you ask me, this is where the greatest opportunities reside.
 
-Learn [DynamoDB]() and become and expert at its [Best Practices](), the quicker you can learn to adapt to changing market conditions, the better of engineer you will become for it.
+Learn [DynamoDB]() and become an expert at its [Best Practices](), the quicker you can learn to adapt to changing market conditions, the better of an engineer you will become for it.
 
-##### Key Types
+##### [DynamoDB]() Key Types
 
-`Key` Types determine how your application can access the `data` it collects later on. There are two `Key` types you can use to define for your table and Key Attributes **MUST** be decided upon in advance. We can use either `SimpleKey` or `CompositeKey` types. To take advantage of the [Distributed Hash Map Architecture]() that enables [DynamoDB]()'s high performance as a `Key:Value` *Document Storage* database, we use a `CompositeKey`.
+`Key` Types determine how your application can access the `data` it collects later on. There are two `Key` types you can use to define for your table, furthermore all Key Type Attributes **MUST** be decided upon in advance. We can use either `SimpleKey` or `CompositeKey` types. To take advantage of the [Distributed Hash Map Architecture]() that enables [DynamoDB]()'s high performance as a `Key:Value` *Document Storage* database, we will use a `CompositeKey`.
 
 The simplicity that [DynamoDB]() provides you with is that it is *Schemaless* in that it does not require you to define every field you need for this service ahead of time. The only two fields we do need to declare now however are as follows:
 
-  1. **Partition Keys**: These will uniquely identify the records that you will have stored in your *NoSQL* table. In our case we have called our table `/resources/GeneralLedgerTable.yml`. There are very few use cases that justify multiple tables. In this new reality you want to implement **ONLY ONE TABLE** that is going to be uniquely identified with this key. 
+  1. **Partition Keys**: These will uniquely identify a *Partition* of records that you will have stored in your *NoSQL* table. In our case we have called our table `/resources/GeneralLedgerTable.yml`. There are very few use cases that justify multiple tables. In this new reality you want to implement **ONLY ONE TABLE** that is going to be uniquely identified with this key. 
 
   2. **Sort Keys**: This *Key* will have a value that will differentiate different items within a *Partition*. This `Key` will be combioned with our **PartitionK Key** to let [DynamoDB]() use it and catalog it within its data store according to the relationship of the `item` and its `partition:sort` *composite key*. 
 
-The thing to remember about *Composite Keys* is that all items are stored together if they share a *Partition Key*. Each item is sorted within this *Partition*, and sorted within the [DynamoDB]() physical storage system by the value of its *Sort Key*.
+The thing to remember about *Composite Keys* is that all items are stored together if they share a *Partition Key*. Each item is sorted within this *Partition*, and sorted within the [DynamoDB]() physical storage system by the value of its *Sort Key*. 
 
-3. **Local Secondary Indexes**:
-4. **Global Secondary Indexes**:
-5. **Provisioning Throughput (RCU vs WCU)**:
+*Sort Keys*, if designed correctly will allow you to eliminate complex `JOIN` statements in exchange for *Composite Keys* that allow you to `query` *Composite Data* that you will aggregate to one table. The idea is to keep related data together under the roof of one *serverless + microservice*, to create aggregated tables that allow you to create **views** of the data you collect from the user. To accomplish this [DynamoDB]() gives you a couple of tools to help you address *Complex Queries* that you will have to solve to build an application that your users will want to use.
+
+##### [DynamoDB]() Indexes
+
+In a `NoSQL` **Data Model** you need to avoid thinking in a **Relational** manner because it will cost you more money due to the amount of **Read Requests or RCUs** you will make to your database. [DynamoDB]() does not enforce relationships between tables. As you aggregate composite data into your [NoSQL DynamoDB]() implementation, your data is stored as [*unnormalized*](https://en.wikipedia.org/wiki/Unnormalized_form) information. If your application cannot tolerate showing or outputting *stale* data to your user, then you need rethink using [DynamoDB]() and reconsider a [*Strongly Consistent*]() **RDBMS** instead.
+
+We can take advantage of [DynamoDB]() when *stale* data is not an issue, and when [*Eventually Consistent*]() data is acceptable for your use case. In practice data is processed by [AWS DynamoDB]() so fast that your implementation will be very close to, if not *Instantly Consistent*. The idea is to sacrifice strong consistency in exchange for a highly efficient *document store* on a distributed hash map that is schemaless and easy to implement, to achive high availability so that every request made to your database receives a successfull, *non-error* response. [DynamoDB]() is highly scalable due to its efficient partitioning mechanism that distributes your data across a series of highly available nodes of data stores that can also enable *Realtime Operations* and updates within your application to process *streams* of updates to your database in **Realtime** at a very **low cost**.
+
+**It is all about the Benjamins**
+
+---> NEED AN IMAGE HERE <---
+
+In forcing you to declare and define your *Partition* and *Sort* key attributes ahead of time, [DynamoDB]() forces you to define the **Access Patterns** you need to implement for your database and its *schemaless* implementation before your start using it. With [DynamoD]() you will normalize your data as you implement the features that with scan or fetch from your database.
+
+
+
+1. **Local Secondary Indexes**:
+2. **Global Secondary Indexes**:
+3. **Provisioning Throughput (RCU vs WCU)**:
+
+
 
 
 
