@@ -154,7 +154,7 @@ export function call(action, params) {
 }
 ```
 
-#### Serverless + MicroService & the DynamoDB *DataStore*
+## Serverless + MicroService & the DynamoDB *DataStore*
 
 Coming up in this next section, we will also have to define the *NoSQL* tables that we will need to implement in [AWS DynamoDB]() within an isolated environment, so that we can be sure to develop the appropriate data model needed for this specific *serverless + microservice*. Furthermore, in a *microservice* environment, each *service* will implement its own *database*. In the case of *NoSQL*, its own table (more on this to come). 
 
@@ -197,7 +197,7 @@ The first thing we define here under the `Resources` declaration is the name of 
 
 We are also configuring two of our table's field attributes that we have called `userId` and `invoiceId` as shown in the example. We complete the implementation of our table by provisioning the read and write capacity of our database using custom variables to describe the load that our tables will need to service as we attract users to our application over time. 
 
-##### Add a DynamoDB Resource to your CloudFormation template
+### Add a DynamoDB Resource to your CloudFormation template
 
 Going back to the `serverless.yml` file that we have in the `root` of our project directory, now I need you to add the following reference to our `GeneralLedgerTable.yml`, as a resource to this project. You will have to replace the `resources` block that is at the very bottom of our `serverless.yml` file. Use the information below to make the adjustments needed:
 
@@ -219,7 +219,7 @@ Please pay attention. We will take the liberty now to go off on a bit of a tange
 
 Learn [DynamoDB]() and become an expert at its [Best Practices](), the quicker you can learn to adapt to changing market conditions, the better of an engineer you will become for it.
 
-##### [DynamoDB]() Key Types
+### [DynamoDB]() Key Types
 
 `Key` Types determine how your application can access the `data` it collects later on. There are two `Key` types you can use to define for your table, furthermore all Key Type Attributes **MUST** be decided upon in advance. We can use either `SimpleKey` or `CompositeKey` types. To take advantage of the [Distributed Hash Map Architecture]() that enables [DynamoDB]()'s high performance as a `Key:Value` *Document Storage* database, we will use a `CompositeKey`.
 
@@ -235,7 +235,7 @@ The thing to remember about *Composite Keys* is that all you *Items* are stored 
 
 > "Build Something that people want!" - YCombinator
 
-##### [DynamoDB]() Indexes
+### [DynamoDB]() Indexes
 
 In a `NoSQL` **Data Model** you need to avoid thinking in a **Relational** manner because it will cost you more money due to the amount of **Read Requests or RCUs** you will make to your database. [DynamoDB]() does not enforce relationships between tables. As you aggregate composite data into your [NoSQL DynamoDB]() implementation, your data is stored as [*unnormalized*](https://en.wikipedia.org/wiki/Unnormalized_form) information. If your application cannot tolerate showing or outputting *stale* data to your user, then you need to rethink using [DynamoDB]() and reconsider using a [*Strongly Consistent*]() **RDBMS** like [PostgreSQL]() instead.
 
@@ -255,7 +255,7 @@ Ideally, you will aggregate all of the information your application collects, an
 
 The difference between these tools provided to you by [DynamoDB](), is that you will want to use each of them based on the needs of your queries, or the **Access Patterns** you define when modeling your data. You will want to use either your **LSI** or your *Sort Key*, but not both. Use either, depending on the conditions you present in the questions that you determine your application will need to ask of your *data store*. Use a predefined **GSI** when your application needs to display a view that relies on a completely different *Partition* of data that will need to be obtained with a different **Access Pattern**. [DynamoDB]() is a highly scalable tool that gives you a lot of flexibility to quickly implement and iterate through our application. Now that you understand how to model your data, let's keep implementing the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) application.
 
-##### Provisioning Table Throughput Capacity
+### Provisioning Table Throughput Capacity
 
 [DynamDB]() also helps us balance our costs against the availability of our database by letting us autoscale our database to meet the needs of our users. Using the settings in this section will need careful consideration on your part because these can lead an unexpected surge in your [AWS Costs]() if your application goes viral. These settings will allow your database to scale to meet the increasing demand of users on your application. Keeping these settings static would prevent your database from responding to queries that exceed an arbitrary threshold. Instead, we will let it grow with the needs of our users. We want to register as many users as our application can handle and we want it to scale with the demands of our market. 
 
@@ -299,7 +299,7 @@ If you notice, you will need to comment out every thing from `# ProvisionedThrou
 
 This will tell [CloudFormation]() to configure your [DynamoDB]() and `autoscale` them when the need arises. [AWS]() will bill you for the demand place on the the service alone and nothing more. When peak load decreases, so to will the resources allocated to your service. Collecting this information will help you determine what the best approach will be in the future when considering which configuration options are best for you and your company's situation.
 
-##### Configure [DynamoDB]() as IAC on `serverless.yml`
+### Configure [DynamoDB]() as IAC on `serverless.yml`
 
 Next, we need to configure our **Infrastructure As Code** template that we are using to tell [CloudFormation]() how to build and deploy our resources and technology stack on [AWS](). Navigate into the `root` of your project directory and open up the `$ cd ~/services/invoice-log-api/serverless.yml` file, and add your [DynamoDB]() configuration information as shown below. Make sure your `custom` block looks like the version below to tell [CloudFormation]() how to deploy the [DynamoDB]() resources that we will need:
 
@@ -386,7 +386,9 @@ provider:
 
 To connect to our database we will need to expose a few arguments through the `process.env` variables that [Node.js]() provides to us through our `terminal`. We are using the `environment` block above to tell the [Serverless Framework]() that we will use our environment variables with our [Lambda functions](). Our `tableName` will be exposed to us as a `process.env` reference. 
 
-in the final block above we are using the `iamRoleStatments` to restrict our [Lambda]() functions to specifically work with our `GeneralLedgerTable` only. Our [Lambda]() functions for this *serverless + microservice* can only access the `GeneralLedgerTable` with the explicit permissions listed in the `Action` block shown. 
+In the final block above we are using the `iamRoleStatments` to restrict our [Lambda]() functions to specifically work with our `GeneralLedgerTable` only. Our [Lambda]() functions for this *serverless + microservice* can only access the `GeneralLedgerTable` with the explicit permissions listed in the `Action` block shown. 
+
+## User Registration & Authentication with [AWS Cognito]()
 
 
 
