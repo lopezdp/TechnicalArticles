@@ -186,10 +186,29 @@ Resources:
           KeyType: HASH
         - AttributeName: invoiceId
           KeyType: RANGE
+
       # Set the capacity based on the stage
       ProvisionedThroughput:
         ReadCapacityUnits: ${self:custom.tableThroughput}
         WriteCapacityUnits: ${self:custom.tableThroughput}
+```
+
+The first thing we define here under the `Resources` declaration is the name of this table which we have appropriately chosen to call our `GeneralLedger`. The actual table that we implement and get back from this [CloudFormation]() template is named after a `custom variable` that we call: `${self:custom.tableName}`. Our `serverless.yml` will generate this table for us dynamically within [AWS]().
+
+We are also configuring two of our table's field attributes that we have called `userId` and `invoiceId` as shown in the example. We complete the implementation of our table by provisioning the read and write capacity of our database using custom variables to describe the load that our tables will need to service as we attract users to our application over time. 
+
+##### Add a DynamoDB Resource to your CloudFormation template
+
+Going back to the `serverless.yml` file that we have in the `root` of our project directory, now I need you to add the following reference to our `GeneralLedgerTable.yml`, as a resource to this project. You will have to replace the `resources` block that is at the very bottom of our `serverless.yml` file. Use the information below to make the adjustments needed:
+
+**Add a DynamoDB Resource**
+
+```
+# Keep resources modular and create each with separate CloudFormation templates
+
+resources:
+  # DynamoDB Services
+  - ${file(resources/GeneralLedgerTable.yml)}
 ```
 
 There are a few considerations you need to make while studying the implementation I have just graced you with. The first and most important thing I would ask you to seriously consider is to **STOP THINKING RELATIONALLY**! This is a [NoSQL]() data model and if you try to build a *Relational Database* out of it you're going to engineer yourself right on out of house and home. Consider it a [NoSQL Best Practice]() to just shove in as much of your data into one table as possible. Therefore, the only thing that you really have to declare and think about ahead of time is a couple of concepts you need to know surrounding [Composite Keys](); Namely, your *NoSQL* [Partition Key]() and [SortKey]().
@@ -228,30 +247,150 @@ We can take advantage of [DynamoDB]() when *stale* data is not an issue, and whe
 
 In forcing you to declare and define your *Partition* and *Sort* key attributes ahead of time, [DynamoDB]() requires you to define the **Access Patterns** that your application will need implemented for your database, and its *schemaless* data store, before your start using it. With [DynamoDB]() you will normalize your data as you query your data store. You will generate your view and normalize your data as you scan or fetch the information you need from your database. 
 
-Ideally, you will aggregate all of the information your application collects, and you will create different views of original data with the model that you define. Your queries will deaggregate the data you gather, to implement your features, as they stream your data in [Real Time]() to your application. More importantly, to generate the views that you will output to your users, [DynamoDB]() will force you to start by *defining the questions that your application needs answered with your queries*. Keeping related data together in each service will let you define the **Access Patterns** needed to use *Sort Keys* effectively to distribute your queries evenly across your NoSQL partitions. To accomplish this [DynamoDB]() give you the following tools to better manipulate and stream your data to your *frontend* views:
+Ideally, you will aggregate all of the information your application collects, and you will create different views of original data with the models that you define. Your queries will deaggregate the data you gather, to implement your features, as they stream your data in [Real Time]() to your application. More importantly, to generate the views that you will output to your users, [DynamoDB]() will force you to start by **defining the questions that your application needs answered with your queries** first! Keeping related data together in each service will let you define the **Access Patterns** needed to use *Sort Keys* effectively so that you can distribute your queries evenly across your NoSQL partitions. To accomplish this [DynamoDB]() give you the following tools to better manipulate and stream your data to your *frontend* views:
 
-1. **Local Secondary Indexes**: These are similar to your *Sort Key* types in that you can define up to 5 **LSI**'s to resort your queries as needed. Defining an additional *Sort Key* in the form of an **LSI** gives you the ability to find the information you need in your database with a different set of **Access Patterns** depending on the view that you need to display to your user. You would use an **LSI** to resort the results of a query with a different field or attribute that you must define ahead of time.
+1. **Local Secondary Indexes**: These are similar to your *Sort Key* types in that you can define up to 5 **LSI**'s to re-Sort your queries as needed. Defining an additional *Sort Key* in the form of an **LSI** gives you the ability to find the information you need in your database with a different set of **Access Patterns** depending on the view that you need to display to your user. You would use an **LSI** to re-Sort the results of a query with a different field or attribute that you must define ahead of time.
 
-2. **Global Secondary Indexes**: A **GSI** is another tool that [DynamoDB]() gives you the ability to query your data with more flexibility and ease. A **GSI** is nothing more than a copy of your table with a different **Partition Key** and **Sort Key** which gives you the ability to store a subset of attributes while emulating the functionality of an **LSI**. [DynamoDB]() lets you define up to 20 **GSI**'s to give you a flexible and *eventually consistent* view of your data that can be *unlimited* in size.
+2. **Global Secondary Indexes**: A **GSI** is another tool that [DynamoDB]() gives you to query your data with more flexibility and ease. A **GSI** is nothing more than a copy of your table with a different **Partition Key** and **Sort Key** which gives you the ability to store a subset of attributes while emulating the functionality of an **LSI**. [DynamoDB]() lets you define up to 20 **GSI**'s to give you a flexible and *eventually consistent* view of your data that can be *unlimited* in size. More **GSI**'s give you the ability to ask more questions of the data you store in your table.
 
-The difference between these tools provided to you in [DynamoDB](), is that you will want to use each of them based on the needs of your queries, or the **Access Patterns** you define when modeling your data. You will want to use either your **LSI** or your *Sort Key*, but not both. Use either, depending on the conditions you present in the questions you determine that your application will need to ask of your *data store*. Use a predefined **GSI** when your application needs to display a view that relies on a completely different *Partition* of data that will need to be obtained with a different **Access Pattern**. [DynamoDB]() is a highly scalable tool that gives you a lot of flexibility to quickly implement and iterate through our application. Now that you understand how to model your data, let's keep implementing the [PayMyInvoice](https://github.com/lopezdp/invoice-log-api) application.
+The difference between these tools provided to you by [DynamoDB](), is that you will want to use each of them based on the needs of your queries, or the **Access Patterns** you define when modeling your data. You will want to use either your **LSI** or your *Sort Key*, but not both. Use either, depending on the conditions you present in the questions that you determine your application will need to ask of your *data store*. Use a predefined **GSI** when your application needs to display a view that relies on a completely different *Partition* of data that will need to be obtained with a different **Access Pattern**. [DynamoDB]() is a highly scalable tool that gives you a lot of flexibility to quickly implement and iterate through our application. Now that you understand how to model your data, let's keep implementing the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) application.
 
 ##### Provisioning Table Throughput Capacity
 
-[DynamDB]() also helps us balance our costs against the availability of our database by letting us autoscale our database to meet the needs of our users. Using the settings in this section will need careful consideration on your part because these can lead an unexpected surge in your [AWS Costs]() if your application goes viral. These settings will allow your database to scale to meet the increasing demand of users on your application. Keeping these settings static would prevent your database from responding to queries that exceed an arbitrary threshold so we will let it grow with the needs of our users.
+[DynamDB]() also helps us balance our costs against the availability of our database by letting us autoscale our database to meet the needs of our users. Using the settings in this section will need careful consideration on your part because these can lead an unexpected surge in your [AWS Costs]() if your application goes viral. These settings will allow your database to scale to meet the increasing demand of users on your application. Keeping these settings static would prevent your database from responding to queries that exceed an arbitrary threshold. Instead, we will let it grow with the needs of our users. We want to register as many users as our application can handle and we want it to scale with the demands of our market. 
+
+> "You have to spend money to make money." - *Anonymous*
 
 1. **Provisioning Throughput (RCU vs WCU)**:
 
+Let's adjust the definition of our `GeneralLedgerTable` that we created above so that it looks a little more like this: 
 
+```
+# NOTE: DynamoDB Serverless Configuration
 
-
-# Set the capacity based on the stage
+Resources:
+  GeneralLedger:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.tableName}
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: invoiceId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: invoiceId
+          KeyType: RANGE
+      # Set the capacity based on the stage
       # ProvisionedThroughput:
         # ReadCapacityUnits: ${self:custom.tableThroughput}
         # WriteCapacityUnits: ${self:custom.tableThroughput}
       # AWS DynamoDB Automatic Provisioning Pricing
       # https://medium.com/@softprops/putting-dynamodb-scalability-knobs-on-auto-pilot-3af8520439c9
       BillingMode: PAY_PER_REQUEST
+
+```
+
+If you notice, you will need to comment out every thing from `# ProvisionedThroughput:` down and then you will need to be sure to add: 
+
+`BillingMode: PAY_PER_REQUEST`
+
+This will tell [CloudFormation]() to configure your [DynamoDB]() and `autoscale` them when the need arises. [AWS]() will bill you for the demand place on the the service alone and nothing more. When peak load decreases, so to will the resources allocated to your service. Collecting this information will help you determine what the best approach will be in the future when considering which configuration options are best for you and your company's situation.
+
+##### Configure [DynamoDB]() as IAC on `serverless.yml`
+
+Next, we need to configure our **Infrastructure As Code** template that we are using to tell [CloudFormation]() how to build and deploy our resources and technology stack on [AWS](). Navigate into the `root` of your project directory and open up the `$ cd ~/services/invoice-log-api/serverless.yml` file, and add your [DynamoDB]() configuration information as shown below. Make sure your `custom` block looks like the version below to tell [CloudFormation]() how to deploy the [DynamoDB]() resources that we will need:
+
+**Serverless.yml custom block**
+
+```
+# configure plugins declared above
+custom:
+  # Stages are based on what is passed into the CLI when running
+  # serverless commands. Or fallback to settings in provider section.
+  stage: ${opt:stage, self:provider.stage}
+  
+  # Set your table name as needed for local testing
+  tableName: ${self:custom.stage}-invoices
+
+  # Set our table throughput for prod & dev stages
+  # tableThroughputs:
+  #   prod: 5
+  #   default: 1
+  # tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
+
+  # Load webpack config
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+  # ServerlessWarmup Configuration
+  # See configuration Options at:
+  # https://github.com/FidelLimited/serverless-plugin-warmup
+  warmup:
+    enabled: true # defaults to false
+    folderName: '_warmup' # Name of folder generated for warmup
+    memorySize: 256
+    events:
+      # Run WarmUp every 720 minutes
+      - schedule: rate(720 minutes) 
+    timeout: 20
+ ```
+
+When we deploy our newly configured [Lambda functions](), we want to set the `stage` of our project to better differentiate where we are in development vs. production at any given time. We will use `$ sls deploy --stage $STAGE` as the command to set the current `stage` of our project when we deploy our *backend functions*. To help us tell our application what `stage` we are working on, we will declare a stage in our [CloudFormation]() template as shown above using: `stage: ${opt:stage, self:provider.stage}`. This mechanism will tell the [Serverless Framework]() and [CloudFormation]() the following:
+
+1. When deploying [CloudFormation]() should begin to look in `opt:stage`, which is the argument that will be passed into the `terminal` when deploying a service. If the condition is not met, then the same statement tells the [Serverless Framework]() to deploy the new service to `self:provider.stage` as the stage declared in the `provider` block.
+
+2. The next line tells us that the stage that we use to deplopy our new services will determine the name of our table: `tableName: ${self:custom.stage}-invoices`. The best practice is to create separate tables dynamically when deploying services to a new environment. to create a clear separation of concerns between the resources that we use for each of our environments we need to deploy one table each to our `dev` and `prod` stages. When this deploys successfully we will have two tables in our [AWS]() account:
+
+    * `dev-invoices`
+
+    * `prod-invoices`
+
+The remaining lines about table `Throughput` above are commented out, but left in place for you to detemine how to statically provision your Read and Write capacity and `Throughput` with [AWS](). In practice, you will need your *production* environment to work with a higher capacity than your *development* environment. In our case we are *autoscaling* our resources on [AWS]() so that our application can grow flexibly with the demand from our users in both `prod` and `dev`.
+
+With so much configuration to accomplish, I am amazed that you are still following along. If you think back to the discussion we about **CI/CD** now you understand why an automated form of *Continuous Delivery or Deployment* is ideal. If you make small changes that can be tested and deployed automatically, you only have to accomplish this setup and configuration once, and from then on ouy your code will update on its own and deplpoy to your users autonomously with every new and successful change that you make.
+
+Moving forward, we need to add a few permissions that will allow your [Lambda]() functions to access your [DynamoDB]() tables that you deploy as *Infrastructure As Code*. In the `provider` block of your `serverless.yml` file, go ahead and add the `iamRoleStatements` section that you see below.
+
+```
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+
+  # Environment variables made available through process.env
+
+  environment:
+    tableName: ${self:custom.tableName}
+
+  # These statements define the acceptable permission policy for our lambda functions
+  # In this case Lambda functions are give permission to access Dynamo
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      # Need to restrict IM Role to the specific table and stage
+      Resource: 
+        -"Fn::GetAtt": [ GeneralLedgerTable, Arn]
+```
+
+To connect to our database we will need to expose a few arguments through the `process.env` variables that [Node.js]() provides to us through our `terminal`. We are using the `environment` block above to tell the [Serverless Framework]() that we will use our environment variables with our [Lambda functions](). Our `tableName` will be exposed to us as a `process.env` reference. 
+
+in the final block above we are using the `iamRoleStatments` to restrict our [Lambda]() functions to specifically work with our `GeneralLedgerTable` only. Our [Lambda]() functions for this *serverless + microservice* can only access the `GeneralLedgerTable` with the explicit permissions listed in the `Action` block shown. 
+
+
+
+  
 
 
 
