@@ -4,7 +4,7 @@
 
 *Publisher: [UniqueSoftwareDevelopment](https://www.uniquesoftwaredev.com)*
 
-*We did not hurt, injur, or maim any animals or ponies throughout the making of this tutorial. We completed all our heroic action sequences in CGI. Furthermore, we are not liable for what you build after learning how to be a Ninja. Never go [Full Ulbricht](https://www.wired.com/2017/05/silk-road-creator-ross-ulbricht-loses-life-sentence-appeal/).*
+*We did not hurt, injure, or maim any animals or ponies throughout the making of this tutorial. We completed all our heroic action sequences in CGI. Furthermore, we are not liable for what you build after learning how to be a Ninja. Never go [Full Ulbricht](https://www.wired.com/2017/05/silk-road-creator-ross-ulbricht-loses-life-sentence-appeal/).*
 
 ## Part 1: How To SetUp Your `local` Serverless Environment
 
