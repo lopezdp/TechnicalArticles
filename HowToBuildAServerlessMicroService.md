@@ -433,7 +433,40 @@ On the other hand, the `identity-pool` that we create, will give our users tempo
 We will need to create a new file and `$ touch ~/services/invoice-log-api/CognitoUserPool.yml` so that we can create a [CloudFormation]() template with the [ServerlessFramework]() to tell [AWS]() how to configure our `user-pool`. Copy and Paste the code below to configure our `user` *authentication* service in [Cognito]() correctly:
 
 ```
-here
+Resources:
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      # Dynamically create a name using the correct stage
+      # Make sure you differentiate from other apps on AWS!
+      UserPoolName: ${self:custom.stage}-InvoiceUserPool
+      # Set the alias using email address
+      UsernameAttributes:
+        - email
+      AutoVerificationAttributes:
+        - email
+
+  CognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      # Dynamically create the appClient name using the correct stage
+      # Make sure you differentiate from other apps on AWS!
+      ClientName: ${self:custom.stage}-PayMeUserPoolClient
+      UserPoolId:
+        Ref: CognitoUserPool
+      ExplicitAuthFlows:
+        - ADMIN_NO_SRP_AUTH
+      GenerateSecret: false
+
+# Output the ID of the user-pool
+Outputs:
+  UserPoolId:
+    Value:
+      Ref: CognitoUserPool
+
+  UserPoolClientId: 
+    Value:
+      Ref: CognitoUserPoolClient
 ```
 
 ### Creating a [Cognito]() `Identity-Pool`
