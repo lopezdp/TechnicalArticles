@@ -639,47 +639,219 @@ resources:
 
 We need a mechanism to get an individual invoice that we need to display to a user of our application. This funcion will need to `GET` an invoice for those who create them and those who receive them from another `user`. We need to make sure we implement a mechanism that will only let a `user` see the invoices that pertain to their specific account.
 
+```
+// Step1: Discuss in tutorial why /lib and response-lib
+// exist and why they are used. (See create)
+import { success, failure } from "./libs/responseLib";
+
+// Discuss in tutorial the need for a Dynamo table
+// and a dynamo table implemented for each microservice
+// Implement service below
+import * as dynamoLib from "./libs/dynamoLib";
+
+export async function main(event, context) {
+  // Request body is passed in as a JSON string in event.body!
+  const data = JSON.parse(event.body);
+
+  // Same as in createInvoice we need to declare the object
+  // that we want to get from the database this time
+  const params = {
+    TableName: process.env.tableName,
+    /* 'Key': this is what will define our partition & sort
+     *        key for the item that we have to retrieve
+     *
+     *    - 'userId': is the IdP identity of the authenticated user
+     *    - 'invoiceId': is the path parameter that we must include
+     *                   in the request to this service
+    */
+
+    Key: {
+      userId: event.requestContext.identity.cognitoIdentityId,
+      invoiceId: event.pathParameters.id
+    }
+  };
+
+  try {
+    const result = await dynamoLib.call("get", params);
+    if (result.Item) {
+      //return the item that we retrieved
+      return success(result.Item);
+    } else {
+      return failure({
+        status: false,
+        error: "Item was not found in the DB."
+      });
+    }
+  } catch ( err ) {
+    return failure({
+      status: false
+    });
+  }
+}
+```
+
 ### Implement `deleteInvoice.js` 
 
 We need a mechanism to delete an individual invoice that we have saved in our application's database under a specific user. This funcion will need to `DELETE` an invoice as triggered by the `user` who created the invoice.
+
+```
+import { success, failure } from "./libs/responseLib";
+
+// Discuss in tutorial the need for a Dynamo table
+// and a dynamo table implemented for each microservice
+// Implement service below
+import * as dynamoLib from "./libs/dynamoLib";
+
+export async function main(event, context) {
+  const params = {
+    TableName: process.env.tableName,
+    /* 'Key': this is what will define our partition & sort
+     *        key for the item that we have to retrieve
+     *
+     *    - 'userId': is the IdP identity of the authenticated user
+     *    - 'invoiceId': is the path parameter that we must include
+     *                   in the request to this service
+    */
+
+    Key: {
+      "userId": event.requestContext.identity.cognitoIdentityId,
+      "invoiceId": event.pathParameters.id
+    }
+  };
+
+  try {
+    const result = await dynamoLib.call("delete", params);
+    return success({
+      status: true
+    });
+  } catch ( err ) {
+    return failure({
+      status: false
+    });
+  }
+}
+```
 
 ### Implement `updateInvoice.js` 
 
 We need a mechanism to update an individual invoice that we have saved in our application's database under a specific user. This funcion will need to `UPDATE` an invoice as triggered by the `user` who created the invoice.
 
+```
+import { success, failure } from "./libs/responseLib";
+
+// Discuss in tutorial the need for a Dynamo table
+// and a dynamo table implemented for each microservice
+// Implement service below
+import * as dynamoLib from "./libs/dynamoLib";
+
+export async function main(event, context) {
+  const data = JSON.parse(event.body);
+
+  const params = {
+    TableName: process.env.tableName,
+    /* 'Key': this is what will define our partition & sort
+    *        key for the item that we have to retrieve
+    *
+    *    - 'userId': is the IdP identity of the authenticated user
+    *    - 'invoiceId': is the path parameter that we must include
+    *                   in the request to this service
+    */
+
+    Key: {
+      // Need a tutorial setting up Cognito!!!!
+      "userId": event.requestContext.identity.cognitoIdentityId,
+      "invoiceId": event.pathParameters.id
+    },
+    /*
+     * 'UpdateExpression' defines the attributes to update
+     *
+     * 'ExpressionAttributeValues' defined the value that
+     *		that we need in UpdateExpression
+     *
+    */
+    UpdateExpression: "SET content = :content, :attachment",
+    ExpressionAttributeValues: {
+      ":attachment": data.attachment || null,
+      ":content": data.content || null
+    },
+    /*
+     * 'ReturnValues' specifies if and how to return our Item's
+     * attributes, where ALL_NEW returns all attributes of the
+     * item after the update.
+     *
+     * Inspect 'result' to verify the values of the different
+     * applications settings that we configure
+     *
+    */
+    ReturnValues: "ALL_NEW"
+  };
+
+  try {
+    const result = await dynamoLib.call("update", params);
+    return success({
+      status: true
+    });
+  } catch ( err ) {
+    return failure({
+      status: false
+    });
+  }
+}
+```
+
 ### Implement `listInvoices.js`
 
 We need a mechanism to list all of the invoices that we have saved in our application's database for a specific user. This funcion will need to `GET` all invoices created by a `user`.
 
+```
+import { success, failure } from "./libs/responseLib";
 
+// Discuss in tutorial the need for a Dynamo table
+// and a dynamo table implemented for each microservice
+// Implement service below
+import * as dynamoLib from "./libs/dynamoLib";
 
+export async function main(event, context) {
 
+  const params = {
+    TableName: process.env.tableName,
+    /*
+     * KeyConditionExpression will define the condition for the
+     * query.
+     * - 'userId = :userId' will only return the Items tht match
+     *          the 'userId' PartitionKey.
+     *
+     * ExpressionAttributeValues will define the value in the
+     * condition.
+     * - ':userId': will define a 'userId' that maps to the
+     *           Identity Pool Cognito Identity Id of the
+     *           authenticated user!!!
+     *
+     */
 
+    KeyConditionExpression: "userId = :userId",
+    ExpressionAttributeValues: {
+      ":userId": event.requestContext.identity.cognitoIdentityId
+    }
+  };
 
+  try {
+    const result = await dynamoLib.call("query", params);
+    // return the matching list of invoices in response.body!
+    return success(result.Items);
+  } catch ( err ) {
+    return failure({
+      status: false
+    });
+  }
+}
+```
 
+### You completed the implementation of your serverless backend application and logic. Good Luck!
 
+## Part 6: Build a React.js Frontend for your PayPal clone. Take home the Cash with the PayMyInvoice App!
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+* [Part 6: Build a React.js Frontend for your PayPal clone](https://github.com/lopezdp/TechnicalArticles/blob/master/BuildAReactJsFrontendforYourPayPalClone.md) - *Not Published.*
 
 
 
