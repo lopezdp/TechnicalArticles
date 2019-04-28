@@ -481,6 +481,20 @@ At this point it should start to look like more of the same as it pertains to yo
 
 3. Finally, using the `Outputs` block shown, we tell [CloudFormation]() to return the `UserPoolId` and the `UserPoolClientId` that we generate dynamically so that we can reference it later.
 
+#### Adding your `InvoiceUserPool` as a `serverless.yml` Resource
+
+Just like we reference our modular [DynamoDB]() table in our `~/services/invoice-log-api/resources` directory from our `serverless.yml` file, we will have to do the same thing for our `user-pool` by replacing the `resources` block in our [CloudFormation]() template with the information below:
+
+```
+# Keep resources modular and create each with separate CloudFormation templates
+resources:
+  # DynamoDB Service
+  - ${file(resources/GeneralLedgerTable.yml)}
+
+  # Cognito User-Pool Service
+  - ${file(resources/CognitoUserPool.yml)}
+```
+
 ### Creating a [Cognito]() `Identity-Pool`
 
 
