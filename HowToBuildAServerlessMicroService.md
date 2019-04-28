@@ -502,8 +502,101 @@ Earlier we discussed using a [Cognito]() `identity-pool` to give our users tempo
 We will need to create a new file and `$ touch ~/services/invoice-log-api/resources/CognitoIdentityPool.yml` so that we can create a [CloudFormation]() template with the [ServerlessFramework]() to tell [AWS]() how to configure our `identity-pool`. Copy and Paste the code below to configure our `identity-pool` correctly:
 
 ```
-Add implementation here...
+Resources:
+  # This is the fed IdP that will auth with our user-pool
+  CognitoIdentityPool:
+    Type: AWS::Cognito::IdentityPool
+    Properties:
+      # Dynamically create a name using the correct stage
+      # Make sure you differentiate from other apps on AWS!
+      IdentityPoolName: ${self:custom.stage}-InvoiceIdentityPool
+      # This will prevent unauthenticated access to platform
+      AllowUnauthenticatedIdentities: false
+      # Configure User Pool
+      CognitoIdentityProviders:
+        - ClientId:
+            Ref: CognitoUserPoolClient
+          ProviderName:
+            Fn::GetAtt: [ "CognitoUserPool", "ProviderName" ]
+
+  # IAM Role for user-pool
+  CognitoIdentityPoolRoles:
+    Type: AWS::Cognito::IdentityPoolRoleAttachment
+    Properties:
+      IdentityPoolId:
+        Ref: CognitoIdentityPool
+      Roles:
+        authenticated:
+          Fn::GetAtt: [CognitoAuthRole, Arn]
+
+  # IAM role for authentication of a user
+  CognitoAuthRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument: 
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Federated: 'cognito-identity.amazonaws.com'
+            Action:
+              - 'sts.AssumeRoleWithWebIdentity'
+            Condition:
+              StringEquals:
+                'cognito-identity.amazonaws.com:aud':
+                  Ref: CognitoIdentityPool
+              'ForAnyValue:StringLike':
+                'cognito-identity.amazonaws.com:amr': authenticated
+      Policies:
+        - PolicyName: 'CognitoAuthorizedPolicy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: 'Allow'
+                Action:
+                  - 'mobileanalytics:PutEvents'
+                  - 'cognito-sync:*'
+                  - 'cognito-identity:*'
+                Resource: '*'
+
+              # Users have permission to invoke API
+              - Effect: 'Allow'
+                Action:
+                  - 'execute-api:Invoke'
+                Resource:
+                  Fn::Join:
+                    - ''
+                    -
+                      - 'arn:aws:execute-api:'
+                      - Ref: AWS::Region
+                      - ':'
+                      - Ref: AWS::AccountId
+                      - ':'
+                      - Ref: ApiGatewayRestApi
+                      - '/*'
+
+              # Users have permission to upload to their folder in s3
+              - Effect: 'Allow'
+                Action:
+                  - 's3:*'
+                Resource:
+                  - Fn::Join:
+                    - ''
+                    -
+                      - Fn::GetAtt: [AttachmentsBucket, Arn]
+                      - '/PrivateDirectory/'
+                      - '$'
+                      - '{cognito-identity.amazonaws.com:sub}/*'
+
+# Output the ID of the identity-pool
+Outputs:
+  IdentityPoolId:
+    Value:
+      Ref: CognitoIdentityPool
 ```
+
+
 
 
 
