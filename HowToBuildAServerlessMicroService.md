@@ -430,7 +430,11 @@ On the other hand, the `identity-pool` that we create, will give our users tempo
 
 *Infrastructure As Code* is a great way to implement [Cognito]() and the tool set you will use on your application to deploy registration, authentication, and authorization of a `user`. You can complete the implementation of a `user-pool` on the [AWS Console](), but we will focus on completing what we need programatically so that we can commit all of our changes to `source` so that our **CI/CD** pipeline can deploy our changes automatically.
 
+We will need to create a new file and `$ touch ~/services/invoice-log-api/CognitoUserPool.yml` so that we can create a [CloudFormation]() template with the [ServerlessFramework]() to tell [AWS]() how to configure our `user-pool`. Copy and Paste the code below to configure our `user` *authentication* service in [Cognito]() correctly:
 
+```
+here
+```
 
 ### Creating a [Cognito]() `Identity-Pool`
 
