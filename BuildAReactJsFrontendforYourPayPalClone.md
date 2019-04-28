@@ -31,7 +31,7 @@ This frontend client discussed above uses the backend logic provided by the impl
 
 ## Start a New React.js Project
 
-Now that we have a bunch of fancy logic on our [AWS Cloud](), we need to develop a pretty user interface that we can use to attract real *humans* to our money trap, I mean... *Wallet*. Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined]().
+Now that we have a bunch of fancy logic on our [AWS Cloud](), we need to develop a pretty user interface that we can use to attract real *humans* to our money trap, I mean... *Wallet*. Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined](https://github.com/facebook/create-react-app).
 
 
 
