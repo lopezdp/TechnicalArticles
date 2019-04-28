@@ -502,6 +502,7 @@ Earlier we discussed using a [Cognito]() `identity-pool` to give our users tempo
 We will need to create a new file and `$ touch ~/services/invoice-log-api/resources/CognitoIdentityPool.yml` so that we can create a [CloudFormation]() template with the [ServerlessFramework]() to tell [AWS]() how to configure our `identity-pool`. Copy and Paste the code below to configure our `identity-pool` correctly:
 
 ```
+Add implementation here...
 ```
 
 
