@@ -430,7 +430,7 @@ On the other hand, the `identity-pool` that we create, will give our users tempo
 
 *Infrastructure As Code* is a great way to implement [Cognito]() and the tool set you will use on your application to deploy registration, authentication, and authorization of a `user`. You can complete the implementation of a `user-pool` on the [AWS Console](), but we will focus on completing what we need programatically so that we can commit all of our changes to `source` so that our **CI/CD** pipeline can deploy our changes automatically.
 
-We will need to create a new file and `$ touch ~/services/invoice-log-api/CognitoUserPool.yml` so that we can create a [CloudFormation]() template with the [ServerlessFramework]() to tell [AWS]() how to configure our `user-pool`. Copy and Paste the code below to configure our `user` *authentication* service in [Cognito]() correctly:
+We will need to create a new file and `$ touch ~/services/invoice-log-api/resources/CognitoUserPool.yml` so that we can create a [CloudFormation]() template with the [ServerlessFramework]() to tell [AWS]() how to configure our `user-pool`. Copy and Paste the code below to configure our `user` *authentication* service in [Cognito]() correctly:
 
 ```
 Resources:
@@ -468,6 +468,18 @@ Outputs:
     Value:
       Ref: CognitoUserPoolClient
 ```
+
+At this point it should start to look like more of the same as it pertains to your `serverless.yml` file. What you should notice after we complete this implementation of our application's `user-pool` as *Infrastructure As Code*, is that we are using the `~/services/invoice-log-api/resources` directory as a tool to make our *Operations* or *Network Infrastructure* code more **modular**. In the next section we will show you how we reference the `user-pool` module as a `serverless.yml` resource, for now though, let's take a look at the way we implemented our `user-pool`:
+
+1. The `UserPoolName` property tells us that the stage that we use to deploy our service will determine the name of our `user-pool` with the statement: `UserPoolName: ${self:custom.stage}-InvoiceUserPool`. The best practice is to create a separate `user-pool` dynamically when deploying services to a new environment. To create a clear separation of concerns between the resources that we use for each of our environments, we need to deploy one `user-pool` each to our `dev` and `prod` stages. When this deploys successfully we will have the following resources in our [AWS]() account:
+
+    * `dev-InvoiceUserPool`
+
+    * `prod-InvoiceUserPool`
+
+2. We want our `user` to log into our application with their *email address* as their `username`. With our [CloudFormation]() template we tell [Cognito]() and our new `*-InvoiceUserPool`, to set the `UsernameAttributes` to `email` as shown above.
+
+3. Finally, using the `Outputs` block shown, we tell [CloudFormation]() to return the `UserPoolId` and the `UserPoolClientId` that we generate dynamically so that we can reference it later.
 
 ### Creating a [Cognito]() `Identity-Pool`
 
