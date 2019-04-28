@@ -414,17 +414,24 @@ The typical `user` of the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/i
 
 [Amazon Cognito]() is both [**PCI DSS**]() and [**HIPAA**]() compliant and is ready to deploy to *production*. The idea is to create a *directory of users* with your `user-pool` that will allow `users` to sign in to our application. `AWS-Amplify` is the [Amazon SDK]() that lets us access the `user profiles` that are created for each of our `users` whether they sign up with our implementation of [Cognito](), or using a *federated identity* through a thrid-party **IdP** we enable on our application.
 
-On the other hand, the `identity-pool` that we create, will give our users temporary access credentials, much like our [IAM]() service roles provide, so that our `user` can obtain access to the [AWS]() services and resource like [DynamoDB]() and [S3](), that we are using to extend the features and functionality of our application. Using both a `user-pool` and an `identity-pool` together in [Amazon Cognito](), we will implement a three step process that resembles the following image:
+On the other hand, the `identity-pool` that we create, will give our users temporary access credentials, much like our [IAM]() service roles provide, so that our `user` can obtain access to the [AWS]() services and resources like [DynamoDB]() and [S3](), that we are using to extend the features and functionality of our application. Using both a `user-pool` and an `identity-pool` together in [Amazon Cognito](), we will implement a three step process that resembles the following image:
 
 **Users and their Identities, Together forever**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/3StepCognito.png "Together at last!!")
 
-1. Step 1 
+1. First, when the `user` authenticates themselves against our `user-pool`, [Cognito]() will return a `token` that the application will use to validate the `user`'s authentication status as they navigate the app.
 
-2. Step 2
+2. After the `user` authenticates against the `user-pool`, the application will map the user's `token` to the [AWS]() credentials provided by the [Cognito]() `identity-pool`.
 
-3. Step 3
+3. The [AWS]() credentials provided to our `user` by our application's `identity-pool` are now available to use as credentials for services and resources like [DynamoDB]() and [S3]().
+
+### Creating a [Cognito]() `User-Pool`
+
+### Creating a [Cognito]() `Identity-Pool`
+
+
+
 
 
 
