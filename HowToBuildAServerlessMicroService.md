@@ -497,6 +497,13 @@ resources:
 
 ### Creating a [Cognito]() `Identity-Pool`
 
+Earlier we discussed using a [Cognito]() `identity-pool` to give our users temporary access credentials, much like our [IAM]() service roles provide, so that our `user` can obtain access to the [AWS]() services and resources like [DynamoDB]() and [S3](), that we are using to extend the features and functionality of our application. We need to complete this with *Infrastructure As Code* so that our `Identity-Pool` knows that it should use the `User-Pool` above to `authenticate` our applications's *users*. 
+
+We will need to create a new file and `$ touch ~/services/invoice-log-api/resources/CognitoIdentityPool.yml` so that we can create a [CloudFormation]() template with the [ServerlessFramework]() to tell [AWS]() how to configure our `identity-pool`. Copy and Paste the code below to configure our `identity-pool` correctly:
+
+```
+```
+
 
 
 
