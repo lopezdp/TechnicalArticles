@@ -405,14 +405,14 @@ Now that we have created our first [Lambda]() function, called `CreateInvoice.js
 
 Using [AWS Cognito](https://aws.amazon.com/cognito), we will be able to easily implement `user` registration, authentication, authorization, and management for our application. [AWS Cognito](https://aws.amazon.com/cognito) is flexible enough to let us implement [SSO]() using [Federated Identities]() with third party [Identity Providers (IdP)]() like [Facebook](), [LinkedIn](), or [Twitter]() also. Our `user-pool` on [Amazon Cognito]() will manage and handle the load of responses that include the authorization `tokens` returned from each of these social media sign-in *federations* and **SAML IdPs**. 
 
-`User Pools` and `Identity Pools` are the two primary components that you need to consider when implementing [Amazon Cognito](). You have a choice of implementing these components together or independently of each other. There are a few [**Common Amazon Cognito Scenarios**](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-scenarios.html) that you can read about, but in our case we will be concerned with authenticating the `users` of our application to authorize them to access and use another [AWS]() service that extends our platform.
+`User Pools` and `Identity Pools` are the two primary components that you need to consider when implementing [Amazon Cognito](). You have a choice of implementing these components together or independently of each other. There are a few [**Common Amazon Cognito Scenarios**](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-scenarios.html) that you can read about, but in our case we will be concerned with authenticating the `users` of our application to authorize them to access and use other [AWS]() services that extend our platform.
 
 
 ### Implementing both [Cognito]() `User Pool` and `Identity Pool` services together
 
 The typical `user` of the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) application will require access to other [AWS]() services like [DynamoDB](), [S3](), [API Gateway](), and more that we may declare throughout the implementation of this application after they register and log into our software. We must properly deploy a strategy that will result in the security of our application, and the effective use of our tool set which will let our `user` both register and access the services on our platform that are provided to us by [AWS]().
 
-[Amazon Cognito]() is both [**PCI DSS**]() and [**HIPAA**]() compliant and is ready to deploy to *production*. The idea is to create a *directory of users* with your `user-pool` that will allow `users` to sign in to our application. `AWS-Amplify` is the [Amazon SDK]() that lets us access the `user profiles` that are created for each of our `users` whether they sign up with our implementation of [Cognito](), or using a *federated identity* through a thrid-party **IdP** we enable on our application.
+[Amazon Cognito]() is both [**PCI DSS**]() and [**HIPAA**]() compliant and is ready to deploy to *production*. The idea is to create a *directory of users* with your `user-pool` that will allow `users` to sign in to our application. `AWS-Amplify` is the [Amazon SDK]() that lets us access the `user profiles` that are created for each of our `users` whether they sign up with our implementation of [Cognito](), or using a *federated identity* through a thrid-party **IdP** that we enable on our application.
 
 On the other hand, the `identity-pool` that we create, will give our users temporary access credentials, much like our [IAM]() service roles provide, so that our `user` can obtain access to the [AWS]() services and resources like [DynamoDB]() and [S3](), that we are using to extend the features and functionality of our application. Using both a `user-pool` and an `identity-pool` together in [Amazon Cognito](), we will implement a three step process that resembles the following image:
 
@@ -427,6 +427,10 @@ On the other hand, the `identity-pool` that we create, will give our users tempo
 3. The [AWS]() credentials provided to our `user` by our application's `identity-pool` are now available to use as credentials for services and resources like [DynamoDB]() and [S3]().
 
 ### Creating a [Cognito]() `User-Pool`
+
+*Infrastructure As Code* is a great way to implement [Cognito]() and the tool set you will use on your application to deploy registration, authentication, and authorization of a `user`. You can complete the implementation of a `user-pool` on the [AWS Console](), but we will focus on completing what we need programatically so that we can commit all of our changes to `source` so that our **CI/CD** pipeline can deploy our changes automatically.
+
+
 
 ### Creating a [Cognito]() `Identity-Pool`
 
