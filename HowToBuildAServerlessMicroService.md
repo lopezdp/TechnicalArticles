@@ -510,8 +510,10 @@ Resources:
       # Dynamically create a name using the correct stage
       # Make sure you differentiate from other apps on AWS!
       IdentityPoolName: ${self:custom.stage}-InvoiceIdentityPool
+
       # This will prevent unauthenticated access to platform
       AllowUnauthenticatedIdentities: false
+
       # Configure User Pool
       CognitoIdentityProviders:
         - ClientId:
@@ -595,6 +597,42 @@ Outputs:
     Value:
       Ref: CognitoIdentityPool
 ```
+
+Again, this is pretty much the same thing we are doing in the *Infrastructure As Code* implementation for our [Cognito]() `user-pool`. Our [CloudFormation]() templates make this look more complex than it is, and if you just take some time to read through the `property` and `resource` declarations in the file you should be able to make sense of this while reconciling the information deployed here with the information on your [AWS Console]() and what it shows you in [Cognito]().
+
+1. Just like we have done for every other service on [AWS]() that we have implemented with *Infrastructure As Code*, we name our `identity-pool` depending on the stage that we deploy our service to from the `terminal`. We name our `identity-pool` using the statement: `IdentityPoolName: ${self:custom.stage}-InvoiceIdentityPool`.
+
+2. We have to explicitly declare that only users who log into our applicagtion with [Cognito]() are authorized to access the `root` directory of our application with the next line of *IAC* shown: `AllowUnauthenticatedIdentities: false`
+
+3. You will not believe this, but we also have to tell [AWS]() that our `IdP` will authorize the users in our directory to use the [AWS]() services we have deployed. The statement below references the `CognitoUserPoolClient` we defined in our `user-pool` in the previous section: 
+```
+# Configure User Pool
+      CognitoIdentityProviders:
+        - ClientId:
+            Ref: CognitoUserPoolClient
+```
+
+4. We have to consider that the users we authenticate will need our application to attach the [IAM]() roles to the identities in our `user-pool` directory. The implementation above is formatted according to [CloudFormation]() *Best Practices*
+
+5. The [ServerlessFramework]() creates an `ApiGatewayRestApi` **Ref** everytime we implement a serverless endpoint in our `serverless.yml` file. The `- Ref: ApiGatewayRestApi` statement just refers back to the resource deployed to [API Gateway]() by [CloudFormation]().
+
+The final result of the implementation above is the `IdentityPoolId` that is returned to our application by the `Outputs` block. This is what our application uses to make use of the services we have deployed on [AWS]() to support our application in the *wild* later on.
+
+#### Adding your `InvoiceIdentityPool` as a `serverless.yml` Resource
+
+Just like we reference our modular [DynamoDB]() table in our `~/services/invoice-log-api/resources` directory from our `serverless.yml` file (and just like our implementation of the `user-pool`), we will have to do the same thing for our `identity-pool` by replacing the `resources` block in our [CloudFormation]() template with the information below:
+
+```
+# Keep resources modular and create each with separate CloudFormation templates
+resources:
+  # DynamoDB Service
+  - ${file(resources/GeneralLedgerTable.yml)}
+
+  # Cognito User-Pool and Identity-Pool Services
+  - ${file(resources/CognitoUserPool.yml)}
+  - ${file(resources/CognitoIdentityPool.yml)}
+```
+
 
 
 
