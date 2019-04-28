@@ -164,9 +164,11 @@ We will use a loosely coupled architecture that makes it easy to develop, test, 
 
 We'll get to the implementation of our [DynamoDb]() tables soon enough [*Danial-san*](). You'll need to show me that you can still make them [#AlphaMoves]() though, so take it easy and let's just take this one step at a time. For now, you'll need to get back to [*Paint The Fence*](https://www.youtube.com/watch?v=R37pbIySnjg).
 
+**Get To Work**
+
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PaintTheFence.png "Be the ball...")
 
-We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* project. Proceed to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() tables that we are going to use for our new *B2B* [PayPal]() clone that we call, **PayMyInvoice**. Inside of your new `resources` directory that you have created for your *serverless + microservice*, I will need you to go ahead and create a new file called `GeneralLedgerTable.yml`. Below is a `gist` of what you  will need to implement in this new file of yours [Bud](https://www.youtube.com/watch?v=6CMZSw7cS8M):
+We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* project. Proceed to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() tables that we are going to use for our new *B2B* [PayPal]() clone that we call, **PayMyInvoice**. Inside of your new `resources` directory that you have created for your *serverless + microservice*, I will need you to go ahead and create a new file called `GeneralLedgerTable.yml`. Below is a `gist` of what you will need to implement in this new file of yours [Bud](https://www.youtube.com/watch?v=6CMZSw7cS8M):
 
 > "Life all comes down to a few moments... This is one of them." - *Bud Fox, WallStreet*
 
@@ -203,7 +205,7 @@ We are also configuring two of our table's field attributes that we have called 
 
 ### Add a DynamoDB Resource to your CloudFormation template
 
-Going back to the `serverless.yml` file that we have in the `root` of our project directory, now I need you to add the following reference to our `GeneralLedgerTable.yml`, as a resource to this project. You will have to replace the `resources` block that is at the very bottom of our `serverless.yml` file. Use the information below to make the adjustments needed:
+Going back to the `serverless.yml` file that we have in the `root` of our project directory, now I need you to add the following reference to our `GeneralLedgerTable.yml`, as a resource to this project. You will have to replace the `resources` block that is at the very bottom of our `serverless.yml` file. Use the information below to make the adjustments that we need to make:
 
 **Add a DynamoDB Resource**
 
@@ -215,25 +217,25 @@ resources:
   - ${file(resources/GeneralLedgerTable.yml)}
 ```
 
-There are a few considerations you need to make while studying the implementation I have just graced you with. The first and most important thing I would ask you to seriously consider is to **STOP THINKING RELATIONALLY**! This is a [NoSQL]() data model and if you try to build a *Relational Database* out of it you're going to engineer yourself right on out of house and home. Consider it a [NoSQL Best Practice]() to just shove in as much of your data into one table as possible. Therefore, the only thing that you really have to declare and think about ahead of time is a couple of concepts you need to know surrounding [Composite Keys](); Namely, your *NoSQL* [Partition Key]() and [SortKey]().
+There are a few considerations we need to make while studying the implementation I have just graced you with. The first and most important thing I would ask you to seriously consider is to **STOP THINKING RELATIONALLY**! This is a [NoSQL]() data model and if you try to build a *Relational Database* out of it, you're going to engineer yourself right on out of house and home. Consider it a [NoSQL Best Practice](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html) to just shove in as much of your data into one table as possible. Therefore, the only thing that you really have to declare and think about ahead of time is a couple of concepts you need to know surrounding [Composite Keys](); Namely, your *NoSQL* [Partition Key]() and [SortKey]().
 
-Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Magic* that is the **M**assively **A**ggregated **D**ata models that we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**. 
+Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Magic* that are the **M**assively **A**ggregated **D**ata models that we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**. 
 
 > The lesson to learn is that it does not matter how bad it gets, the only way to become a real *professional* is to realize that it is all a mess and that our job as *Software Engineers* is to figure out some way to help our organizations achieve their goals and objectives. That is all we get paid to do; We get paid to implement the ideas of those who are in charge. If you ask me, this is where the greatest opportunities reside.
 
-Learn [DynamoDB]() and become an expert at its [Best Practices](), the quicker you can learn to adapt to changing market conditions, the better of an engineer you will become for it.
+Learn [DynamoDB]() and become an expert at its [Best Practices](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html), the quicker you can learn to adapt to changing market conditions, the better of an engineer you will become for it.
 
 ### [DynamoDB]() Key Types
 
 `Key` Types determine how your application can access the `data` it collects later on. There are two `Key` types you can use to define for your table, furthermore all Key Type Attributes **MUST** be decided upon in advance. We can use either `SimpleKey` or `CompositeKey` types. To take advantage of the [Distributed Hash Map Architecture]() that enables [DynamoDB]()'s high performance as a `Key:Value` *Document Storage* database, we will use a `CompositeKey`.
 
-The simplicity that [DynamoDB]() provides you with is that it is *Schemaless* in that it does not require you to define every field you need for this service ahead of time. The only two fields we do need to declare now however are as follows:
+The simplicity that [DynamoDB]() provides you with is that it is *Schemaless* in that it does not require you to define every field you need for this service ahead of time. The only two fields we do need to declare now, however, are as follows:
 
   1. **Partition Keys**: These will uniquely identify a *Partition* of records that you will have stored in your *NoSQL* table. In our case we have called our table `/resources/GeneralLedgerTable.yml`. There are very few use cases that justify multiple tables. In this new reality you want to implement **ONLY ONE TABLE** that is going to partition our data in a distributed fashion so that we can sort through out data efficiently. 
 
-  2. **Sort Keys**: This **Key** will have a **Value** that will differentiate our `Items` within a distributed *Partition* that persists data to our *document storage* system. This **Sort Key**, also known as a `RANGE` key, will be combioned with our **Partition Key** to let [DynamoDB]() use it to catalog our information within its data store according to the relationship of the `Item` to its `partition:sort` *composite key*. This **Sort Key** will alow us to *Sort* the data stored within a given **Partition** so that we can filter out our *Items* using a specific set of filters and conditions. Later we will show you the tools that [DynamoDB]() gives you to create different **Access Patterns** that will let your sort your data and the **Items** in your *document storage* system in different ways.
+  2. **Sort Keys**: This **Key** will have a **Value** that will differentiate our `Items` within a distributed *Partition* that persists data to our *document storage* system. This **Sort Key**, also known as a `RANGE` key, will be combioned with our **Partition Key** to let [DynamoDB]() use it to catalog our information within its data store according to the relationship of the `Item` to its `partition:sort` *composite key*. This **Sort Key** will allow us to *Sort* the data stored within a given **Partition** so that we can filter out our *Items* using a specific set of filters and conditions. Later we will show you the tools that [DynamoDB]() gives you to create different **Access Patterns** that will let your sort your data and the **Items** in your *document storage* system in different ways.
 
-The thing to remember about *Composite Keys* is that all you *Items* are stored together if they share a *Partition Key*. Each `Item` is sorted within this *Partition*, and sorted within the [DynamoDB]() physical storage system using the value of its *Sort Key*. 
+The thing to remember about *Composite Keys* is that all your *Items* are stored together if they share a *Partition Key*. Each `Item` is sorted within this *Partition*, and sorted within the [DynamoDB]() physical storage system using the value of its *Sort Key*. 
 
 *Sort Keys*, if designed correctly will allow you to eliminate complex `JOIN` statements in exchange for *Composite Keys* that allow you to `query` *Composite Data* that you will aggregate into one table. The idea is to keep related data together under the roof of one *serverless + microservice*, to create aggregated tables that allow you to create **views** of the data you collect from the user. To accomplish this, [DynamoDB]() gives you a couple of tools to help you address *Complex Queries* that you will have to solve for to build an application that your users will want to use.
 
@@ -249,13 +251,15 @@ We can take advantage of [DynamoDB]() when *stale* data is not an issue, and whe
 
 ---> NEED AN IMAGE HERE <---
 
-In forcing you to declare and define your *Partition* and *Sort* key attributes ahead of time, [DynamoDB]() requires you to define the **Access Patterns** that your application will need implemented for your database, and its *schemaless* data store, before your start using it. With [DynamoDB]() you will normalize your data as you query your data store. You will generate your view and normalize your data as you scan or fetch the information you need from your database. 
+In forcing you to declare and define your *Partition* and *Sort* key attributes ahead of time, [DynamoDB]() requires you to define the **Access Patterns** that your application will need to implement to query your database, and its *schemaless* data store, before you start using it. With [DynamoDB]() you will normalize your data as you query your data store. You will generate your view and normalize your data as you scan or fetch the information you need from your database. 
 
-Ideally, you will aggregate all of the information your application collects, and you will create different views of original data with the models that you define. Your queries will deaggregate the data you gather, to implement your features, as they stream your data in [Real Time]() to your application. More importantly, to generate the views that you will output to your users, [DynamoDB]() will force you to start by **defining the questions that your application needs answered with your queries** first! Keeping related data together in each service will let you define the **Access Patterns** needed to use *Sort Keys* effectively so that you can distribute your queries evenly across your NoSQL partitions. To accomplish this [DynamoDB]() give you the following tools to better manipulate and stream your data to your *frontend* views:
+Ideally, you will aggregate all of the information your application collects, and you will create different views of original data with the models that you define. Your queries will deaggregate the data you gather, to implement your features, as they stream your data in [Real Time]() to your application. More importantly, to generate the views that you will output to your users, [DynamoDB]() will force you to start by **defining the questions that your application needs answered with your queries** first! 
 
-1. **Local Secondary Indexes**: These are similar to your *Sort Key* types in that you can define up to 5 **LSI**'s to re-Sort your queries as needed. Defining an additional *Sort Key* in the form of an **LSI** gives you the ability to find the information you need in your database with a different set of **Access Patterns** depending on the view that you need to display to your user. You would use an **LSI** to re-Sort the results of a query with a different field or attribute that you must define ahead of time.
+Keeping related data together in each service will let you define the **Access Patterns** needed to use your *Composite Primary:Sort Keys* effectively so that you can distribute your queries evenly across your NoSQL partitions. To accomplish this [DynamoDB]() give you the following tools to better manipulate and stream your data to your *frontend* views:
 
-2. **Global Secondary Indexes**: A **GSI** is another tool that [DynamoDB]() gives you to query your data with more flexibility and ease. A **GSI** is nothing more than a copy of your table with a different **Partition Key** and **Sort Key** which gives you the ability to store a subset of attributes while emulating the functionality of an **LSI**. [DynamoDB]() lets you define up to 20 **GSI**'s to give you a flexible and *eventually consistent* view of your data that can be *unlimited* in size. More **GSI**'s give you the ability to ask more questions of the data you store in your table.
+1. **Local Secondary Indexes**: These are similar to your *Sort Key* types in that you can define up to 5 **LSI**'s to re-Sort your queries within the same *Partition*, as needed. Defining an additional *Sort Key* in the form of an **LSI** gives you the ability to find the information you need in your database with a different set of **Access Patterns** depending on the view that you need to display to your user. You would use an **LSI** to re-Sort the results of a query with a different field or attribute that you must define ahead of time.
+
+2. **Global Secondary Indexes**: A **GSI** is another tool that [DynamoDB]() gives you to query your data with more flexibility and ease. A **GSI** is nothing more than a copy of your table with a different **Partition Key** and **Sort Key** that gives you the ability to store a subset of attributes while emulating the functionality of an **LSI**. [DynamoDB]() lets you define up to 20 **GSI**'s to give you a flexible and *eventually consistent* view of your data that can be *unlimited* in size. More **GSI**'s give you the ability to ask more questions of the data you store in your table.
 
 The difference between these tools provided to you by [DynamoDB](), is that you will want to use each of them based on the needs of your queries, or the **Access Patterns** you define when modeling your data. You will want to use either your **LSI** or your *Sort Key*, but not both. Use either, depending on the conditions you present in the questions that you determine your application will need to ask of your *data store*. Use a predefined **GSI** when your application needs to display a view that relies on a completely different *Partition* of data that will need to be obtained with a different **Access Pattern**. [DynamoDB]() is a highly scalable tool that gives you a lot of flexibility to quickly implement and iterate through our application. Now that you understand how to model your data, let's keep implementing the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) application.
 
@@ -301,7 +305,7 @@ If you notice, you will need to comment out every thing from `# ProvisionedThrou
 
 `BillingMode: PAY_PER_REQUEST`
 
-This will tell [CloudFormation]() to configure your [DynamoDB]() and `autoscale` them when the need arises. [AWS]() will bill you for the demand place on the the service alone and nothing more. When peak load decreases, so to will the resources allocated to your service. Collecting this information will help you determine what the best approach will be in the future when considering which configuration options are best for you and your company's situation.
+This will tell [CloudFormation]() to configure your [DynamoDB]() to `autoscale` your tables when the need arises. [AWS]() will bill you for the demand placed on the the service alone and nothing more. When peak load decreases, so to will the resources allocated to your service. Collecting this information will help you determine what the best approach will be in the future when considering which configuration options are best for you and your company's situation.
 
 ### Configure [DynamoDB]() as IAC on `serverless.yml`
 
@@ -319,6 +323,9 @@ custom:
   # Set your table name as needed for local testing
   tableName: ${self:custom.stage}-invoices
 
+  # Comment out these settings because we are now on AUTOSCALE
+  # and we are using the BillingMode: PAY_PER_REQUEST setting
+  #
   # Set our table throughput for prod & dev stages
   # tableThroughputs:
   #   prod: 5
@@ -338,16 +345,16 @@ custom:
     folderName: '_warmup' # Name of folder generated for warmup
     memorySize: 256
     events:
-      # Run WarmUp every 720 minutes
-      - schedule: rate(720 minutes) 
+      # Run WarmUp every 5 minutes
+      - schedule: rate(5 minutes) 
     timeout: 20
  ```
 
 When we deploy our newly configured [Lambda functions](), we want to set the `stage` of our project to better differentiate where we are in development vs. production at any given time. We will use `$ sls deploy --stage $STAGE` as the command to set the current `stage` of our project when we deploy our *backend functions*. To help us tell our application what `stage` we are working on, we will declare a stage in our [CloudFormation]() template as shown above using: `stage: ${opt:stage, self:provider.stage}`. This mechanism will tell the [Serverless Framework]() and [CloudFormation]() the following:
 
-1. When deploying [CloudFormation]() should begin to look in `opt:stage`, which is the argument that will be passed into the `terminal` when deploying a service. If the condition is not met, then the same statement tells the [Serverless Framework]() to deploy the new service to `self:provider.stage` as the stage declared in the `provider` block.
+1. When deploying, [CloudFormation]() should begin to look in `opt:stage` first, which is the argument that will be passed into the `terminal` when deploying a service. If the condition is not met, then the same statement tells the [Serverless Framework]() to deploy the new service to `self:provider.stage` instead, as the stage declared in the `provider` block.
 
-2. The next line tells us that the stage that we use to deplopy our new services will determine the name of our table: `tableName: ${self:custom.stage}-invoices`. The best practice is to create separate tables dynamically when deploying services to a new environment. to create a clear separation of concerns between the resources that we use for each of our environments we need to deploy one table each to our `dev` and `prod` stages. When this deploys successfully we will have two tables in our [AWS]() account:
+2. The next line tells us that the stage that we use to deplopy our new services will determine the name of our table: `tableName: ${self:custom.stage}-invoices`. The best practice is to create separate tables dynamically when deploying services to a new environment. To create a clear separation of concerns between the resources that we use for each of our environments, we need to deploy one table each to our `dev` and `prod` stages. When this deploys successfully we will have two tables in our [AWS]() account:
 
     * `dev-invoices`
 
@@ -355,9 +362,9 @@ When we deploy our newly configured [Lambda functions](), we want to set the `st
 
 The remaining lines about table `Throughput` above are commented out, but left in place for you to detemine how to statically provision your Read and Write capacity and `Throughput` with [AWS](). In practice, you will need your *production* environment to work with a higher capacity than your *development* environment. In our case we are *autoscaling* our resources on [AWS]() so that our application can grow flexibly with the demand from our users in both `prod` and `dev`.
 
-With so much configuration to accomplish, I am amazed that you are still following along. If you think back to the discussion we about **CI/CD** now you understand why an automated form of *Continuous Delivery or Deployment* is ideal. If you make small changes that can be tested and deployed automatically, you only have to accomplish this setup and configuration once, and from then on ouy your code will update on its own and deplpoy to your users autonomously with every new and successful change that you make.
+With so much configuration to accomplish, I am amazed that you are still following along. If you think back to the discussion we had about **CI/CD** now you understand why an automated form of *Continuous Delivery or Deployment* is ideal. If you make small changes that can be tested and deployed automatically, you only have to accomplish this setup and configuration once, and from then on, your code will update on its own and deploy to your users autonomously with every new and successful change that you make.
 
-Moving forward, we need to add a few permissions that will allow your [Lambda]() functions to access your [DynamoDB]() tables that you deploy as *Infrastructure As Code*. In the `provider` block of your `serverless.yml` file, go ahead and add the `iamRoleStatements` section that you see below.
+Moving forward, we need to add a few permissions that will allow your [Lambda]() functions to access your [DynamoDB]() tables that you deploy with *Infrastructure As Code*. In the `provider` block of your `serverless.yml` file, go ahead and add the `iamRoleStatements` section that you see below.
 
 ```
 provider:
@@ -393,6 +400,8 @@ To connect to our database we will need to expose a few arguments through the `p
 In the final block above we are using the `iamRoleStatments` to restrict our [Lambda]() functions to specifically work with our `GeneralLedgerTable` only. Our [Lambda]() functions for this *serverless + microservice* can only access the `GeneralLedgerTable` with the explicit permissions listed in the `Action` block shown. 
 
 ## User Registration & Authentication with [AWS Cognito]()
+
+Now that we have created our first [Lambda]() function, called `CreateInvoice.js`, that will `PUT` an `invoice` entry into our `GeneralLedger` table in [DynamoDB](); we will also need a way to `register` and `authenticate` the users of our software. Since we are dealing with money, and the payment of invoices using *credit cards*, we will need a mechanism that will allow us to securely register users while safeguarding their private and personally identifiable information (PII), and financial data. Much like [Amazon IAM](), **Identity and Access Management**, we will use [Cognito]() in this section to add a layer of security to our application that will allow the user to create, read, update, and delete invoice and transactionary data within our new [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) application.
 
 
 
