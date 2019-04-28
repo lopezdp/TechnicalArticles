@@ -64,7 +64,7 @@ export async function main(event, context) {
   // object that you will use later to store the data
   // collected from your user into a database of invoices!
   const params = {
-    // Step4: Need to describe in tutorial how this object is
+    // Need to describe in tutorial how this object is
     // accessing the table defined in the serverless.yml
     // and how data is being stored in db.
     TableName: process.env.invoiceTbl,
@@ -94,7 +94,7 @@ export async function main(event, context) {
      *                    from the request.body too
     */
     Item: {
-      // Step5: Discussion on DynamoDB sort key design and
+      // Discussion on DynamoDB sort key design and
       // how to properly aggregate data in table to
       // minimize READS (RCU) from cloud to minimize cost!!!
       userId: event.requestContext.identity.cognitoIdentityId,
@@ -152,7 +152,7 @@ export function call(action, params) {
   // the specified action and params
   return dynamo[action](params).promise();
 }
-```
+``` 
 
 ## Serverless + MicroService & the DynamoDB *DataStore*
 
@@ -633,10 +633,23 @@ resources:
   - ${file(resources/CognitoIdentityPool.yml)}
 ```
 
+## Implement the remaining [Lambda]() functions
 
+### Implement `getInvoice.js` 
 
+We need a mechanism to get an individual invoice that we need to display to a user of our application. This funcion will need to `GET` an invoice for those who create them and those who receive them from another `user`. We need to make sure we implement a mechanism that will only let a `user` see the invoices that pertain to their specific account.
 
+### Implement `deleteInvoice.js` 
 
+We need a mechanism to delete an individual invoice that we have saved in our application's database under a specific user. This funcion will need to `DELETE` an invoice as triggered by the `user` who created the invoice.
+
+### Implement `updateInvoice.js` 
+
+We need a mechanism to update an individual invoice that we have saved in our application's database under a specific user. This funcion will need to `UPDATE` an invoice as triggered by the `user` who created the invoice.
+
+### Implement `listInvoices.js`
+
+We need a mechanism to list all of the invoices that we have saved in our application's database for a specific user. This funcion will need to `GET` all invoices created by a `user`.
 
 
 
