@@ -1,4 +1,4 @@
-# Build A React.js Frontend for Your PayPal Clone
+# Part 6: Build A React.js Frontend for Your PayPal Clone
 
 *Author: [David P. Lopez](http://www.DavidPLopez.com)*
 

@@ -1,4 +1,4 @@
-# Part 3 : How To Configure Infrastructure As Code, Mock Services, & Unit Testing
+# Part 3: How To Configure Infrastructure As Code, Mock Services, & Unit Testing
 
 *Author: [David P. Lopez](http://www.DavidPLopez.com)*
 
@@ -274,7 +274,7 @@ PayMyInvoice
        |__ FutureServerlessMicroService (TBD)
 ```
 
-To show you how to *Mock* your services locally, we would like to step back from this example for a second to walk you through a specific example we have set up for you in the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) repository. 
+To show you how to *Mock* your services locally, we would like to step back from this example for a second to walk you through a specific example we have set up for you in the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) repository.
 
 **Please keep both of this repositories close. We will be performing exercises in both to better relate the material in this tutorial to each other.**
 
@@ -303,7 +303,7 @@ Navigate to your `home` directory from your `terminal` and clone the [Serverless
           path: starterService
           method: get
           cors: true
-    # Warmup can be applied to each lambda to override 
+    # Warmup can be applied to each lambda to override
     # settings in custom.warmup block globally.
     warmup:
       enabled: true
