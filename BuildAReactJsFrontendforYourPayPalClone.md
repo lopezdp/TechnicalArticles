@@ -86,6 +86,27 @@ Your output will look similar to the following:
 added 30 packages in 11.046s
 ```
 
+Next we need to configure and add the styling that Bootstrap uses and we will have to add some code to out `index.html` file to be sure that we take advantage of the standard Bootstrap v3 styles we will implement here. In your `public.html` file ass the following line:
+
+`<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">`
+
+Furthermore, to prevent our user's screen from zooming in automatically when they focus on an area of their device, we need to change the font size to `16px`. We need to make thee changes in the file that you can find in your project at: `src/index.css` where you will need to add the following:
+
+```
+select.formcontrol,
+textarea.form-control,
+input.form-control {
+	font-size: 16px;
+}
+
+input[type=file] {
+	width: 100%;
+}
+```
+
+
+
+
 
 
 
