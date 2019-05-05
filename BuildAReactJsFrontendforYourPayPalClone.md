@@ -29,7 +29,7 @@ Please refer to the repo above as you follow along with this tutorial. In this p
 
 This frontend client discussed above uses the backend logic provided by the implementation of the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) deployed to the [AWS Cloud]() as described in the previous chaptes in this series.
 
-## Start a New React.js Project
+## Start and Create a New React.js Project
 
 Now that we have a bunch of fancy logic on our [AWS Cloud](), we need to develop a pretty user interface that we can use to attract real *humans* to our money trap, I mean... *Wallet*. Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined](https://github.com/facebook/create-react-app).
 
@@ -43,7 +43,20 @@ Make sure that you use the same naming convention that I have used above because
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/CreateReactTerminal.png "Create React App!")
 
+Taking it a bit further, we have to verify that [React.js]() did install iteslf correctly onto our `local` machine. It's nice that the terminal says everything is fine, but it's always good to confirm right?
 
+> "Trust but Verify." - Ronald Reagan
+
+Go ahead and navigate into the new project directory with `$ cd ~/pay-me-app` and run the following command:
+
+`$ npm start`
+
+This should *spin up* the `local` resources that your need to launch your new [React.js]() application in your *browser* and you should be able to see the following generic [React.js]() application.
+
+
+**React.js App Launched in Browser!**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ReactAppBrowser.png "React App in Browser!")
 
 
 
