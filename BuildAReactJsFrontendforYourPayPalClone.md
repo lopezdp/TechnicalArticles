@@ -33,6 +33,22 @@ This frontend client discussed above uses the backend logic provided by the impl
 
 Now that we have a bunch of fancy logic on our [AWS Cloud](), we need to develop a pretty user interface that we can use to attract real *humans* to our money trap, I mean... *Wallet*. Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined](https://github.com/facebook/create-react-app).
 
+We will have to navigate out of the *serverless + microservice* project directory where we implemented our backend microservices on serverless, and we will have to create a new project we can use for our [React.js]() application. From your `home` directory, or wherever it is that you keep your project files, go ahead and create a new project by running the following command:
+
+`$ npx create-react-app pay-me-app`
+
+Make sure that you use the same naming convention that I have used above because `create-react-app` will not accept capital letters or `camelCase` conventions. The image below is the output you should receive from the terminal after the installation of `create-react-app` for the `pay-me-app` that we are going to developm in this part of the tutorial series.
+
+**React.js App Success!**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/CreateReactTerminal.png "Create React App!")
+
+
+
+
+
+
+
 
 
 
