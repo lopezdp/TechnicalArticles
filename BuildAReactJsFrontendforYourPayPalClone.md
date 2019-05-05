@@ -110,7 +110,46 @@ In the name of serving as many users as possible, we need to make sure that our 
 
 ### React Router for Route Handling Skills
 
- 
+We now need to consider a way to route the different requests that we make available to the users of our Single Page Application. We will take advantage of the nature of how components work within [React.js]() and we will use something called [React Router]() to use their collection of *navigational components* that will let us easily declare the routes that our applications needs to handle.
+
+Lets install it first and make sure it is saved as a dependency in our `package.json`:
+
+`$ npm install react-router-dom --save`
+
+#### Configure React Router
+
+We need to refactor the default files provided to us when we installed the `create-react-app` framework and we need to configure our new route-handling library so that we can encapsulate our application as a component within [React.js]() so that our application properly handle our user's requests. We need to change the `App` component in our project so thjat it looks like this:
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from "react-router-dom";
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
+The implementation here is what enables our ability to implement and handle the routes that we need to use with our `Router` to render the `<App />` component that was initially provided to us by `create-react-app`. We also want to use the [History](https://developer.mozilla.org/en-US/docs/Web/API/History) interface in JavaScript that will allow us to manipulate our browser's session history with `BrowserRouter`. 
+
+
+
+
+
+
+
+
 
 
 
