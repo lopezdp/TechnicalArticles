@@ -86,6 +86,8 @@ Your output will look similar to the following:
 added 30 packages in 11.046s
 ```
 
+#### Mobile First Styling
+
 Next we need to configure and add the styling that Bootstrap uses and we will have to add some code to out `index.html` file to be sure that we take advantage of the standard Bootstrap v3 styles we will implement here. In your `public.html` file ass the following line:
 
 `<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">`
@@ -103,6 +105,14 @@ input[type=file] {
 	width: 100%;
 }
 ```
+
+In the name of serving as many users as possible, we need to make sure that our application can be viewed elegantly from any mobile device above all else. With the syling above, we are trying to make sure that none of the design elements overflow off the screen to force the browser to add a scroll bar. We have to set the inputs file's width above to let [React.js]() take all screen sizes and browsers into consideration to normalize our changes across all devices for us.
+
+### React Router for Route Handling Skills
+
+ 
+
+
 
 
 
