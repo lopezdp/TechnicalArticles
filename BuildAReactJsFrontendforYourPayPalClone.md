@@ -27,11 +27,26 @@ Please refer to the repo above as you follow along with this tutorial. In this p
 * `react-bootstrap`
 * `aws-amplify`
 
-This frontend client discussed above uses the backend logic provided by the implementation of the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) deployed to the [AWS Cloud]() as described in the previous chaptes in this series.
+This frontend client discussed above uses the backend logic provided by the implementation of the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) deployed to the [AWS Cloud]() as described in the previous chaptes in this series. 
 
-## Start and Create a New React.js Project
+## Choose your Framework. Start and Create a New React.js Project
 
-Now that we have a bunch of fancy logic on our [AWS Cloud](), we need to develop a pretty user interface that we can use to attract real *humans* to our money trap, I mean... *Wallet*. Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined](https://github.com/facebook/create-react-app).
+Forgive me. I have decided on our frontend framework for you. You are lucky. Twenty (20) years ago the framework thrown on your lap may very well have been [ColdFusion](), an interesting language to say the least. I purposely choose to not call it a dead language because the fact is they are all very much alive and in *production*, powering many applications that you probably give little thought to. I bring this up because I would like to share a few ideas before fully diving into working together using the hottest framework on the market.
+
+1. Learning how to read, understand, and debug someone else's code and logic, is more important than understanding how to implement a new React.js application from scratch. You are more than likely going to inherit someone else's buggy application before being assign a task to implement a React.js application from scratch. To be able to debug the project in front of you to deploy it for the people who hired you, is the most valuable skillset you can learn right now. Take a look at the comments I found when reviewing the code I was given the responsibility of deploying at one of the first projects I was ever assigned as a professional software engineer:
+
+**Buggy Application Functions**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/BuggyAF.png "Buggy App Function!")
+
+2. When implementing a React.js application you must remember to never call `setState` from within the `render()` function or your new React Component will produce nothing but a series of infinite loops. Your render function should be a *functionally pure function* that you will use to change the view displayed to the user depending on the `state` of the application.
+
+Now that we have a bunch of fancy backend logic on our [AWS Cloud](), we need to develop an engaging user interface that we can use to attract real *humans* to our latest *get rich quick idea*, we are going to continue to call it a digital *Wallet* to make mom, and our resume, proud. Depending
+
+
+Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined](https://github.com/facebook/create-react-app). All sarcasm and `Dilber Humor` aside, [React]() is a practical approach to another one of those esoteric software engineering questions that exist in an abundance of threads on the internet that scroll of into perpetuity. 
+
+There was a time I had to figure out how to deploy an application into production that would allow members of a highly technical team to view and query information stored in a `PostgreSQL` database
 
 We will have to navigate out of the *serverless + microservice* project directory where we implemented our backend microservices on serverless, and we will have to create a new project we can use for our [React.js]() application. From your `home` directory, or wherever it is that you keep your project files, go ahead and create a new project by running the following command:
 
