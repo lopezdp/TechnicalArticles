@@ -245,6 +245,26 @@ export default class Home extends Component {
   }
 }
 ```
+Slowly we make progress. Here you have rendered your first `html` page using [JSX](), an extension to JavaScript that lets you use an `xml`-like syntax in the views that you implement to elegantly describe what you want your user's interface to look like. Here is the magic that we find in React; it embraces the fact that the logic required to implement an elegant user interface is tightly coupled with rendering, state changes, data preprocessing and application logic also. React allows you to create simple components that let you separate architectural considerations efficiently, to help you feel more comfortable writing your `html` markup into your JavaScript functions, so that you can more easily render the views you need to your users. 
+
+The `JSX` we are rendering above is only going to display the first version of our homepage to the users of our new Wallet. Copy the `css` styling below into the `src/containers/Home.css` file in your project directory so we can start making this page look presentable:
+
+```
+.Home .landing-page {
+	text-align: center;
+	padding: 65px;
+}
+
+.Home .landing-page h1 {
+	font-weight: 700;
+	font-family: sans-serif, "Roboto";
+}
+
+.Home .landing-page p {
+	color: #999999;
+}
+```
+
 
 
 
