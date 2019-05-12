@@ -265,6 +265,73 @@ The `JSX` we are rendering above is only going to display the first version of o
 }
 ```
 
+### Configure your Application's Routing
+
+Now that we have a `Home` page component that we can use to start displaying some form of content to our user, we need to configure the routes that our application will use so that the view implemented above, can respond appropriately when a user triggers an event that calls the `/` route from anywhere in the application. We will use `react-router` and the `Switch` component it gives us, to render an *exclusive* route that we can display to the user as the first resource defined within the component, that precisely matches the path we need. 
+
+Review the code we implemented below that you need to create as a new `src/Routes.js` file in the project directory and add the following to your implementation:
+
+```
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Home from "./containers/Home";
+
+export default () => <Switch>
+                       <Route path="/" exact component={ Home } />
+                     </Switch>;
+```
+
+Taking a look at this a bit deeper, you can see that we are using the `exact` property because we **must** precisely match the `/` path defined as a route in our implementation file. Using the `Switch` component forces us to use the `exact` prop like this because it will force the `/` route to match every route that uses the `/` at the start of its declaration.
+
+### Display you Home Container Route
+
+We need to refactor our `App.js` component so that it knows how to properly respond to the events triggered by a user who is requesting a particular route from our application. We need to add the `<Routes />` component that we implemented above so that our user can navigate through the different features that we will provide them with to make and accept P2P payments from within our application. Take a look at the updated `App.js` source code below that you need to be sure to implement in your own project:
+
+```
+import React, { Component } from 'react'; // Added Component
+// Use Link (see r-r-d docs here), for ref to home without refresh
+import { Link } from "react-router-dom";
+// Import navbar component given to you by bootstrap 
+import { Navbar } from "react-bootstrap";
+// Import Routes component so that App knows how to 
+// respond with correct view
+import Routes from "./Routes";
+import './App.css';
+
+// We need a component to "contain" our App
+class App extends Component {
+  // Need to render App container
+  render() {
+    return (
+      // should probably discuss className syntax in article
+      <div className="App container">
+        { /* Add bootstrap Navbar */ }
+        { /* probably best to discuss JSX and JSX comments */ }
+        { /* collapseOnSelect - Toggles expanded to false after the onSelect
+                event of a descendant of a child <Nav> fires. */ }
+        <Navbar fluid collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/">
+                Pay My Wallet
+              </Link>
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+        <Routes />
+      </div>
+      );
+  }
+}
+export default App;
+```
+
+
+
+
+
+
+... 
 
 
 
