@@ -29,11 +29,11 @@ Please refer to the repo above as you follow along with this tutorial. In this p
 
 This frontend client discussed above uses the backend logic provided by the implementation of the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) deployed to the [AWS Cloud]() as described in the previous chaptes in this series. 
 
-## Choose your Framework. Start and Create a New React.js Project
+## Choose your Framework
 
 Forgive me. I have decided on our frontend framework for you. You are lucky. Twenty (20) years ago the framework thrown on your lap may very well have been [ColdFusion](), an interesting language to say the least. I purposely choose to not call it a dead language because the fact is they are all very much alive and in *production*, powering many applications that you probably give little thought to. I bring this up because I would like to share a few ideas before fully diving into working together using the hottest framework on the market.
 
-1. Learning how to read, understand, and debug someone else's code and logic, is more important than understanding how to implement a new React.js application from scratch. You are more than likely going to inherit someone else's buggy application before being assign a task to implement a React.js application from scratch. To be able to debug the project in front of you to deploy it for the people who hired you, is the most valuable skillset you can learn right now. Take a look at the comments I found when reviewing the code I was given the responsibility of deploying at one of the first projects I was ever assigned as a professional software engineer:
+1. Learning how to read, understand, and debug someone else's code and logic, is more important than understanding how to implement a new React.js application from scratch. You are more than likely going to inherit someone else's buggy application before being assigned the task to implement a React.js application from scratch. To be able to debug the project in front of you to deploy it for the people who hired you, is the most valuable skillset you can learn right now. Take a look at the comments I found when reviewing the code I was given the responsibility of deploying at one of the first projects I was ever assigned as a professional software engineer:
 
 **Buggy Application Functions**
 
@@ -41,18 +41,17 @@ Forgive me. I have decided on our frontend framework for you. You are lucky. Twe
 
 2. When implementing a React.js application you must remember to never call `setState` from within the `render()` function or your new React Component will produce nothing but a series of infinite loops. Your render function should be a *functionally pure function* that you will use to change the view displayed to the user depending on the `state` of the application.
 
-Now that we have a bunch of fancy backend logic on our [AWS Cloud](), we need to develop an engaging user interface that we can use to attract real *humans* to our latest *get rich quick idea*, we are going to continue to call it a digital *Wallet* to make mom, and our resume, proud. Depending
+Now that we have a bunch of fancy backend logic on our [AWS Cloud](), we need to develop an engaging user interface that we can use to attract real *humans* to our latest *get rich quick idea*, we are going to continue to call it a digital *Wallet* to make mom, and our resumes, proud. Rather than get into the long history that led to React.js' role as the 'V' or the *View* in the *Model-View-Controller* design paradigm, we will spend some time implementing React.js so that you can learn by doing.  
 
+Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined](https://github.com/facebook/create-react-app). All sarcasm and `Dilber Humor` aside, [React.js]() is a practical approach to another one of those esoteric software engineering questions that exist in an abundance of threads on the internet that scroll of into perpetuity. Implementing frontend component in React.js is effective and more productive approach that allows you to reuse code that you have written throughout your code. React takes advantage of a [Virtual DOM]() that ituses to check against state changes to render dynamic UI elements faster than traditional MVC implementations.
 
-Since the [Facebook Mafia]() is much smarter than us, we are just going to go ahead and use something called [Create React App, or `create-react-app` for those who are more programatically inclined](https://github.com/facebook/create-react-app). All sarcasm and `Dilber Humor` aside, [React]() is a practical approach to another one of those esoteric software engineering questions that exist in an abundance of threads on the internet that scroll of into perpetuity. 
-
-There was a time I had to figure out how to deploy an application into production that would allow members of a highly technical team to view and query information stored in a `PostgreSQL` database
+### Start and Create a New React.js Project
 
 We will have to navigate out of the *serverless + microservice* project directory where we implemented our backend microservices on serverless, and we will have to create a new project we can use for our [React.js]() application. From your `home` directory, or wherever it is that you keep your project files, go ahead and create a new project by running the following command:
 
 `$ npx create-react-app pay-me-app`
 
-Make sure that you use the same naming convention that I have used above because `create-react-app` will not accept capital letters or `camelCase` conventions. The image below is the output you should receive from the terminal after the installation of `create-react-app` for the `pay-me-app` that we are going to developm in this part of the tutorial series.
+Make sure that you use the same naming convention that I have used above because `create-react-app` will not accept capital letters or `camelCase` conventions. The image below is the output you should receive from the terminal after the installation of `create-react-app` for the `pay-me-app` that we are going to develop in this part of the tutorial series.
 
 **React.js App Success!**
 
@@ -133,7 +132,7 @@ Lets install it first and make sure it is saved as a dependency in our `package.
 
 #### Configure React Router
 
-We need to refactor the default files provided to us when we installed the `create-react-app` framework and we need to configure our new route-handling library so that we can encapsulate our application as a component within [React.js]() so that our application properly handle our user's requests. We need to change the `App` component in our project so thjat it looks like this:
+We need to refactor the default files provided to us when we installed the `create-react-app` framework and we need to configure our new route-handling library so that we can encapsulate our application as a component within [React.js]() so that our application properly handle our user's requests. We need to change the `App` component in our project so that it looks like this:
 
 ```
 import React from 'react';
@@ -158,8 +157,60 @@ serviceWorker.unregister();
 
 The implementation here is what enables our ability to implement and handle the routes that we need to use with our `Router` to render the `<App />` component that was initially provided to us by `create-react-app`. We also want to use the [History](https://developer.mozilla.org/en-US/docs/Web/API/History) interface in JavaScript that will allow us to manipulate our browser's session history with `BrowserRouter`. 
 
+## Organize your App in a Container
 
+To better organize our logic within the structure of our `App`, an ideal approach is to create a container to hold the top-level component that renders our wallet. This primary node that is the main container of our `App` will also organize the primary components that we will implement here to render the logic we need for our wallet. Before we can do that we should list a few of the views that we will need to implement to make this successful:
 
+1. Create Invoice/Transaction
+2. View Transactions
+3. Pay Transaction
+4. View History
+
+The first thing we have to build is a navigation bar so that we can organize all of the views we need our users to work with. [React-Bootstrap]() makes this really easy with `import { Navbar } from "react-bootstrap";`. We have to make some changes to the default `App.js` file originally deployed by `create-react-app`. Take a look at the `source code` below that we need to use in the new version of our `App.js` file. 
+
+```
+/*
+  Pay Me Now Wallet
+  P2P anonymous payments
+*/
+
+import React, { Component } from 'react'; // Added Component
+// Use Link (see r-r-d docs here), for ref to home without refresh
+import { Link } from "react-router-dom";
+// Import navbar component given to you by bootstrap 
+import { Navbar } from "react-bootstrap";
+import './App.css';
+
+// We need a component to "contain" our App
+class App extends Component {
+  // Need to render App container
+  render() {
+    return (
+      // should probably discuss className syntax in article
+      <div className="App container">
+        { /* Add bootstrap Navbar */ }
+        { /* probably best to discuss JSX and JSX comments */ }
+        { /* collapseOnSelect - Toggles expanded to false after the onSelect
+                event of a descendant of a child <Nav> fires. */ }
+        <Navbar fluid collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/">
+                Pay My Wallet
+              </Link>
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+      </div>
+
+      );
+  }
+}
+
+export default App;
+```
+
+We are using the Bootstrap Fluid Layout by configuring the `fluid` attribute, and we declare the primary `div.container` to implement a *responsive application container* with a fixed-width, so that we can add our navigation bar. We also have to figure out a way to get our users back to the homepage without triggering a refresh event. To get our users to their homepage dashboard we need React-Router's `Link` component to get us there. Finally we need to begin to style our application. Please copy the following `css` styling to the same directory as your `App.js` script in your project directory.
 
 
 
