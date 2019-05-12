@@ -191,7 +191,7 @@ class App extends Component {
         { /* Add bootstrap Navbar */ }
         { /* probably best to discuss JSX and JSX comments */ }
         { /* collapseOnSelect - Toggles expanded to false after the onSelect
-                event of a descendant of a child <Nav> fires. */ }
+                                event of a descendant of a child <Nav> fires. */ }
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
@@ -202,17 +202,49 @@ class App extends Component {
           </Navbar.Header>
         </Navbar>
       </div>
-
-      );
+    );
   }
 }
-
 export default App;
 ```
 
-We are using the Bootstrap Fluid Layout by configuring the `fluid` attribute, and we declare the primary `div.container` to implement a *responsive application container* with a fixed-width, so that we can add our navigation bar. We also have to figure out a way to get our users back to the homepage without triggering a refresh event. To get our users to their homepage dashboard we need React-Router's `Link` component to get us there. Finally we need to begin to style our application. Please copy the following `css` styling to the same directory as your `App.js` script in your project directory.
+We are telling React that we want to use the Bootstrap Fluid Layout by configuring the `fluid` attribute, and we declare the primary `div.container` to implement a *responsive application container* with a fixed-width, so that we can add our navigation bar easily. We also have to figure out a way to get our users back to the homepage without triggering a refresh event. To get our users to their homepage dashboard we are going to use React-Router's `Link` component to get us there. Finally, we need to begin to style our application. Please copy the following `css` styling to the same directory as your `App.js` script in your project directory, and call the file `App.css`.
 
+```
+.App {
+  margin-top: 15px;
+}
 
+.App .navbar-brand {
+  font-weight: bold;
+}
+```
+
+### Implement your landing page
+
+With the primary application container ready, we need to implement our landing page in a `Home` container that we can use to respond to the `/` route where our primary components will live, and that we can use to make requests to our serverless + microservices. We will want to differentiate our primary containers from the rest of the components in our application, and we will use `$ mkdr src/containers` from our project's root directory to save these files.
+
+Now that we have structured our application properly, we can complete the first iteration of our landing page so that we can show something to the rest of the world. Create a new file called `Home.js` inside of the `src/containers` project directory. All of the primary containers that provide our routes with a response, and that will send requests to our serverless backend, are just the primary views that our user interacts with in our application. Take a look at the file we have implemented for you in the `src/containers/Home.js` project directory and make the changes in your project as needed. Below is what we completed for this tutorial:
+
+```
+import React, { Component } from "react";
+import "./Home.css";
+
+export default class Home extends Component {
+  render() {
+    return (
+      <div className="Home">
+        <div className="landing-page">
+          <h1>UPay Simple. A Secure Wallet</h1>
+          <p>
+            A simple & Anonymous P2P payments app.
+          </p>
+        </div>
+      </div>
+      );
+  }
+}
+```
 
 
 
