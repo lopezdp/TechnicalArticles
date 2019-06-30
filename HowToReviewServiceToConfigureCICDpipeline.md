@@ -115,6 +115,7 @@ Either way you now have to replace you `.babelrc` file with the following set of
 		["env", {"node": "10.14.1"}],
 		"stage-3"
 	],
+
     "test": [
         "jest"
     ]
@@ -167,18 +168,30 @@ module.exports = {
 
 JavaScript over the years, has evolved into something that the programming community has labeled with a series of different and confusing acronyms, and mouths full of alphabet soup, to keep the uninitiated from braving the waters of the software engineering market. 
 
-Not really, but close. You see, what happens is that anytime you build something that goes into widespread use, you get these international organizations that get together and decide what is best for everyone in the world to adopt in terms of standards and best practices when working together to use a unified and codified language like JavaScript. In this case, that organization is ECMA International. ECMA is probably also owned by Sun Microsystems. Although this can all very easily turn into some kind of YouTube Conspiracy Video, due to the historic undertones that go back to the NetScape Navigator vs InternetExplorer Battles, this Planned Economy of sorts is good because it enforces a standard across the world so that all of us can together, experience the joys of writing OpenSource code. The joy...
+Not really, but close. You see, what happens is that anytime you build something that goes into widespread use, you get these international organizations that get together and decide what is best for everyone in the world to adopt in terms of standards and best practices when working together to use a unified and codified language like JavaScript. In this case, that organization is ECMA International. ECMA is probably also owned by Sun Microsystems. Although this can all very easily turn into some kind of YouTube Conspiracy Video, due to the historic undertones that go back to the NetScape Navigator vs InternetExplorer Battles, this Planned Economy of sorts is good because it enforces a standard across the world so that all of us can together, experience the joys of writing OpenSource applications in what is really called ECMAScript!!!. The joy...
+
+**Then why is it called `ES6`?**
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/OpenSourceSam.jpg "Do it for your country.")
 
+Just take my word for it, JavaScript is really ES6... for now. The real issue for us is that ES6 is as awesome as the latest update to any codified language will ever be, and unfortunately for us, internet browsers are always a substiantial few releases behind the release schedule devised by the gods at Sun... I mean ECMA International.
 
+This means that current browser technology is able to compile ES3 technology maybe ES5 in some cases which will never ever be Internet Explorer. Don't you even forget me when I say that you will forever kick yourself in the face in disgust when you realized that entire legions of your users will alway remain ardent users of **IE8**.
 
+**womp-womp**
 
+Anyway, this means that we need a tool that will help us *transpile* our new ES6 code into an older version of JavaScript that can be used by browser that at best will support ES5. This is the reason for our dependency on Babel and the `.babelrc` configuration settings above. Babel is what makes our handy ES6 logic dynamically viewable to the world in any of the silly web broswers that people use out there in the world.
 
+Transpiling is an opportunity for JavaScript developers to say that they still have to compile their code. C++ developers will appreciate the beauty and humor in that one very efficient statement. Once all of ES6 code is compiled we will then need to use something called a module bundler. In our case we use Webpack which basically just takes chunks of your code and the libraries that it depends on to bundle them into one file that will be used in the browser.
+
+And there you have it. That's why you need the `webpack.config.js` file set the way we have discussed above. Please take note or you probably won't be able to deploy anything. Don't get comfy yet, there's still a bit of banging your head on the walls to come. 
 
 #### `UPDATE:` package.json
 
-```{
+Just to be safe I wanted to include the updated `package.json`file we need to work with. Please copy the file below and don't be shy about changing the name in the Author field to your own if you have made it this far!
+
+```
+{
   "name": "invoice-log-api",
   "version": "1.7.3",
   "description": "A serverless general ledger service.",
@@ -224,7 +237,6 @@ Not really, but close. You see, what happens is that anytime you build something
   }
 }
 ```
-
 
 ## Deploy the `ServerlessStarterService` Template
 
