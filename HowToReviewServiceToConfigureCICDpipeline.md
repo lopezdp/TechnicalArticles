@@ -647,13 +647,17 @@ Please keep the Role name handy because we will need to find it within the AWS I
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04d.Pipeline.png "CodePipeline Step 4d!")
 
-Make sure you tell [Pipeline]() to **Use the `buildspec-dev.yml` in the source code root directory** when describing the environment `build`. For our use-case, each pipeline that we implement will represent a build stage of our project that will map to a build phase on the front end that maps to a subdomain in `dev`, `test`, or `prod`, for example. 
+Make sure you tell [Pipeline]() to **Use the `buildspec-dev.yml` in the source code root directory** when describing the environment `build` properties and configuration instructions. For our use-case, each pipeline that we implement will represent a build stage of our project that will map to a build phase on the front end that maps to a subdomain in `dev`, `test`, or `prod`, for example. 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04f.Pipeline.png "CodePipeline Step 4f!")
 
-Accept the remaining defaults, click on the `Save build project` element and continue on to the next step in the implementation process for this [Pipeline on AWS]().
+Select and use CloudWatch logs and give the group name the name of your service and differentiate the streams by the build phase which you plan to deploy each service on to make it easier to debug later. In our case our group name is `invoice-log-api` and of course our stream is uniquely identified by `dev` in this first launch of the pipeline.
+
+Click **Continue to CodePipeline** and let's deploy this project.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04g.Pipeline.png "CodePipeline Step 4g!")
+
+You should now see a message that says that you have *Successfully created invoice-log-api-dev in CodeBuild*. Go ahead and click the *Next* button to continue.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04h.Pipeline.png "CodePipeline Step 4h!")
 
