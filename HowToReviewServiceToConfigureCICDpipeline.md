@@ -711,6 +711,10 @@ During the `build` phase, [CodeBuild]() will literally `build` out our applicati
 
 In the `post_build` phase, well we simply decided to run our unit tests. This was just to show you a very simple example and to highlight how flexible these stages can be. You can define these stages and run unit testing at any point along the workflow to deploy your services only when your tests come back positively. We've commented out testing and left some homework for you to do to see if you can take it a step further by implementing a `prod` environment also with Jest.
 
+**Home Free!!**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step08.Pipeline.png "CodePipeline SUCCESS! But Not Really")
+
 You might think that you're home free at this point, and here's where the software Gods and Gremlins laugh at you dear sir:
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/GodIsLOL.png "I feel no pity for you.")
@@ -747,11 +751,74 @@ Serverless: Remove /codebuild/output/src7045676547/src/.webpack
 [Container] 2019/06/30 08:25:47 Phase context status code:  Message:  
  ```
 
+What happens here is that each of the build phases complete successfully, even with the error response and our commented out testing, and it tells CodePipeline that all of our scripts are complete. In another article we'll dig deeper into scripting more of these commands so that you can take more of the control from your command line and put it onto the cloud!
+
+When you look at the build logs however, you see that the Serverless Framework was not able to successfully deploy the Lambda functions we wrote using CodeBuild and CodePipeline due to not having the correct permissions.
+
+What we need to do is to click on the Services tab in the AWS navigation bar and head on over to IAM so that we can adjust the policies that this role associated to this CodeBuild project has access to. 
+
+Inside of IAM you will want to click on Roles and find the Role that was created by CodeBuild when you created your project earlier. In our case the Role name was `codebuild-invoice-log-api-dev-service-role` and you can more easily find it by looking at the Trusted entities column to the right, and looking for an **AWS Service: codebuild** tag to more easily sort through the list.
+
+Click on the Role needed and click on **Attach Policies** to select *AdministratorAccess*. When selected proceed to give this policy for this code build project by clicking **Attach Policy**. 
+
+When this is done you need to proceed to the CodePipeline Console and select the pipeline in question. When you are in the pipeline UI click on the **Release Change** Button on the top right so that you can trigger the pipeline to run the entire process from source to build and deployment on your `dev` branch of this new serverless + microservice backend.
+
+You know a successfull test by the following result in the build logs:
+
+```
+Serverless: Stack update finished... 
+Service Information 
+service: invoice-log-api 
+stage: dev 
+region: us-east-1 
+stack: invoice-log-api-dev 
+resources: 45 
+api keys: 
+  None 
+endpoints: 
+  POST - https://tusgdsg6qg.execute-api.us-east-1.amazonaws.com/dev/invoices 
+  GET - https://tusgdsg6qg.execute-api.us-east-1.amazonaws.com/dev/invoices/{id} 
+  DELETE - https://tusgdsg6qg.execute-api.us-east-1.amazonaws.com/dev/invoices/{id} 
+  PUT - https://tusgdsg6qg.execute-api.us-east-1.amazonaws.com/dev/invoices/{id} 
+  GET - https://tusgdsg6qg.execute-api.us-east-1.amazonaws.com/dev/invoices 
+functions: 
+  createInvoice: invoice-log-api-dev-createInvoice 
+  getInvoice: invoice-log-api-dev-getInvoice 
+  deleteInvoice: invoice-log-api-dev-deleteInvoice 
+  updateInvoice: invoice-log-api-dev-updateInvoice 
+  listInvoices: invoice-log-api-dev-listInvoices 
+  warmUpPlugin: invoice-log-api-dev-warmup-plugin 
+layers: 
+  None 
  
+Stack Outputs 
+UserPoolClientId: 52setdhgnfmhhfgsdhdy54639lol 
+AttachmentsBucketName: invoice-log-api-dev-attachmentsbucket-tusgdsg6qg 
+UserPoolId: us-east-1_IJsfdgvbj 
+UpdateInvoiceLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:96wragrqgareg255:function:invoice-log-api-dev-updateInvoice:2 
+WarmUpPluginLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:96wragrqgareg255:function:invoice-log-api-dev-warmup-plugin:2 
+IdentityPoolId: us-east-1:5e240536-4ce6-4422-8bfd-63e79d177510 
+ListInvoicesLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:96wragrqgareg255:function:invoice-log-api-dev-listInvoices:2 
+CreateInvoiceLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:96wragrqgareg255:function:invoice-log-api-dev-createInvoice:2 
+DeleteInvoiceLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:96wragrqgareg255:function:invoice-log-api-dev-deleteInvoice:2 
+GetInvoiceLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:96wragrqgareg255:function:invoice-log-api-dev-getInvoice:2 
+ServiceEndpoint: https://96wragrqgareg255.execute-api.us-east-1.amazonaws.com/dev 
+ServerlessDeploymentBucketName: invoice-log-api-dev-serverlessdeploymentbucket-khwragveqrgafscv 
+ 
+Serverless: Removing old service artifacts from S3... 
+Serverless Enterprise: Run `serverless login` and deploy again to explore, monitor, secure your serverless project for free. 
+ 
+[Container] 2019/06/30 09:18:13 Phase complete: BUILD State: SUCCEEDED 
+[Container] 2019/06/30 09:18:13 Phase context status code:  Message:  
+[Container] 2019/06/30 09:18:13 Entering phase POST_BUILD 
+[Container] 2019/06/30 09:18:13 Phase complete: POST_BUILD State: SUCCEEDED 
+[Container] 2019/06/30 09:18:13 Phase context status code:  Message:  
+```
 
-Below is what your [Pipeline]() will look like once all build phases complete and all of your automated constraints to deplpoy your services are met.
+*I have changed the resource ID's to prevent scoundrels from killing the funds I have on my AWS account!*
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step08.Pipeline.png "CodePipeline SUCCESS!")
+
+This is the result of a successfull build and deployment to a stage and what it will look like once all build phases complete and all of your automated constraints to deplpoy your services are met.
 
 ### Troubleshooting
 
@@ -762,15 +829,3 @@ None of this comes without its issues and perpetual errors of course. Click on t
 ## Part 5: Build a PayPal clone. Make money off your friends with the PayMyInvoice App!
 
 * [Part 5: How To Implement and Deploy your own Serverless + MicroService to AWS](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToBuildAServerlessMicroService.md) - *Not Published.*
-
-
-
-
-
-
-
-
-
-
-
-
