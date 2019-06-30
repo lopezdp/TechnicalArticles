@@ -20,6 +20,8 @@ Please refer to this repo as you follow along with this tutorial.
 
 We have definitely covered a lot of ground by now, and it may be best to take a minute and work through a *Code Review* of sorts, that we can use to absorb all of this information that we have reviewed and implemented together before merging our code and deploying our services into *production*. It is definitely a good idea to take this time to think about the workflow that we will put in place to manage our day to day development, and implementation activities as a team of engineers. [In my case it's just `Wilson` and I, remember](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToSetUpYourLocalServerlessEnvironment.md#setup-editor-and-install-linting)?
 
+**Stay Agile OB-1**
+
 ![alt text](https://mars.nasa.gov/mer/gallery/press/spirit/20040119a/fhaz_move_flat_br.gif "I am wandering around Mars...")
 
 Collaborating with other team members can be tricky, that is, it can be tricky if you don't have a plan in place to work in an organized manner!!! We recommend that the documentation for any project repository include a set of `ContributionGuidelines.md` that dictate how each member of your team shall interact with the organization's source code. There are numerous examples out in the [ether](https://www.google.com) that you can look to as a set of guiding principles, and yet, you know I have a suggestion for you anyway. As someone who has published OpenSource work for NASA as a contractor, I suggest you model any `ContributionGuidelines` that you make for you and your team after the [NASA OpenMCT](https://github.com/nasa/openmct/blob/master/CONTRIBUTING.md) project guildelines to start off. It is pretty straght forward and really gets to the point in terms of what a good OpenSource contribution policy should look like.
@@ -28,11 +30,13 @@ Collaborating with other team members can be tricky, that is, it can be tricky i
 
 In an [Agile]() development environment, we just want a process that we can use to iterate over a predefined *Code Review* workflow that will help us implement and merge new updates to our source code efficiently, transparently, and with close to zero downtime in the *Wild*. When a team member writes and implements a set of features, there should be someone, again, in my case `Wilson`, who will review the code you have implemented on a `topic-branch` in [git]() after you create a [Pull Request]() for your project lead to review your code.
 
-The *Code Review* process is an important part of your team workflow because it allows you to share the knowledge you gained from the implementation of the logic and functionality that defines the feature you will deploy, it gives you a layer of quality assurance that lets your peers contribute and provide insight into the feature you will deploy, and it allows new team members to learn from the rest of the team by taking ownership of a feature and implementing the logic the new feature needs to deploy.
+The *Code Review* process is an important part of your team workflow because it allows you to share the knowledge you gained from the implementation of the logic and functionality that defines the feature you will deploy. It also gives you a layer of quality assurance that enables your peers to contribute and provide insight into the feature you will deploy, and it allows new team members to learn from others on the team by taking ownership of a feature and implementing the logic the new feature needs so that it can be accepted by the project owner.
 
-The [Agile]() framework requires that every *Code Review* complete a *Pull Request* in phases. The first phase would require your *Tech Lead* to look at your implementation and any changes you made, and compare it to the code that you are refactoring. The second phase of the review requires the *Reviewer* to add feedback and comments to your implementation that critique your work. The *Reviewer* should get you to question all scenarios and *edge-cases* that you have to consider before approving your Pull Request.
+The [Agile]() framework requires that every *Code Review* complete a *Pull Request* in phases. The first phase would require your *Tech Lead* to look at your implementation and any changes you made, and compare it to the code that you are refactoring.
 
-You should complete and attached these checklists to any pull requests you create or file as an author or reviewer of a new feature in your project's repository. When you decide to `merge` a pull request please complete a checklist similar to the version of the checklists provided below:
+The second phase of the review requires that the *Reviewer* add feedback and comments to your implementation to critique your work. The *Reviewer* should get you to question all scenarios and *edge-cases* that you have to consider before approving your Pull Request onto a `dev` or `production` branch.
+
+You should complete and attach these checklists to any pull requests you create or file as an author or reviewer of a new feature in your project's repository. When you decide to `merge` a pull request please complete a checklist similar to the version of the checklists provided below:
 
 #### Author Checklist
 
@@ -61,8 +65,8 @@ If you have gotten this far I am impressed. You might still have a chance at com
 ##### Serverless MicroService Implementation Best Practices
 
 1. [Setup `local` Serverless Environment]():
-	* [Instal `nvm` and Node.js v8.10.0]()
-	* [Setup Editor & Instal ESLint]()
+	* [Instal `nvm` and Node.js v10.14.1]()
+	* [Setup Editor & Install ESLint]()
 	* [Configure SublimeText3]()
 
 2. [Configure your Serverless Backend on AWS]():
@@ -77,6 +81,150 @@ If you have gotten this far I am impressed. You might still have a chance at com
 	* [Mocking Services before Deployment]()
 	* [Unit Testing & Code Coverage]()
 	* [Run Tests before Deployment]()
+
+#### AWS Lambda Notes
+
+There have been a few recent updates to the AWS Lambda service that you should be aware of. The Node.js AWS Lambda runtime environment now supports Node.js v.10.14.1. In your `serverless.yml` file you should declare the runtime you will use as `runtime: nodejs10.x` to make sure that you can deploy your Lambda function correctly and with the latest supported features.
+
+Throughout the remaining articles in this tutorial series we will indicate the newest updates that we have discovered and have had to evolve with using a tag like this: 
+
+* `UPDATE:` *This will discuss the update in question*
+
+#### `UPDATE:` .babelrc
+
+Older projects running AWS Lambda v8.10 will have a `.babelrc` file with the following configuration settings that will no longer work:
+
+```
+{
+  "plugins": ["source-map-support", "transform-runtime"],
+  "presets": [
+    ["env", { "node": "8.10" }],
+    "stage-3"
+  ]
+}
+```
+
+**Tough Luck** right? Well we went through the headache of refactoring our projects so that we could report back to you and give you the easy way out of this mess in 30 minutes or less. Queue the [Domino's Pizza guarantee](https://www.dominos.co.in/hot-pizza-30-minutes-delivery-guarantee-at-dominos-get-pizza-hot)!
+
+Either way you now have to replace you `.babelrc` file with the following set of configuration parameters:
+
+```
+{
+	"plugins": [],
+	"presets": [
+		["env", {"node": "10.14.1"}],
+		"stage-3"
+	],
+    "test": [
+        "jest"
+    ]
+}
+```
+
+Thank me later and send me some Bitcoin...
+
+#### `UPDATE:` webpack.config.js
+
+Going a bit further please ensure that the following setting are copied exactly the way they are specified below.
+
+```
+const slsw = require("serverless-webpack");
+const nodeExternals = require("webpack-node-externals");
+
+module.exports = {
+  entry: slsw.lib.entries,
+  target: "node",
+
+  // Generate source maps for the proper handling of error messages
+  devtool: "source-map",
+
+  // Since 'aws-sdk' is not compatible with webpack
+  // we must exclude all non dependencies
+  externals: [nodeExternals()],
+  mode: slsw.lib.webpack.isLocal ? "development" : "production",
+  optimization: {
+    // do not minimize code!
+    minimize: false
+  },
+  performance: {
+    // Turn off size warnings for entry points
+    hints: false
+  },
+  // Run babel on all .js files and skip those in node_modules
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: __dirname,
+        exclude: /node_modules/
+      }
+    ]
+  }
+};
+```
+
+#### Babel & Webpack. What you need to know
+
+JavaScript over the years, has evolved into something that the programming community has labeled with a series of different and confusing acronyms, and mouths full of alphabet soup, to keep the uninitiated from braving the waters of the software engineering market. 
+
+Not really, but close. You see, what happens is that anytime you build something that goes into widespread use, you get these international organizations that get together and decide what is best for everyone in the world to adopt in terms of standards and best practices when working together to use a unified and codified language like JavaScript. In this case, that organization is ECMA International. ECMA is probably also owned by Sun Microsystems. Although this can all very easily turn into some kind of YouTube Conspiracy Video, due to the historic undertones that go back to the NetScape Navigator vs InternetExplorer Battles, this Planned Economy of sorts is good because it enforces a standard across the world so that all of us can together, experience the joys of writing OpenSource code. The joy...
+
+https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwjYiv2jvpDjAhUq1VkKHR3oDmcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.flickr.com%2Fphotos%2Fjalbertbowdenii%2F5682524083&psig=AOvVaw0rBq89t_N3Mtir3tQ5cMpQ&ust=1561959102088826
+
+
+
+
+
+
+#### `UPDATE:` package.json
+
+```{
+  "name": "invoice-log-api",
+  "version": "1.7.3",
+  "description": "A serverless general ledger service.",
+  "main": "handler.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "author": "David P. Lopez",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lopezdp/invoice-log-api.git"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.350.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-source-map-support": "^2.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "eslint": "^5.15.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.8.0",
+    "serverless-offline": "^5.0.0",
+    "serverless-plugin-warmup": "^4.4.3-rc.1",
+    "serverless-webpack": "^5.1.0",
+    "webpack": "^4.16.2",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "source-map-support": "^0.5.12",
+    "stripe": "^6.17.0",
+    "uuid": "^3.3.2"
+  }
+}
+```
+
 
 ## Deploy the `ServerlessStarterService` Template
 
