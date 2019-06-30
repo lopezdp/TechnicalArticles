@@ -680,18 +680,21 @@ Your [Build]() is now complete for the implementation of our **CI/CD** [Pipeline
 All we are doing with [CodePipeline]() and [CodeBuild]() in this pyrrhic exercise to *Continuously Integrate and Deploy* our application is to `build` a container that contains our `Source` code that [CodePipeline]() will `pull` from out [GitHub]() repo to run the commands declared in the implementation of our `buildspec.yml`. The commands we need to execute to complete our `build` stage are as follows:
 
 ```
-version: 0.1
+# CI/CD buildspec.yml file for invoice-log service on dev
+version: 0.2
 phases:
   install:
-   commands:
-    - npm install -g serverless
-    - npm install
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - npm install -g serverless
+      - npm install
   build:
-   commands:
-    - ./node_modules/.bin/serverless deploy --stage cicd | tee deploy.out
-  post_build:
-   commands:
-    - npm test
+    commands:
+      - serverless deploy -v --stage dev | tee deploy.out
+  #post_build:
+    #commands:
+      #- npm test
 ```
 
 The `buildspec.yml` will install the dependencies declared in our `package.json` file with the `$ npm install` command. During the `build` stage of our [Pipeline](), we will `$ serverless deploy` our [Lambda]() services using the `npm` packages in our local copy of the `node_modules` directory. We will execute our *Unit Tests* that we implemented with [Jestjs.io]() during the `post_build` stage using the same scripts that we have defined in our `package.json` file. In this case we will execute `$ npm test` before moving on to the next phase of our [Pipeline]().
