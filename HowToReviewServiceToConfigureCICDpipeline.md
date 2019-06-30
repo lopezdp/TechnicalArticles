@@ -701,7 +701,7 @@ The `buildspec.yml` will install the dependencies declared in our `package.json`
 
 ## CI/CD CodePipeline Validation and Execution
 
-Below is what your [CodePipeline]() will look like once it is created. As you can see below the [Pipeline]() workflow will pull from `Source` located at your [GitHub]() repositpory. The first time you create your [Pipeline]() [AWS]() will create an s3 bucket for you if you followed along with me. When you make changes in the future, [CodePipeline]() will use this same [s3 Bucket]() as your artifact store that it will use to pull the `Source` code to from your repo. There is a lot going on here and I will review this article a few time to make sure I don't miss a critical step that will leave you in RPM Hell](http://wiki.c2.com/?RpmHell).
+Below is what your [CodePipeline]() will look like once it is created. As you can see below, the [Pipeline]() workflow will pull from the `Source` code located at your [GitHub]() repository. The first time you create your [Pipeline]() [AWS]() will create an s3 bucket for you if you followed along with me. When you make changes in the future, [CodePipeline]() will use this same [s3 Bucket]() as the artifact store that it will use to pull the `Source` code to from your repo on GitHub. There is a lot going on here and I will review this article a few times to make sure I don't miss a critical step that will leave you in RPM Hell](http://wiki.c2.com/?RpmHell).
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step07.Pipeline.png "CodePipeline Complete!!!")
 
