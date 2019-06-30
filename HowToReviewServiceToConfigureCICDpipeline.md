@@ -569,7 +569,7 @@ Do yourself a favor and follow along. This is your *lottery-ticket*!
 
 ### Using the [PayMyInvoice](https://github.com/lopezdp/PayMyInvoice) App to Deploy our Pipeline
 
-We will go ahead and use the **Project Directory** that we defined in [Part 2, Setting Up Serverless Locally](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally) that we called `PayMyInvoice`, and we will start with the service that we named `$ ~/PayMyInvoice/services/invoice-log-api`. The `serverless.yml` file located in the project is of the same structure that discussed to implement our *Infrastructure As Code*. I will rely on the fact that you have been listening carefully throughout this entire tutorial, and that I will not have to review the elements of this file which is used by [CloudFormation]() to deploy the [AWS Services]() you need to run your application at scale. I will move right along into what I would argue is the most important file that we need to implement our *CI/CD* [Pipeline]() effectively, the `buildspec.yml`.
+We will use the **Project Directory** that we defined in [Part 2, Setting Up Serverless Locally](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally) that we called `PayMyInvoice`, and we will start with the service that we named `$ ~/PayMyInvoice/services/invoice-log-api`. The `serverless.yml` file located in the project is of the same structure that discussed to implement our *Infrastructure As Code*. I will rely on the fact that you have been listening carefully throughout this entire tutorial, and that I will not have to review the elements of this file which is used by [CloudFormation]() to deploy the [AWS Services]() you need to run your application at scale. I will move right along into what I would argue is the most important file that we need to implement our *CI/CD* [Pipeline]() effectively, the `buildspec.yml`.
 
 #### Implement a `buildspec.yml` for [AWS CodeBuild]()
 
@@ -635,7 +635,7 @@ Next, go ahead and enter the *Project Name* that you have defined in [CodeBuild]
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04b.Pipeline.png "CodePipeline Step 4b!")
 
-We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that asks you to select **Use an image managed by AWS CodeBuild**, or a custom image. Select the default choice and go ahead and go with **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS and your **Runtime** environment must be specified as **Standard**. 
+We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that asks you to select **Use an image managed by AWS CodeBuild**, or a custom image. Select the default choice and go with **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS and your **Runtime** environment must be specified as **Standard**. 
 
 Next we must select an **Image** that we will use on the AWS Cloud to build our application. In our specific case because we like to keep our systems as updated as we possibly can be we are choosing to go with the `aws/codebuild/standard:2.0` image selection. We will choose to keep our image version updated for this runtime version to complete this step. This is an important configuration step because it will require that all of our custom `buildspec.yml` files use the `version: 0.2` declaration at the start of the file.
 
@@ -663,13 +663,13 @@ You should now see a message that says that you have *Successfully created invoi
 
 **Step 5**
 
-We can skip the **Deployment Provider** for now because we are not using [AWS CodeDeploy]() in this example.
+We can skip the **Deployment Provider** for now because we are not using [AWS CodeDeploy]() in this CodePipeline with the Serverless Framework.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step05.Pipeline.png "CodePipeline Step 5!")
 
 **Step 6**
 
-You can now review all of the setting you have configured for your [CodePipeline](). If everything looks *kosher*, go ahead and click on the **Create Pipeline** button as shown in the image below.
+You can now review all of the setting you have configured for your [CodePipeline](). If everything looks *kosher*, go on and click on the **Create Pipeline** button as shown in the image below.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step06.Pipeline.png "CodePipeline Step 6!")
 
