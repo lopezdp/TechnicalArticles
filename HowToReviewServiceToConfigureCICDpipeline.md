@@ -609,9 +609,9 @@ Give your new [CodePipeline]() a name to remember in the `Pipeline Name` field. 
 
 Click on the **New Service Role** selection and just let [AWS Pipeline]() fill out the `Role Name` for you while letting it create the service role for you. You can also rename the Role name to something that makes more sense to you to better remember which roles you have allocated for the resources on your AWS account. 
 
-Please keep the Role name handy because we will need to find it within the AWS IAM service roles available to attach a few more permissions that this pipeline will need to continuously deploy changes through out pipeline.
+Please keep the Role name handy because we will need to find it within the AWS IAM service roles available to attach a few more permissions that this pipeline will need to continuously deploy changes through out pipeline. Make sure to allow AWS CodePipeline to create a service role so it can be used with this new pipeline
 
-Lastly, leave the default selection for the *Artifact Store* and let [Pipeline]() use any bucket it wnts to temporarily store your builds. Keep It Simple, Stupid. **Click Next**!
+Lastly, leave the default selection for the *Artifact Store*. Keep It Simple, Stupid. **Click Next**!
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step02.Pipeline.png "CodePipeline Step 2!")
 
@@ -621,7 +621,9 @@ Here we need to define the `Source` repository where our application resides and
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step03.Pipeline.png "CodePipeline Step 3!")
 
-When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo that you want to connect: `invoice-log-api`. Next, select the branch that you want [Pipeline]() to listen to, in our case this will be the `master` branch.
+When you proceed to the `Connect` dialog, this will trigger an authenticated connection between [GitHub]() and your new [CodePipeline](). Once connected, select the repo that you want to connect: `invoice-log-api-dev`. Next, select the branch that you want [Pipeline]() to listen to, in our case this will be the `dev` branch.
+
+Make sure you select the `dev` branch for this stage of our pipeline! Reserve the `master` branch for everything you push onto `prod` later!
 
 Use [GitHub Webhooks]() to start our [Pipeline]() and execute a `build` when changes occur. **Click Next** to complete this step.
 
@@ -631,11 +633,13 @@ Now it is time to select the `Build Provider` we will use to `build` our `source
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04a.Pipeline.png "CodePipeline Step 4a!")
 
-Next, go ahead and enter  the *Project Name* that you have defined in [CodeBuild](), **or** click on **Create Project** as shown in the image. You will be taken to another window to complete the *Project* setup step. We are naming our `build` *invoice-log-api*.
+Next, go ahead and enter the *Project Name* that you have defined in [CodeBuild](), **or** click on **Create Project** as shown in the image. You will be taken to another window to complete the *Project* setup step. We are naming our `build` *invoice-log-api-dev*. This is the `dev` pipeline so be sure to label it accordingly!
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04b.Pipeline.png "CodePipeline Step 4b!")
 
-We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that specifies you to **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS. Your **Runtime** environment must be specified as **Node.js**, and from there proceed to select the latest **Version** available for the runtime environment you selected.
+We have to manage our environment and specify the `build` properties we need to have setup for us by [CodePipeline](). You need to select an **Environment Image** that asks you to select **Use an image managed by AWS CodeBuild**, or a custom image. Select the default choice and go ahead and go with **Use an image managed by AWS CodeBuild**. Your **Operating System** must be specified as an **Ubuntu** OS and your **Runtime** environment must be specified as **Standard**. 
+
+Next we must select an **Image** that we will use on the AWS Cloud to build our application. In our specific case because we like to keep our systems as updated as we possibly can be we are choosing to go with the `aws/codebuild/standard:2.0` image selection. We will choose to keep our image version updated for this runtime version to complete this step. This is an important configuration step because it will require that all of our custom `buildspec.yml` files use the `version: 0.2` declaration at the start of the file.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04c.Pipeline.png "CodePipeline Step 4c!")
 
