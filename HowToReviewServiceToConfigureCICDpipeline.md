@@ -705,11 +705,51 @@ Below is what your [CodePipeline]() will look like once it is created. As you ca
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step07.Pipeline.png "CodePipeline Complete!!!")
 
-Once our [Pipeline]() pulls from `source`, it will proccess each of the `build` phases that we defined in our `buildspec.yml` file. During the `install` phase that we defined, [CodeBuild]() will run `$ npm install` on our `package.json` file and it will also run `$ npm install -g serverless` and prepare our application's environment very much the same way we completed that task four our `local` machines in [Part 1 of this series.](). In this case we don't have to include `ESLint` or `jsfmt` because the container running our [Lambda]() just doesn't care about the beauty of our code.
+Once our [Pipeline]() pulls from `source`, it will proccess each of the `build` phases that we defined in our `buildspec-dev.yml` file. During the `install` phase that we defined, [CodeBuild]() will run `$ npm install` on our `package.json` file and it will also run `$ npm install -g serverless` and prepare our application's environment very much the same way we completed that task for our `local` machines in [Part 1 of this series.](). In this case we don't have to include `ESLint` or `jsfmt` because the container running our [Lambda]() just doesn't care about the beauty of our code.
 
-During the `build` phase [CodeBuild]() will literally `build` out our application using the [ServerlessFramework]() tools we had it install in the `install` phase and it sill deploy our [Lambda's]() and backend services the same exact way we did it on our `local` machines... just, `autonomously`. Fear the Ai my friend, fear, the Ai.
+During the `build` phase, [CodeBuild]() will literally `build` out our application using the [ServerlessFramework]() tools we had it install in the `install` phase and it will deploy our [Lambda's]() and backend services the same exact way we did it on our `local` machines... just, `autonomously`. Fear the Ai my friend, fear, the Ai.
 
-In the `post_build` phase, well we simply decided to run our unit tests. This was just to show you a very simple example and to highlight how flexible these stages can be. You can define these stages and run unit testing at any point along the workflow to deploy your services only when your tests come back positively. Below is what your [Pipeline]() will look like once all tests prove successful and all of your automated constraints to deplpoy your services are met.
+In the `post_build` phase, well we simply decided to run our unit tests. This was just to show you a very simple example and to highlight how flexible these stages can be. You can define these stages and run unit testing at any point along the workflow to deploy your services only when your tests come back positively. We've commented out testing and left some homework for you to do to see if you can take it a step further by implementing a `prod` environment also with Jest.
+
+You might think that you're home free at this point, and here's where the software Gods and Gremlins laugh at you dear sir:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/GodIsLOL.png "I feel no pity for you.")
+
+Your pipeline will initially show up as being successful... but you'll need to dig deep into the build details to review the build logs. 
+
+More than likely you'll find that you have gotten a permissions error because we never went back to give that CodeBuild Role the permission it needed to actually build our project!
+
+**I pity the fool!**
+
+```
+Serverless: Packaging service... 
+Serverless: Remove /codebuild/output/src7045676547/src/.webpack 
+  
+  Serverless Error --------------------------------------- 
+  
+  ServerlessError: User: arn:aws:sts::xxxxxxxxxxxxxx:assumed-role/codebuild-invoice-log-api-dev-service-role/AWSCodeBuild-0234rrfg-524a-4a32-9e00-adddddddd02 is not authorized to perform: cloudformation:DescribeStacks on resource: arn:aws:cloudformation:us-east-1:xxxxxxxxxxxxxx:stack/invoice-log-api-dev/05fa6f20-9afe-11e9-8fe6-12a1111111115d0 
+  
+  Get Support -------------------------------------------- 
+     Docs:          docs.serverless.com 
+     Bugs:          github.com/serverless/serverless/issues 
+     Issues:        forum.serverless.com 
+  
+  Your Environment Information --------------------------- 
+     OS:                     linux 
+     Node Version:           10.16.0 
+     Serverless Version:     1.46.1 
+  
+ 
+[Container] 2019/06/30 08:25:47 Phase complete: BUILD State: SUCCEEDED 
+[Container] 2019/06/30 08:25:47 Phase context status code:  Message:  
+[Container] 2019/06/30 08:25:47 Entering phase POST_BUILD 
+[Container] 2019/06/30 08:25:47 Phase complete: POST_BUILD State: SUCCEEDED 
+[Container] 2019/06/30 08:25:47 Phase context status code:  Message:  
+ ```
+
+ 
+
+Below is what your [Pipeline]() will look like once all build phases complete and all of your automated constraints to deplpoy your services are met.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step08.Pipeline.png "CodePipeline SUCCESS!")
 
