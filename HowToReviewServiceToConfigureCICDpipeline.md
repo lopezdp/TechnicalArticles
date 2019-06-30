@@ -647,9 +647,7 @@ Please keep the Role name handy because we will need to find it within the AWS I
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04d.Pipeline.png "CodePipeline Step 4d!")
 
-Make sure you tell [Pipeline]() to **Use the `buildspec-dev.yml` in the source code root directory** when describing the environment `build`. For our case each pipeline that we implement will represent a build stage of our project that will map to a build stage on the front end that maps to a subdomain. 
-
-Finally, select the option to **Choose an existing service role from your account** and select the role that we created previously called: `CloudFormationServiceRole`.
+Make sure you tell [Pipeline]() to **Use the `buildspec-dev.yml` in the source code root directory** when describing the environment `build`. For our use-case, each pipeline that we implement will represent a build stage of our project that will map to a build phase on the front end that maps to a subdomain in `dev`, `test`, or `prod`, for example. 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04f.Pipeline.png "CodePipeline Step 4f!")
 
