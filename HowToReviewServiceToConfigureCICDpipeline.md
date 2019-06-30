@@ -607,9 +607,7 @@ Here you will need to navigate to the [CodePipeline Console](https://console.aws
 
 Give your new [CodePipeline]() a name to remember in the `Pipeline Name` field. In our use case we will name our [Pipeline]() after the service that we will deploy on *CI/CD*. We will name this [Pipeline](): `invoice-log-api-dev`.
 
-Click on the **New Service Role** selection and just let [AWS Pipeline]() fill out the `Role Name` for you while letting it create the service role for you. You can also rename the Role name to something that makes more sense to you to better remember which roles you have allocated for the resources on your AWS account. 
-
-Please keep the Role name handy because we will need to find it within the AWS IAM service roles available to attach a few more permissions that this pipeline will need to continuously deploy changes through out pipeline. Make sure to allow AWS CodePipeline to create a service role so it can be used with this new pipeline
+Click on the **New Service Role** selection and just let [AWS Pipeline]() fill out the `Role Name` for you while letting it create the service role for you. You can also rename the Role name to something that makes more sense to you to better remember which roles you have allocated for the resources on your AWS account.
 
 Lastly, leave the default selection for the *Artifact Store*. Keep It Simple, Stupid. **Click Next**!
 
@@ -643,11 +641,15 @@ Next we must select an **Image** that we will use on the AWS Cloud to build our 
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04c.Pipeline.png "CodePipeline Step 4c!")
 
-Next proceed to create a **New Service Role** as shown in the image below and choose a unique name for this role that you can remember later and make secure changes to as needed.
+Next proceed to create a **New Service Role** as shown in the image below and choose a unique name for this role that you can remember later and make secure changes to as needed. 
+
+Please keep the Role name handy because we will need to find it within the AWS IAM service roles available so tjhat we can attach a few more permissions that this CodeBuild project will need to continuously deploy changes through out our pipeline. Make sure to allow AWS CodeBuild to create a service role so it can be used with this new Code Build Project on CodePipeline.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04d.Pipeline.png "CodePipeline Step 4d!")
 
-Make sure you tell [Pipeline]() to **Use the `buildspec.yml` in the source code root directory** when describing the environment `build`, and select the option to **Choose an existing service role from your account** and select the role that we created previously called: `CloudFormationServiceRole`.
+Make sure you tell [Pipeline]() to **Use the `buildspec-dev.yml` in the source code root directory** when describing the environment `build`. For our case each pipeline that we implement will represent a build stage of our project that will map to a build stage on the front end that maps to a subdomain. 
+
+Finally, select the option to **Choose an existing service role from your account** and select the role that we created previously called: `CloudFormationServiceRole`.
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PipelineSteps/Step04f.Pipeline.png "CodePipeline Step 4f!")
 
