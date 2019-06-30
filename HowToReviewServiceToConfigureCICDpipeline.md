@@ -169,7 +169,7 @@ JavaScript over the years, has evolved into something that the programming commu
 
 Not really, but close. You see, what happens is that anytime you build something that goes into widespread use, you get these international organizations that get together and decide what is best for everyone in the world to adopt in terms of standards and best practices when working together to use a unified and codified language like JavaScript. In this case, that organization is ECMA International. ECMA is probably also owned by Sun Microsystems. Although this can all very easily turn into some kind of YouTube Conspiracy Video, due to the historic undertones that go back to the NetScape Navigator vs InternetExplorer Battles, this Planned Economy of sorts is good because it enforces a standard across the world so that all of us can together, experience the joys of writing OpenSource code. The joy...
 
-https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwjYiv2jvpDjAhUq1VkKHR3oDmcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.flickr.com%2Fphotos%2Fjalbertbowdenii%2F5682524083&psig=AOvVaw0rBq89t_N3Mtir3tQ5cMpQ&ust=1561959102088826
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/OpenSourceSam.jpg "Do it for your country.")
 
 
 
