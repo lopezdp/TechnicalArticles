@@ -605,9 +605,11 @@ Here you will need to navigate to the [CodePipeline Console](https://console.aws
 
 **Step 2**
 
-Give your new [CodePipeline]() a name to remember in the `Pipeline Name` field. In our use case we will name our [Pipeline]() after the service that we will deploy on *CI/CD*. We will name this [Pipeline](): `invoice-log`.
+Give your new [CodePipeline]() a name to remember in the `Pipeline Name` field. In our use case we will name our [Pipeline]() after the service that we will deploy on *CI/CD*. We will name this [Pipeline](): `invoice-log-api-dev`.
 
-Click on the **New Service Role** selection and just let [AWS Pipeline]() fill out the `Role Name` for you while letting it create the service role for you. [AWS]() has changed the interface and it is a bit buggy right now and it is not letting me select the role we created earlier. Maybe by the time you read this you will be able to just select an **Existing Service Role**. If so, then feel free to submit a `Pull Request` and update this tutorial for yourself and those who come after.
+Click on the **New Service Role** selection and just let [AWS Pipeline]() fill out the `Role Name` for you while letting it create the service role for you. You can also rename the Role name to something that makes more sense to you to better remember which roles you have allocated for the resources on your AWS account. 
+
+Please keep the Role name handy because we will need to find it within the AWS IAM service roles available to attach a few more permissions that this pipeline will need to continuously deploy changes through out pipeline.
 
 Lastly, leave the default selection for the *Artifact Store* and let [Pipeline]() use any bucket it wnts to temporarily store your builds. Keep It Simple, Stupid. **Click Next**!
 
