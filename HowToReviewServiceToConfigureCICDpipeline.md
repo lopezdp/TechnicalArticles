@@ -244,7 +244,7 @@ We have finally gotten to the coolest part of this tutorial. The buildup is enor
 
 Navigate into the [Serverless-Starter-Service](https://github.com/lopezdp/ServerlessStarterService) project directory on your `local` machine and execute the following command in your `terminal`:
 
-* `$ serverless deploy`
+* `$ serverless deploy -v`
 
 Here is the result of the deployment; the output also includes the *Service Information* you need to consume the resources from the `API` you have just implemented on [AWS]()!
 
@@ -433,7 +433,7 @@ With the completion of this review and with the deployment of our [ServerlessSta
 
 ## Continuous Integration & Continuous Deployment Fundamentals
 
-Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* mentality. We will also study and review concepts in Continuous Integration and Continuous Delivery to really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeBuild]() and [CodePipeline]().
+Moving forward with our project, and this tutorial, we can now take some time to discuss and understand the principles, practices, and benefits of adopting a *DevOps* mentality. We will also study and review concepts in Continuous Integration and Continuous Delivery and we will really start getting comfortable deploying enterprise ready software to the [AWS Cloud](). Just to make sure you are ready, we will review and get you comfortable with commiting your code to a *Version Control* repository on something like [GitHub](), and I'll show you how to setup a continuous integration server and integrate it with [AWS]() *DevOps* tools like [CodeBuild]() and [CodePipeline]().
 
 > "Opportunity is missed by most people because it is dressed in overalls and looks like work." - [Thomas A. Edison]()
 
@@ -563,192 +563,9 @@ The last step is to create our [AWS CodePipeline]() which we can define with as 
 
 ### Implementation of [CodeBuild]() and [CodePipeline]()
 
-We are going to deploy our application on [AWS]() because we like it. We love being *Locked-In* and we love paying *Bezos* his cut. This might be a long tutorial but its worth it when you realize how easy it is to use [SublimeText3]() with [AWS]() on a [Mac]() over [VisualStudio]() on your 10-poubd [PC].
+We are going to deploy our application on [AWS]() because we like it. We love being *Locked-In* and we love paying *Bezos* his cut. This might be a long tutorial but its worth it when you realize how easy it is to use [SublimeText3]() with [AWS]() on a [Mac]() over [VisualStudio]() on your 10-pound PC.
 
 Do yourself a favor and follow along. This is your *lottery-ticket*!
-
-#### **Create A Service Role**
-
-* **Step 1**: Go to your [IAM Console]() and click on `Roles` in the lft navigation frame shown below:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step1.ClickRoles.png "IAM Role Step 1.")
-
-* **Step 2**: Click on the `Create Role` button pointed out in the picture:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step2.ClickCreateRoles.png "IAM Role Step 2.")
-
-* **Step 3**: Click on [CloudFormation]() as shown:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step3.ClickCoudForm.png "IAM Role Step 3.")
-
-* **Step 4**: Select the [CloudFormation]() Use Case and then click on `Next: Permissions` as shown:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step4.ClickNext.Permissions.png "IAM Role Step 4.")
-
-* **Step 5**: Put your cursor in the input field to filter the policies and type: `awslambdaexecute`. Select the box for the `AWSLambdaExecute` policy that shows up and click `Next: Tags` on the bottom right of the browser. Continue clicking `Next` on the *Tags (Optional)* screen. We will not use tags at the moment. See below:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step5.ClickNext.Tags.png "IAM Role Step 5.")
-
-* **Step 6**: Add a `Role Name` for this role that we are creating as shown and make sure to note it so that we can use it later in the tutorial. Click on the `Create Role` button as shown and proceed to the next step:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step6.ClickCreateRole.png "IAM Role Step 6.")
-
-For this tutorial we chose **CloudFormationServiceRole** as the `Role Name` that we will use later.
-
-* **Step 7**: Your new `Role` is now `Active` and ready for use!
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step7.CloudFormRoleComplete.png "IAM Role Step 7.")
-
-* **Step 8**: Now that we have added the correct permissions for our [CodePipeline]() to access [CloudFormation](), we also need to add additional permissions for this role so that our [CodePipeline]() can access [Lambda](), [API Gateway](), and other [AWS Services]() that we will need deployed with our *Infrastructure As Code* that [Pipeline]() will `pull` from our `Source` code located on our *Version Control* repo. Move on and select the `role` that we just created in the previous step and click on the `Add inline policy` button shown:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step8.AddInlinePolicy.png "IAM Role Step 8.")
-
-* **Step 9**: Click on the `.json` tab indicated by the arrow so that we can get to the correct field to enter the policy we will show you next:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step9.ClickJSONTab.png "IAM Role Step 9.")
-
-Below is the *Policy Statement* that you need to enter into the screen shown in **Step 9** above. Copy and paste this into the browser as shown and click on the `Review Policy` button on the bottom right side of the browser.
-
-#### **A NOTE on your INLINE POLICY STATEMENT**
-
-Make sure you change the policy below to include your `AWS Account ID` and your `AWS Region` or this will not work for you!!!
-
-**Policy Statement**
-
-```
-{
-	"Statement": [
-	  {
-			"Action": [
-				"s3:GetObject",
-				"s3:GetObjectVersion",
-				"s3:GetBucketVersioning"
-			],
-			"Resource": "*",
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-				"s3:PutObject"
-			],
-			"Resource": [
-				"arn:aws:s3:::codepipeline*"
-			],
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-                "lambda:CreateFunction",
-                "lambda:GetFunctionConfiguration",
-                "lambda:ListVersionsByFunction",
-                "lambda:PublishVersion",
-                "lambda:UpdateFunctionCode",
-                "lambda:GetFunction",
-                "lambda:AddPermission",
-                "execute-api:Invoke"
-            ],
-            "Resource": "*",
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-                "dynamodb:CreateTable",
-                "dynamodb:DescribeTable"
-            ],
-            "Resource": "*",
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-                "logs:CreateLogGroup",
-                "logs:DescribeLogGroups",
-                "logs:DeleteLogGroup"
-            ],
-            "Resource": [ "*" ],
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-				"apigateway:*"
-			],
-			"Resource": [
-				"arn:aws:apigateway:us-east-1::*"
-			],
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-				"iam:GetRole",
-				"iam:CreateRole",
-				"iam:DeleteRole",
-				"iam:PutRolePolicy",
-				"iam:AttachRolePolicy",
-				"iam:DeleteRolePolicy",
-				"iam:DetachRolePolicy",
-				"iam:PassRole"
-			],
-			"Resource": [
-				"arn:aws:iam::968256005255:role/*"
-			],
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-				"cloudformation:CreateStack",
-				"cloudformation:DescribeStacks",
-				"cloudformation:DescribeStackEvents",
-				"cloudformation:DescribeStackResource",
-				"cloudformation:DescribeStackResources",
-				"cloudformation:CreateUploadBucket",
-				"cloudformation:UpdateStack",
-				"cloudformation:ValidateTemplate"
-			],
-			"Resource": [
-				"*"
-			],
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-				"codedeploy:CreateApplication",
-				"codedeploy:DeleteApplication",
-				"codedeploy:RegisterApplicationRevision"
-			],
-			"Resource": [
-				"arn:aws:codedeploy:us-east-1:968256005255:application:*"
-			],
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-				"codedeploy:CreateDeploymentGroup",
-				"codedeploy:CreateDeployment",
-				"codedeploy:GetDeployment"
-			],
-			"Resource": [
-				"arn:aws:codedeploy:us-east-1:968256005255:deploymentgroup:*"
-			],
-			"Effect": "Allow"
-		},
-		{
-			"Action": [
-				"codedeploy:GetDeploymentConfig"
-			],
-			"Resource": [
-				"arn:aws:codedeploy:us-east-1:968256005255:deploymentconfig:*"
-			],
-			"Effect": "Allow"
-		}
-	],
-	"Version": "2012-10-17"
-}
-```
-
-* **Step 10**: Name your new Policy and click on the the `Create Policy` button after reviewing The `Access Levels` and `Resources` that you have configured for your [Pipeline]() as shown below:
-
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ImplementPipeline/Step10.ClickCreatePolicy.png "IAM Role Step 10.")
-
-With this `Role` now configured please review the summary page to obtain the *ARN* and all pertinent information that we will use for the deployment of our [CloudFormation]() resources with [CodePipeline]().
 
 ### Using the [PayMyInvoice](https://github.com/lopezdp/PayMyInvoice) App to Deploy our Pipeline
 
@@ -759,18 +576,23 @@ We will go ahead and use the **Project Directory** that we defined in [Part 2, S
 Go ahead and run `$ touch buildspec.yml` in your terminal from the `~/PayMyInvoice/services/invoice-log-api` directory and add the following to the file and save in the root directory of the service to deploy:
 
 ```
-version: 0.1
+# CI/CD buildspec-dev.yml file for invoice-log service on dev
+
+version: 0.2
 phases:
   install:
-   commands:
-    - npm install -g serverless
-    - npm install
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - cd services/invoice-log-api
+      - npm install -g serverless
+      - npm install
   build:
-   commands:
-    - ./node_modules/.bin/serverless deploy --stage cicd | tee deploy.out
-  post_build:
-   commands:
-    - npm test
+    commands:
+      - serverless deploy -v --stage dev | tee deploy.out
+  #post_build:
+    #commands:
+      #- npm test
 ```
 
 #### Create a New [AWS CodePipeline]()
