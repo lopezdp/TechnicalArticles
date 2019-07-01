@@ -369,7 +369,7 @@ Moving forward, we need to add a few permissions that will allow your [Lambda]()
 ```
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   stage: dev
   region: us-east-1
 
