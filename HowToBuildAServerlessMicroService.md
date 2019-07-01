@@ -201,7 +201,7 @@ Resources:
 
 The first thing we define here under the `Resources` declaration is the name of this table which we have appropriately chosen to call our `GeneralLedger`. The actual table that we implement and get back from this [CloudFormation]() template is named after a `custom variable` that we call: `${self:custom.tableName}`. Our `serverless.yml` will generate this table for us dynamically within [AWS]().
 
-We are also configuring two of our table's field attributes that we have called `userId` and `invoiceId` as shown in the example. We complete the implementation of our table by provisioning the read and write capacity of our database using custom variables to describe the load that our tables will need to service as we attract users to our application over time.
+We are also configuring two of our table's field attributes that we have called `userId` and `invoiceId` as shown in the example. We complete the implementation of our table by provisioning the read and write capacity of our database using custom variables to describe the load that our tables will need to service as we attract users to our application over time. More on this subject and autoscaling capacity later, for now just try to understand what we're doing.
 
 ### Add a DynamoDB Resource to your CloudFormation template
 
@@ -248,8 +248,6 @@ In a `NoSQL` **Data Model** you need to avoid thinking in a **Relational** manne
 We can take advantage of [DynamoDB]() when *stale* data is not an issue, and when [*Eventually Consistent*]() data is acceptable for your use case. In practice, data is processed by [AWS DynamoDB]() so fast that your implementation will be very close to, if not *Instantly Consistent*. The idea is to sacrifice strong consistency in exchange for a highly efficient *document store* on a distributed hash map that is schemaless and easy to implement, to achive high availability so that every request made to your database receives a successfull, *non-error* response. [DynamoDB]() is highly scalable due to its efficient partitioning mechanism that distributes your data across a series of highly available nodes of data stores that can also enable *Realtime Operations*. [DynamoDB]() can update tables across your services with **Sub-Second Latency**.  [DynamoDB]() will also enable you to process *sharded data* within your application to process *streams* of updates to your database in **Realtime** at a very **low cost**.
 
 **It is all about the Benjamins**
-
----> NEED AN IMAGE HERE <---
 
 In forcing you to declare and define your *Partition* and *Sort* key attributes ahead of time, [DynamoDB]() requires you to define the **Access Patterns** that your application will need to implement to query your database, and its *schemaless* data store, before you start using it. With [DynamoDB]() you will normalize your data as you query your data store. You will generate your view and normalize your data as you scan or fetch the information you need from your database.
 
