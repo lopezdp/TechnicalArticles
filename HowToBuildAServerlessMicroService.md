@@ -691,7 +691,7 @@ We need the template to declare the service to produce an `Output` for us that w
 
 ### Add an S3 Resource to our CloudFormation template on `serverless.yml`
 
-To complete this task we will need to let our CLoudFormation template know which `resource` file we need to use to declare the right S3 bucket for our purposes of saving a simple attachment to each invoice. Make sure that the final `resources` block in your `serverless.yml` file looks like the following:
+To complete this task we will need to let our CloudFormation template know which `resource` file we need to use to declare the right S3 bucket for our purposes of saving a simple attachment to each invoice. Make sure that the final `resources` block in your `serverless.yml` file looks like the following to include all of the work we have discussed in each of the resource sections above:
 
 **Add an S3 Resource**
 
@@ -924,6 +924,12 @@ export async function main(event, context) {
   }
 }
 ```
+
+And thats it. You have implemented everything we need for a simple `GeneralLedger` build on AWS using a **serverless + microservice** architecture. If you have implemented these new features onto the `dev` branch that we used to implement the *CI/CD* pipeline on your AWS account, then you should see that your CodePipeline project has built and deployed your new backend.
+
+`$ git add .`
+`$ git commit -m "feat: implemented dev serverless backend on lambda."`
+`$ git push origin dev`
 
 ### You completed the implementation of your serverless backend application and logic. Good Luck!
 
