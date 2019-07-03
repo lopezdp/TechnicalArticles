@@ -685,7 +685,7 @@ Outputs:
   AttachmentsBucketName:
     Value:
       Ref: AttachmentsBucket
-      ```
+```
 
 We need the template to declare the service to produce an `Output` for us that will give us the correct `resource` name that we can use to upload our attachments to the correct S3 resource on our cloud. The intrinsic function **Ref** returns a value for the parameter or resource we have declared as our S3 bucket. H
 
