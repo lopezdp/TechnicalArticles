@@ -16,15 +16,15 @@ This is a continuation of our multi-part series on building a simple web applica
 
 You can also clone a sample of the application we will be using in this tutorial here: [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api)
 
-Please refer to the repo above as you follow along with this tutorial. In this part of the series we will cover implementation steps for *User Authentication* with [AWS Cognito]() and the implementation of the application's *Data Model* using [AWS Dynamo DB]() as *serverless + microservices* that we will deploy as *Infrastructure As Code* on [AWS CloudFormation](). The *business logic* that will govern the functionality of this application will run on [AWS Lambda]() to allow us to implement a simple [General Ledger]() that we can use to think about simple problems that brought about the rise of [Blockchain]() technology.
+Please refer to the repo above as you follow along with this tutorial. In this part of the series we will cover implementation steps for *User Authentication* with [AWS Cognito]() and the implementation of the application's *Data Model* using [AWS Dynamo DB]() as *serverless + microservices* that we will deploy as *Infrastructure As Code* on [AWS CloudFormation](). The *business logic* that will govern the functionality of this application will run on [AWS Lambda]() to allow us to implement a simple [General Ledger]() that we can use to think about and discuss simple problems that brought about the rise of [Blockchain]() technology in future articles.
 
 We will start with the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) that we implemented in a previous chapter in this series, and we will extend this demo and turn it into the [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api) discussed above.
 
 ## System Architecture & Project Structure
 
-We will start by structuring our project directory according to what we will build today. I have done some work in the *payments* industry, and I always enjoy looking for ways to make it easier to send or receive money between people. In my opinion, *sustainability* and *monetization* are synonymous. You cannot sustain any of your projects without [Cash Money](). We will build a *time-sheet* application that will allow a user to login to the demo application, create an invoice with a description of work, to send it to an email to notify a *third party* and accept payment for the invoice generated. We will call this the **PayMeNow** application that will use a [DynamoDB]() table as its [General Ledger]().
+We will start by structuring our project directory according to what we will build today. I have done some work in the *payments* industry, and I always enjoy looking for ways to make it easier to send or receive money between people. In my opinion, *sustainability* and *monetization* are synonymous. You cannot sustain any of your projects without [Cash Money](). We will build a *time-sheet* application that will allow a user to login to the demo application, create an invoice with a description of work, to send it to an email address that will notify a *third party* of an amount due, and accept payment for the invoice generated. We will call this the **PayMeNow** application that will use a [DynamoDB]() table as its [General Ledger]().
 
-You can [clone the invoice-log-api](https://github.com/lopezdp/invoice-log-api) that we are starting out with if you want to see the completed application, but we think it is best if you just follow along with us through each step, so you can better internalize the lessons to be learned in this tutorial my young *padawan*. Let me know when you get sick of the *Star Wars* references and we  will double down a bit more. Go ahead and start with the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) and let's do this:
+You can [clone the invoice-log-api](https://github.com/lopezdp/invoice-log-api) that we are starting out with if you want to see the completed application, but we think it is best if you just follow along with us through each step, so you can better internalize the lessons to be learned in this tutorial my young *padawan*. Let me know when you get sick of the *Star Wars* references and we  will double down a bit more. Go ahead and start with the [ServerlessStarterService](https://github.com/lopezdp/ServerlessStarterService) that we deployed to our *Continuous Integration and Continuous Deployment Pipeline* and let's do this:
 
 We are going to continue on, where we left off in [Part 2 of Setting up your `local`](https://github.com/lopezdp/TechnicalArticles/blob/master/HowToConfigureYourServerlessBackend.md#setup-serverless-framework-locally) serverless environment. We walked through creating a `local` project structure that resembled something like this after you renamed your template:
 
@@ -35,11 +35,11 @@ We are going to continue on, where we left off in [Part 2 of Setting up your `lo
        |__ FutureServerlessMicroService (TBD)
 ```
 
-Proceed to navigate into the `invoice-log-api` service where we will now implement a few [Lambda functions]() that we need to serve our [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api). The first thing a user of our application will need to do is to create an invoice that the user can send to someone. The recipient of the invoice will make a payment to our system based on the amount due on the invoice. After having initially implemented this service to be able to more effectively write this tutorial for you, I now realize that I have forgotten to add fields for `Payee` information and `email` which would really be helpful within the scope of this application! Either way, my mistake is your success!
+Proceed to navigate into the `invoice-log-api` service where we will now implement a few [Lambda functions]() that we need to serve our [PayMyInvoice B2B Wallet](https://github.com/lopezdp/invoice-log-api). The first thing a user of our application will need to do is to create an invoice that the user can send to someone. The recipient of the invoice will make a payment to our system based on the amount due on the invoice. After having initially implemented this service to be able to more effectively write this tutorial for you, I now realize that I have forgotten to add fields for `Payee` information and `email` which would really be helpful within the scope of this application! Either way, my mistake is your success! Go ahead and get it done. Show the world what you got and add the change and create your first OpenSource PullRequest to this repository and let's see if you can get it approved!
 
 ### Implement `createInvoice.js`
 
-Here is what you will need to implement to be able to let your users create an invoice that they can use to accept payments for from a third-party within our new payment system. I have left a few comments within the source code to provide some insight on what each line of code is trying to achieve. We will review these in a bit of detail to be sure you are comfortable implementing a few [Lambda's]() in the future on your own!
+Here is what you will need to implement to be able to let your users create an invoice that they can use to accept payments for, from a third-party within our new payment system. I have left a few comments within the source code to provide some insight on what each line of code is trying to achieve. We will review these in a bit of detail to be sure you are comfortable implementing a few [Lambda's]() in the future and on your own!
 
 **creatInvoice.js**
 
@@ -97,6 +97,11 @@ export async function main(event, context) {
       // Discussion on DynamoDB sort key design and
       // how to properly aggregate data in table to
       // minimize READS (RCU) from cloud to minimize cost!!!
+      /*
+       * Here is where you want to start thinking about
+       * the new payee fields that you need to add!
+       *
+       */
       userId: event.requestContext.identity.cognitoIdentityId,
       invoiceId: uuid.v1(),
       createdAt: Date.now(),
@@ -127,13 +132,19 @@ We'll break this first one down by steps just to be sure this is all clear to yo
 
 #### CORS (Cross-Origin Resource Sharing)
 
-In *Step2* we had to create a library that we located at: `./libs/responseLib`. Or, one level up in your project directory, under your new `/libs` directory. We are implementing this to be able to send consistent responses back from our [dynamoDB]() resources, as invoice objects making use of the appropriate `http` status codes. Each service will have to respond with the correct `statusCode` and response `headers` so that our resources can be shared accros our *serverless + miscroservices*. This is known as **CORS (Cross-Origin Resource Sharing)**. With our [dynamoDB]() implementation, we will have to respond with `statusCode: 200` if our `http` requests are successful. Otherwise, the response from our *serverless + microservice* will be a `statusCode: 500`. We are using the `./libs/responseLib` library to attempt to keep ourselves [**DRY**]()!
+In *Step2* we had to create a library that we located at: `./libs/responseLib.js`. Or, one level up in your project directory, under your new `/libs` directory you need to create a `responseLib.js` file. 
+
+We are implementing this to be able to send consistent responses back from our cloud based resources on aws, as invoice objects make use of the appropriate `http` status codes. Each service will have to respond with the correct `statusCode` and response `headers` so that our resources can be shared across our *serverless + miscroservices*.
+
+This is known as **CORS (Cross-Origin Resource Sharing)**. With our [dynamoDB]() implementation, we will have to respond with `statusCode: 200` if our `http` requests are successful. Otherwise, the response from our *serverless + microservice* will be a `statusCode: 500`. We are using the `./libs/responseLib.js` library to attempt to keep ourselves [**DRY**](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)!
 
 #### JavaScript Promises to Love You
 
-In *Step3* we implement an `import` that uses a library that we call `./libs/dynamoLib`, in another attempt to [*save the world*]() by decoupling our code and making it more [*modular*]() and easy to read! Our goal here is to create a [JS Promise]() library that we can use to make our code super simple minded for *cavemen* like me.
+In *Step3* we implement an `import` that uses a library that we call `./libs/dynamoLib.js`, in another attempt to [*save the world*]() by decoupling our code and making it more [*modular*]() and easy to read! Our goal here is to create a [JS Promise]() library that we can use to make our code super simple minded for *cavemen* like me.
 
-We just want a way to replace the standard syntax for the JavaScript `callback` functionality. If you have a better way to manage `asynchronous` code then please *HMU*, otherwise, this tutorial is going to make do with JavaScript *Promises*. The beauty behind using these *Promises* with our `async/await` pattern that we show in the [Lambda]() implementation above, is that we can just return our `response` as soon as our service completes the execution of its logic, which allows us to avoid using the `callback`. If you've been using a `callback` since `2012`, and it's what you know, then you may disagree. Please, send me the blog post you write about it telling me how I am wrong, and make sure to scream at me on [Twitter](). We're just going to push ahead with all the cool stuff [**ES6 Syntax**]() keeps on giving us.
+We just want a way to replace the standard syntax for the JavaScript `callback` functionality. If you have a better way to manage `asynchronous` code then please *HMU*, otherwise, this tutorial is going to make do with JavaScript *Promises*. The beauty behind using these *Promises* with our `async/await` pattern that we show in the [Lambda]() implementation above, is that we can just return our `response` as soon as our service completes the execution of its logic, which allows us to avoid using the `callback`. 
+
+If you've been using a `callback` since `2012`, and it's what you know, then you may disagree. Please, send me the blog post you write about it telling me how I am wrong, and make sure to scream at me on [Twitter](http://www.DavidPLopez.com). We're just going to push ahead with all the cool stuff [**ES6 Syntax**]() keeps on giving us.
 
 **Another Promise from DynamoDb**
 
@@ -168,7 +179,7 @@ We'll get to the implementation of our [DynamoDb]() tables soon enough [*Danial-
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/PaintTheFence.png "Be the ball...")
 
-We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* project. Proceed to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() tables that we are going to use for our new *B2B* [PayPal]() clone that we call, **PayMyInvoice**. Inside of your new `resources` directory that you have created for your *serverless + microservice*, I will need you to go ahead and create a new file called `GeneralLedgerTable.yml`. Below is a `gist` of what you will need to implement in this new file of yours [Bud](https://www.youtube.com/watch?v=6CMZSw7cS8M):
+We will need a new directory that we will call `resources`. In the root of your *serverless + microservice* project. Proceed to `$ mkdir resources`, so that we can have a place to save the definition of the [DynamoDb]() tables that we are going to use for our new *B2B* [PayPal]() clone that we call, **PayMyInvoice**. Inside of your new `resources` directory that you have created for your *serverless + microservice*, I will need you to go ahead and create a new file called `GeneralLedgerTable.yml`. Below is a `gist` of something similar to what you will need to implement in this new file of yours [Bud](https://www.youtube.com/watch?v=6CMZSw7cS8M):
 
 > "Life all comes down to a few moments... This is one of them." - *Bud Fox, WallStreet*
 
@@ -219,7 +230,7 @@ resources:
 
 There are a few considerations we need to make while studying the implementation I have just graced you with. The first and most important thing I would ask you to seriously consider is to **STOP THINKING RELATIONALLY**! This is a [NoSQL]() data model and if you try to build a *Relational Database* out of it, you're going to engineer yourself right on out of house and home. Consider it a [NoSQL Best Practice](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html) to just shove in as much of your data into one table as possible. Therefore, the only thing that you really have to declare and think about ahead of time is a couple of concepts you need to know surrounding [Composite Keys](); Namely, your *NoSQL* [Partition Key]() and [SortKey]().
 
-Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Magic* that are the **M**assively **A**ggregated **D**ata models that we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction]() could ever have imagined. This whole [**DARN**] thing is just **MAD**.
+Please pay attention. We will take the liberty now to go off on a bit of a tangent here to discuss a few of the fundamentals surrounding the *Magic* that are the **M**assively **A**ggregated **D**ata models that we now know as [DynamoDB](). Something with more power than the *Cold War* era architects of [Mutually Assured Destruction](https://en.wikipedia.org/wiki/Mutual_assured_destruction) could ever have imagined. This whole [**DARN**] thing is just **MAD**.
 
 > The lesson to learn is that it does not matter how bad it gets, the only way to become a real *professional* is to realize that it is all a mess and that our job as *Software Engineers* is to figure out some way to help our organizations achieve their goals and objectives. That is all we get paid to do; We get paid to implement the ideas of those who are in charge. If you ask me, this is where the greatest opportunities reside.
 
@@ -227,7 +238,7 @@ Learn [DynamoDB]() and become an expert at its [Best Practices](https://docs.aws
 
 ### [DynamoDB]() Key Types
 
-`Key` Types determine how your application can access the `data` it collects later on. There are two `Key` types you can use to define for your table, furthermore all Key Type Attributes **MUST** be decided upon in advance. We can use either `SimpleKey` or `CompositeKey` types. To take advantage of the [Distributed Hash Map Architecture]() that enables [DynamoDB]()'s high performance as a `Key:Value` *Document Storage* database, we will use a `CompositeKey`.
+`Key` Types determine how your application can access the `data` it collects later on. There are two `Key` types you can use to define for your table, furthermore all Key Type Attributes **MUST** be decided upon in advance. We can use either `SimpleKey` or `CompositeKey` types. To take advantage of the [Distributed Hash Map Architecture](http://www.eecs.harvard.edu/~mema/courses/cs264/papers/opendht-sigcomm2005.pdf) that enables [DynamoDB]()'s high performance as a `Key:Value` *Document Storage* database, we will use a `CompositeKey`.
 
 The simplicity that [DynamoDB]() provides you with is that it is *Schemaless* in that it does not require you to define every field you need for this service ahead of time. The only two fields we do need to declare now, however, are as follows:
 
@@ -245,7 +256,9 @@ The thing to remember about *Composite Keys* is that all your *Items* are stored
 
 In a `NoSQL` **Data Model** you need to avoid thinking in a **Relational** manner because it will cost you more money due to the amount of **Read Requests or RCUs** you will make to your database. [DynamoDB]() does not enforce relationships between tables. As you aggregate composite data into your [NoSQL DynamoDB]() implementation, your data is stored as [*unnormalized*](https://en.wikipedia.org/wiki/Unnormalized_form) information. If your application cannot tolerate showing or outputting *stale* data to your user, then you need to rethink using [DynamoDB]() and reconsider using a [*Strongly Consistent*]() **RDBMS** like [PostgreSQL]() instead.
 
-We can take advantage of [DynamoDB]() when *stale* data is not an issue, and when [*Eventually Consistent*]() data is acceptable for your use case. In practice, data is processed by [AWS DynamoDB]() so fast that your implementation will be very close to, if not *Instantly Consistent*. The idea is to sacrifice strong consistency in exchange for a highly efficient *document store* on a distributed hash map that is schemaless and easy to implement, to achive high availability so that every request made to your database receives a successfull, *non-error* response. [DynamoDB]() is highly scalable due to its efficient partitioning mechanism that distributes your data across a series of highly available nodes of data stores that can also enable *Realtime Operations*. [DynamoDB]() can update tables across your services with **Sub-Second Latency**.  [DynamoDB]() will also enable you to process *sharded data* within your application to process *streams* of updates to your database in **Realtime** at a very **low cost**.
+We can take advantage of [DynamoDB]() when *stale* data is not an issue, and when [*Eventually Consistent*]() data is acceptable for your use case. In practice, data is processed by [AWS DynamoDB]() so fast that your implementation will be very close to, if not *Instantly Consistent*. The idea is to sacrifice strong consistency in exchange for a highly efficient *document store* on a distributed hash map that is schemaless and easy to implement, to achive high availability so that every request made to your database receives a successful, *non-error* response. [DynamoDB]() is highly scalable due to its efficient partitioning mechanism that distributes your data across a series of highly available nodes of data stores that can also enable *Realtime Operations*. [DynamoDB]() can update tables across your services with **Sub-Second Latency**.  [DynamoDB]() will also enable you to process *sharded data* within your application to process *streams* of updates to your database in **Realtime** at a very **low cost**. 
+
+The best way to think about this is to collect and aggregate all of your data on DynamoDB. Then, using DynamoDB Data Streaming you can replicate your tables in AWS RedShift where you can query your data in a PostgreSQL environment that you can use to provide a data analytics *UX/UI* for the users of your new application.
 
 **It is all about the Benjamins**
 
@@ -630,6 +643,73 @@ resources:
   - ${file(resources/CognitoUserPool.yml)}
   - ${file(resources/CognitoIdentityPool.yml)}
 ```
+
+## S3 Bucket Resources for our Invoice Attachments
+
+Up next, we need to create an object storage directory on the cloud with Simple Storage Service or **S3** on AWS. We want to deal with the attachments that our users may add to every invoice or transaction that they add to each entry in our new `GeneralLedger` table that we implemented above.
+
+Later on, when we walk you through building the React.js *UI* in the next tutorial, you will take advantage of AWS Amplify and the web development SDK provided by AWS to use an easy to use ReST API that will let us store all of our user's attachments to this new S3 bucket we are implementing as Infrastructure As Code to deploy on CloudFormation.
+
+Here are some docs on AWS discussing the [Browser-Based Upload with AWS Amplify](https://docs.aws.amazon.com/AmazonS3/latest/API/browser-based-uploads-aws-amplify.html) features we will be using for a sneak peak of whats to come.
+
+Here we will be declaring our S3 bucket programatically and keeping the file within the `services/invoice-log-api/resources/s3-attachments-bucket.yml` directory that we created for the modular AWS resource architecture we have walked through since we started this article. Are you paying attention? Noticing any patterns yet? Keep it Simple, Stupid.
+
+Below is the `s3-attachments-bucket.yml` that you need to add to the service we are building out. You can find a series of CloudFormation properties that you can declare for your S3 Resources on your Infrastructure as Code Templates at [these AWS Documents](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html). The only property we will configure for our S3 bucket for now will be the `CorsConfiguration` policies that our bucket needs to have to work correctly with our application.
+
+**Cross-origin resource sharing (CORS)** simply allows us to use AWS URI's that connect us to a wide array of resources in the cloud safely and securely so that we can build beautiful tools and applications that are served from a wide array of domains.  Take a look at the code below to see how we need to implement this for our own application:
+
+**S3 Objects for our Cloud!**
+
+```
+Resources:
+  AttachmentsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      # Set the CORS policy
+      CorsConfiguration:
+        CorsRules:
+          -
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3000
+# Print out the name of the bucket that is created
+Outputs:
+  AttachmentsBucketName:
+    Value:
+      Ref: AttachmentsBucket
+      ```
+
+We need the template to declare the service to produce an `Output` for us that will give us the correct `resource` name that we can use to upload our attachments to the correct S3 resource on our cloud. The intrinsic function **Ref** returns a value for the parameter or resource we have declared as our S3 bucket. H
+
+### Add an S3 Resource to our CloudFormation template on `serverless.yml`
+
+To complete this task we will need to let our CLoudFormation template know which `resource` file we need to use to declare the right S3 bucket for our purposes of saving a simple attachment to each invoice. Make sure that the final `resources` block in your `serverless.yml` file looks like the following:
+
+**Add an S3 Resource**
+
+```
+resources:
+  # DynamoDB Service
+  - ${file(resources/GeneralLedgerTable.yml)}
+
+  # Cognito User-Pool and Identity-Pool Services
+  - ${file(resources/CognitoUserPool.yml)}
+  - ${file(resources/CognitoIdentityPool.yml)}
+
+
+  # S3 Attachments Bucket
+  - ${file(resources/s3-attachments-bucket.yml)}
+```
+
+Commit your code to the repository and let's build the rest of the backend so that our `GeneralLedger` actually does something!
 
 ## Implement the remaining [Lambda]() functions
 
