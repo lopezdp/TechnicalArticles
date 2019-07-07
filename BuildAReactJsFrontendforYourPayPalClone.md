@@ -283,7 +283,7 @@ export default () => <Switch>
 
 Taking a look at this a bit deeper, you can see that we are using the `exact` property because we **must** precisely match the `/` path defined as a route in our implementation file. Using the `Switch` component forces us to use the `exact` prop like this because it will force the `/` route to match every route that uses the `/` at the start of its declaration.
 
-### Display you Home Container Route
+### Display your Home Container Route
 
 We need to refactor our `App.js` component so that it knows how to properly respond to the events triggered by a user who is requesting a particular route from our application. We need to add the `<Routes />` component that we implemented above so that our user can navigate through the different features that we will provide them with to make and accept P2P payments from within our application. Take a look at the updated `App.js` source code below that you need to be sure to implement in your own project:
 
