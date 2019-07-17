@@ -222,8 +222,8 @@ module.exports = {
     "es6": true
   },
   "rules": {
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "no-alert": 2,
     "no-array-constructor": 2,
