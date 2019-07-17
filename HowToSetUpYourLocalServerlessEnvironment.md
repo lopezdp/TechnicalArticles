@@ -172,7 +172,7 @@ From the project root directory run `$ ls -a`, and confirm that you can see the 
 
 ```
 module.exports = {
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["eslint:recommended"],
   "settings": {
     "react": {
       "createClass": "createReactClass", // Regex for Component Factory to use,
@@ -209,7 +209,9 @@ module.exports = {
     "SharedArrayBuffer": "readonly"
   },
   "parser": "babel-eslint",
-  "plugins": ["react"],
+  "plugins": [
+    "react"
+  ],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -222,8 +224,8 @@ module.exports = {
     "es6": true
   },
   "rules": {
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "react/react-in-jsx-scope": 2,
     "no-alert": 2,
     "no-array-constructor": 2,
