@@ -111,10 +111,10 @@ Next we need to configure and add the styling that Bootstrap uses and we will ha
   crossorigin="anonymous"
 />`
 
-Furthermore, to prevent our user's screen from zooming in automatically when they focus on an area of their device, we need to change the font size to `16px`. We need to make the changes in the file that you can find in your project at: `src/index.css` where you will need to add the following:
+Furthermore, to prevent our user's screen from zooming in automatically when they focus on an area of their device, we need to change the font size to `16px` so that it is large enough to trick the device into not zooming in on focus. We need to make the changes in the file that you can find in your project at: `src/index.css` where you will need to add the following:
 
 ```
-select.formcontrol,
+select.form-control,
 textarea.form-control,
 input.form-control {
 	font-size: 16px;
@@ -125,27 +125,27 @@ input[type=file] {
 }
 ```
 
-In the name of serving as many users as possible, we need to make sure that our application can be viewed elegantly from any mobile device above all else. With the syling above, we are trying to make sure that none of the design elements overflow off the screen to force the browser to add a scroll bar. We have to set the inputs file's width above to let [React.js]() take all screen sizes and browsers into consideration to normalize our changes across all devices for us.
+In the name of serving as many users as possible, we need to make sure that our application can be viewed elegantly from any mobile device above all else. With the styling above, we are trying to make sure that none of the design elements overflow off the screen to force the browser to add a scroll bar. We have to set the inputs file's width above to let [React.js]() take all screen sizes and browsers into consideration to normalize our changes across all devices for us.
 
 ### React Router for Route Handling Skills
 
-We now need to consider a way to route the different requests that we make available to the users of our Single Page Application. We will take advantage of the nature of how components work within [React.js]() and we will use something called [React Router]() to use their collection of *navigational components* that will let us easily declare the routes that our applications needs to handle.
+We now need to consider a way to route the different requests that we make available to the users of our Single Page Application. We will take advantage of the nature of how components work within [React.js]() and we will use something called [React Router](https://reacttraining.com/react-router/web/guides/quick-start) to use its collection of *navigational components* that will let us easily declare the routes that our applications needs to handle for our users and their requests.
 
 Lets install it first and make sure it is saved as a dependency in our `package.json`:
 
-`$ npm install react-router-dom --save`
+`$ npm install react-router-dom`
 
 #### Configure React Router
 
-We need to refactor the default files provided to us when we installed the `create-react-app` framework and we need to configure our new route-handling library so that we can encapsulate our application as a component within [React.js]() so that our application properly handle our user's requests. We need to change the `App` component in our project so that it looks like this:
+We need to refactor the default files provided to us when we installed the `create-react-app` framework and we need to configure our new route-handling library so that we can encapsulate our application as a component within [React.js]() so that our application can properly handle our user's requests. We need to change the `App` component in our project so that it looks like this:
 
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <Router>
@@ -160,7 +160,10 @@ ReactDOM.render(
 serviceWorker.unregister();
 ```
 
-The implementation here is what enables our ability to implement and handle the routes that we need to use with our `Router` to render the `<App />` component that was initially provided to us by `create-react-app`. We also want to use the [History](https://developer.mozilla.org/en-US/docs/Web/API/History) interface in JavaScript that will allow us to manipulate our browser's session history with `BrowserRouter`. 
+The example above is what enables us to implement and handle the routes that we need to use with our `<Router>` to render the `<App />` component that was initially provided to us by `create-react-app`. We also want to use the [History](https://developer.mozilla.org/en-US/docs/Web/API/History) interface in JavaScript that will allow us to manipulate our browser's session history with `BrowserRouter`.
+
+Our application will dynamically generate the pages that React.js renders for us in the browser. `BrowserRouter` will access the session history within our browser, so that we can let our users navigate through our application's project structure with the routes that we define using the `<Router>` component.
+
 
 ## Organize your App in a Container
 
