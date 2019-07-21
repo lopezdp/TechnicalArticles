@@ -164,17 +164,20 @@ The example above is what enables us to implement and handle the routes that we 
 
 Our application will dynamically generate the pages that React.js renders for us in the browser. `BrowserRouter` will access the session history within our browser, so that we can let our users navigate through our application's project structure with the routes that we define using the `<Router>` component.
 
-
 ## Organize your App in a Container
 
-To better organize our logic within the structure of our `App`, an ideal approach is to create a container to hold the top-level component that renders our wallet. This primary node that is the main container of our `App` will also organize the primary components that we will implement here to render the logic we need for our wallet. Before we can do that we should list a few of the views that we will need to implement to make this successful:
+To better organize our logic within the structure of our `App`, an ideal approach is to create a container to hold the top-level component that renders our wallet. This makes it possible to more easily use `flexbox` to design the components of our application so that they can be viewed on mobile devices. 
+
+This primary node that is the main container of our `App`, will also hold the primary components that will render the logic we need for our wallet. Before we can do that we should list a few of the views that we will need to implement to make this successful:
 
 1. Create Invoice/Transaction
 2. View Transactions
 3. Pay Transaction
 4. View History
 
-The first thing we have to build is a navigation bar so that we can organize all of the views we need our users to work with. [React-Bootstrap]() makes this really easy with `import Navbar from "react-bootstrap";`. We have to make some changes to the default `App.js` file originally deployed by `create-react-app`. Take a look at the `source code` below that we need to use in the new version of our `App.js` file. 
+The first thing we have to build is a navigation bar so that we can organize all of the views we need our users to work with. [React-Bootstrap]() makes this really easy with `import Navbar from "react-bootstrap/Navbar";` as shown below. 
+
+We have to make some changes to the default `App.js` file originally deployed by `create-react-app` to make this possible. Take a look at the `source code` below that we need to use in the new version of our `App.js` file. 
 
 ```
 /*
@@ -184,7 +187,7 @@ The first thing we have to build is a navigation bar so that we can organize all
 
 import React, { Component } from 'react'; // Added Component
 // Use Link (see r-r-d docs here), for ref to home without refresh
-import { /* Link, */ NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 // Import navbar component given to you by bootstrap 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -203,8 +206,8 @@ class App extends Component {
         { /* collapseOnSelect - Toggles expanded to false after the onSelect
                                 event of a descendant of a child <Nav> fires. */ }
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">
-            Pay Me
+          <Navbar.Brand as={ NavLink } to="/">
+            MyPay Wallet
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -225,23 +228,34 @@ class App extends Component {
 export default App;
 ```
 
-We are telling React that we want to use the Bootstrap Fluid Layout by configuring the `fluid` attribute, and we declare the primary `div.container` to implement a *responsive application container* with a fixed-width, so that we can add our navigation bar easily. We also have to figure out a way to get our users back to the homepage without triggering a refresh event. To get our users to their homepage dashboard we are going to use React-Router's `Link` component to get us there. Finally, we need to begin to style our application. Please copy the following `css` styling to the same directory as your `App.js` script in your project directory, and call the file `App.css`.
+We are telling React that we want to use the Bootstrap4 `fluid` attribute and layout that is configured by default with `<Navbar>`. We also declare the primary `div.container` to implement a *responsive application container* with a fixed-width, so that we can add our navigation bar easily while ensuring its responsiveness. Next, we have to figure out a way to get our users back to the homepage without triggering a refresh event. To get our users to their homepage dashboard we are going to use React-Router's `as={ NavLink }` component to get us there. We have to specify a path which in the case is the `root` of our project directory or, `to="/"`.
+
+We will use the Bootstrap4 `<Navbar.Collapse>` component to give us a responsive and collapsable *hamburger* icon on mobile devices for the two `<Nav.Link>` components will use for our future registration and login functionality.
+
+Finally, we need to begin to style our application. Please copy the following `css` styling to the same directory as your `App.js` script in your project directory, and call the file `App.css`.
 
 ```
 .App {
-  margin-top: 15px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .App .navbar-brand {
   font-weight: bold;
 }
+
+.container {
+  max-width: 100%;
+}
 ```
 
 ### Implement your landing page
 
-With the primary application container ready, we need to implement our landing page in a `Home` container that we can use to respond to the `/` route where our primary components will live, and that we can use to make requests to our serverless + microservices. We will want to differentiate our primary containers from the rest of the components in our application, and we will use `$ mkdr src/containers` from our project's root directory to save these files.
+With the primary application container ready, we need to implement our landing page in a `Home` container that we can use to respond to the `/` route where our primary components will live, and that we can use to make requests to our serverless + microservices, using *asynchronous* calls to our *services in the cloud*. We will want to differentiate our primary containers from the rest of the components in our application, and we will use `$ mkdr src/containers` from our project's root directory to save these files.
 
-Now that we have structured our application properly, we can complete the first iteration of our landing page so that we can show something to the rest of the world. Create a new file called `Home.js` inside of the `src/containers` project directory. All of the primary containers that provide our routes with a response, and that will send requests to our serverless backend, are just the primary views that our user interacts with in our application. Take a look at the file we have implemented for you in the `src/containers/Home.js` project directory and make the changes in your project as needed. Below is what we completed for this tutorial:
+Now that we have structured our application properly, we can complete the first iteration of our landing page so that we can show something to the rest of the world. Create a new file called `Home.js` inside of the `src/containers` project directory. 
+
+All of the primary containers that provide our routes with a response, and that will send requests to our serverless backend, are just the primary views that our user interacts with in our application. Take a look at the file we have implemented for you in the `src/containers/Home.js` project file, and make the changes in your project as needed. Below is what we completed for this tutorial:
 
 ```
 import React, { Component } from "react";
@@ -262,7 +276,9 @@ export default class Home extends Component {
   }
 }
 ```
-Slowly we make progress. Here you have rendered your first `html` page using [JSX](), an extension to JavaScript that lets you use an `xml`-like syntax in the views that you implement to elegantly describe what you want your user's interface to look like. Here is the magic that we find in React; it embraces the fact that the logic required to implement an elegant user interface is tightly coupled with rendering, state changes, data preprocessing and application logic also. React allows you to create simple components that let you separate architectural considerations efficiently, to help you feel more comfortable writing your `html` markup into your JavaScript functions, so that you can more easily render the views you need to your users. 
+Slowly we make progress. Here you have rendered your first `html` page using [JSX](), an extension to JavaScript that lets you use an `xml`-like syntax in the views that you implement to elegantly describe what you want your user's interface to look like. 
+
+Here is the magic that we find in React; it embraces the fact that the logic required to implement an elegant user interface is tightly coupled with rendering, state changes, data preprocessing and application logic also. React allows you to create simple and reusable components that let you separate architectural considerations efficiently, to help you feel more comfortable writing your `html` markup into your JavaScript functions, so that you can more easily render the views you need to your users. 
 
 The `JSX` we are rendering above is only going to display the first version of our homepage to the users of our new Wallet. Copy the `css` styling below into the `src/containers/Home.css` file in your project directory so we can start making this page look presentable:
 
@@ -286,7 +302,7 @@ The `JSX` we are rendering above is only going to display the first version of o
 
 Now that we have a `Home` page component that we can use to start displaying some form of content to our user, we need to configure the routes that our application will use so that the view implemented above, can respond appropriately when a user triggers an event that calls the `/` route from anywhere in the application. We will use `react-router` and the `Switch` component it gives us, to render an *exclusive* route that we can display to the user as the first resource defined within the component, that precisely matches the path we need. 
 
-Review the code we implemented below that you need to create as a new `src/Routes.js` file in the project directory and add the following to your implementation:
+Review the code we implemented below that you will need to create as a new `src/Routes.js` file in the project directory, and add the following to your implementation:
 
 ```
 import React from "react";
@@ -298,7 +314,7 @@ export default () => <Switch>
                      </Switch>;
 ```
 
-Taking a look at this a bit deeper, you can see that we are using the `exact` property because we **must** precisely match the `/` path defined as a route in our implementation file. Using the `Switch` component forces us to use the `exact` prop like this because it will force the `/` route to match every route that uses the `/` at the start of its declaration.
+Taking a look at this a bit deeper, you can see that we are using the `exact` property because we **must** precisely match the `/` path defined as a route in our implementation file. Using the `Switch` component requires us to use the `exact` prop like this because it will force the `/` route to match every route that uses the `/` at the start of its declaration.
 
 ### Display your Home Container Route
 
@@ -342,6 +358,13 @@ class App extends Component {
 }
 export default App;
 ```
+
+You should now have a homepage that looks something like the image below:
+
+**myPay first Homepage**
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/myPay.React.Start.png "First Homepage!")
+
 
 
 
