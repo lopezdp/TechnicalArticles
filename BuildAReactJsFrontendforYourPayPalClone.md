@@ -166,7 +166,7 @@ To better organize our logic within the structure of our `App`, an ideal approac
 3. Pay Transaction
 4. View History
 
-The first thing we have to build is a navigation bar so that we can organize all of the views we need our users to work with. [React-Bootstrap]() makes this really easy with `import { Navbar } from "react-bootstrap";`. We have to make some changes to the default `App.js` file originally deployed by `create-react-app`. Take a look at the `source code` below that we need to use in the new version of our `App.js` file. 
+The first thing we have to build is a navigation bar so that we can organize all of the views we need our users to work with. [React-Bootstrap]() makes this really easy with `import Navbar from "react-bootstrap";`. We have to make some changes to the default `App.js` file originally deployed by `create-react-app`. Take a look at the `source code` below that we need to use in the new version of our `App.js` file. 
 
 ```
 /*
@@ -176,9 +176,11 @@ The first thing we have to build is a navigation bar so that we can organize all
 
 import React, { Component } from 'react'; // Added Component
 // Use Link (see r-r-d docs here), for ref to home without refresh
-import { Link } from "react-router-dom";
+import { /* Link, */ NavLink, withRouter } from "react-router-dom";
 // Import navbar component given to you by bootstrap 
-import { Navbar } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import './App.css';
 
 // We need a component to "contain" our App
