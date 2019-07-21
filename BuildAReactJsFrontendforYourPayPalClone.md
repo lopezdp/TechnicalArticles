@@ -316,7 +316,7 @@ export default () => <Switch>
 
 Taking a look at this a bit deeper, you can see that we are using the `exact` property because we **must** precisely match the `/` path defined as a route in our implementation file. Using the `Switch` component requires us to use the `exact` prop like this because it will force the `/` route to match every route that uses the `/` at the start of its declaration.
 
-### Display your Home Container Route
+### Display your Home Container and Declare both Registration/Login Routes
 
 We need to refactor our `App.js` component so that it knows how to properly respond to the events triggered by a user who is requesting a particular route from our application. We need to add the `<Routes />` component that we implemented above so that our user can navigate through the different features that we will provide them with to make and accept P2P payments from within our application. Take a look at the updated `App.js` source code below that you need to be sure to implement in your own project:
 
@@ -366,6 +366,51 @@ You should now have a homepage that looks something like the image below:
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/myPay.React.Start.png "First Homepage!")
 
 
+We have setup our application's first *route* that we can use to always get our user back to the homepage. It would probably be a good idea to take a look at the two links that we initially setup to use for our future `Login` and `Registration` routes that we are going to use to get our users authenticated so that we can assign them the permissions they need to use the different resources we will build into the functionality of this project.
+
+Take a second to refactor your `src/App.js` file so that your render method looks like this:
+
+```
+render() {
+    return (
+      // should probably discuss className syntax in article
+      <div className="App container">
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand as={ NavLink } to="/">
+            MyPay Wallet
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="navigate">
+              <Nav.Link as={ NavLink }
+                to="/register"
+                className="navi-link"
+                exact>
+                Register
+              </Nav.Link>
+              <Nav.Link as={ NavLink }
+                to="/login"
+                className="navi-link"
+                exact>
+                Login
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Routes />
+      </div>
+      );
+}
+```
+
+The *routes* declared in the `<Nav.Link>` components rely on the `
+import { NavLink } from "react-router-dom";` statement we are also using for the home page route. If you click on the `Register` or `Login` button on your homepage you will see that the URL in the Address Bar reflect the slection chosen by the user, either `http://localhost:3000/register` or `http://localhost:3000/login`, respectively.
+
+Right now there is nothing that react can render to the page when the links are selected by the user since there is no registration, login, or any page for that matter. In case a user decides to request a *route* that we dont have an implementation for, we should make it so that our application responds with a proper *404 Page Does Not Exist* response.
+
+### Handle 404 Responses and Routing
+
+With `react-router` we can see that it is pretty easy to declare and implement new routes for your application as needed. We still need to create the components that the *routes* will point to. As our application's **permissions-model** grows in complexity, the *Higher Order Components (HOC)* that we will use to wrap our *routes* with, will also grow in complexity as we use them to properly authenticate the routes that we will implement with you in this article.
 
 
 
