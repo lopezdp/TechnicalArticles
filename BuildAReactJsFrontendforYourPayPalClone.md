@@ -87,26 +87,31 @@ You can see the changes made at the repository we have created for you on GitHub
 
 ### UIKit with React-Bootstrap
 
-The most important part of any web development project is making sure to have a good set of tools that will let you create a beautiful user interface that your user can use to interact with your serverless backend. You can definitely spend your days implementing your own elements in JavaScript, HTML, and CSS and maybe create your own **UIKit** that you can market to the world to become famous, but for the purposes of this tutorial we are just going to go ahead and use the [Bootstrap UI toolset via the React-Bootstrap library](https://react-bootstrap.github.io) that we will import into each of our components as needed. We will install it and make it project dependency now with the following command:
+The most important part of any web development project is making sure to have a good set of tools that will let you create a beautiful user interface that your user can use to interact with your serverless backend. You can definitely spend your days implementing your own elements in JavaScript, HTML, and CSS and maybe create your own **UIKit** that you can market to the world to become famous, but for the purposes of this tutorial we are just going to go ahead and use the [Bootstrap UI toolset via the React-Bootstrap library](https://react-bootstrap.netlify.com) that we will import into each of our components as needed. We will install it and make it project dependency now with the following command:
 
-`$ npm install react-bootstrap --save`
+`$ npm install react-bootstrap bootstrap`
 
-This will make sure to add `react-bootstrap` as a project dependency in our `package.json` file that we have save in our [pay-me-app](https://github.com/lopezdp/pay-me-app) project directory. 
+This will make sure to add `react-bootstrap` as a project dependency in our `package.json` file that we have saved in our [pay-me-app](https://github.com/lopezdp/pay-me-app) project directory. 
 
 Your output will look similar to the following:
 
 ```
-+ react-bootstrap@1.0.0-beta.8
++ react-bootstrap@1.0.0-beta.9
 added 30 packages in 11.046s
 ```
 
 #### Mobile First Styling
 
-Next we need to configure and add the styling that Bootstrap uses and we will have to add some code to out `index.html` file to be sure that we take advantage of the standard Bootstrap v3 styles we will implement here. In your `public.html` file ass the following line:
+Next we need to configure and add the styling that Bootstrap uses and we will have to add some code to our `index.html` file to be sure that we take advantage of the standard Bootstrap v4 styles that we will implement here. In your `public.html` file add the following line:
 
-`<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">`
+`<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossorigin="anonymous"
+/>`
 
-Furthermore, to prevent our user's screen from zooming in automatically when they focus on an area of their device, we need to change the font size to `16px`. We need to make thee changes in the file that you can find in your project at: `src/index.css` where you will need to add the following:
+Furthermore, to prevent our user's screen from zooming in automatically when they focus on an area of their device, we need to change the font size to `16px`. We need to make the changes in the file that you can find in your project at: `src/index.css` where you will need to add the following:
 
 ```
 select.formcontrol,
@@ -194,14 +199,21 @@ class App extends Component {
         { /* probably best to discuss JSX and JSX comments */ }
         { /* collapseOnSelect - Toggles expanded to false after the onSelect
                                 event of a descendant of a child <Nav> fires. */ }
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">
-                Pay My Wallet
-              </Link>
-            </Navbar.Brand>
-          </Navbar.Header>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">
+            Pay Me
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="navigate">
+              <Nav.Link href="#register">
+                Register
+              </Nav.Link>
+              <Nav.Link href="#login">
+                Log In
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );
