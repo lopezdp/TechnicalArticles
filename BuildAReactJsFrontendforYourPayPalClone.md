@@ -576,7 +576,7 @@ Lastly, me make use of the `mandatorySignIn` flag by setting it to `true` inside
 
 Now that we have all of our application's plumbing in place so that our left hand knows where our right hand is we can implement a simple user registration and login feature that will let us authenticate everyone who wants to use our app!
 
-## Implement the SignIn Interface
+## Implement the Sign-In Interface
 
 Eventually our user will have some form of credential that they can use to sign-in to our application, and we have chosen to begin with the implemention of the view for this interface to help demonstrate how we can use React.js to make *asynchronous calls* to the Cognito service on the AWS Cloud. When we develop our registration interface using forms in bootstrap4, we will dive deeper into the use of making *async* calls to let our user sign-in to our app with the email attributes that we configured as a username with Cognito, using Infrastructure As Code on our serverless backend.
 
@@ -675,6 +675,12 @@ export default class Signin extends Component {
 ```
 
 The first thing we have to pay attention to here is the implementation of the `state` object inside of our component's `constructor`. We use `state` attributes to store the user's `email` and `password` data that we can access using `this.state.email` and `this.state.password` as the `value` in our `sign-in` form fields that will be updated by React.js on every change of `state`. React.js literally provides you with a canvas to create your front end application on. As you change the `state` of your application's attributes, React.js will display a new render, or the most updated version of your application.
+
+It is important to understand this nature of React.js, and how it perpetually renders, and re-renders your page to display the most recent `state` changes that your application has undergone. If you try to change the `state` of an attribute within a `render()` function you will inevitably get caught in one hell of an `infinite-loop`. You need to change the `state` of your attributes with an `event` handler like the one we implemented above called `handleChange()`.
+
+`handleChange()` is triggered by an application `event` and uses the `controlId` declared in each `<Form.Group>` in the input fields shown. It proceeds to update the `state` of each attribute when the user enters the appropriate data.
+
+
 
 
 
