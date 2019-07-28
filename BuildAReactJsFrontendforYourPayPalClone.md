@@ -572,7 +572,7 @@ You have to keep in mind that in the context above Amplify refers to to the Cogn
 
 The configuration settings also let us add endpoints that our app can communicate with via API Gateway. The name of the enpoint we deployed with Lambda on the ServerlessFramework is the `invoice-log-api`. If you notice here we have a data structure that has an array of *endpoint objects*. Our app currently only has one endpoint, but as we continue to build it out here is where we will be configuring each of the endpoints we need to use to access the services we deploy on API Gateway.
 
-Lastly, me make use of the `mandatorySignIn` flag by setting it to true inside of the `Auth` object to that we can force our users to register and sign in with Cognito before they use any of our application's resources.
+Lastly, me make use of the `mandatorySignIn` flag by setting it to `true` inside of the `Auth` object so that we can force our users to register and sign in with Cognito before they use any of our application's resources.
 
 
 
