@@ -439,8 +439,32 @@ We can style this page a bit further and just for a bit more practice with the `
 
 The styling above is just aligning the output message our component is displaying to the user in the center of the page using a `100px` padding from the top of the page
 
+#### Catching All Unmatched Routes
 
+We can now use `react-router` to implement the route that we need to handle the 404 Page request our users will inevitably generate for our serverless...servers. Did I say that right? Either way, now we need to tell our app when and how to show our users our new `404Page.js` component.
 
+We need to implement a new `<Route />` component in the `src/Routes.js` file located in the root project directory. We need to add a new case to the `<Switch>` block that needs to look a little something like this:
+
+```
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Home from "./containers/Home";
+import Page404 from "./containers/404Page";
+
+export default () => <Switch>
+                       { /* This is our home page route for the main landing page to the app */ }
+                       <Route path="/" exact component={ Home } />
+
+                       { /* This route will catch all unmatched routes && MUST BE LAST!!! */ }
+                       <Route component={ Page404 } />
+                     </Switch>
+```
+
+The new case we are adding to handle our `Page 404` error responses must always be included in the `<Switch>` block last. Our `Page404` component will only handle requests that have failed to be handled by any of the initial routes that we have implemented.
+
+Once you have this complete you can now click on the `login` or `register` buttons in the app that should now take you to a 404 page response similar to what you can see below:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Page404.png "404 Responded!")
 
 
 
