@@ -412,6 +412,37 @@ Right now there is nothing that react can render to the page when the links are 
 
 With `react-router` we can see that it is pretty easy to declare and implement new routes for your application as needed. We still need to create the components that the *routes* will point to. As our application's **permissions-model** grows in complexity, the *Higher Order Components (HOC)* that we will use to wrap our *routes* with, will also grow in complexity as we use them to properly authenticate the routes that we will implement with you in this article.
 
+We need to start off by implementing a component that we can save as `src/containers/404Page.js` so that we can create the view we'll need React.js to display for us in-app if and when a user tries to access a resource that does not exist.
+
+Add the following code to the new `404Page.js` file that we created and I will show you how to add it as a default *catch-all* route in case our users need it:
+
+```
+import React from "react";
+import "./404Page.css";
+
+export default () => <div className="Page404">
+                       <h3>Sorry, this page does not exist within the MyPay Platform... yet!</h3>
+                     </div>;
+
+```
+
+The only thing that this component is responsible for is to display a message to our user informing them that the resource that is being accessed does not exist.
+
+We can style this page a bit further and just for a bit more practice with the `.css` code I have left for you below:
+
+```
+.Page404 {
+  padding-top: 100px;
+  text-align: center;
+}
+```
+
+The styling above is just aligning the output message our component is displaying to the user in the center of the page using a `100px` padding from the top of the page
+
+
+
+
+
 
 
 
