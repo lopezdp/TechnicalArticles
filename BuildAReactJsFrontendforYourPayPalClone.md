@@ -510,10 +510,69 @@ You can find these stack outputs by looking through the details of the build log
 
 ### Implement AWS Amplify
 
-To complete the configuration and implementation of `Amplify` with our application we need to first add the folllowing statement to the top of `src/index.js`:
+To complete the configuration and implementation of `Amplify` with our application we need to first add the folllowing statements to the top of `src/index.js`:
 
 `import Amplify from "aws-amplify";`
 
+also include: `import config from "./config";`
+
+Finally, you need to provide `Amplify` with a mapping of the `config` parameters we implemented above and this will allow us to initialize `Amplify` with everything we need to have our app use the services we need on the cloud. Our implementation of `src/index.js` needs to look like the following file below:
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import * as serviceWorker from "./serviceWorker";
+import Amplify from "aws-amplify";
+import config from "./config";
+
+Amplify.configure({
+  Auth: {
+    mandatorySignIn: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+  },
+  Storage: {
+    region: config.s3.REGION,
+    bucket: config.s3.BUCKET,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID
+  },
+  API: {
+    endpoints: [
+      {
+        // NOTE: The API "name" is critical and used by aws-amplify
+        //       when an amplify API.post() method where the first
+        //       argument is the name of this API field!!!
+        name: "invoice-log-api",
+        endpoint: config.apiGateway.URL,
+        region: config.apiGateway.REGION
+      }
+    ]
+  }
+});
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
+You have to keep in mind that in the context above Amplify refers to to the Cognito Authentication service on the cloud as `Auth`. The same holds true form both the S3 Upload service and API Gateway; `Storage` refers to S3 while `API` refers to the later.
+
+The configuration settings also let us add endpoints that our app can communicate with via API Gateway. The name of the enpoint we deployed with Lambda on the ServerlessFramework is the `invoice-log-api`. If you notice here we have a data structure that has an array of *endpoint objects*. Our app currently only has one endpoint, but as we continue to build it out here is where we will be configuring each of the endpoints we need to use to access the services we deploy on API Gateway.
+
+Lastly, me make use of the `mandatorySignIn` flag by setting it to true inside of the `Auth` object to that we can force our users to register and sign in with Cognito before they use any of our application's resources.
 
 
 
