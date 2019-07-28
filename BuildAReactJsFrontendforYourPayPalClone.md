@@ -466,6 +466,53 @@ Once you have this complete you can now click on the `login` or `register` butto
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Page404.png "404 Responded!")
 
+Now that we have a bit of a *front-end infrastructure* in place, we can now work on figuring out how to configure the AWS Services that we have implemented to support this app and its users. Let's tae a look how we can start leveraging cloud based tools like `AWS-Amplify` to easily give our app what it needs to do something amazing like *making the world a better place*...
+
+## Building a Modern Web Application with `AWS-Amplify`
+
+Traditional web-architectures using a *client-server* approach lead to a poor user experience because of the need to re-render dynamic pages for every click of a button that needs to wait for an *asynchronous* response from a server. On the contrary, Modern Web Applications use a *Single Page Application* approach to package all of the application components into a single *static* file to offer a *native-like* feel to the user using brebuilt layout and JavaScript files to execute backend logic without having to re-render the page content.
+
+`AWS-Amplify` just provides everything that we need to implement and deploy scalable cloud based apps that uses a *CLI* and *library* that really simplifies the development of web and mobile applications. In the next article we will even go over and show you how to deploy your app onto an infinite amount of stages by using `AWS-Amplify`.
+
+### Install and Configure Amplify
+
+We need to be able to communicate with AWS Services like `Cognito`, `S3`, `API Gateway`, and others like `DynamoDB`. The first thing we have to get done is to install the `Amplify` library thats going to let us use all of these cloud based tools really easily:
+
+`$ npm install aws-amplify --save`
+
+Once this completes double check that `Amplify` is now a listed dependency in your `package.json` file located in the root of your project directory.
+
+When we deployed our *serverless + microservices*, we were shown a few different *Stack Outputs* provided by AWS that gave us the unique resource names and ID's that we now need to use to configure `AWS Amplify`. With the information you gather, we need to then proceed to create a new file called `src/config.js` so that we can add the details shown below:
+
+```
+export default {
+  s3: {
+    REGION: "S3_BUCKET_REGION",
+    BUCKET: "S3_BUCKET_NAME"
+  },
+
+  apiGateway: {
+    REGION: "API_GATEWAY_REGION",
+    URL: "API_GATEWAY_URL"
+  },
+
+  cognito: {
+    REGION: "COGNITO_REGION",
+    USER_POOL_ID: "COGNITO_USER_POOL_ID",
+    APP_CLIENT_ID: "COGNITO_APP_CLIENT_ID",
+    IDENTITY_POOL_ID: "COGNITO_IDENTITY_POOL_ID"
+  }
+};
+```
+Each of the values shown in the file above needs to be replaced with the stack outputs your were displayed when you deployed your backend services on AWS in the previous chapters of this tutorial.
+
+You can find these stack outputs by looking through the details of the build logs in your CodePipeline implementation that we completed for your CI/CD.
+
+### Implement AWS Amplify
+
+To complete the configuration and implementation of `Amplify` with our application we need to first add the folllowing statement to the top of `src/index.js`:
+
+`import Amplify from "aws-amplify";`
 
 
 
