@@ -574,6 +574,8 @@ The configuration settings also let us add endpoints that our app can communicat
 
 Lastly, me make use of the `mandatorySignIn` flag by setting it to `true` inside of the `Auth` object so that we can force our users to register and sign in with Cognito before they use any of our application's resources.
 
+Now that we have all of our application's plumbing in place so that our left hand knows where our right hand is we can implement a simple user registration and login feature that will let us authenticate everyone who wants to use our app!
+
 
 
 
