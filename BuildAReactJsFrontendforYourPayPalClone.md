@@ -576,6 +576,109 @@ Lastly, me make use of the `mandatorySignIn` flag by setting it to `true` inside
 
 Now that we have all of our application's plumbing in place so that our left hand knows where our right hand is we can implement a simple user registration and login feature that will let us authenticate everyone who wants to use our app!
 
+## Implement the SignIn Interface
+
+Eventually our user will have some form of credential that they can use to sign-in to our application, and we have chosen to begin with the implemention of the view for this interface to help demonstrate how we can use React.js to make *asynchronous calls* to the Cognito service on the AWS Cloud. When we develop our registration interface using forms in bootstrap4, we will dive deeper into the use of making *async* calls to let our user sign-in to our app with the email attributes that we configured as a username with Cognito, using Infrastructure As Code on our serverless backend.
+
+### Create A Login Component Hierarchy
+
+We need to setup a simple methodology to manage our `state` properties in react to store the requested credentials from our user. Add a new file called `src/containers/Signin.js` to your project directory and implement the code below:
+
+```
+import React, { Component } from "react";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Auth } from "aws-amplify";
+import "./Signin.css";
+
+export default class Signin extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  validateForm() {
+    return this.state.email.length > 0 && this.state.password.length > 0;
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  }
+
+  // Use async promise to wait for response from aws-amplify api
+  handleSubmit = async event => {
+    event.preventDefault();
+
+    // Amplify Authentication logic
+    try {
+      // Make call to Auth API using aws-amplify
+      await Auth.signIn(this.state.email, this.state.password);
+      alert("Logged In!");
+    } catch ( err ) {
+      alert(err.message);
+    }
+  }
+
+  render() {
+    return (
+      <div className="Signin">
+        <Form onSubmit={ this.handleSubmit }>
+          <p>
+            <strong>Returning Users Please Sign-in.</strong>
+          </p>
+          <Form.Group controlId="email">
+            <Form.Label>
+              Email address
+            </Form.Label>
+            <Form.Control autoFocus
+              size="lg"
+              type="email"
+              placeholder="Enter email"
+              value={ this.state.email }
+              onChange={ this.handleChange } />
+            <Form.Text className="text-muted">
+              We will never share your private information with a third-party.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>
+              Password
+            </Form.Label>
+            <Form.Control size="lg"
+              type="password"
+              placeholder="Password"
+              value={ this.state.password }
+              onChange={ this.handleChange } />
+          </Form.Group>
+          { /* FIXME: Get Remember me check working so that it grabs user email from cookie */ }
+          <Form.Group controlId="rememberUser">
+            <Form.Check type="checkbox" label="Remember Me" />
+          </Form.Group>
+          <Button block
+            size="lg"
+            disabled={ !this.validateForm() }
+            variant="primary"
+            type="submit">
+            Login
+          </Button>
+        </Form>
+      </div>
+      );
+  }
+}
+```
+
+The first thing we have to pay attention to here is the implementation of the `state` object inside of our component's `constructor`. We use `state` attributes to store the user's `email` and `password` data that we can access using `this.state.email` and `this.state.password` as the `value` in our `sign-in` form fields that will be updated by React.js on every change of `state`. React.js literally provides you with a canvas to create your front end application on. As you change the `state` of your application's attributes, React.js will display a new render, or the most updated version of your application.
+
+
+
+
 
 
 
