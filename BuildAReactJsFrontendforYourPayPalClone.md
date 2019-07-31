@@ -580,7 +580,7 @@ Now that we have all of our application's plumbing in place so that our left han
 
 Eventually our user will have some form of credential that they can use to sign-in to our application, and we have chosen to begin with the implemention of the view for this interface to help demonstrate how we can use React.js to make *asynchronous calls* to the Cognito service on the AWS Cloud. When we develop our registration interface using forms in bootstrap4, we will dive deeper into the use of making *async* calls to let our user sign-in to our app with the email attributes that we configured as a username with Cognito, using Infrastructure As Code on our serverless backend.
 
-### Create A Login Component Hierarchy
+### Create A Login Component Hierarchy and Route
 
 We need to setup a simple methodology to manage our `state` properties in react to store the requested credentials from our user. Add a new file called `src/containers/Signin.js` to your project directory and implement the code below:
 
@@ -679,6 +679,68 @@ The first thing we have to pay attention to here is the implementation of the `s
 It is important to understand this nature of React.js, and how it perpetually renders, and re-renders your page to display the most recent `state` changes that your application has undergone. If you try to change the `state` of an attribute within a `render()` function you will inevitably get caught in one hell of an `infinite-loop`. You need to change the `state` of your attributes with an `event` handler like the one we implemented above called `handleChange()`.
 
 `handleChange()` is triggered by an application `event` and uses the `controlId` declared in each `<Form.Group>` in the input fields shown. It proceeds to update the `state` of each attribute when the user enters the appropriate data.
+
+Form validation is always a good practice and looking a bit deeper we can see that the function called `validateForm` checks to ensure that our `email` and `password` fields are not empty prior to the execution of the `Auth.signIn()` method.
+
+When the `state` of the application is ready to submit data to our services on the cloud, we then use Amplify to call our resources in Cognito to authenticate a user. Take a look at the *asynchronous* promise returned by the `handleSubmit()` function shown above. We are using our `state` sttributes to call Amplify's `Auth.signIn()` method to validate our credentials and authenticate our user. Using the `await` feature to return a promise, we execute `Auth.signIn()` to securely sign our user into the app.
+
+Next, in our `src/containers/Signin.css` file we can style our sign-in screen accordingly:
+
+```
+@media all and (min-width: 480px) {
+  .sign-in {
+    padding: 60px 0;
+  }
+
+  .sign-in form {
+    margin: 0px auto;
+    max-width: 320px; 
+  }
+}
+```
+
+We need to complete the implementation of our sign-in page by adding a *Sign-In* route to our `src/Routes.js` file below our `root` path. Your new file should look like the `source` below:
+
+```
+/*
+  Pay Me Now Wallet
+  P2P anonymous payments
+  Routes.js
+*/
+
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Home from "./containers/Home";
+import Signin from "./containers/Signin";
+import Page404 from "./containers/404Page";
+
+export default () => <Switch>
+                       { /* This is our home page route for the main landing page tyo the app */ }
+                       <Route path="/" exact component={ Home } />
+                       { /* This is the Login Route */ }
+                       <Route path="/login" exact component={ Signin } />
+                       { /* This route will catch all unmatched routes && MUST BE LAST!!! */ }
+                       <Route component={ Page404 } />
+                     </Switch>
+```
+
+With that all setup and ready to go, if you look at your browser now at `http://localhost:3000/login` you should see a page that looks a little something like the image below:
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Page404.png "404 Responded!")
+
+And thats it. You have implemented everything we need to set up the skeleton for a simple React.js application. In the next article we will discuss how you will need to actually connect this new front end to all of the serverless + microservices you built on AWS Lambda. We will finish off the next article with showing you how to deploy all of these new features that take advantage of your `GeneralLedger` in the cloud on AWS Amplify.
+
+### You completed the implementation of your React.js Framework. Good Luck!
+
+## Part 7: Integrate your serverless + microservices with React.js and deploy your app on AWS-Amplify.
+
+* [Part 7: Integrate React with Serverless and Deploy on Amplify](https://github.com/lopezdp/TechnicalArticles/blob/master/ServerlessReactDeployedOnAmplify.md) - *Not Published.*
+
+
+
+
+
+
 
 
 
