@@ -102,3 +102,23 @@ Later on, when we walk you through building the React.js UI in the next tutorial
 ### Keywords
 
 DynamoDB, Cognito, Authentication, Data Modeling, Federated Identities, Simple Storage Service, s3, AWS, Infrastructure As Code, CloudFormation
+
+## Part 6. Building A ReactJS FrontEnd
+
+Now that we have a bunch of fancy backend logic on our AWS Cloud, we need to develop an engaging user interface that we can use to attract real humans to our latest get rich quick idea, we are going to continue to call it a digital Wallet to make mom, and our resumes, proud. Rather than get into the long history that led to React.js' role as the 'V' or the View in the Model-View-Controller design paradigm, we will spend some time implementing React.js so that you can learn by doing.
+
+Since the Facebook Mafia is much smarter than us, we are just going to go ahead and use something called Create React App, or create-react-app for those who are more programatically inclined. All sarcasm and Dilber Humor aside, React.js is a practical approach to another one of those esoteric software engineering questions that exist in an abundance of threads on the internet that scroll of into perpetuity. Implementing frontend component in React.js is effective and more productive approach that allows you to reuse code that you have written throughout your code. React takes advantage of a Virtual DOM that ituses to check against state changes to render dynamic UI elements faster than traditional MVC implementations.
+
+The most important part of any web development project is making sure to have a good set of tools that will let you create a beautiful user interface that your user can use to interact with your serverless backend. You can definitely spend your days implementing your own elements in JavaScript, HTML, and CSS and maybe create your own UIKit that you can market to the world to become famous, but for the purposes of this tutorial we are just going to go ahead and use the Bootstrap UI toolset via the React-Bootstrap library that we will import into each of our components as needed. 
+
+We now need to consider a way to route the different requests that we make available to the users of our Single Page Application. We will take advantage of the nature of how components work within React.js and we will use something called React Router to use its collection of navigational components that will let us easily declare the routes that our applications needs to handle for our users and their requests.
+
+Traditional web-architectures using a client-server approach lead to a poor user experience because of the need to re-render dynamic pages for every click of a button that needs to wait for an asynchronous response from a server. On the contrary, Modern Web Applications use a Single Page Application approach to package all of the application components into a single static file to offer a native-like feel to the user using brebuilt layout and JavaScript files to execute backend logic without having to re-render the page content.
+
+AWS-Amplify just provides everything that we need to implement and deploy scalable cloud based apps that uses a CLI and library that really simplifies the development of web and mobile applications. In the next article we will even go over and show you how to deploy your app onto an infinite amount of stages by using AWS-Amplify.
+
+When the state of the application is ready to submit data to our services on the cloud, we then use Amplify to call our resources in Cognito to authenticate a user. Take a look at the asynchronous promise returned by the handleSubmit() function shown above. We are using our state sttributes to call Amplify's Auth.signIn() method to validate our credentials and authenticate our user. Using the await feature to return a promise, we execute Auth.signIn() to securely sign our user into the app.
+
+### Keywords
+
+React.js, AWS-Amplify, Bootstrap4, Modern Web Applications, Single Page Applications, JavaScript Promise, Asynchronous Requests
