@@ -726,7 +726,7 @@ export default () => <Switch>
 
 With that all setup and ready to go, if you look at your browser now at `http://localhost:3000/login` you should see a page that looks a little something like the image below:
 
-![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/Page404.png "404 Responded!")
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/SignInPage.png "User Sign In Page!")
 
 And thats it. You have implemented everything we need to set up the skeleton for a simple React.js application. In the next article we will discuss how you will need to actually connect this new front end to all of the serverless + microservices you built on AWS Lambda. We will finish off the next article with showing you how to deploy all of these new features that take advantage of your `GeneralLedger` in the cloud on AWS Amplify.
 
