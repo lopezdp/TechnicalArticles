@@ -19,3 +19,19 @@ This is a continuation of our multi-part series on building a simple web applica
 * [Part 6: Build a React.js Frontend for your PayPal clone](https://github.com/lopezdp/TechnicalArticles/blob/master/BuildAReactJsFrontendforYourPayPalClone.md) - *Not Published.*
 
 You can also clone a sample of the application that we will be using in this tutorial at: [PayMyInvoice B2B ClientWallet](https://github.com/lopezdp/pay-me-app)
+
+Please refer to the repo above as you follow along with this tutorial. In this part of the series we will continue to cover the needed implementation steps for a [React.js]() *Single Page Application* that we will deploy on [AWS]() using the following [React.js]() and [AWS]() *imports* and *SDK's*:
+
+* `react`
+* `react-dom`
+* `react-router`
+* `react-router-dom`
+* `react-bootstrap`
+* `aws-amplify`
+
+## Implement User Permissions and Registration
+
+Now that this application of ours has a login interface that our users can use to authenticate themselves, we are going to have to make sure that there is a mechanism in place to enable the permissions our users need to create and manage their transactions within our app. To properly complete thes configuration steps we will need to be able to load our application's current state from our user's login session managed by Cognito, we'll need to implement a few redirects for proper login and logout functionality, and more importantly we always have to make sure that we are giving our users good feedback when logging in so that they can be sure that they are submitting the correct credentials.
+
+
+
