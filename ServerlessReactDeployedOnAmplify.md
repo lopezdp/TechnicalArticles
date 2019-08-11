@@ -364,7 +364,7 @@ The following image is what you should be able to see on your own `local` enviro
 
 Typically we can make use of `Cookies` or `LocalStorage` to store the user's sign-in data that we can load from the session stored in the browser. In the case of a *Progressive Web Application* we can use these tools to persist *offline data* to allow our users to work with our app in a native-like environment. With `AWS-Amplify` we can store our session information automatically and use Amplify to load the session information we need when a user signs in, into the application's state.
 
-
+We are going to work with the `Auth.currentSession()` method provided by Amplify to return a promise that we can resolve into a session object that we use to verify a user's login state. We will implement a `componentDidMount` function in our React.js app to load our current session.
 
 
 
