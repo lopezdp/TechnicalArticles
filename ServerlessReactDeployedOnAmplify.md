@@ -331,6 +331,20 @@ $  aws cognito-idp sign-up \
    --password Passw0rd!
 ```
 
+Here is the `Output` you should see in your `terminal` after running the command above:
+
+```
+{
+    "UserConfirmed": false,
+    "CodeDeliveryDetails": {
+        "Destination": "d***@l***.com",
+        "DeliveryMedium": "EMAIL",
+        "AttributeName": "email"
+    },
+    "UserSub": "800ef60e-2e91-4354-9956-1b1199b3cdee"
+}
+```
+
 Just like you did in your own `config.js` file, here you will need to do the same and use your own `client-id` and `region` values based on the *Service Information* and *Stack Outputs* you received when you deployed your service on CodePipeline in the previous chapter on CI/CD. Furthermore, before we can use this username to authenticate ourselves within our application, we will need to verify this user in Cognito with the fopllowing command:
 
 ```
@@ -342,9 +356,17 @@ $  aws cognito-idp admin-confirm-sign-up \
 
 With this step complete we can now test our `Fragment` component to see if our `Sign Out` link is displayed to our users when they authenticate themselves against Cognito.
 
-The following image is what you should be able to see on your own `local` environment:
+The following image is what you should be able to see on your own `local` environment (Notice the new Sign Out link that appears after the new test user signs into the app!):
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/SignOutLink.png "User Sign Off Link!")
+
+### Loading the Application State from its Session
+
+Typically we can make use of `Cookies` or `LocalStorage` to store the user's sign-in data that we can load from the session stored in the browser. In the case of a *Progressive Web Application* we can use these tools to persist *offline data* to allow our users to work with our app in a native-like environment. With `AWS-Amplify` we can store our session information automatically and use Amplify to load the session information we need when a user signs in, into the application's state.
+
+
+
+
 
 
 
