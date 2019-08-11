@@ -364,8 +364,80 @@ The following image is what you should be able to see on your own `local` enviro
 
 Typically we can make use of `Cookies` or `LocalStorage` to store the user's sign-in data that we can load from the session stored in the browser. In the case of a *Progressive Web Application* we can use these tools to persist *offline data* to allow our users to work with our app in a native-like environment. With `AWS-Amplify` we can store our session information automatically and use Amplify to load the session information we need when a user signs in, into the application's state.
 
-We are going to work with the `Auth.currentSession()` method provided by Amplify to return a promise that we can resolve into a session object that we use to verify a user's login state. We will implement a `componentDidMount` function in our React.js app to load our current session.
+We are going to work with the `Auth.currentSession()` method provided by Amplify to return a promise that we can resolve into a session object that we use to verify a user's login state. We will implement a `componentDidMount` function in our React.js app to load our current session *asynchronously*.
 
+We will use *promises* implemented with the `aync`, `await` pattern to load our application only after our promise returns an authenticated user object after the complete execution of the logic in our `componentDidMount` function. We need a few `state` attributes that we can use as flags to tell our application when a user `isAuthenticated` and that our application `isAuthenticating` a user on login. 
+
+Implementing `Auth.currentSession()` will load a user's session when they log in, and our application will update our `isAuthenticating` flag if the session loads successfully. Amplify will throw an error that we will handle with a `try/catch` method if there is no user signed into the application. Our `componentDidMount` inside of our `src/App.js` file should look like the following `source code`:
+
+```
+async componentDidMount() {
+    try {
+      await Auth.currentSession();
+      this.userHasAuthenticated(true);
+    }
+    catch(e) {
+      if(e !== 'No current user'){
+        alert(e);
+      }
+    }
+
+    this.setState({ isAuthenticating: false });
+  }
+```
+Dont forget to include: `import { Auth } from "aws-amplify";` so that Amplify knows you're trying to grab the session object from its grasp!!!
+
+Leveraging the asynchronous pattern that we implemented above we need to wait for the application state to load with the user's session we are taking from Amplify to render the app in an authenticated or unauthernitcated state, depending on the response we get back from Cognito and Amplify.
+
+Below is what the new render function should look like that will let us conditionally render our views based on the authenticated status of the user.
+
+```
+// Need to render App container
+  render() {
+
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      userHasAuthenticated: this.userHasAuthenticated
+    };
+
+    return (
+      !this.state.isAuthenticating &&
+      // should probably discuss className syntax in article
+      <div className="App container">
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand as={ NavLink } to="/">
+            MyPay Wallet
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            { this.state.isAuthenticated
+              ? <NavDropdown.Item onClick={ this.handleSignOut } className="navi-link">
+                  Sign Out
+                </NavDropdown.Item>
+              : <Fragment>
+                  { /* Fragment is like placeholder component */ }
+                  <Nav.Link as={ NavLink }
+                    to="/register"
+                    className="navi-link"
+                    exact>
+                    Register
+                  </Nav.Link>
+                  <Nav.Link as={ NavLink }
+                    to="/signin"
+                    className="navi-link"
+                    exact>
+                    Login
+                  </Nav.Link>
+                </Fragment> }
+          </Navbar.Collapse>
+        </Navbar>
+        <Routes childProps={ childProps } />
+      </div>
+      );
+  }
+```
+
+A user can now log into our application and we will have to implement the functionality they will use to log out next.
 
 
 
