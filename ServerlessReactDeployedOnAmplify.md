@@ -551,7 +551,7 @@ You need to start by creating a new file that I have called: `src/components/UiL
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
-import "./LoaderButton.css";
+import "./UiLoadBtn.css";
 
 export default ({ isLoading, 
                   text, 
@@ -578,13 +578,33 @@ Interestingly, I have decided to pass a new property that I have called `disable
 There are quite a few options for the different visualizations you can use so make sure you visit the `react-bootstrap` docs to make sure you end up using the right element for your own app. Either way, *Bootstrap4* is great because with just the following bit of `css` our dynamic button implementation for our `isLoading` flag is now complete!
 
 ```
-.LoaderButton {
+.UiLoadBtn {
   margin-right: 7px;
   top: 2px;
 }
 ```
 
 While *Boostrap4* takes care of the display of our spinning *glyphicons*, we just need to implement our new component in our `Signin.js` component so that we can complete this task of letting our user know that the app is doing what it should be doing instead of, well... *buggin' out*.
+
+You will need to replace the `<Button>` element in your `Signin.js` file with the following:
+
+```
+{ /* Loading Button Component */ }
+<UiLoadBtn block
+  size="lg"
+  disabled={ !this.validateForm() }
+  variant="primary"
+  type="submit"
+  isLoading={ this.state.isLoading }
+  text="Signin"
+  loadingText="Signing In..." />
+```
+
+Also, do not forget to correctly `import` this component into your `Signin.js` component so that you can use it. If you take a look at your browser you should be able to see the state of the button in the UI while the application processes your authentication request!
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/SignInLoading.png "User Sign In Loading!")
+
+
 
 
 
