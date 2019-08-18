@@ -201,19 +201,19 @@ This line of code has to executed after the call to signin with Cognito is made 
 Your new `handleSubmit()` `async` function inside of your `src/containers/Signin.js` component should now look like this:
 
 ```
-  // Use async promise to wait for response from aws-amplify api
-  handleSubmit = async event => {
-    event.preventDefault();
+// Use async promise to wait for response from aws-amplify api
+handleSubmit = async event => {
+  event.preventDefault();
 
-    // Amplify Authentication logic
-    try {
-      // Make call to Auth API using aws-amplify
-      await Auth.signIn(this.state.email, this.state.password);
-      this.props.userHasAuthenticated(true)
-    } catch ( err ) {
-      alert(err.message);
-    }
+  // Amplify Authentication logic
+  try {
+    // Make call to Auth API using aws-amplify
+    await Auth.signIn(this.state.email, this.state.password);
+    this.props.userHasAuthenticated(true)
+  } catch ( err ) {
+    alert(err.message);
   }
+}
 ```
 
 To execute this functionality we now have to implement a UI element that will let the user fire off these events. We need a sign out button and we need one quick.
@@ -335,13 +335,13 @@ Here is the `Output` you should see in your `terminal` after running the command
 
 ```
 {
-    "UserConfirmed": false,
-    "CodeDeliveryDetails": {
-        "Destination": "d***@l***.com",
-        "DeliveryMedium": "EMAIL",
-        "AttributeName": "email"
-    },
-    "UserSub": "800ef60e-2e91-4354-9956-1b1199b3cdee"
+  "UserConfirmed": false,
+  "CodeDeliveryDetails": {
+      "Destination": "d***@l***.com",
+      "DeliveryMedium": "EMAIL",
+      "AttributeName": "email"
+  },
+  "UserSub": "800ef60e-2e91-4354-9956-1b1199b3cdee"
 }
 ```
 
@@ -372,18 +372,18 @@ Implementing `Auth.currentSession()` will load a user's session when they log in
 
 ```
 async componentDidMount() {
-    try {
-      await Auth.currentSession();
-      this.userHasAuthenticated(true);
-    }
-    catch(e) {
-      if(e !== 'No current user'){
-        alert(e);
-      }
-    }
-
-    this.setState({ isAuthenticating: false });
+  try {
+    await Auth.currentSession();
+    this.userHasAuthenticated(true);
   }
+  catch(e) {
+    if(e !== 'No current user'){
+      alert(e);
+    }
+  }
+
+  this.setState({ isAuthenticating: false });
+}
 ```
 Dont forget to include: `import { Auth } from "aws-amplify";` so that Amplify knows you're trying to grab the session object from its grasp!!!
 
@@ -393,48 +393,48 @@ Below is what the new render function should look like that will let us conditio
 
 ```
 // Need to render App container
-  render() {
+render() {
 
-    const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
-    };
+  const childProps = {
+    isAuthenticated: this.state.isAuthenticated,
+    userHasAuthenticated: this.userHasAuthenticated
+  };
 
-    return (
-      !this.state.isAuthenticating &&
-      // should probably discuss className syntax in article
-      <div className="App container">
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand as={ NavLink } to="/">
-            MyPay Wallet
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            { this.state.isAuthenticated
-              ? <NavDropdown.Item onClick={ this.handleSignOut } className="navi-link">
-                  Sign Out
-                </NavDropdown.Item>
-              : <Fragment>
-                  { /* Fragment is like placeholder component */ }
-                  <Nav.Link as={ NavLink }
-                    to="/register"
-                    className="navi-link"
-                    exact>
-                    Register
-                  </Nav.Link>
-                  <Nav.Link as={ NavLink }
-                    to="/signin"
-                    className="navi-link"
-                    exact>
-                    Login
-                  </Nav.Link>
-                </Fragment> }
-          </Navbar.Collapse>
-        </Navbar>
-        <Routes childProps={ childProps } />
-      </div>
-      );
-  }
+  return (
+    !this.state.isAuthenticating &&
+    // should probably discuss className syntax in article
+    <div className="App container">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand as={ NavLink } to="/">
+          MyPay Wallet
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          { this.state.isAuthenticated
+            ? <NavDropdown.Item onClick={ this.handleSignOut } className="navi-link">
+                Sign Out
+              </NavDropdown.Item>
+            : <Fragment>
+                { /* Fragment is like placeholder component */ }
+                <Nav.Link as={ NavLink }
+                  to="/register"
+                  className="navi-link"
+                  exact>
+                  Register
+                </Nav.Link>
+                <Nav.Link as={ NavLink }
+                  to="/signin"
+                  className="navi-link"
+                  exact>
+                  Login
+                </Nav.Link>
+              </Fragment> }
+        </Navbar.Collapse>
+      </Navbar>
+      <Routes childProps={ childProps } />
+    </div>
+    );
+}
 ```
 
 A user can now log into our application and we will have to implement the functionality they will use to log out next.
@@ -460,24 +460,145 @@ To be able to access the *session history* that can direct our user correctly, w
 
 ```
 handleSubmit = async event => {
-    event.preventDefault();
+  event.preventDefault();
 
-    // Amplify Authentication logic
-    try {
-      // Make call to Auth API using aws-amplify
-      await Auth.signIn(this.state.email, this.state.password);
-      this.props.userHasAuthenticated(true);
-      // Implement hostory object here!
-      this.props.history.push("/");
-    } catch ( err ) {
-      alert(err.message);
-    }
+  // Amplify Authentication logic
+  try {
+    // Make call to Auth API using aws-amplify
+    await Auth.signIn(this.state.email, this.state.password);
+    this.props.userHasAuthenticated(true);
+    // Implement hostory object here!
+    this.props.history.push("/");
+  } catch ( err ) {
+    alert(err.message);
   }
+}
 ```
 
 Take a look at your browser after your user signs into your application now, and you will see that after the user is authenticated by Amazon Cognito, your user will be redirected to the home page as intended. What happens when your user signs off? We will take a look at how to deal with that specific use-case next!
 
-Unfortunately, the architecture of our application forces us to go a little outside of the box to implement our `Sign Out` functionality since the `root` application component, or our `src/App.js` file is not actually rendered within a proper `<Route />`. We will have to use a [Higher Order Component (HOC)](https://facebook.github.io/react/docs/higher-order-components.html), and specifically, we will rely on an *HOC* called `withRouter` that is provided to us by `react-router` that will enable us to use the `props` that are accessible inside of our `src/App.js`.
+Unfortunately, the architecture of our application forces us to go a little outside of the box to implement our `Sign Out` functionality since the `root` application component, or our `src/App.js` file, is not actually rendered within a proper `<Route />`. We will need to use a [Higher Order Component (HOC)](https://facebook.github.io/react/docs/higher-order-components.html), and specifically, we will rely on an *HOC* called `withRouter` that is provided to us by `react-router` that will enable us to use the `props` that need to be accessible inside of `src/App.js` to pass our `history` object down into our `Signin` component. The properties will be available to you within the `history` object as determined by the `HOC`'s closest matching `<Route>`.
+
+`withRouter` does not receive `state` change values to update the location within the `hostory` object, it only renders the page after every change in location that is persisted to the DOM from the `<Router>` component. `withRouter` will only re-draw wach page when its `parent` component is updated and is forced to be rendered as an update to the application's `state`.
+
+To implement `withRouter` correctly and to allow for the legitimate access of the `history` object's session details, we first need to replace the last line in `src/App.js` with the following:
+
+`export default withRouter(App);`
+
+This is where we wrap our `App` component with the `withRouter` *Higher Order Component* so that we can share the `history` object and its session details with the rest of our `App` and its child components as properties that we can pass down into each with this wrapper. We just need to make sure that we are importing it correctly by using: 
+
+`import { withRouter } from "react-router";`
+
+With everything in place to route and redirect our users correctly on sign-in and sign-out, we now need to ensure that our sign-out function looks like this:
+
+```
+handleSignOut = async event => {
+  await Auth.signOut();
+  this.userHasAuthenticated(false);
+  this.props.history.push("/signin");
+}
+```
+
+We should provide the user with a prompt of sorts to let them know what to expect from the program in development to account for the *asynchronous* requests made to our serverless + microservice, however, you should now see that the code above will now redirect the user of the application the the sign-in page upon signing off from our app.
+
+### Prompt the user when Signing into the application
+
+Using *asynchronous* methods to *get* a backend response from our serverless + microservices does introduce a bit of latency into the application that we will have to address so that our users will know that the app is working and has not crashed while waiting for the data requested. We will need to create a `state` attribute that we can use as a flag to determine when the application is *awaiting* an *asynchronous* response filled with data requested by the user from our UI. In our `Signin` component we will use an `isLoading` flag as a `state` attribute for the purposes we have just discussed. You need to implement your application's initial state in the constructor of your `Signin.js` file as such:
+
+```
+this.state = {
+  isLoading: false,
+  email: "",
+  password: ""
+};
+```
+
+Finally, we need to make sure that we update our *asynchronous* `handleSubmit` function so that it updates the `state` of our application and the `isLoading` flag while the *asynchronous* request is processing so that we can use it to give a visual queue to our user so that they know that our application is working while they wait patiently... hopefully not for too long. Below is the completed `handleSubmit` function that you need to implement in your `Signin.js` component:
+
+```
+handleSubmit = async event => {
+  event.preventDefault();
+
+  this.setState({
+    isLoading: true
+  });
+
+  // Amplify Authentication logic
+  try {
+    // Make call to Auth API using aws-amplify
+    await Auth.signIn(this.state.email, this.state.password);
+    this.props.userHasAuthenticated(true);
+    this.props.history.push("/");
+  } catch ( err ) {
+    alert(err.message);
+
+    this.setState({
+      isLoading: false
+    });
+  }
+}
+```
+
+So this is great and all that we have a mechanism that changes the ephemeral state of our appliction using some esoteric `state` variable that we change dynamically on every user's interaction with our application. But, how are we going to use it to let our user know that our application is in fact working, instead of just sitting there staring back blindly at our user?
+
+#### Implement a UI Button with a dynamic Loading display
+
+The easisest and most effective tool to use, is a button element that changes its behavior dynamically based on the `state` of the `isLoading` flag that we just implemented in the previous section. I decided to implement a component that we could just reuse so that we could better adhere to the infamous [DRY Principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). I am certain we are going to need quite a few dynamic button elements that will tell the user when the app is loading new data from our serverless + microservices.
+
+You need to start by creating a new file that I have called: `src/components/UiLoadBtn.js` and which needs to have the following code in its implementation:
+
+```
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
+import "./LoaderButton.css";
+
+export default ({ isLoading, 
+                  text, 
+                  loadingText, 
+                  className = "", 
+                  disabled = false, 
+                  ...props 
+                }) => <Button className={ `LoaderButton ${className}` } 
+                              disabled={ disabled || isLoading } 
+                              {...props}>
+                        { isLoading && <Spinner animation="grow" /> }
+                        { !isLoading ? text : loadingText }
+                      </Button>;
+```
+
+This is nothing more than a component that accepts a series of arguments that include the `isLoading` `state` attribute that we have declared for use as the flad that will let us dynamically change the way that this button appears to the user when the data is being processed by the application. The *JavaScript* object that we are defining as the parameters of our function also accept `text` that we will use to define what the button says to the user while it is in a *static* `state`, whereas the `loadingText` is what it will display to the user when in the dynamic `state` when `isLoading` is `true`.
+
+Interestingly, I have decided to pass a new property that I have called `disabled`. `disabled` will let us decativate the user's ability to interact with this *element* whenever we want, so that the user cannot click the button if the application is processing data *asynchronously* at any given moment. We do not want the user to trigger a second event while the first click is loading the original request's data to the UI.
+
+*Bootstrap4* and the *NPM* package built for its implementation in React.js with `react-bootstrap` is really convenient in that it provides us with a `Spinner` component that we can easily use to dynamically update the change of the button's `state` with a visual representation of a *spinner* using this line of code:
+
+* `<Spinner animation="grow" />`
+
+There are quite a few options for the different visualizations you can use so make sure you visit the `react-bootstrap` docs to make sure you end up using the right element for your own app. Either way, *Bootstrap4* is great because with just the following bit of `css` our dynamic button implementation for our `isLoading` flag is now complete!
+
+```
+.LoaderButton {
+  margin-right: 7px;
+  top: 2px;
+}
+```
+
+While *Boostrap4* takes care of the display of our spinning *glyphicons*, we just need to implement our new component in our `Signin.js` component so that we can complete this task of letting our user know that the app is doing what it should be doing instead of, well... *buggin' out*.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
