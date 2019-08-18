@@ -439,6 +439,47 @@ Below is what the new render function should look like that will let us conditio
 
 A user can now log into our application and we will have to implement the functionality they will use to log out next.
 
+### Create the Session when a user Signs On/Off & Redirect
+
+```
+// Update authentication state on signout event
+handleSignOut = async event => {
+  await Auth.signOut();
+  this.userHasAuthenticated(false);
+}
+```
+Amplify acts as our `LocalStorage` mechanism to help us persist our user's session. With the code above our app will now clear the application's state and clear the session from `LocalStorage` with `Auth.signOut()`. We need to add this feature to our `handleSignOut` function in our `srcs/App.js` file as shown above. With the implementation a user can logout and refresh the page, and Amplify will handle clearing our users session and application state to be sure to be completely signed out of our application.
+
+The best way to handle a user signing out of our application is to send, or *redirect* our happy use-case actor back to the sign in page after the session is cleared and the app logs them out of the system. Conversely, when a user authenticates against our implementation of AWS Cognito, our app will have to make sure the user ends up on the home page after signing into our platform. Using the `history` object we can manipulate our browser's *session history* to help our user navigate to the correct path in our app.
+
+Thankfully, `react-router` gives us a method called `history.push` that we can use to find the right attribute within the history object that will let us push our user to the correct authenticated route on login. With our `Login.js` component that is rendered to our app with our `<Route />` component, the new `history` object will be passed down into the `Login` component as a `prop` and we can easily redirect our user with the syntax you should already feel comfortable using in React.js:
+
+* `this.props.history.push("/");`
+
+To be able to access the *session history* that can direct our user correctly, we will use their location and `push` them to the `root path` of our project as determined by their `authentication` status. The component's `history` property will be implemented like the `source code` below so that it is triggered correctly when the `handleSubmit` function is called:
+
+```
+handleSubmit = async event => {
+    event.preventDefault();
+
+    // Amplify Authentication logic
+    try {
+      // Make call to Auth API using aws-amplify
+      await Auth.signIn(this.state.email, this.state.password);
+      this.props.userHasAuthenticated(true);
+      // Implement hostory object here!
+      this.props.history.push("/");
+    } catch ( err ) {
+      alert(err.message);
+    }
+  }
+```
+
+Take a look at your browser after your user signs into your application now, and you will see that after the user is authenticated by Amazon Cognito, your user will be redirected to the home page as intended. What happens when your user signs off? We will take a look at how to deal with that specific use-case next!
+
+Unfortunately, the architecture of our application forces us to go a little outside of the box to implement our `Sign Out` functionality since the `root` application component, or our `src/App.js` file is not actually rendered within a proper `<Route />`. We will have to use a [Higher Order Component (HOC)](https://facebook.github.io/react/docs/higher-order-components.html), and specifically, we will rely on an *HOC* called `withRouter` that is provided to us by `react-router` that will enable us to use the `props` that are accessible inside of our `src/App.js`.
+
+
 
 
 
