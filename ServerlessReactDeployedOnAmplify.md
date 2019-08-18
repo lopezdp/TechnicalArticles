@@ -604,6 +604,10 @@ Also, do not forget to correctly `import` this component into your `Signin.js` c
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/SignInLoading.png "User Sign In Loading!")
 
+We need to add the ability to change a password and a few other features which we will go over in a separate section ater when we implement a `Setting.js` component. For now you should be able to see the `Spinner` component that Bootstrap4 gave us to load the next page on `Signin`. But what do we do to get a user credentials anyway? We need a `Registration` component next!
+
+
+
 
 
 
