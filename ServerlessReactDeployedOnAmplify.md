@@ -604,18 +604,33 @@ Also, do not forget to correctly `import` this component into your `Signin.js` c
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/SignInLoading.png "User Sign In Loading!")
 
-We need to add the ability to change a password and a few other features which we will go over in a separate section ater when we implement a `Setting.js` component. For now you should be able to see the `Spinner` component that Bootstrap4 gave us to load the next page on `Signin`. But what do we do to get a user credentials anyway? We need a `Registration` component next!
+We need to add the ability to change a password and a few other features which we will go over in a separate section ater when we implement a `Setting.js` component. For now you should be able to see the `Spinner` component that Bootstrap4 gave us to load the next page on `Signin`. But what do we do to get a user credentialed and registered with our app anyway? We need a `Registration` component next!
 
+### Implement a User Registration Workflow
 
+The registration workflow we will create is quite simple, and will help us collect some basic information about our users so that we can take advantage of the AWS Amplify API and interact with Amazon Cognito to both confirm, and authenticate each user that registers with our app. We will confirm each user registration with Cognito's API, which will send a *confirmation code* to every user's email, and which they will need to enter into our two part registration form to obtain access to our app and their new wallet.
 
+#### Implement Simple Authentication
 
+Sometimes, user sign-up and sign-in features are the only requirement to consider when implementing user authentication. When complete, the app is able to talk to resources exposed to API Gateway or other cloud based services on authentication. Tyically, you can easily deploy a UserPool on Cognito by running Amplify's `addAuth` command with the `amplify-cli` and using the default setup parameters. You can have your app retrieve the user's authentication tokens to complete the authentication process by using either `Auth.signUp` and `Auth.signIn`.
 
+#### AWS Authentication & Signing Requests
 
+If you need to store videos or large files on AWS Simple Storage Service, your application will use services that will need signing requests authorized. Sending analytics or streaming data on Kinesis firehose to a data warehouse is another use-case to consider. Using credentials from a Cognito Identity Pool with a short *time to live*, and whose expiration and rotation are managed by AWS Amplify, all signs requests will automatically execute by calling `Auth.signIn`. All JWT Tokens from Cognito UserPools and your Cognito Identity Pools with return your user's credentials which can always be accessed by the app using `Auth.currentSession()` and `Auth.currentCredentials()` as shown in the diagram below:
 
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/cognito.jwt.png "Get a JWT from Cognito!")
 
+Using these tools we need to create a registration flow that will allow our users to:
 
+1. Provide an email and password to use for authentication and confirmation by Cognito.
 
+2. Our app will obtain a user object from Amplify when the user is registered with Cognito.
 
+3. A form is displayed to the user that will accept the emailed confirmation code as an input to be verfied against Cognito.
+
+4. The app send s the code to Cognito to confirm the user's registration and we complete the new user's authentication.
+
+5. We take the session from the object returned by Amplify on authentication and we update the application's state.
 
 
 
