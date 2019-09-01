@@ -694,7 +694,7 @@ import Media from "react-media";
 </Container>
 ```
 
-You can find a [public gist on Github](https://gist.github.com/lopezdp/fc05d1bcfefd81e1f00d387f96f7d88c) where I have this information saved for you on the cloud **forever**! Do not hesitate to follow my profile and *star* my content!
+You can find a [public gist on Github](https://gist.github.com/lopezdp/fc05d1bcfefd81e1f00d387f96f7d88c) where I have this information saved for you on the cloud **for-ev-er**! Do not hesitate to follow my profile and *star* my content!
 
 ![alt text](https://media.giphy.com/media/hEwkspP1OllJK/source.gif "For-Ev-Er!")
 
