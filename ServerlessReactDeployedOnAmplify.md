@@ -652,11 +652,53 @@ Moving forward with the Registration UI, we will touch upon a few more advanced 
 
 [`react-media`](https://www.npmjs.com/package/react-media) is a CSS media query component for React.
 
-> Every `<Media>` component listens for matches to a CSS media query and renders stuff based on whether the query matches or not.
+> Every `<Media>` component listens for matches to a CSS media query and renders an element declared in your component based on whether the query matches or not.
 
-Please continue on and install this library at the root of your React client's project directory with:
+Please continue on, and install this library at the root of your React client's project directory with:
 
-`$ npm install --save react-media`
+* `$ npm install --save react-media`
+
+Generally, I find that the following sizes work best for most device sizes on iOS and Android platforms:
+
+```
+import React, { Component/*, Fragment*/ } from "react";
+// Using react containers to achieve responsiveness in Medias
+import Container from "react-bootstrap/Container";
+import Media from "react-media";
+
+<Container>
+  {/* Smaller phones portrait  */}
+  <Media query="(min-width: 319px) and (max-width: 567px)">
+      <p>KnowledgeBase Test 319 - 567</p>
+  </Media>
+
+  {/* Smaller Landscapes  */}
+        <Media query="(min-width: 568px) and (max-width: 639px)">
+      <p>KnowledgeBase Test 568 - 639</p>
+        </Media>
+
+        {/* Bigger Landscapes */}
+        <Media query="(min-width: 640px) and (max-width: 767px)">
+      <p>KnowledgeBase Test 640 - 767</p>
+        </Media>
+
+        {/* iPads */}
+        <Media query="(min-width: 768px) and (max-width: 991px)">
+      <p>KnowledgeBase Test 768 - 991</p>
+        </Media>
+
+        {/* Desktops */}
+        <Media query="(min-width: 992px)">
+      <p>KnowledgeBase Test 992</p>
+        </Media>
+</Container>
+```
+
+You can find a [public gist on Github](https://gist.github.com/lopezdp/fc05d1bcfefd81e1f00d387f96f7d88c) where I have this information saved for you on the cloud **forever**! Do not hesitate to follow my profile and *star* my content!
+
+![alt text](https://giphy.com/gifs/hEwkspP1OllJK/html5 "For-Ev-Er!")
+
+
 
 
 
