@@ -638,6 +638,20 @@ First thing's first; we must implement a proper registration form first!
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/papers.please.png "Register and all your base belong to us!")
 
+#### Implementing a User Registration React Component
+
+The first thing we need to accomplish is to create a simple form that we can use to obtain the user's initial registration information like `email` and `password` so that we can have Cognito send the user a `confirmationCode` that the app will use to confirm the user's registration and authentication for the first time they log into the app.
+
+There are a number of ways in which you can approach the registration of a user and the capturing of the data needed to authenticate a user. Many times you will want a responsive and multi-step registration workflow that will let your user enter multiple data points that your business will require you to persist to storage. In a multi-step workflow, the trick is to pass the values stored in the app's `state` attributes to the child components that you will need to leverage to complete the registration workflow, as `props` that the final component can use to call the Amplify API when connecting to Cognito.
+
+Since this application is a *FinTech App* it will more than likely need to abide by two key principles known within the financial industry as **KYC** and **AML** regulations; better known as *Know Your Customer* and *Anti-Money Laundering* laws. We will implement a *Multi-Step Registration Workflow* with a *Responsive UI/UX* that will be able to be displayed from any device.
+
+We will create a multi-step registration component called `UserRegistration` that will pass down the appropriate `state` attributes to the child component that we will call `UserConfirmation`, which will use them to register, confirm, and authenticate our user against Amazon Cognito. We will also need to be able to access the `userHasAuthenticated` method in our `props` that we are using to update the application's `state` from our parent compinent called `src/App.js`.
+
+
+
+
+
 
 
 
