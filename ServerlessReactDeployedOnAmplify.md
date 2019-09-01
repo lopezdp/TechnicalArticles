@@ -648,6 +648,15 @@ Since this application is a *FinTech App* it will more than likely need to abide
 
 We will create a multi-step registration component called `UserRegistration` that will pass down the appropriate `state` attributes to the child component that we will call `UserConfirmation`, which will use them to register, confirm, and authenticate our user against Amazon Cognito. We will also need to be able to access the `userHasAuthenticated` method in our `props` that we are using to update the application's `state` from our parent compinent called `src/App.js`.
 
+Moving forward with the Registration UI, we will touch upon a few more advanced topics pertaining to page *responsiveness* and laying out elements for optimized viewing on any device. *Mobile-First* is a design philosophy that every developer today must embrace or you risk losing out on large portions of market share. You must build all of your apps so that they can be viewed on any device and we can easily get this done with an `npm` library called `react-media`.
+
+[`react-media`](https://www.npmjs.com/package/react-media) is a CSS media query component for React.
+
+> Every <Media> component listens for matches to a CSS media query and renders stuff based on whether the query matches or not.
+
+Please continue on and install this library at the root of your React client's project directory with:
+
+`$ npm install --save react-media`
 
 
 
