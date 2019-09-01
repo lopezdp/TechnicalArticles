@@ -622,7 +622,7 @@ If you need to store videos or large files on AWS Simple Storage Service, your a
 
 Using these tools we need to create a registration flow that will allow our users to:
 
-1. Provide an email and password to use for authentication and confirmation by Cognito.
+1. Accept a user's email and password to use for authentication and confirmation by Cognito.
 
 2. Our app will obtain a user object from Amplify when the user is registered with Cognito.
 
