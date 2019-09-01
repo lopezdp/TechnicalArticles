@@ -652,7 +652,7 @@ Moving forward with the Registration UI, we will touch upon a few more advanced 
 
 [`react-media`](https://www.npmjs.com/package/react-media) is a CSS media query component for React.
 
-> Every <Media> component listens for matches to a CSS media query and renders stuff based on whether the query matches or not.
+> Every `<Media>` component listens for matches to a CSS media query and renders stuff based on whether the query matches or not.
 
 Please continue on and install this library at the root of your React client's project directory with:
 
