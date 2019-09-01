@@ -698,6 +698,18 @@ You can find a [public gist on Github](https://gist.github.com/lopezdp/fc05d1bcf
 
 ![alt text](https://media.giphy.com/media/hEwkspP1OllJK/source.gif "For-Ev-Er!")
 
+With these fundamental concepts in mind, we now can proceed with the implementation of our multi-step registration workflow in React.js. Since we are building a wallet, we will ask a user for the following pieces of information:
+
+* `First Name`
+* `Last Name`
+* `Street Address`
+* `City, State, ZipCode`
+* `SSN (Government ID)`
+* `Phone Number`
+* `email`
+* `password`
+
+
 
 
 
