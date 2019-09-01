@@ -628,9 +628,17 @@ Using these tools we need to create a registration flow that will allow our user
 
 3. A form is displayed to the user that will accept the emailed confirmation code as an input to be verfied against Cognito.
 
-4. The app send s the code to Cognito to confirm the user's registration and we complete the new user's authentication.
+4. The app sends the code to Cognito to confirm the user's registration and we complete the new user's authentication.
 
 5. We take the session from the object returned by Amplify on authentication and we update the application's state.
+
+First thing's first; we must implement a proper registration form first!
+
+> "Your papers, please!" *Casablanca Policeman*
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/papers.please.png "Register and all your base belong to us!")
+
+
 
 
 
