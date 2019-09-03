@@ -638,7 +638,7 @@ First thing's first; we must implement a proper registration form first!
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/papers.please.png "Register and all your base belong to us!")
 
-#### Implementing a User Registration React Component
+#### Implementing a Multi-Step User Registration React Component
 
 The first thing we need to accomplish is to create a simple form that we can use to obtain the user's initial registration information like `email` and `password` so that we can have Cognito send the user a `confirmationCode` that the app will use to confirm the user's registration and authentication for the first time they log into the app.
 
@@ -708,6 +708,10 @@ With these fundamental concepts in mind, we now can proceed with the implementat
 * `Phone Number`
 * `email`
 * `password`
+
+We will keep this form simple and touch upon a few topics that will include passing the values of your `state` attributes as `props` down into a child component, passing a value as a function argument into a `prop` that will handle your application's `state` in a parent component, and using state to render a new UI `view` while retaining the values in memory that you need to complete a user's registration while keeping your app respinsive to all mobile devices.
+
+
 
 
 
