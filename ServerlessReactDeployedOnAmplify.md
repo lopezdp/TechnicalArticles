@@ -711,6 +711,617 @@ With these fundamental concepts in mind, we now can proceed with the implementat
 
 We will keep this form simple and touch upon a few topics that will include passing the values of your `state` attributes as `props` down into a child component, passing a value as a function argument into a `prop` that will handle your application's `state` in a parent component, and using state to render a new UI `view` while retaining the values in memory that you need to complete a user's registration while keeping your app respinsive to all mobile devices. 
 
+We will start off by creating a few new components; remember that files in `src/containers` are React components that will make API calls to third party services or to our backend, while everything inside of `src/components` is just going to be UI components and views that we need in React.js to display our frontend logic appropriately. The first component we need is going to be the `src/components/UserRegistration` component that we will use to walk our users through the registration workflow we need to collect the data we need.
+
+#### Implement `UserRegistration` and persist application state to Child components
+
+Ok great, you have to implement a new component, you have to manage your application's state, and somehow, you have to make sure that the correct `state` ends up in your Parent component once your `userHasAuthenticated`! 
+
+You have to remember, we created a function in our Parent component, `src/App.js`, that we called `userHasAuthenticated` which we have passed down as a `prop` into our Child components using our `<Routes />` component. The function currently is a `prop` within the `UserRegistration` component because of the `childProps` that we declared in `src/App.js` with the following lines:
+
+```
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      userHasAuthenticated: this.userHasAuthenticated
+    };
+```
+
+In order to change the `state` of our `App`, we need to make sure that the function that we are using to change the value of `isAuthenticated` is passed into the container that we will use within our registration component as a `prop` so that we can continue to manage our application's `state` after a user logs into our `App`. Keep in mind that our homemade reducer is defined with the following implementation:
+
+```
+  userHasAuthenticated = authenticated => {
+    this.setState({
+      isAuthenticated: authenticated
+    });
+  }
+```
+
+Shorlty, I will show you how we pass this `prop` into the nested component that we call from our `UserRegistration` component that I will now show you how to implement. Create a new file called `src/components/UserRegistration.js` and include the following source code that we will now review:
+
+**`<UserRegistration />` Component**
+
+```
+import React, { Component } from "react";
+import Container from "react-bootstrap/Container";
+import Media from "react-media";
+import Form from "react-bootstrap/Form";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import { Auth } from "aws-amplify";
+import UiLoadBtn from "../components/UiLoadBtn";
+import config from "../config";
+import UserConfirmation from "../containers/UserConfirmation";
+import "./UserRegistration.css";
+
+export default class UserRegistration extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: false,
+      govNumber: "",
+      streetAddress: "",
+      addressLine2: "",
+      firstName: "",
+      lastName: "",
+      mobilePhone: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      confirmationCode: "",
+      validated: false,
+      registrationStep: 0,
+      newUser: null
+    };
+
+    // NOTE: Bind the registration workflow and the suggestion selector
+    this.registrationWorkFlow = this.registrationWorkFlow.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+  }
+
+  //NOTE: When component mounts this takes over
+  componentDidMount() {
+    if (this.state.registrationStep.toString() === "0") {
+      this.setState({
+        registrationStep: 1
+      });
+    }
+  }
+
+  // FIXME: may need to delete or merge this into more
+  //        efficient validation schemes
+  // Need to make sure the form is filled in with information
+  validateForm() {
+    let b = false;
+    // eslint-disable-next-line
+    console.log("validateForm called!!!!");
+
+    // If on step 1 && dealer has name && name is NaN && valid address
+    // then bool is true
+    if (this.state.registrationStep.toString() === "1") {
+      if (this.state.govNumber.length > 0 &&
+        isNaN(this.state.streetAddress) &&
+        this.state.streetAddress) {
+
+        b = true;
+      }
+    }
+
+    //validate fields in step 2 before submitting form
+    if (this.state.registrationStep.toString() === "2") {
+      if (this.state.firstName.length > 0 && isNaN(this.state.firstName) &&
+        this.state.lastName.length > 0 && isNaN(this.state.lastName) &&
+        this.state.mobilePhone.length === 10 && !isNaN(this.state.mobilePhone)) {
+        b = true;
+      }
+    }
+
+    //validate fields in step 3 before submitting form
+    if (this.state.registrationStep.toString() === "3") {
+      if (this.state.firstName.length > 0 &&
+        this.state.email.length > 0 &&
+        this.state.password.length > 0 &&
+        this.state.password === this.state.confirmPassword) {
+        // if false then confirmation is turned off!
+        b = true;
+      }
+    }
+
+    // return the bool value. true if form is valid or false if 
+    // the form is invalid...
+    return (b);
+  }
+
+  handleChange = event => {
+    this.setState({
+      // using controlId change the state of the value as needed
+      [event.target.id]: event.target.value
+    });
+  }
+
+  handleSubmit = async event => {
+
+    const form = event.currentTarget;
+
+    // eslint-disable-next-line
+    console.log("This is the checkValidity res: " + form.checkValidity());
+
+    // NOTE: This will check the validity of the input
+    //       fields with html5 validation tools
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    this.setState({
+      validated: true
+    });
+
+    event.preventDefault();
+
+    this.setState({
+      // set button spinner state to loading
+      // while we wait for async responses
+      isLoading: true
+    });
+
+    try {
+      // call cognito with amplify api
+      const newUser = await Auth.signUp({
+        username: this.state.email,
+        password: this.state.password
+      });
+
+      this.setState({
+        // set state with newUser data
+        newUser
+      });
+    } catch ( err ) {
+      // eslint-disable-next-line
+      alert(err.message);
+    }
+
+    this.setState({
+      // turn off loading when async complete
+      isLoading: false
+    });
+  }
+
+  renderProgressBar = (now) => {
+    const progressBar = <ProgressBar animated
+                          variant="info"
+                          now={ now }
+                          label={ `${now}%` } />;
+    return (progressBar);
+  }
+
+  // TODO: Need functionality to handle state changes when button OnClick
+  registrationWorkFlow() {
+    this.setState({
+      isLoading: true
+    });
+
+    if (this.state.registrationStep.toString() === "1") {
+      this.setState({
+        registrationStep: 2
+      });
+    }
+
+    if (this.state.registrationStep.toString() === "2") {
+      // FIXME: Confirm Logic
+      this.setState({
+        registrationStep: 3
+      });
+    }
+
+    this.setState({
+      isLoading: false
+    });
+  }
+
+  renderStep1() {
+    //let registrationStep;
+
+    const { validated } = this.state.validated;
+
+    /* if (this.state.registrationStep) {
+      registrationStep = this.state.registrationStep.toString();
+    } */
+
+    return (
+      <div>
+        <Media query="(min-width: 319px) and (max-width: 567px)">
+          <Container>
+            <header className="hdr1">
+              <h4 className="title">Register your Account</h4>
+              <h5 className="tagline">Step 1: Your basic information.</h5>
+            </header>
+
+            <section id="progressBar">
+              { this.renderProgressBar(5) }
+            </section>
+
+            <article className="signup">
+              { /*Start Form for step 1 here!!*/ }
+              <Form className="form"
+                noValidate
+                validated={ validated }
+                onSubmit={ this.handleSubmit }>
+                <p className="signup-tag">
+                  <strong>Register to get access to your Wallet!</strong>
+                </p>
+                
+                <Form.Group controlId="govNumber" className="gov-num">
+                  <Form.Label>
+                    SSN
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.govNumber }
+                    onChange={ this.handleChange }
+                    placeholder="444-77-3333"
+                    required
+                    minLength="9" />
+                  <Form.Text className="help">
+                    Your information is never shared!
+                  </Form.Text>
+                </Form.Group>
+
+                { /* NOTE: Implemented Google Geocode API to confirm zipCode & city by location */ }
+                <Form.Group controlId="streetAddress">
+                  <Form.Label>
+                    Street Address
+                  </Form.Label>
+
+                  <Form.Control type="text"
+                    value={ this.state.streetAddress }
+                    onChange={ this.handleChange }
+                    placeholder="1234 Main St." />
+                    
+                  <Form.Text className="help">
+                    Please provide your street Address, and include your city, state, and zip code.
+                  </Form.Text>
+                </Form.Group>
+
+                { /* This is street Address */ }
+                <Form.Group controlId="addressLine2">
+                  <Form.Label>
+                    Suite or Unit
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.addressLine2 }
+                    onChange={ this.handleChange }
+                    placeholder="Ex: Unit #101" />
+                  <Form.Text className="help">
+                    Please provide a Suite or Unit number if available.
+                  </Form.Text>
+                </Form.Group>
+
+                { /* UiLoadBtn Component */ }
+                <UiLoadBtn block
+                  onClick={ this.registrationWorkFlow }
+                  size="lg"
+                  disabled={ !this.validateForm() }
+                  variant="primary"
+                  className="nxtBtn"
+                  isLoading={ this.state.isLoading }
+                  text="Save Changes"
+                  loadingText="Saving..." 
+                />
+
+              </Form>
+              { /* Section used for credibility seal on larger screens*/ }
+              <section id="logo">
+                TBD - Section here
+              </section>
+            </article>
+          </Container>
+        </Media>
+
+        <Media query="(min-width: 568px)">
+          <Container>
+            <header className="hdr1">
+              <h4 className="title">Register your Account</h4>
+              <h5 className="tagline">Step 1: Basic Information about yourself.</h5>
+            </header>
+
+            <section id="progressBar">
+              { this.renderProgressBar(5) }
+            </section>
+
+            <article className="signup">
+              { /*Start Form for step 1 here!!*/ }
+              <Form className="form"
+                noValidate
+                validated={ validated }
+                onSubmit={ this.handleSubmit }>
+                <p>
+                  <strong>Please Register and get access to your Wallet!</strong>
+                </p>
+                
+                <Form.Group controlId="govNumber" className="gov-num">
+                  <Form.Label>
+                    SSN
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.govNumber }
+                    onChange={ this.handleChange }
+                    placeholder="444-77-3333"
+                    required
+                    minLength="9" />
+                  <Form.Text className="help">
+                    Your information is never shared!
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group controlId="streetAddress">
+                  <Form.Label>
+                    Street Address
+                  </Form.Label>
+
+                  <Form.Control type="text"
+                    value={ this.state.streetAddress }
+                    onChange={ this.handleChange }
+                    placeholder="1234 Main St." />
+
+                  <Form.Text className="help">
+                    Please provide your street Address.
+                  </Form.Text>
+                </Form.Group>
+
+                { /* This is street Addreess */ }
+                <Form.Group controlId="addressLine2">
+                  <Form.Label>
+                    Suite or Unit
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.addressLine2 }
+                    onChange={ this.handleChange }
+                    placeholder="Ex: Unit #101" />
+                  <Form.Text className="help">
+                    Please provide a Suite or Unit number if available.
+                  </Form.Text>
+                </Form.Group>
+
+                { /* UiLoadBtn Component */ }
+                <UiLoadBtn block
+                  onClick={ this.registrationWorkFlow }
+                  size="lg"
+                  disabled={ !this.validateForm() }
+                  variant="primary"
+                  className="nxtBtn"
+                  isLoading={ this.state.isLoading }
+                  text="Save Changes"
+                  loadingText="Saving..." 
+                />
+
+              </Form>
+              { /* Section used for credibility seal on larger screens*/ }
+              <section id="logo">
+                TBD - Section here
+              </section>
+            </article>
+          </Container>
+        </Media>
+      </div>
+      );
+  }
+
+  renderStep2(oType) {
+    //let registrationStep;
+
+    /* if (this.state.registrationStep) {
+      registrationStep = this.state.registrationStep.toString();
+    } */
+
+    return (
+      <div>
+        <header className="hdr1">
+          <h4 className="title">Wallet Registration</h4>
+          <h5 className="tagline">Step 2: Create your User Account</h5>
+        </header>
+        <section id="progressBar">
+          { this.renderProgressBar(33) }
+        </section>
+        <div className="signup">
+          { /*Start Form for step 1 here!!*/ }
+          <Form className="form" onSubmit={ this.handleSubmit }>
+            <p>
+              <strong>Please Register As a New User</strong>
+            </p>
+            
+            { /* This is the user's first name and middle initial */ }
+            <Form.Group controlId="firstName">
+              <Form.Label>
+                First Name
+              </Form.Label>
+              <Form.Control type="text"
+                value={ this.state.firstName }
+                onChange={ this.handleChange }
+                placeholder="Ex: Henry J." />
+              <Form.Text className="help">
+                Enter your first name and an optional middle initial.
+              </Form.Text>
+            </Form.Group>
+            { /* This is the user's last name and middle initial */ }
+            <Form.Group controlId="lastName">
+              <Form.Label>
+                Last Name
+              </Form.Label>
+              <Form.Control type="text"
+                value={ this.state.lastName }
+                onChange={ this.handleChange }
+                placeholder="Ex: Jones" />
+              <Form.Text className="help">
+                Enter your first name and an optional middle initial.
+              </Form.Text>
+            </Form.Group>
+            { /* This is the user's mobile phone */ }
+            <Form.Group controlId="mobilePhone">
+              <Form.Label>
+                Mobile Phone
+              </Form.Label>
+              <Form.Control type="tel"
+                value={ this.state.mobilePhone }
+                onChange={ this.handleChange }
+                placeholder="Ex: (628) 425-2790" />
+              <Form.Text className="help">
+                Please <strong>ONLY</strong> include your 10-digit mobile phone number without any additional characters.
+              </Form.Text>
+            </Form.Group>
+            { /* UiLoadBtn Component */ }
+            <UiLoadBtn block
+              onClick={ this.registrationWorkFlow }
+              size="lg"
+              disabled={ !this.validateForm() }
+              variant="primary"
+              className="nxtBtn"
+              isLoading={ this.state.isLoading }
+              text="Save Changes"
+              loadingText="Saving..." />
+          </Form>
+          { /* Section used for credibility seal on larger screens*/ }
+          <section id="logo">
+            TBD - Section here
+          </section>
+        </div>
+      </div>
+      );
+  }
+
+  renderStep3() {
+    // eslint-disable-next-line
+    let clsName;
+    // let registrationStep;
+
+    return (
+      <div>
+        <header className="hdr1">
+          <h4 className="title">Create a User Account</h4>
+          <h5 className="tagline">Step 3: Create your Login Credentials</h5>
+        </header>
+        <section id="progressBar">
+          { this.renderProgressBar(66) }
+        </section>
+        <div className="signup">
+          { /*Start Form for step 1 here!!*/ }
+          <Form className="form" onSubmit={ this.handleSubmit }>
+            <p>
+              <strong>Please Register As a new User.</strong>
+            </p>
+            <Form.Group controlId="email">
+              <Form.Label>
+                Email
+              </Form.Label>
+              <Form.Control autoFocus
+                size="lg"
+                type="email"
+                value={ this.state.email }
+                onChange={ this.handleChange }
+                required />
+            </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Label>
+                Password
+              </Form.Label>
+              <Form.Control size="lg"
+                type="password"
+                value={ this.state.password }
+                onChange={ this.handleChange }
+                required />
+            </Form.Group>
+            <Form.Group controlId="confirmPassword">
+              <Form.Label>
+                Confirm Password
+              </Form.Label>
+              <Form.Control size="lg"
+                type="password"
+                value={ this.state.confirmPassword }
+                onChange={ this.handleChange } />
+            </Form.Group>
+            { /* UiLoadBtn Component */ }
+            <UiLoadBtn block
+              size="lg"
+              type="submit"
+              disabled={ !this.validateForm() }
+              variant="primary"
+              className="nxtBtn"
+              isLoading={ this.state.isLoading }
+              text="Register"
+              loadingText="Processing..." />
+          </Form>
+          { /* Section used for credibility seal on larger screens*/ }
+          <section id="logo">
+            TBD - Section here
+          </section>
+        </div>
+      </div>
+      );
+
+  }
+
+  /*
+   *
+   * @return <UserConfirmation />
+   *
+   * Reuturns the component that
+   * will confirm a user's credentials
+   *
+   */
+
+  renderConfirmationFormNew() {
+
+    return (
+      <UserConfirmation
+        registrationStep={ this.state.registrationStep }
+        email={ this.state.email }
+        password={ this.state.password }
+        isAuthenticated={ this.props.isAuthenticated }
+        userHasAuthenticated={ this.props.userHasAuthenticated }
+        user={ this.state } /> 
+      );
+  }
+
+  // NOTE: This is being used to get the correct workflow step
+  // to render. You have to setState outside of the render
+  // "canvas".
+  renderForms() {
+    let form;
+
+    if (this.state.registrationStep.toString() === "1") {
+      form = this.renderStep1();
+    } else if (this.state.registrationStep.toString() === "2") {
+      form = this.renderStep2(this.state.orgType);
+    } else if (this.state.registrationStep.toString() === "3") {
+      form = this.renderStep3();
+    }
+
+    return (form);
+
+  }
+
+  // TODO: Conditionally render each form element needed!!!
+  // conditionally render the registration form or the confirmation form
+  // depending on the user's registration state.
+  // ? this.renderForms()
+  render() {
+    // eslint-disable-next-line
+    console.log("THese are child props.isAuthenticated IN UR.js: " + this.props.isAuthenticated);
+    // eslint-disable-next-line
+    console.log("THese are child props.userHasAuthenticated IN UR.js: " + this.props.userHasAuthenticated);
+
+    return (
+      <div className="Registration">
+        { this.state.newUser === null
+          ? this.renderForms()
+          : this.renderConfirmationFormNew() }
+      </div>
+      );
+  }
+}
+```
+
+If you have faithfully followed along, your new *multi-step registration* workflow in React.js should look like the image below:
+
 *Multi-Step Registration UI*
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ReactMultiStepWorkFlow.png "Multi Step Registration UI!")
