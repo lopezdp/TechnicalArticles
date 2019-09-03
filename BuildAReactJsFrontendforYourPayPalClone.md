@@ -728,29 +728,17 @@ With that all setup and ready to go, if you look at your browser now at `http://
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/SignInPage.png "User Sign In Page!")
 
-And thats it. You have implemented everything we need to set up the skeleton for a simple React.js application. In the next article we will discuss how you will need to actually connect this new front end to all of the serverless + microservices you built on AWS Lambda. We will finish off the next article with showing you how to deploy all of these new features that take advantage of your `GeneralLedger` in the cloud on AWS Amplify.
+And thats it. You have implemented everything we need to set up the skeleton for a simple React.js application. In the next article we will discuss how you will need to actually connect this new front end to all of the serverless + microservices you built on AWS Lambda while showing your how to implement a milti-step registration workflow.
 
 ### You completed the implementation of your React.js Framework. Good Luck!
 
-## Part 7: Integrate your serverless + microservices with React.js and deploy your app on AWS-Amplify.
+## Part 7: Integrate your serverless + microservices with React.js and implement a multi-step registration.
 
-* [Part 7: Integrate React with Serverless and Deploy on Amplify](https://github.com/lopezdp/TechnicalArticles/blob/master/ServerlessReactDeployedOnAmplify.md) - *Not Published.*
-
-
+* [Part 7: Integrate React with Serverless and Deploy on Amplify](https://github.com/lopezdp/TechnicalArticles/blob/master/ServerlessReactIntegration.md) - *Not Published.*
 
 
 
 
-
-
-
-
-
-
-
-
-
-... 
 
 
 

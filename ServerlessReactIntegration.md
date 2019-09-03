@@ -1,4 +1,4 @@
-# Part 7: Integrate your serverless + microservices with React.js and deploy your App on AWS-Amplify
+# Part 7: Integrate your serverless + microservices with React.js and Implement Multi-Step Registration
 
 *Author: [David P. Lopez](http://www.DavidPLopez.com)*
 
@@ -31,7 +31,7 @@ Please refer to the repo above as you follow along with this tutorial. In this p
 
 ## Implement User Permissions and Registration
 
-Now that this application of ours has a login interface that our users can use to authenticate themselves, we are going to have to make sure that there is a mechanism in place to enable the permissions our users need to create and manage their transactions within our app. To properly complete thes configuration steps we will need to be able to load our application's current state from our user's login session managed by Cognito, we'll need to implement a few redirects for proper login and logout functionality, and more importantly we always have to make sure that we are giving our users good feedback when logging in so that they can be sure that they are submitting the correct credentials.
+Now that this application of ours has a login interface that our users can use to authenticate themselves, we are going to have to make sure that there is a mechanism in place to enable the permissions our users need to create and manage their transactions within our app. To properly complete these configuration steps we will need to be able to load our application's current state from our user's login session managed by Cognito, we'll need to implement a few redirects for proper login and logout functionality, and more importantly we always have to make sure that we are giving our users good feedback when logging in so that they can be sure that they are submitting the correct credentials.
 
 Initially we really need a way to update the application state when the user signs into our app. This brings up the concept of *"Lifting"* state up to a *Parent* component so that the login state can be passed down as a *prop* to other components that will share this attribute later. Application state can only be passed down from Parent to Child component. As the complexity of the application grows, state management should be a top priority so that you can architect your UI accordingly. 
 
@@ -1256,7 +1256,6 @@ export default class UserRegistration extends Component {
         </div>
       </div>
       );
-
   }
 
   /*
@@ -1320,61 +1319,54 @@ export default class UserRegistration extends Component {
 }
 ```
 
+Carefully reviewing everything above, you may very well become easily overwhelmed, there is a lot going on and it may very well need to be reviewed many times before fully understanding everything going on. The first and most important thing we should discuss is the *explicit binding* of a few of our event handlers and *controlled components* inside of our constructor. The code in question looks like the following two lines:
+
+* `this.registrationWorkFlow = this.registrationWorkFlow.bind(this);`
+
+* `this.validateForm = this.validateForm.bind(this);`
+
+In JavaScript, `this` binding really depends on how our functions are invoked; because of the way that React.js works with ES6 and **Class Components**, our event handlers and controlled components will point to an `undefined` value when our functions are used in `strict` mode. They will all fall back to their *default bindings* after losing their `context`. These functions must be implemented in our application's constructor *explicitly* with a *hard bind* to the `this` value, while using the `bind()` method to persist the application `context` to the component rendered to the UI.
+
+Please take some time to understand the reasons why this happens in JavaScript; binding `this` to our handlers and their respective instances inside of their constructors as shown above, lets us use our callback functions normally without losing their `context`.
+
+Moving along, you should note that we use a `state` attribute that we are calling `registrationStep` to manage the step that the user is on within the registration workflow process. As soon as the components mounts, as you can see in the `componentDidMount` function, the `state` of the attribute changes to `1`. You will find that this then tells React.js to use the `registrationWorkFlow()` function to render the first step in the multi-step registration form we have implemented for you.
+
+We have split up the *views* that React.js will render on each step in the workflow based on the `registrationStep`, and each `registrationStep` will explicity tell React.js to render either `renderStep1()`, `renderStep2()`, or `renderStep3()` based on where the user is at in the process of registering their credentials with the app.
+
+Finally, based on whether or not the `newUser` object has been created or not, the UI will render either the steps described above or the `<UserConfirmation />` component. The `<UserConfirmation />` is important because it is here where we need to pass in the `props` that we need it to use with out Parent component so that our app can update its `state` when a user `isAuthenticated` as we described above. As you can see below, we are using a *ternary* operation to tell React.js to display the correct component:
+
+```
+<div className="Registration">
+  { this.state.newUser === null
+    ? this.renderForms()
+    : this.renderConfirmationFormNew() }
+</div>
+```
+
+When the *ternary* operation fails and the conditional requires the new `<UserConfimation />` component, react will call `this.renderConfirmationFormNew()` and our app will render the new component using the correct `props` as we declare below:
+
+```
+<UserConfirmation
+  registrationStep={ this.state.registrationStep }
+  email={ this.state.email }
+  password={ this.state.password }
+  isAuthenticated={ this.props.isAuthenticated }
+  userHasAuthenticated={ this.props.userHasAuthenticated }
+  user={ this.state } 
+/>
+```
 If you have faithfully followed along, your new *multi-step registration* workflow in React.js should look like the image below:
 
 *Multi-Step Registration UI*
 
 ![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ReactMultiStepWorkFlow.png "Multi Step Registration UI!")
 
+You have implemented a multi-step registration process while integrating a few of your services with React. In the next article we will discuss how to implement another feature that creates a database entry and we deploy all of these new features that take advantage of your `GeneralLedger` in the cloud on AWS Amplify.
 
+### You completed the implementation React.js and a milti-step registration flow. Good Luck!
 
+## Part 8: Implement your front end and deploy your app on AWS-Amplify.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+* [Part 8: Integrate React with Serverless and Deploy on Amplify](https://github.com/lopezdp/TechnicalArticles/blob/master/DeployReactOnAmplify.md) - *Not Published.*
 
 
