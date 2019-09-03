@@ -709,7 +709,13 @@ With these fundamental concepts in mind, we now can proceed with the implementat
 * `email`
 * `password`
 
-We will keep this form simple and touch upon a few topics that will include passing the values of your `state` attributes as `props` down into a child component, passing a value as a function argument into a `prop` that will handle your application's `state` in a parent component, and using state to render a new UI `view` while retaining the values in memory that you need to complete a user's registration while keeping your app respinsive to all mobile devices.
+We will keep this form simple and touch upon a few topics that will include passing the values of your `state` attributes as `props` down into a child component, passing a value as a function argument into a `prop` that will handle your application's `state` in a parent component, and using state to render a new UI `view` while retaining the values in memory that you need to complete a user's registration while keeping your app respinsive to all mobile devices. 
+
+*Multi-Step Registration UI*
+
+![alt text](https://github.com/lopezdp/TechnicalArticles/blob/master/img/ReactMultiStepWorkFlow.png "Multi Step Registration UI!")
+
+
 
 
 
