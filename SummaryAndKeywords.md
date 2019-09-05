@@ -122,3 +122,25 @@ When the state of the application is ready to submit data to our services on the
 ### Keywords
 
 React.js, AWS-Amplify, Bootstrap4, Modern Web Applications, Single Page Applications, JavaScript Promise, Asynchronous Requests
+
+## Part 7. Serverless & React Integration with Multi-Step Registration
+
+Now that this application of ours has a login interface that our users can use to authenticate themselves, we are going to have to make sure that there is a mechanism in place to enable the permissions our users need to create and manage their transactions within our app. To properly complete these configuration steps we will need to be able to load our application's current state from our user's login session managed by Cognito, we'll need to implement a few redirects for proper login and logout functionality, and more importantly we always have to make sure that we are giving our users good feedback when logging in so that they can be sure that they are submitting the correct credentials.
+
+Having declared an object that will hold the value of the authentication state that you need to pass into each rendered component used by your application, you now need to pass the object and its values into the <Route /> component that is declared at the end of the render() function in your src/App.js file.
+
+Let's take a moment to talk about an advanced technique used in React.js as an emergent design pattern, because of its ability to allow developers to implement composite functions. Yes a function as an input to another function, or in the case of Higher Order Components in React.js, a function that accepts a Component as an argument to return a new Component that we canleverage to reuse Component logic. We need to use this concept to implement an HOC that will create a new Route for us that renders a new Child Component that will have the property values that have to be stored for use in the UI to deal with the appropriate state changes triggered by our users.
+
+We are now ready to start adding a few more interactive UI elements into the layout of the app. We need to apply the authenticate state functionality so that we can let our users interact with our app on Sign Out. When a user is authenticated, they will need to see a button that will let them sign out of our application also. We will accomplish this in React.js using a <Fragment> component. A Fragment is great for creating groups of child elements without cluttering the DOM full of extra nodes.
+
+Typically we can make use of Cookies or LocalStorage to store the user's sign-in data that we can load from the session stored in the browser. In the case of a Progressive Web Application we can use these tools to persist offline data to allow our users to work with our app in a native-like environment. With AWS-Amplify we can store our session information automatically and use Amplify to load the session information we need when a user signs in, into the application's state.
+
+Using asynchronous methods to get a backend response from our serverless + microservices does introduce a bit of latency into the application that we will have to address so that our users will know that the app is working and has not crashed while waiting for the data requested. We will need to create a state attribute that we can use as a flag to determine when the application is awaiting an asynchronous response filled with data requested by the user from our UI. In our Signin component we will use an isLoading flag as a state attribute for the purposes we have just discussed.
+
+In JavaScript, this binding really depends on how our functions are invoked; because of the way that React.js works with ES6 and Class Components, our event handlers and controlled components will point to an undefined value when our functions are used in strict mode. They will all fall back to their default bindings after losing their context. These functions must be implemented in our application's constructor explicitly with a hard bind to the this value, while using the bind() method to persist the application context to the component rendered to the UI.
+
+You have implemented a multi-step registration process while integrating a few of your services with React. In the next article we will discuss how to implement another feature that creates a database entry and we deploy all of these new features that take advantage of your GeneralLedger in the cloud on AWS Amplify.
+
+### Keywords
+
+Multi-Step Forms, Authentication, Higher Order COmpionents, Session, JWT, LocalStorage, Cognito

@@ -734,7 +734,7 @@ And thats it. You have implemented everything we need to set up the skeleton for
 
 ## Part 7: Integrate your serverless + microservices with React.js and implement a multi-step registration.
 
-* [Part 7: Integrate React with Serverless and Deploy on Amplify](https://github.com/lopezdp/TechnicalArticles/blob/master/ServerlessReactIntegration.md) - *Not Published.*
+* [Part 7: Integrate React with Serverless and Implement Multi-Step Registration](https://github.com/lopezdp/TechnicalArticles/blob/master/ServerlessReactIntegration.md) - *Not Published.*
 
 
 
